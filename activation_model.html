@@ -30,39 +30,39 @@
 
     <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
         <div
-            class="w-full px-4 py-3 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 flex flex-wrap justify-between items-center gap-4">
+            class="w-full px-4 py-3.5 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 flex flex-wrap justify-between items-center gap-4">
             <div class="flex items-center space-x-3">
-                <div class="p-2 bg-emerald-500/10 rounded-lg border border-emerald-500/20 text-emerald-400">
-                    <i class="fa-solid fa-bolt-lightning text-xl"></i>
+                <div class="p-2.5 bg-emerald-500/10 rounded-xl border border-emerald-500/20 text-emerald-400">
+                    <i class="fa-solid fa-bolt-lightning text-2xl"></i>
                 </div>
                 <div>
-                    <h1 class="text-lg font-bold text-white tracking-tight">Zero-Emission Building Retrofit Dynamics
-                    </h1>
-                    <p class="text-xs text-slate-400">Activation Energy Model for Non-Residential Buildings</p>
+                    <h1 class="text-xl font-bold text-white tracking-tight">Zero-Emission Building Retrofit Dynamics</h1>
+                    <p class="text-sm text-slate-400">Activation Energy Model for Non-Residential Decarbonization</p>
                 </div>
             </div>
-            <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-3.5">
                 <!-- Property Owner Motivation Telemetry Badge -->
                 <div id="physics-telemetry"
-                    class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-800/90 border border-slate-700/80 text-xs">
-                    <span class="flex items-center gap-1.5 text-slate-400">
-                        <i class="fa-solid fa-user-tie text-blue-400"></i>
+                    class="hidden md:flex items-center gap-2.5 px-3.5 py-2 rounded-lg bg-slate-800/90 border border-slate-700/80 text-sm">
+                    <span class="flex items-center gap-1.5 text-slate-300 font-medium">
+                        <i class="fa-solid fa-user-tie text-blue-400 text-base"></i>
                         <span>Owner Motivation:</span>
                     </span>
                     <span id="telemetry-motivation"
-                        class="px-2 py-0.5 rounded font-bold uppercase tracking-wider text-[11px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">High</span>
+                        class="px-2.5 py-0.5 rounded font-bold uppercase tracking-wider text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">High</span>
                     <span class="text-slate-600">|</span>
-                    <span id="telemetry-status" class="text-slate-300 font-medium">Ready</span>
+                    <span id="telemetry-status" class="text-slate-200 font-medium">Ready</span>
                 </div>
 
                 <button id="btn-play-animation"
-                    class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition shadow-lg shadow-blue-600/20">
+                    class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm font-semibold flex items-center gap-2 transition shadow-lg shadow-blue-600/20">
                     <i class="fa-solid fa-play" id="play-icon"></i>
                     <span id="play-text">Roll Reaction Ball</span>
                 </button>
                 <button id="btn-reset"
-                    class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-medium border border-slate-700 transition">
-                    <i class="fa-solid fa-rotate-right mr-1"></i> Reset
+                    class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm font-medium border border-slate-700 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <span>Reset</span>
                 </button>
             </div>
         </div>
@@ -75,29 +75,29 @@
 
             <!-- Preset Selection Card -->
             <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl">
-                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
+                <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-3 flex items-center gap-2">
                     <i class="fa-solid fa-sliders text-blue-400"></i> Model Scenario Presets
                 </h2>
-                <div class="grid grid-cols-2 gap-2">
+                <div class="grid grid-cols-2 gap-2.5">
                     <button data-preset="A"
-                        class="preset-btn px-3 py-2 text-left rounded-lg border border-slate-800 hover:border-emerald-500/50 bg-slate-800/50 hover:bg-emerald-500/10 transition group">
-                        <div class="text-xs font-bold text-slate-200 group-hover:text-emerald-400">Scenario A</div>
-                        <div class="text-[10px] text-slate-400">Standard / Optimal</div>
+                        class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-800 hover:border-emerald-500/50 bg-slate-800/50 hover:bg-emerald-500/10 transition group">
+                        <div class="text-sm font-bold text-slate-100 group-hover:text-emerald-400">Scenario A</div>
+                        <div class="text-xs text-slate-400">Standard / Optimal</div>
                     </button>
                     <button data-preset="B"
-                        class="preset-btn px-3 py-2 text-left rounded-lg border border-slate-800 hover:border-red-500/50 bg-slate-800/50 hover:bg-red-500/10 transition group">
-                        <div class="text-xs font-bold text-slate-200 group-hover:text-red-400">Scenario B</div>
-                        <div class="text-[10px] text-slate-400">Excessive Cap-Ex</div>
+                        class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-800 hover:border-red-500/50 bg-slate-800/50 hover:bg-red-500/10 transition group">
+                        <div class="text-sm font-bold text-slate-100 group-hover:text-red-400">Scenario B</div>
+                        <div class="text-xs text-slate-400">Excessive Cap-Ex</div>
                     </button>
                     <button data-preset="C"
-                        class="preset-btn px-3 py-2 text-left rounded-lg border border-slate-800 hover:border-amber-500/50 bg-slate-800/50 hover:bg-amber-500/10 transition group">
-                        <div class="text-xs font-bold text-slate-200 group-hover:text-amber-400">Scenario C</div>
-                        <div class="text-[10px] text-slate-400">Long Downtime</div>
+                        class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-800 hover:border-amber-500/50 bg-slate-800/50 hover:bg-amber-500/10 transition group">
+                        <div class="text-sm font-bold text-slate-100 group-hover:text-amber-400">Scenario C</div>
+                        <div class="text-xs text-slate-400">Long Downtime</div>
                     </button>
                     <button data-preset="D"
-                        class="preset-btn px-3 py-2 text-left rounded-lg border border-slate-800 hover:border-rose-500/50 bg-slate-800/50 hover:bg-rose-500/10 transition group">
-                        <div class="text-xs font-bold text-slate-200 group-hover:text-rose-400">Scenario D</div>
-                        <div class="text-[10px] text-slate-400">Increased Op-Ex</div>
+                        class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-800 hover:border-rose-500/50 bg-slate-800/50 hover:bg-rose-500/10 transition group">
+                        <div class="text-sm font-bold text-slate-100 group-hover:text-rose-400">Scenario D</div>
+                        <div class="text-xs text-slate-400">Increased Op-Ex</div>
                     </button>
                 </div>
             </div>
@@ -110,116 +110,104 @@
                     <details class="group" open>
                         <summary class="cursor-pointer list-none flex items-center justify-between select-none">
                             <h2
-                                class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                                class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
                                 <i class="fa-solid fa-gears text-blue-400"></i> Input Parameters
                                 <span id="custom-badge"
-                                    class="hidden text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full border border-blue-500/30">Customized</span>
+                                    class="hidden text-xs bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full border border-blue-500/30">Customized</span>
                             </h2>
                             <i
-                                class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
+                                class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform text-sm"></i>
                         </summary>
 
-                        <div class="space-y-4 pt-4">
+                        <div class="space-y-5 pt-4">
                             <!-- Total Integrated Cap-Ex -->
                             <div>
-                                <div class="flex justify-between text-xs mb-1">
-                                    <label class="font-medium text-slate-300">Total Integrated Cap-Ex (∫ dt)</label>
-                                    <span id="val-capex" class="text-blue-400 font-mono font-semibold">$350k</span>
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
+                                    <label class="font-medium text-slate-200">Total Integrated Cap-Ex (∫ dt)</label>
+                                    <span id="val-capex" class="text-blue-400 font-mono font-bold text-base">$350k</span>
                                 </div>
                                 <input type="range" id="slider-capex" min="50" max="900" step="10" value="350"
-                                    class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer">
-                                <div class="flex justify-between items-center text-[10px] text-slate-500 mt-1">
+                                    class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                <div class="flex justify-between items-center text-xs text-slate-400 mt-1.5">
                                     <span>Total investment over installation period</span>
-                                    <span id="val-peak-rate" class="text-amber-400/90 font-mono">Peak: $420k/yr</span>
+                                    <span id="val-peak-rate" class="text-amber-400 font-mono font-medium">Peak: $420k/yr</span>
                                 </div>
                             </div>
 
                             <!-- Baseline Installation Duration -->
                             <div>
-                                <div class="flex justify-between text-xs mb-1">
-                                    <label class="font-medium text-slate-300">Baseline Installation Duration</label>
-                                    <span id="val-install-time" class="text-blue-400 font-mono font-semibold">6
-                                        mos</span>
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
+                                    <label class="font-medium text-slate-200">Baseline Installation Duration</label>
+                                    <span id="val-install-time" class="text-blue-400 font-mono font-bold text-base">6 mos</span>
                                 </div>
                                 <input type="range" id="slider-install-time" min="2" max="24" step="1" value="6"
-                                    class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer">
-                                <p class="text-[10px] text-slate-500 mt-1">Shorter implementation windows reduce
-                                    disruption and
-                                    strongly elevate property owner motivation.</p>
+                                    class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">Shorter implementation windows reduce disruption and strongly elevate owner motivation.</p>
                             </div>
 
                             <!-- Commissioning Duration -->
                             <div>
-                                <div class="flex justify-between text-xs mb-1">
-                                    <label class="font-medium text-slate-300">Commissioning Duration (Months)</label>
-                                    <span id="val-commission-time" class="text-blue-400 font-mono font-semibold">4
-                                        mos</span>
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
+                                    <label class="font-medium text-slate-200">Commissioning Duration (Months)</label>
+                                    <span id="val-commission-time" class="text-blue-400 font-mono font-bold text-base">4 mos</span>
                                 </div>
                                 <input type="range" id="slider-commission-time" min="1" max="12" step="1" value="4"
-                                    class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer">
-                                <p class="text-[10px] text-slate-500 mt-1">Smooth transitional optimization period down
-                                    to stable
-                                    zero-emission operation.</p>
+                                    class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">Transitional optimization period toward stable zero-emission operation.</p>
                             </div>
 
                             <!-- Operational Savings / Delta -->
                             <div>
-                                <div class="flex justify-between text-xs mb-1">
-                                    <label class="font-medium text-slate-300">Post-Retrofit Annual Op-Ex Delta
-                                        ($)</label>
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
+                                    <label class="font-medium text-slate-200">Post-Retrofit Annual Op-Ex Delta</label>
                                     <span id="val-opex-delta"
-                                        class="text-emerald-400 font-mono font-semibold">-$60k/yr</span>
+                                        class="text-emerald-400 font-mono font-bold text-base">-$60k/yr</span>
                                 </div>
                                 <input type="range" id="slider-opex-delta" min="-120" max="50" step="5" value="-60"
-                                    class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer">
-                                <p class="text-[10px] text-slate-500 mt-1">Negative values = Green savings. Positive
-                                    values = Red
-                                    added costs.</p>
+                                    class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-xs text-slate-400 mt-1.5">Negative values = Green savings. Positive values = Red added costs.</p>
                             </div>
 
                             <!-- Owner's Discount Rate for Future Savings -->
-                            <div class="pt-2 border-t border-slate-800">
-                                <div class="flex justify-between text-xs mb-1">
-                                    <label class="font-medium text-slate-300 flex items-center gap-1">
-                                        <i class="fa-solid fa-percent text-purple-400"></i> Owner's Discount Rate
-                                        (Future Savings)
+                            <div class="pt-3 border-t border-slate-800">
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
+                                    <label class="font-medium text-slate-200 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-percent text-purple-400"></i> Owner's Discount Rate (Savings)
                                     </label>
-                                    <span id="val-discount" class="text-purple-400 font-mono font-semibold">6.0%</span>
+                                    <span id="val-discount" class="text-purple-400 font-mono font-bold text-base">6.0%</span>
                                 </div>
                                 <input type="range" id="slider-discount" min="0" max="20" step="0.5" value="6.0"
-                                    class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer">
-                                <p class="text-[10px] text-slate-500 mt-1">Discounts the present value of future annual
-                                    Op-Ex
-                                    savings, visually curving the operational trajectory upward over time.</p>
+                                    class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">Discounts the present value of future annual Op-Ex savings across operational years.</p>
                             </div>
 
                             <!-- Financial Parameters Collapsible -->
-                            <div class="pt-2 border-t border-slate-800">
+                            <div class="pt-3 border-t border-slate-800">
                                 <details class="group/nested">
                                     <summary
-                                        class="text-xs font-semibold text-slate-400 hover:text-slate-200 cursor-pointer flex items-center justify-between py-1">
+                                        class="text-sm font-semibold text-slate-300 hover:text-white cursor-pointer flex items-center justify-between py-1">
                                         <span>Financial Horizon & Baseline</span>
                                         <i
-                                            class="fa-solid fa-chevron-down group-open/nested:rotate-180 transition-transform"></i>
+                                            class="fa-solid fa-chevron-down group-open/nested:rotate-180 transition-transform text-xs"></i>
                                     </summary>
-                                    <div class="space-y-3 pt-3">
+                                    <div class="space-y-4 pt-3">
                                         <div>
-                                            <div class="flex justify-between text-xs mb-1">
-                                                <label class="text-slate-400">Pre-Retrofit Baseline Op-Ex</label>
+                                            <div class="flex justify-between items-baseline text-sm mb-1.5">
+                                                <label class="text-slate-300">Pre-Retrofit Baseline Op-Ex</label>
                                                 <span id="val-baseline-opex"
-                                                    class="text-slate-200 font-mono">$150k/yr</span>
+                                                    class="text-slate-100 font-mono font-bold text-base">$150k/yr</span>
                                             </div>
                                             <input type="range" id="slider-baseline-opex" min="50" max="300" step="10"
                                                 value="150"
-                                                class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                                class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
                                         </div>
                                         <div>
-                                            <div class="flex justify-between text-xs mb-1">
-                                                <label class="text-slate-400">Evaluation Horizon</label>
-                                                <span id="val-horizon" class="text-slate-200 font-mono">20 Years</span>
+                                            <div class="flex justify-between items-baseline text-sm mb-1.5">
+                                                <label class="text-slate-300">Evaluation Horizon</label>
+                                                <span id="val-horizon" class="text-slate-100 font-mono font-bold text-base">20 Years</span>
                                             </div>
                                             <input type="range" id="slider-horizon" min="5" max="30" step="1" value="20"
-                                                class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                                class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
                                         </div>
                                     </div>
                                 </details>
@@ -233,45 +221,38 @@
                     <details class="group" open>
                         <summary class="cursor-pointer list-none flex items-center justify-between select-none">
                             <h2
-                                class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                                class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
                                 <i class="fa-solid fa-landmark text-cyan-400"></i> Policy Interventions
                             </h2>
                             <i
-                                class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
+                                class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform text-sm"></i>
                         </summary>
 
-                        <div class="space-y-4 pt-4">
+                        <div class="space-y-5 pt-4">
                             <!-- Policy Barrier Reduction -->
                             <div>
-                                <div class="flex justify-between text-xs mb-1">
-                                    <label class="font-medium text-slate-300 flex items-center gap-1">
-                                        <i class="fa-solid fa-file-signature text-cyan-400"></i> Barrier Reduction /
-                                        Speedup
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
+                                    <label class="font-medium text-slate-200 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-file-signature text-cyan-400"></i> Barrier Reduction / Speedup
                                     </label>
-                                    <span id="val-barrier-reduction" class="text-cyan-400 font-mono font-semibold">0% (6
-                                        mos)</span>
+                                    <span id="val-barrier-reduction" class="text-cyan-400 font-mono font-bold text-base">0% (6 mos)</span>
                                 </div>
                                 <input type="range" id="slider-barrier-reduction" min="0" max="75" step="5" value="0"
-                                    class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer">
-                                <p class="text-[10px] text-slate-500 mt-1">Accelerates permitting & inspections.
-                                    Shortening
-                                    implementation duration directly boosts owner motivation.</p>
+                                    class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">Accelerates permitting & inspections, directly boosting owner momentum.</p>
                             </div>
 
                             <!-- Policy Catalyst / Incentive -->
-                            <div class="pt-2 border-t border-slate-800">
-                                <div class="flex justify-between text-xs mb-1">
-                                    <label class="font-medium text-slate-300 flex items-center gap-1">
-                                        <i class="fa-solid fa-flask text-amber-400"></i> Policy Catalyst / Incentive
-                                        Offset
+                            <div class="pt-3 border-t border-slate-800">
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
+                                    <label class="font-medium text-slate-200 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-flask text-amber-400"></i> Policy Catalyst / Incentive Offset
                                     </label>
-                                    <span id="val-catalyst" class="text-amber-400 font-mono font-semibold">0%</span>
+                                    <span id="val-catalyst" class="text-amber-400 font-mono font-bold text-base">0%</span>
                                 </div>
                                 <input type="range" id="slider-catalyst" min="0" max="100" step="5" value="0"
-                                    class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer">
-                                <p class="text-[10px] text-slate-500 mt-1">Lowers the Cap-Ex peak like a chemical
-                                    catalyst lowers
-                                    activation energy.</p>
+                                    class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">Lowers the Cap-Ex peak like a chemical catalyst lowers activation energy.</p>
                             </div>
                         </div>
                     </details>
@@ -285,46 +266,43 @@
 
             <!-- Chart Display Card -->
             <div
-                class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl flex-1 flex flex-col min-h-[460px] relative">
-                <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
+                class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl flex-1 flex flex-col min-h-[500px] relative">
+                <div class="flex flex-wrap justify-between items-center mb-4 gap-3">
                     <div>
-                        <h2 class="text-sm font-bold text-slate-100 flex items-center gap-2">
-                            <i class="fa-solid fa-chart-line text-emerald-400"></i> Activation Cost Trajectory &
+                        <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line text-emerald-400 text-lg"></i> Activation Cost Trajectory &
                             Thermodynamic Energy Profile
                         </h2>
-                        <p class="text-xs text-slate-400">X-Axis: Project Timeline (Construction Months &amp;
+                        <p class="text-xs sm:text-sm text-slate-400 mt-0.5">X-Axis: Project Timeline (Construction Months &amp;
                             Operational Years) | Y-Axis: Effective Cost Rate ($/yr)</p>
                     </div>
 
                     <!-- Driving Force & Legend Controls -->
-                    <div class="flex flex-wrap items-center gap-3 text-[11px]">
+                    <div class="flex flex-wrap items-center gap-3.5 text-xs">
                         <div id="pill-driving-force"
-                            class="px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700/80 font-mono text-slate-300 flex items-center gap-2">
-                            <span class="text-slate-400">Cumulative Savings (PV):</span>
-                            <span id="val-cum-savings" class="text-emerald-400 font-bold">$688k</span>
+                            class="px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700/80 font-mono text-slate-300 flex items-center gap-2">
+                            <span class="text-slate-400 font-sans">Cumulative Savings (PV):</span>
+                            <span id="val-cum-savings" class="text-emerald-400 font-bold text-sm">$688k</span>
                             <span class="text-slate-600">|</span>
-                            <span class="text-slate-400">Motivation:</span>
-                            <span id="pill-motivation-level" class="font-bold text-emerald-400">High</span>
+                            <span class="text-slate-400 font-sans">Motivation:</span>
+                            <span id="pill-motivation-level" class="font-bold text-emerald-400 text-sm">High</span>
                         </div>
 
-                        <div class="flex items-center gap-3">
-                            <span class="flex items-center gap-1"><span
-                                    class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span> Cost
-                                Increase</span>
-                            <span class="flex items-center gap-1"><span
-                                    class="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block"></span> Cost
-                                Reduction</span>
-                            <span class="flex items-center gap-1"><span
-                                    class="w-3 h-0.5 border-b border-dashed border-slate-400 inline-block"></span>
-                                Baseline
-                                Op-Ex</span>
+                        <div class="flex items-center gap-3.5 text-xs text-slate-300">
+                            <span class="flex items-center gap-1.5"><span
+                                    class="w-3 h-3 rounded-full bg-red-500/80 inline-block shadow-sm"></span> Cost Increase</span>
+                            <span class="flex items-center gap-1.5"><span
+                                    class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block shadow-sm"></span> Cost Reduction</span>
+                            <span class="flex items-center gap-1.5"><span
+                                    class="w-3.5 h-0.5 border-b-2 border-dashed border-slate-400 inline-block"></span>
+                                Baseline Op-Ex</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Canvas Container with Hover Tooltip Integration -->
                 <div id="canvas-container"
-                    class="relative flex-1 w-full h-full min-h-[340px] bg-slate-950/60 rounded-lg border border-slate-800/80 overflow-hidden cursor-crosshair">
+                    class="relative flex-1 w-full h-full min-h-[380px] bg-slate-950/60 rounded-lg border border-slate-800/80 overflow-hidden cursor-crosshair">
                     <canvas id="activationCanvas" class="absolute inset-0 w-full h-full"></canvas>
                 </div>
             </div>
@@ -332,61 +310,54 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <!-- KPI 1: Net Present Value -->
                 <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-lg">
-                    <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Net Present Value
-                        (NPV)</div>
-                    <div id="kpi-npv" class="text-lg font-bold font-mono text-emerald-400 mt-1">$0</div>
-                    <div id="kpi-npv-sub" class="text-[10px] text-slate-500 mt-0.5">Lifetime net value</div>
+                    <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Net Present Value (NPV)</div>
+                    <div id="kpi-npv" class="text-2xl font-bold font-mono text-emerald-400 mt-1.5">$0</div>
+                    <div id="kpi-npv-sub" class="text-xs text-slate-400 mt-1">Lifetime net value</div>
                 </div>
 
                 <!-- KPI 2: Simple Payback -->
                 <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-lg">
-                    <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Simple Payback</div>
-                    <div id="kpi-payback" class="text-lg font-bold font-mono text-emerald-400 mt-1">0.0 yrs</div>
-                    <div id="kpi-payback-sub" class="text-[10px] text-slate-500 mt-0.5">Time to break even (&lt;5 yrs
-                        rolls over)</div>
+                    <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Simple Payback</div>
+                    <div id="kpi-payback" class="text-2xl font-bold font-mono text-emerald-400 mt-1.5">0.0 yrs</div>
+                    <div id="kpi-payback-sub" class="text-xs text-slate-400 mt-1">Break-even (&lt;5 yrs rolls over)</div>
                 </div>
 
                 <!-- KPI 3: ROI -->
                 <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-lg">
-                    <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Project ROI</div>
-                    <div id="kpi-roi" class="text-lg font-bold font-mono text-emerald-400 mt-1">0%</div>
-                    <div id="kpi-roi-sub" class="text-[10px] text-slate-500 mt-0.5">Return on investment (NPV / Cap-Ex)
-                    </div>
+                    <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Project ROI</div>
+                    <div id="kpi-roi" class="text-2xl font-bold font-mono text-emerald-400 mt-1.5">0%</div>
+                    <div id="kpi-roi-sub" class="text-xs text-slate-400 mt-1">Return on investment (NPV / Cap-Ex)</div>
                 </div>
 
                 <!-- KPI 4: Effective Cap-Ex -->
                 <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-lg">
-                    <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Effective Cap-Ex
-                        Barrier</div>
-                    <div id="kpi-net-capex" class="text-lg font-bold font-mono text-amber-400 mt-1">$0</div>
-                    <div id="kpi-net-capex-sub" class="text-[10px] text-slate-500 mt-0.5">After policy incentive</div>
+                    <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Effective Cap-Ex Barrier</div>
+                    <div id="kpi-net-capex" class="text-2xl font-bold font-mono text-amber-400 mt-1.5">$0</div>
+                    <div id="kpi-net-capex-sub" class="text-xs text-slate-400 mt-1">After policy incentive offset</div>
                 </div>
             </div>
 
             <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-2">
-                    <i class="fa-solid fa-atom text-purple-400"></i> Conceptual Framework: Analogizing ZE Building
+                <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-2.5 flex items-center gap-2">
+                    <i class="fa-solid fa-atom text-purple-400 text-base"></i> Conceptual Framework: Analogizing ZE Building
                     Retrofits to Chemical Reaction Kinetics
                 </h3>
-                <p id="scenario-description" class="text-xs text-slate-300 leading-relaxed">
+                <p id="scenario-description" class="text-sm text-slate-200 leading-relaxed font-normal">
                     Loading scenario overview...
                 </p>
                 <div
-                    class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4 text-[11px] text-slate-400 border-t border-slate-800/80 pt-3">
-                    <div class="bg-slate-950/40 p-2.5 rounded-lg border border-slate-800">
-                        <span class="font-bold text-slate-200 block mb-1">1. Reactants (Pre-Retrofit)</span>
-                        Baseline building operating state with ongoing operational emissions and energy bills. High
-                        kinetic stability, but high cumulative long-term cost.
+                    class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mt-4 text-xs sm:text-sm text-slate-300 border-t border-slate-800/80 pt-3.5">
+                    <div class="bg-slate-950/40 p-3 rounded-lg border border-slate-800 leading-relaxed">
+                        <span class="font-bold text-slate-100 block mb-1 text-sm text-emerald-400">1. Reactants (Pre-Retrofit)</span>
+                        Baseline building operating state with ongoing operational emissions and energy bills. High kinetic stability, but high cumulative long-term cost.
                     </div>
-                    <div class="bg-slate-950/40 p-2.5 rounded-lg border border-slate-800">
-                        <span class="font-bold text-slate-200 block mb-1">2. Activation Barrier (Cap-Ex)</span>
-                        Upfront capital expenditures, equipment procurement, installation disruption, and commissioning
-                        required to cross the energetic threshold.
+                    <div class="bg-slate-950/40 p-3 rounded-lg border border-slate-800 leading-relaxed">
+                        <span class="font-bold text-slate-100 block mb-1 text-sm text-amber-400">2. Activation Barrier (Cap-Ex)</span>
+                        Upfront capital expenditures, equipment procurement, installation disruption, and commissioning required to cross the energetic threshold.
                     </div>
-                    <div class="bg-slate-950/40 p-2.5 rounded-lg border border-slate-800">
-                        <span class="font-bold text-slate-200 block mb-1">3. Products (Zero-Emission State)</span>
-                        Exothermic financial return when operational expenditures drop permanently below pre-retrofit
-                        baseline levels (Green shaded region).
+                    <div class="bg-slate-950/40 p-3 rounded-lg border border-slate-800 leading-relaxed">
+                        <span class="font-bold text-slate-100 block mb-1 text-sm text-cyan-400">3. Products (Zero-Emission State)</span>
+                        Exothermic financial return when operational expenditures drop permanently below pre-retrofit baseline levels (Green shaded region).
                     </div>
                 </div>
             </div>
@@ -829,7 +800,7 @@
             // Property Owner Motivation Badge in Header
             if (telemetryMotivation) {
                 telemetryMotivation.innerText = tier.level;
-                telemetryMotivation.className = `px-2 py-0.5 rounded font-bold uppercase tracking-wider text-[11px] border ${tier.colorClass}`;
+                telemetryMotivation.className = `px-2.5 py-0.5 rounded font-bold uppercase tracking-wider text-xs border ${tier.colorClass}`;
             }
             if (telemetryStatus) {
                 telemetryStatus.innerText = state.statusMessage;
@@ -1001,10 +972,10 @@
 
             ctx.clearRect(0, 0, width, height);
 
-            const paddingLeft = 60;
-            const paddingRight = 35;
-            const paddingTop = 45;
-            const paddingBottom = 82;
+            const paddingLeft = 74;
+            const paddingRight = 45;
+            const paddingTop = 52;
+            const paddingBottom = 96;
 
             const graphW = width - paddingLeft - paddingRight;
             const graphH = height - paddingTop - paddingBottom;
@@ -1043,7 +1014,7 @@
             });
 
             // 2. Peak Month (if installation window is wide enough)
-            if ((xPeak - xStart) >= 44 && (xInstallEnd - xPeak) >= 44) {
+            if ((xPeak - xStart) >= 50 && (xInstallEnd - xPeak) >= 50) {
                 xTicks.push({
                     x: xPeak,
                     label: `Mo ${(phaseInfo.effInstallMonths / 2).toFixed(0)}`,
@@ -1052,24 +1023,26 @@
                 });
             }
 
-            // 3. Installation End Month
-            xTicks.push({
-                x: xInstallEnd,
-                label: `Mo ${phaseInfo.effInstallMonths.toFixed(0)}`,
-                color: '#f59e0b',
-                grid: false
-            });
+            // 3. Installation End Month (only display if well separated from Start)
+            if ((xInstallEnd - xStart) >= 46) {
+                xTicks.push({
+                    x: xInstallEnd,
+                    label: `Mo ${phaseInfo.effInstallMonths.toFixed(0)}`,
+                    color: '#f59e0b',
+                    grid: false
+                });
+            }
 
             // 4. Commissioning End / Year 0 of Operation
             const totMonths = phaseInfo.effInstallMonths + state.commissionDuration;
-            if ((xCommissionEnd - xInstallEnd) >= 42) {
+            if ((xCommissionEnd - xInstallEnd) >= 48) {
                 xTicks.push({
                     x: xCommissionEnd,
                     label: `Mo ${totMonths.toFixed(0)} (Yr 0)`,
                     color: '#38bdf8',
                     grid: false
                 });
-            } else {
+            } else if ((xCommissionEnd - xStart) >= 54) {
                 xTicks.push({
                     x: xCommissionEnd,
                     label: 'Yr 0',
@@ -1082,13 +1055,13 @@
             const opWidthPx = xEnd - xCommissionEnd;
             let yrStep = 5;
             if (state.timeHorizon <= 10) yrStep = 2;
-            else if (opWidthPx < 350) yrStep = 10;
+            else if (opWidthPx < 400) yrStep = 10;
             else yrStep = 5;
 
             for (let y = yrStep; y <= state.timeHorizon; y += yrStep) {
                 const yrRatio = phaseInfo.pCommissionEnd + (y / state.timeHorizon) * (1.0 - phaseInfo.pCommissionEnd);
                 const xYr = ratioToX(yrRatio);
-                if (xYr - xCommissionEnd >= 34 && (xEnd - xYr) >= 14) {
+                if (xYr - xCommissionEnd >= 42 && (xEnd - xYr) >= 20) {
                     xTicks.push({
                         x: xYr,
                         label: `Yr ${y}`,
@@ -1100,7 +1073,7 @@
 
             // 6. Horizon End Tick
             const lastTick = xTicks[xTicks.length - 1];
-            if (xEnd - lastTick.x >= 32) {
+            if (xEnd - lastTick.x >= 38) {
                 xTicks.push({
                     x: xEnd,
                     label: `Yr ${Math.round(state.timeHorizon)}`,
@@ -1112,8 +1085,9 @@
             // Horizontal Grid Lines & Y-Axis Labels
             ctx.strokeStyle = '#1e293b';
             ctx.lineWidth = 1;
-            ctx.font = '10px Inter';
-            ctx.fillStyle = '#64748b';
+            ctx.font = '12px Inter';
+            ctx.fillStyle = '#94a3b8';
+            ctx.textAlign = 'right';
 
             const numTicks = 5;
             for (let i = 0; i <= numTicks; i++) {
@@ -1125,7 +1099,7 @@
                 ctx.lineTo(width - paddingRight, y);
                 ctx.stroke();
 
-                ctx.fillText(`$${Math.round(v)}k`, 10, y + 3);
+                ctx.fillText(`$${Math.round(v)}k`, paddingLeft - 10, y + 4);
             }
 
             // Vertical Year Grid Lines in Chart Background
@@ -1173,22 +1147,23 @@
 
             // Baseline Dashed Line
             ctx.beginPath();
-            ctx.setLineDash([5, 5]);
+            ctx.setLineDash([6, 6]);
             ctx.strokeStyle = '#94a3b8';
-            ctx.lineWidth = 1.5;
+            ctx.lineWidth = 1.75;
             ctx.moveTo(paddingLeft, baselineY);
             ctx.lineTo(width - paddingRight, baselineY);
             ctx.stroke();
             ctx.setLineDash([]);
 
-            ctx.fillStyle = '#cbd5e1';
-            ctx.font = '11px Inter';
-            ctx.fillText('Baseline Op-Ex', width - paddingRight - 90, baselineY - 8);
+            ctx.fillStyle = '#e2e8f0';
+            ctx.font = '600 13px Inter';
+            ctx.textAlign = 'right';
+            ctx.fillText('Baseline Op-Ex', width - paddingRight - 15, baselineY - 10);
 
             // Main Energy Curve Line
             ctx.beginPath();
             ctx.strokeStyle = '#38bdf8';
-            ctx.lineWidth = 3;
+            ctx.lineWidth = 3.5;
             points.forEach((p, idx) => {
                 if (idx === 0) ctx.moveTo(p.x, p.y);
                 else ctx.lineTo(p.x, p.y);
@@ -1196,7 +1171,7 @@
             ctx.stroke();
 
             // Vertical Phase Boundary Dashed Lines
-            ctx.setLineDash([3, 3]);
+            ctx.setLineDash([4, 4]);
             ctx.strokeStyle = '#334155';
             [xStart, xInstallEnd, xCommissionEnd].forEach(x => {
                 ctx.beginPath();
@@ -1219,36 +1194,36 @@
             ctx.stroke();
 
             // Axis Titles
-            ctx.fillStyle = '#94a3b8';
-            ctx.font = 'bold 11px Inter';
+            ctx.fillStyle = '#cbd5e1';
+            ctx.font = 'bold 13px Inter';
             ctx.textAlign = 'left';
             ctx.fillText('Costs ($/yr rate)', paddingLeft, paddingTop - 22);
 
             ctx.textAlign = 'right';
-            ctx.font = 'bold 10px Inter';
-            ctx.fillStyle = '#94a3b8';
-            ctx.fillText('Time: Construction (Months) → Operation (Years) →', width - paddingRight, xAxisY - 7);
+            ctx.font = 'bold 12px Inter';
+            ctx.fillStyle = '#cbd5e1';
+            ctx.fillText('Time: Construction (Months) → Operation (Years) →', width - paddingRight, xAxisY - 9);
 
             // X-Axis Downward Ticks & Numerical Labels (Months & Years)
             xTicks.forEach(t => {
                 // Downward Tick Mark
                 ctx.beginPath();
                 ctx.strokeStyle = '#475569';
-                ctx.lineWidth = 1.2;
+                ctx.lineWidth = 1.5;
                 ctx.moveTo(t.x, xAxisY);
-                ctx.lineTo(t.x, xAxisY + 5);
+                ctx.lineTo(t.x, xAxisY + 6);
                 ctx.stroke();
 
                 // Tick Label
                 ctx.fillStyle = t.color;
-                ctx.font = 'bold 9px Inter';
+                ctx.font = 'bold 11px Inter';
                 ctx.textAlign = 'center';
-                ctx.fillText(t.label, t.x, xAxisY + 15);
+                ctx.fillText(t.label, t.x, xAxisY + 18);
             });
 
             // Dedicated Timeline Track below X-axis
-            const trackY = xAxisY + 22;
-            const trackH = 22;
+            const trackY = xAxisY + 28;
+            const trackH = 26;
 
             function drawPhaseBadge(x1, x2, bg, border, textColor, title, sub) {
                 const w = Math.max(x2 - x1 - 4, 10);
@@ -1258,22 +1233,22 @@
                 ctx.strokeStyle = border;
                 ctx.lineWidth = 1;
                 ctx.beginPath();
-                ctx.roundRect(x, trackY, w, trackH, 5);
+                ctx.roundRect(x, trackY, w, trackH, 6);
                 ctx.fill();
                 ctx.stroke();
 
                 ctx.fillStyle = textColor;
-                ctx.font = 'bold 9px Inter';
+                ctx.font = 'bold 11px Inter';
                 ctx.textAlign = 'center';
                 const midX = x + w / 2;
 
-                if (w > 65) {
-                    ctx.fillText(title, midX, trackY + 10);
-                    ctx.font = '8px Inter';
+                if (w > 80) {
+                    ctx.fillText(title, midX, trackY + 12);
+                    ctx.font = '10px Inter';
                     ctx.fillStyle = '#94a3b8';
-                    ctx.fillText(sub, midX, trackY + 19);
-                } else if (w > 30) {
-                    ctx.fillText(title, midX, trackY + 14);
+                    ctx.fillText(sub, midX, trackY + 22);
+                } else if (w > 36) {
+                    ctx.fillText(title, midX, trackY + 16);
                 }
             }
 
@@ -1297,20 +1272,20 @@
 
             // End tick caps
             ctx.beginPath();
-            ctx.moveTo(peakX - 4, peakY);
-            ctx.lineTo(peakX + 4, peakY);
-            ctx.moveTo(peakX - 4, baselineY);
-            ctx.lineTo(peakX + 4, baselineY);
+            ctx.moveTo(peakX - 5, peakY);
+            ctx.lineTo(peakX + 5, peakY);
+            ctx.moveTo(peakX - 5, baselineY);
+            ctx.lineTo(peakX + 5, baselineY);
             ctx.stroke();
 
             // Text beside activation barrier
             ctx.textAlign = 'left';
             ctx.fillStyle = '#f59e0b';
-            ctx.font = 'bold 10px Inter';
-            ctx.fillText(`Activation Barrier: +$${Math.round(peakRateHeight)}k/yr`, peakX + 7, (baselineY + peakY) / 2 - 4);
-            ctx.font = '9px Inter';
+            ctx.font = 'bold 12px Inter';
+            ctx.fillText(`Activation Barrier: +$${Math.round(peakRateHeight)}k/yr`, peakX + 9, (baselineY + peakY) / 2 - 6);
+            ctx.font = '600 11px Inter';
             ctx.fillStyle = '#fbbf24';
-            ctx.fillText(`Total Cap-Ex: $${Math.round(effectiveCapEx)}k`, peakX + 7, (baselineY + peakY) / 2 + 8);
+            ctx.fillText(`Total Cap-Ex: $${Math.round(effectiveCapEx)}k`, peakX + 9, (baselineY + peakY) / 2 + 10);
 
             // Op-Ex Delta Indicator in Operation Phase (Initial undiscounted rate marker)
             const opexMarkerX = xCommissionEnd + (xEnd - xCommissionEnd) * 0.15;
@@ -1322,15 +1297,15 @@
             ctx.beginPath();
             ctx.moveTo(opexMarkerX, baselineY);
             ctx.lineTo(opexMarkerX, opexInitialY);
-            ctx.moveTo(opexMarkerX - 4, baselineY);
-            ctx.lineTo(opexMarkerX + 4, baselineY);
-            ctx.moveTo(opexMarkerX - 4, opexInitialY);
-            ctx.lineTo(opexMarkerX + 4, opexInitialY);
+            ctx.moveTo(opexMarkerX - 5, baselineY);
+            ctx.lineTo(opexMarkerX + 5, baselineY);
+            ctx.moveTo(opexMarkerX - 5, opexInitialY);
+            ctx.lineTo(opexMarkerX + 5, opexInitialY);
             ctx.stroke();
 
             ctx.fillStyle = opexColor;
-            ctx.font = 'bold 10px Inter';
-            ctx.fillText(`Initial Δ Op-Ex: ${state.opexDelta <= 0 ? '-' : '+'}$${Math.abs(state.opexDelta)}k/yr`, opexMarkerX + 6, (baselineY + opexInitialY) / 2);
+            ctx.font = 'bold 12px Inter';
+            ctx.fillText(`Initial Δ Op-Ex: ${state.opexDelta <= 0 ? '-' : '+'}$${Math.abs(state.opexDelta)}k/yr`, opexMarkerX + 8, (baselineY + opexInitialY) / 2);
 
             // Interactive Mouse Hover Crosshair & Tooltip
             if (state.isHovering && state.hoverRatio !== null) {
@@ -1340,9 +1315,9 @@
                 const hY = valToY(hRes.value);
 
                 // Vertical Crosshair line
-                ctx.setLineDash([2, 2]);
+                ctx.setLineDash([3, 3]);
                 ctx.strokeStyle = '#38bdf8';
-                ctx.lineWidth = 1;
+                ctx.lineWidth = 1.2;
                 ctx.beginPath();
                 ctx.moveTo(hX, paddingTop);
                 ctx.lineTo(hX, height - paddingBottom);
@@ -1351,11 +1326,11 @@
 
                 // Target Circle on curve
                 ctx.beginPath();
-                ctx.arc(hX, hY, 5, 0, Math.PI * 2);
+                ctx.arc(hX, hY, 6, 0, Math.PI * 2);
                 ctx.fillStyle = '#38bdf8';
                 ctx.fill();
                 ctx.strokeStyle = '#ffffff';
-                ctx.lineWidth = 2;
+                ctx.lineWidth = 2.5;
                 ctx.stroke();
 
                 // Floating Tooltip Box
@@ -1380,37 +1355,37 @@
                     subTime = `Year ${y.toFixed(1)} of ${state.timeHorizon} (PV Discounted)`;
                 }
 
-                const tooltipW = 165;
-                const tooltipH = 62;
-                let tipX = hX + 12;
-                if (tipX + tooltipW > width - paddingRight) tipX = hX - tooltipW - 12;
+                const tooltipW = 190;
+                const tooltipH = 74;
+                let tipX = hX + 14;
+                if (tipX + tooltipW > width - paddingRight) tipX = hX - tooltipW - 14;
                 let tipY = Math.max(hY - tooltipH / 2, paddingTop);
                 if (tipY + tooltipH > height - paddingBottom) tipY = height - paddingBottom - tooltipH;
 
-                ctx.fillStyle = 'rgba(15, 23, 42, 0.95)';
+                ctx.fillStyle = 'rgba(15, 23, 42, 0.96)';
                 ctx.strokeStyle = '#334155';
-                ctx.lineWidth = 1;
+                ctx.lineWidth = 1.2;
                 ctx.beginPath();
-                ctx.roundRect(tipX, tipY, tooltipW, tooltipH, 6);
+                ctx.roundRect(tipX, tipY, tooltipW, tooltipH, 8);
                 ctx.fill();
                 ctx.stroke();
 
                 ctx.textAlign = 'left';
-                ctx.font = 'bold 9.5px Inter';
+                ctx.font = 'bold 11.5px Inter';
                 ctx.fillStyle = '#94a3b8';
-                ctx.fillText(phaseName, tipX + 8, tipY + 14);
+                ctx.fillText(phaseName, tipX + 10, tipY + 17);
 
-                ctx.font = '8.5px Inter';
+                ctx.font = '10.5px Inter';
                 ctx.fillStyle = '#64748b';
-                ctx.fillText(subTime, tipX + 8, tipY + 26);
+                ctx.fillText(subTime, tipX + 10, tipY + 31);
 
-                ctx.font = '10px Inter';
+                ctx.font = 'bold 12px Inter';
                 ctx.fillStyle = '#f8fafc';
-                ctx.fillText(`Cost Rate: $${Math.round(hRes.value)}k/yr`, tipX + 8, tipY + 41);
+                ctx.fillText(`Cost Rate: $${Math.round(hRes.value)}k/yr`, tipX + 10, tipY + 48);
 
-                ctx.font = 'bold 9.5px Inter';
+                ctx.font = 'bold 11.5px Inter';
                 ctx.fillStyle = deltaColor;
-                ctx.fillText(`Delta: ${deltaStr}`, tipX + 8, tipY + 54);
+                ctx.fillText(`Delta: ${deltaStr}`, tipX + 10, tipY + 64);
             }
 
             // Physics-Aligned Rolling Reaction Ball
