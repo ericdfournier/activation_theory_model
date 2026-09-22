@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-900 text-slate-100">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>An Activation Model of Zero-Emission (ZE) Building Retrofits</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 18px;
+            width: 18px;
+            border-radius: 50%;
+            background: #3b82f6;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+    </style>
+</head>
+
+<body class="h-full flex flex-col overflow-x-hidden bg-slate-950 text-slate-100">
+
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+        <div
+            class="w-full px-4 py-3 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="p-2 bg-emerald-500/10 rounded-lg border border-emerald-500/20 text-emerald-400">
+                    <i class="fa-solid fa-bolt-lightning text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-white tracking-tight">Zero-Emission Building Retrofit Dynamics
+                    </h1>
+                    <p class="text-xs text-slate-400">Activation Energy Model for Non-Residential Buildings</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <!-- Property Owner Motivation Telemetry Badge -->
+                <div id="physics-telemetry"
+                    class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-800/90 border border-slate-700/80 text-xs">
+                    <span class="flex items-center gap-1.5 text-slate-400">
+                        <i class="fa-solid fa-user-tie text-blue-400"></i>
+                        <span>Owner Motivation:</span>
+                    </span>
+                    <span id="telemetry-motivation"
+                        class="px-2 py-0.5 rounded font-bold uppercase tracking-wider text-[11px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">High</span>
+                    <span class="text-slate-600">|</span>
+                    <span id="telemetry-status" class="text-slate-300 font-medium">Ready</span>
+                </div>
+
+                <button id="btn-play-animation"
+                    class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition shadow-lg shadow-blue-600/20">
+                    <i class="fa-solid fa-play" id="play-icon"></i>
+                    <span id="play-text">Roll Reaction Ball</span>
+                </button>
+                <button id="btn-reset"
+                    class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-medium border border-slate-700 transition">
+                    <i class="fa-solid fa-rotate-right mr-1"></i> Reset
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 w-full px-4 py-6 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Left Controls Panel (4 Cols on lg, 3 Cols on xl/2xl) -->
+        <section class="lg:col-span-4 xl:col-span-3 2xl:col-span-3 space-y-6">
+
+            <!-- Preset Selection Card -->
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-blue-400"></i> Model Scenario Presets
+                </h2>
+                <div class="grid grid-cols-2 gap-2">
+                    <button data-preset="A"
+                        class="preset-btn px-3 py-2 text-left rounded-lg border border-slate-800 hover:border-emerald-500/50 bg-slate-800/50 hover:bg-emerald-500/10 transition group">
+                        <div class="text-xs font-bold text-slate-200 group-hover:text-emerald-400">Scenario A</div>
+                        <div class="text-[10px] text-slate-400">Standard / Optimal</div>
+                    </button>
+                    <button data-preset="B"
+                        class="preset-btn px-3 py-2 text-left rounded-lg border border-slate-800 hover:border-red-500/50 bg-slate-800/50 hover:bg-red-500/10 transition group">
+                        <div class="text-xs font-bold text-slate-200 group-hover:text-red-400">Scenario B</div>
+                        <div class="text-[10px] text-slate-400">Excessive Cap-Ex</div>
+                    </button>
+                    <button data-preset="C"
+                        class="preset-btn px-3 py-2 text-left rounded-lg border border-slate-800 hover:border-amber-500/50 bg-slate-800/50 hover:bg-amber-500/10 transition group">
+                        <div class="text-xs font-bold text-slate-200 group-hover:text-amber-400">Scenario C</div>
+                        <div class="text-[10px] text-slate-400">Long Downtime</div>
+                    </button>
+                    <button data-preset="D"
+                        class="preset-btn px-3 py-2 text-left rounded-lg border border-slate-800 hover:border-rose-500/50 bg-slate-800/50 hover:bg-rose-500/10 transition group">
+                        <div class="text-xs font-bold text-slate-200 group-hover:text-rose-400">Scenario D</div>
+                        <div class="text-[10px] text-slate-400">Increased Op-Ex</div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Parameter Controls Container -->
+            <div class="space-y-4">
+
+                <!-- Card 1: Input Parameters (Collapsible) -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl">
+                    <details class="group" open>
+                        <summary class="cursor-pointer list-none flex items-center justify-between select-none">
+                            <h2
+                                class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                                <i class="fa-solid fa-gears text-blue-400"></i> Input Parameters
+                                <span id="custom-badge"
+                                    class="hidden text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full border border-blue-500/30">Customized</span>
+                            </h2>
+                            <i
+                                class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
+                        </summary>
+
+                        <div class="space-y-4 pt-4">
+                            <!-- Total Integrated Cap-Ex -->
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <label class="font-medium text-slate-300">Total Integrated Cap-Ex (∫ dt)</label>
+                                    <span id="val-capex" class="text-blue-400 font-mono font-semibold">$350k</span>
+                                </div>
+                                <input type="range" id="slider-capex" min="50" max="900" step="10" value="350"
+                                    class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                <div class="flex justify-between items-center text-[10px] text-slate-500 mt-1">
+                                    <span>Total investment over installation period</span>
+                                    <span id="val-peak-rate" class="text-amber-400/90 font-mono">Peak: $420k/yr</span>
+                                </div>
+                            </div>
+
+                            <!-- Baseline Installation Duration -->
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <label class="font-medium text-slate-300">Baseline Installation Duration</label>
+                                    <span id="val-install-time" class="text-blue-400 font-mono font-semibold">6
+                                        mos</span>
+                                </div>
+                                <input type="range" id="slider-install-time" min="2" max="24" step="1" value="6"
+                                    class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-[10px] text-slate-500 mt-1">Shorter implementation windows reduce
+                                    disruption and
+                                    strongly elevate property owner motivation.</p>
+                            </div>
+
+                            <!-- Commissioning Duration -->
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <label class="font-medium text-slate-300">Commissioning Duration (Months)</label>
+                                    <span id="val-commission-time" class="text-blue-400 font-mono font-semibold">4
+                                        mos</span>
+                                </div>
+                                <input type="range" id="slider-commission-time" min="1" max="12" step="1" value="4"
+                                    class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-[10px] text-slate-500 mt-1">Smooth transitional optimization period down
+                                    to stable
+                                    zero-emission operation.</p>
+                            </div>
+
+                            <!-- Operational Savings / Delta -->
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <label class="font-medium text-slate-300">Post-Retrofit Annual Op-Ex Delta
+                                        ($)</label>
+                                    <span id="val-opex-delta"
+                                        class="text-emerald-400 font-mono font-semibold">-$60k/yr</span>
+                                </div>
+                                <input type="range" id="slider-opex-delta" min="-120" max="50" step="5" value="-60"
+                                    class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-[10px] text-slate-500 mt-1">Negative values = Green savings. Positive
+                                    values = Red
+                                    added costs.</p>
+                            </div>
+
+                            <!-- Owner's Discount Rate for Future Savings -->
+                            <div class="pt-2 border-t border-slate-800">
+                                <div class="flex justify-between text-xs mb-1">
+                                    <label class="font-medium text-slate-300 flex items-center gap-1">
+                                        <i class="fa-solid fa-percent text-purple-400"></i> Owner's Discount Rate
+                                        (Future Savings)
+                                    </label>
+                                    <span id="val-discount" class="text-purple-400 font-mono font-semibold">6.0%</span>
+                                </div>
+                                <input type="range" id="slider-discount" min="0" max="20" step="0.5" value="6.0"
+                                    class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-[10px] text-slate-500 mt-1">Discounts the present value of future annual
+                                    Op-Ex
+                                    savings, visually curving the operational trajectory upward over time.</p>
+                            </div>
+
+                            <!-- Financial Parameters Collapsible -->
+                            <div class="pt-2 border-t border-slate-800">
+                                <details class="group/nested">
+                                    <summary
+                                        class="text-xs font-semibold text-slate-400 hover:text-slate-200 cursor-pointer flex items-center justify-between py-1">
+                                        <span>Financial Horizon & Baseline</span>
+                                        <i
+                                            class="fa-solid fa-chevron-down group-open/nested:rotate-180 transition-transform"></i>
+                                    </summary>
+                                    <div class="space-y-3 pt-3">
+                                        <div>
+                                            <div class="flex justify-between text-xs mb-1">
+                                                <label class="text-slate-400">Pre-Retrofit Baseline Op-Ex</label>
+                                                <span id="val-baseline-opex"
+                                                    class="text-slate-200 font-mono">$150k/yr</span>
+                                            </div>
+                                            <input type="range" id="slider-baseline-opex" min="50" max="300" step="10"
+                                                value="150"
+                                                class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between text-xs mb-1">
+                                                <label class="text-slate-400">Evaluation Horizon</label>
+                                                <span id="val-horizon" class="text-slate-200 font-mono">20 Years</span>
+                                            </div>
+                                            <input type="range" id="slider-horizon" min="5" max="30" step="1" value="20"
+                                                class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Card 2: Policy Interventions (Collapsible) -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl">
+                    <details class="group" open>
+                        <summary class="cursor-pointer list-none flex items-center justify-between select-none">
+                            <h2
+                                class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                                <i class="fa-solid fa-landmark text-cyan-400"></i> Policy Interventions
+                            </h2>
+                            <i
+                                class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
+                        </summary>
+
+                        <div class="space-y-4 pt-4">
+                            <!-- Policy Barrier Reduction -->
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <label class="font-medium text-slate-300 flex items-center gap-1">
+                                        <i class="fa-solid fa-file-signature text-cyan-400"></i> Barrier Reduction /
+                                        Speedup
+                                    </label>
+                                    <span id="val-barrier-reduction" class="text-cyan-400 font-mono font-semibold">0% (6
+                                        mos)</span>
+                                </div>
+                                <input type="range" id="slider-barrier-reduction" min="0" max="75" step="5" value="0"
+                                    class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-[10px] text-slate-500 mt-1">Accelerates permitting & inspections.
+                                    Shortening
+                                    implementation duration directly boosts owner motivation.</p>
+                            </div>
+
+                            <!-- Policy Catalyst / Incentive -->
+                            <div class="pt-2 border-t border-slate-800">
+                                <div class="flex justify-between text-xs mb-1">
+                                    <label class="font-medium text-slate-300 flex items-center gap-1">
+                                        <i class="fa-solid fa-flask text-amber-400"></i> Policy Catalyst / Incentive
+                                        Offset
+                                    </label>
+                                    <span id="val-catalyst" class="text-amber-400 font-mono font-semibold">0%</span>
+                                </div>
+                                <input type="range" id="slider-catalyst" min="0" max="100" step="5" value="0"
+                                    class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-[10px] text-slate-500 mt-1">Lowers the Cap-Ex peak like a chemical
+                                    catalyst lowers
+                                    activation energy.</p>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Right Display & Graph Area (8 Cols on lg, 9 Cols on xl/2xl) -->
+        <section class="lg:col-span-8 xl:col-span-9 2xl:col-span-9 space-y-6 flex flex-col">
+
+            <!-- Chart Display Card -->
+            <div
+                class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl flex-1 flex flex-col min-h-[460px] relative">
+                <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
+                    <div>
+                        <h2 class="text-sm font-bold text-slate-100 flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line text-emerald-400"></i> Activation Cost Trajectory &
+                            Thermodynamic Energy Profile
+                        </h2>
+                        <p class="text-xs text-slate-400">X-Axis: Project Timeline (Construction Months &amp;
+                            Operational Years) | Y-Axis: Effective Cost Rate ($/yr)</p>
+                    </div>
+
+                    <!-- Driving Force & Legend Controls -->
+                    <div class="flex flex-wrap items-center gap-3 text-[11px]">
+                        <div id="pill-driving-force"
+                            class="px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700/80 font-mono text-slate-300 flex items-center gap-2">
+                            <span class="text-slate-400">Cumulative Savings (PV):</span>
+                            <span id="val-cum-savings" class="text-emerald-400 font-bold">$688k</span>
+                            <span class="text-slate-600">|</span>
+                            <span class="text-slate-400">Motivation:</span>
+                            <span id="pill-motivation-level" class="font-bold text-emerald-400">High</span>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            <span class="flex items-center gap-1"><span
+                                    class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span> Cost
+                                Increase</span>
+                            <span class="flex items-center gap-1"><span
+                                    class="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block"></span> Cost
+                                Reduction</span>
+                            <span class="flex items-center gap-1"><span
+                                    class="w-3 h-0.5 border-b border-dashed border-slate-400 inline-block"></span>
+                                Baseline
+                                Op-Ex</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Canvas Container with Hover Tooltip Integration -->
+                <div id="canvas-container"
+                    class="relative flex-1 w-full h-full min-h-[340px] bg-slate-950/60 rounded-lg border border-slate-800/80 overflow-hidden cursor-crosshair">
+                    <canvas id="activationCanvas" class="absolute inset-0 w-full h-full"></canvas>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- KPI 1: Net Present Value -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-lg">
+                    <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Net Present Value
+                        (NPV)</div>
+                    <div id="kpi-npv" class="text-lg font-bold font-mono text-emerald-400 mt-1">$0</div>
+                    <div id="kpi-npv-sub" class="text-[10px] text-slate-500 mt-0.5">Lifetime net value</div>
+                </div>
+
+                <!-- KPI 2: Simple Payback -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-lg">
+                    <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Simple Payback</div>
+                    <div id="kpi-payback" class="text-lg font-bold font-mono text-emerald-400 mt-1">0.0 yrs</div>
+                    <div id="kpi-payback-sub" class="text-[10px] text-slate-500 mt-0.5">Time to break even (&lt;5 yrs
+                        rolls over)</div>
+                </div>
+
+                <!-- KPI 3: ROI -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-lg">
+                    <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Project ROI</div>
+                    <div id="kpi-roi" class="text-lg font-bold font-mono text-emerald-400 mt-1">0%</div>
+                    <div id="kpi-roi-sub" class="text-[10px] text-slate-500 mt-0.5">Return on investment (NPV / Cap-Ex)
+                    </div>
+                </div>
+
+                <!-- KPI 4: Effective Cap-Ex -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-lg">
+                    <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Effective Cap-Ex
+                        Barrier</div>
+                    <div id="kpi-net-capex" class="text-lg font-bold font-mono text-amber-400 mt-1">$0</div>
+                    <div id="kpi-net-capex-sub" class="text-[10px] text-slate-500 mt-0.5">After policy incentive</div>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-atom text-purple-400"></i> Conceptual Framework: Analogizing ZE Building
+                    Retrofits to Chemical Reaction Kinetics
+                </h3>
+                <p id="scenario-description" class="text-xs text-slate-300 leading-relaxed">
+                    Loading scenario overview...
+                </p>
+                <div
+                    class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4 text-[11px] text-slate-400 border-t border-slate-800/80 pt-3">
+                    <div class="bg-slate-950/40 p-2.5 rounded-lg border border-slate-800">
+                        <span class="font-bold text-slate-200 block mb-1">1. Reactants (Pre-Retrofit)</span>
+                        Baseline building operating state with ongoing operational emissions and energy bills. High
+                        kinetic stability, but high cumulative long-term cost.
+                    </div>
+                    <div class="bg-slate-950/40 p-2.5 rounded-lg border border-slate-800">
+                        <span class="font-bold text-slate-200 block mb-1">2. Activation Barrier (Cap-Ex)</span>
+                        Upfront capital expenditures, equipment procurement, installation disruption, and commissioning
+                        required to cross the energetic threshold.
+                    </div>
+                    <div class="bg-slate-950/40 p-2.5 rounded-lg border border-slate-800">
+                        <span class="font-bold text-slate-200 block mb-1">3. Products (Zero-Emission State)</span>
+                        Exothermic financial return when operational expenditures drop permanently below pre-retrofit
+                        baseline levels (Green shaded region).
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        // State Object
+        const state = {
+            scenario: 'A',
+            totalCapex: 350,         // Time-integrated Cap-Ex in $k (∫ Cost dt)
+            installDuration: 6,      // baseline duration in months
+            barrierReduction: 0,     // % speedup / duration reduction
+            commissionDuration: 4,   // in months
+            opexDelta: -60,          // in $k / year
+            catalyst: 0,            // % reduction
+            baselineOpex: 150,       // in $k / year
+            discountRate: 6.0,       // %
+            timeHorizon: 20,         // years
+
+            // Physics Animation State
+            animating: false,
+            ballProgress: 0,         // normalized progress r: 0 to 1
+            ballVelocity: 0,         // dr/dt
+            initialVelocity: 0,      // calculated from cumulative Op-Ex savings
+            ballRotation: 0,         // visual rolling rotation angle in radians
+            physicsStatus: 'ready',  // 'ready' | 'running' | 'settled' | 'rollback'
+            statusMessage: 'Ready to roll',
+            animFrameId: null,
+
+            // Interactive Mouse Hover
+            hoverRatio: null,
+            isHovering: false,
+            mouseX: 0,
+            mouseY: 0
+        };
+
+        // Scenario Preset Data
+        const presets = {
+            A: {
+                totalCapex: 250,
+                installDuration: 6,
+                barrierReduction: 0,
+                commissionDuration: 4,
+                opexDelta: -60,
+                catalyst: 0,
+                description: "<strong>Scenario A (Standard / Optimal Retrofit):</strong> Rapid 4.7-year payback (<5 yrs) creates sufficient owner momentum to clear the Cap-Ex hurdle. Upfront integrated Cap-Ex is concentrated over a standard 6-month installation, followed by prompt commissioning and deep, perpetual operational cost reductions (green area)."
+            },
+            B: {
+                totalCapex: 550,
+                installDuration: 6,
+                barrierReduction: 0,
+                commissionDuration: 3,
+                opexDelta: -15,
+                catalyst: 0,
+                description: "<strong>Scenario B (Excessive Capital Expenditures):</strong> The integrated Cap-Ex barrier is exceptionally high ($750k, 50-year payback >> 5 yrs). The instantaneous expenditure rate spikes severely, creating an insurmountable economic hurdle where the ball runs out of momentum and rolls back."
+            },
+            C: {
+                totalCapex: 350,
+                installDuration: 18,
+                barrierReduction: 0,
+                commissionDuration: 6,
+                opexDelta: -50,
+                catalyst: 0,
+                description: "<strong>Scenario C (Excessive Installation Downtime):</strong> The total integrated Cap-Ex is identical to Scenario A ($350k), but spread across an elongated 18-month installation with a 6.3-year payback (>5 yrs). The prolonged disruption and delayed savings fail to provide the kinetic momentum required to surmount the barrier, resulting in rollback."
+            },
+            D: {
+                totalCapex: 320,
+                installDuration: 5,
+                barrierReduction: 0,
+                commissionDuration: 5,
+                opexDelta: 25,
+                catalyst: 0,
+                description: "<strong>Scenario D (Increased Operational Expenditures):</strong> An endothermic / unfavorable outcome with no economic payback. Ongoing operational expenditures exceed the pre-retrofit baseline (red area), producing near-zero driving motivation and immediate rollback."
+            }
+        };
+
+        // DOM Elements
+        const canvas = document.getElementById('activationCanvas');
+        const container = document.getElementById('canvas-container');
+        const ctx = canvas.getContext('2d');
+
+        const sliders = {
+            capex: document.getElementById('slider-capex'),
+            installTime: document.getElementById('slider-install-time'),
+            barrierReduction: document.getElementById('slider-barrier-reduction'),
+            commissionTime: document.getElementById('slider-commission-time'),
+            opexDelta: document.getElementById('slider-opex-delta'),
+            catalyst: document.getElementById('slider-catalyst'),
+            baselineOpex: document.getElementById('slider-baseline-opex'),
+            discount: document.getElementById('slider-discount'),
+            horizon: document.getElementById('slider-horizon')
+        };
+
+        const labels = {
+            capex: document.getElementById('val-capex'),
+            peakRate: document.getElementById('val-peak-rate'),
+            installTime: document.getElementById('val-install-time'),
+            barrierReduction: document.getElementById('val-barrier-reduction'),
+            commissionTime: document.getElementById('val-commission-time'),
+            opexDelta: document.getElementById('val-opex-delta'),
+            catalyst: document.getElementById('val-catalyst'),
+            baselineOpex: document.getElementById('val-baseline-opex'),
+            discount: document.getElementById('val-discount'),
+            horizon: document.getElementById('val-horizon')
+        };
+
+        const kpis = {
+            npv: document.getElementById('kpi-npv'),
+            payback: document.getElementById('kpi-payback'),
+            roi: document.getElementById('kpi-roi'),
+            netCapex: document.getElementById('kpi-net-capex')
+        };
+
+        const playBtn = document.getElementById('btn-play-animation');
+        const playIcon = document.getElementById('play-icon');
+        const playText = document.getElementById('play-text');
+        const scenarioDesc = document.getElementById('scenario-description');
+        const customBadge = document.getElementById('custom-badge');
+        const telemetryMotivation = document.getElementById('telemetry-motivation');
+        const telemetryStatus = document.getElementById('telemetry-status');
+        const valCumSavings = document.getElementById('val-cum-savings');
+        const pillMotivation = document.getElementById('pill-motivation-level');
+
+        function getEffectiveInstallDuration() {
+            const rawDuration = state.installDuration * (1 - state.barrierReduction / 100);
+            return Math.max(rawDuration, 0.5); // Minimum 0.5 months
+        }
+
+        // Present Value of Cumulative operational savings over evaluation horizon ($k)
+        function getDiscountedCumulativeSavings() {
+            const annualSavings = -state.opexDelta; // $k/year saved (positive for savings, negative for added costs)
+            const r = state.discountRate / 100;
+            let pv = 0;
+            for (let t = 1; t <= state.timeHorizon; t++) {
+                pv += annualSavings / Math.pow(1 + r, t);
+            }
+            return pv;
+        }
+
+        // Multiplier where shorter installation periods contribute positively to motivation & velocity
+        function getDurationMotivationMultiplier() {
+            const effInstallMonths = getEffectiveInstallDuration();
+            // Benchmark is 6 months. Shorter projects boost motivation; elongated projects penalize it.
+            return Math.sqrt(9 / (effInstallMonths + 3));
+        }
+
+        // Peak Rate Height (Activation Barrier Height) above baseline
+        function getPeakRateHeight(effectiveCapEx, effInstallMonths) {
+            const baseWidth = (6 / 36) * 0.42;
+            const installWidth = (effInstallMonths / 36) * 0.42;
+            const widthFactor = installWidth / baseWidth;
+            return (effectiveCapEx * 1.1) / Math.pow(widthFactor, 0.75);
+        }
+
+        // Exact critical initial velocity (vc) required to reach the peak of the barrier (pPeak)
+        // under the current physics landscape (potential energy slope + friction)
+        function getCriticalVelocity() {
+            const effectiveCapEx = state.totalCapex * (1 - state.catalyst / 100);
+            const effInstallMonths = getEffectiveInstallDuration();
+            const installWidth = (effInstallMonths / 36) * 0.42;
+            const pStart = 0.12;
+            const pPeak = pStart + installWidth / 2;
+            const peakRateHeight = getPeakRateHeight(effectiveCapEx, effInstallMonths);
+            const halfW = installWidth / 2;
+
+            const gEff = 0.00038;
+            const friction = 0.40;
+            const dt = 0.008;
+
+            // Fast simulation to check if a test initial velocity reaches or exceeds pPeak
+            function clears(testV) {
+                let r = 0.02;
+                let v = testV;
+                for (let i = 0; i < 2500; i++) {
+                    let slope = 0.0;
+                    if (r >= pStart && r <= pStart + installWidth) {
+                        const u = ((r - pPeak) / halfW) * 2.1;
+                        const bump = Math.exp(-(u * u));
+                        slope = peakRateHeight * bump * (-2.0 * u * (2.1 / halfW));
+                    }
+                    v += (-gEff * slope - friction * v) * dt;
+                    r += v * dt;
+                    if (r >= pPeak) return true;
+                    if (v <= 0) return false;
+                }
+                return false;
+            }
+
+            // Bisection search for precise threshold velocity
+            let low = 0.05;
+            let high = 2.5;
+            for (let iter = 0; iter < 16; iter++) {
+                const mid = (low + high) / 2;
+                if (clears(mid)) {
+                    high = mid;
+                } else {
+                    low = mid;
+                }
+            }
+            return (low + high) / 2;
+        }
+
+        // Compute initial velocity of the reaction ball:
+        // Parameterized such that the ball ALWAYS rolls over the hill when the payback period is < 5.0 years,
+        // and FAILS to roll over the hill (halts and rolls back) when the payback period is >= 5.0 years (or no payback).
+        function computeInitialVelocity() {
+            const effectiveCapEx = state.totalCapex * (1 - state.catalyst / 100);
+            const annualSavings = -state.opexDelta; // $k/yr
+            const vc = getCriticalVelocity();
+
+            // Unfavorable economics (negative or zero annual savings): minimal momentum, immediate rollback
+            if (annualSavings <= 0) {
+                return Math.max(0.08, vc * 0.15);
+            }
+
+            const payback = effectiveCapEx / annualSavings; // simple payback in years
+            const durMultiplier = getDurationMotivationMultiplier();
+
+            if (payback < 5.0) {
+                // Guaranteed v0 > vc: Ball always surmounts the barrier and rolls into zero-emission state!
+                // Shorter payback (<5 yrs) and prompt installation further elevate velocity and momentum.
+                const paybackBoost = 1.10 + 0.35 * ((5.0 - payback) / 5.0);
+                const durFactor = Math.max(0.95, Math.min(1.20, durMultiplier));
+                return vc * paybackBoost * durFactor;
+            } else {
+                // Guaranteed v0 < vc: Ball always fails to reach the peak and rolls back!
+                // Longer payback reduces kinetic energy, stopping earlier on the slope.
+                const ratio = 5.0 / payback; // in (0, 1]
+                const paybackScale = 0.90 * Math.max(0.20, Math.min(1.0, Math.sqrt(ratio)));
+                const durFactor = Math.max(0.85, Math.min(1.02, durMultiplier));
+                return Math.min(vc * 0.93, vc * paybackScale * durFactor);
+            }
+        }
+
+        // Qualitative Property Owner Motivation Metric [Low, Medium, High, Very High]
+        // Explicitly tied to the 5-year payback barrier threshold:
+        // Payback < 5.0 yrs -> High / Very High (Overcomes Barrier)
+        // Payback >= 5.0 yrs -> Low / Medium (Insufficient Momentum to Surmount Barrier)
+        function getMotivationTier(v0) {
+            const effectiveCapEx = state.totalCapex * (1 - state.catalyst / 100);
+            const annualSavings = -state.opexDelta;
+
+            if (annualSavings <= 0) {
+                return {
+                    level: 'Low',
+                    colorClass: 'text-red-400 bg-red-500/20 border-red-500/30',
+                    pillColor: 'text-red-400',
+                    desc: 'Low Motivation (Unfavorable economics / no payback)'
+                };
+            }
+
+            const payback = effectiveCapEx / annualSavings;
+
+            if (payback >= 10.0) {
+                return {
+                    level: 'Low',
+                    colorClass: 'text-red-400 bg-red-500/20 border-red-500/30',
+                    pillColor: 'text-red-400',
+                    desc: 'Low Motivation (Long payback ≥10 yrs, unfeasible barrier)'
+                };
+            } else if (payback >= 5.0) {
+                return {
+                    level: 'Medium',
+                    colorClass: 'text-amber-400 bg-amber-500/20 border-amber-500/30',
+                    pillColor: 'text-amber-400',
+                    desc: 'Medium Motivation (Marginal payback ≥5 yrs, insufficient momentum)'
+                };
+            } else if (payback >= 3.5) {
+                return {
+                    level: 'High',
+                    colorClass: 'text-emerald-400 bg-emerald-500/20 border-emerald-500/30',
+                    pillColor: 'text-emerald-400',
+                    desc: 'High Motivation (Rapid payback <5 yrs, surmounts barrier)'
+                };
+            } else {
+                return {
+                    level: 'Very High',
+                    colorClass: 'text-cyan-400 bg-cyan-500/20 border-cyan-500/30',
+                    pillColor: 'text-cyan-400',
+                    desc: 'Very High Motivation (Exceptional payback <3.5 yrs & rapid adoption)'
+                };
+            }
+        }
+
+        function initListeners() {
+            // Preset Buttons
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const key = btn.getAttribute('data-preset');
+                    applyPreset(key);
+                });
+            });
+
+            // Reset Button: resets presets and financial parameters back to default
+            document.getElementById('btn-reset').addEventListener('click', () => {
+                state.baselineOpex = 150;
+                state.discountRate = 6.0;
+                state.timeHorizon = 20;
+
+                sliders.baselineOpex.value = 150;
+                sliders.discount.value = 6.0;
+                sliders.horizon.value = 20;
+
+                applyPreset('A');
+                stopAnimation();
+                state.ballProgress = 0;
+                state.ballVelocity = 0;
+                state.physicsStatus = 'ready';
+                state.statusMessage = 'Ready to roll';
+                updateTelemetryUI();
+                render();
+            });
+
+            // Play / Pause Animation Button
+            playBtn.addEventListener('click', toggleAnimation);
+
+            // Sliders Events
+            Object.keys(sliders).forEach(key => {
+                sliders[key].addEventListener('input', () => {
+                    updateStateFromSliders();
+                    setPresetUI(null); // Mark as custom
+                    stopAnimation();
+                    state.ballProgress = 0;
+                    state.ballVelocity = 0;
+                    state.physicsStatus = 'ready';
+                    state.statusMessage = 'Ready to roll';
+                    updateTelemetryUI();
+                    render();
+                });
+            });
+
+            // Interactive Mouse Hover Listeners
+            canvas.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                const paddingLeft = 60;
+                const paddingRight = 35;
+                const graphW = rect.width - paddingLeft - paddingRight;
+
+                const clientX = e.clientX - rect.left;
+                const clientY = e.clientY - rect.top;
+
+                if (clientX >= paddingLeft && clientX <= rect.width - paddingRight) {
+                    state.isHovering = true;
+                    state.hoverRatio = (clientX - paddingLeft) / graphW;
+                    state.mouseX = clientX;
+                    state.mouseY = clientY;
+                } else {
+                    state.isHovering = false;
+                    state.hoverRatio = null;
+                }
+                if (!state.animating) render();
+            });
+
+            canvas.addEventListener('mouseleave', () => {
+                state.isHovering = false;
+                state.hoverRatio = null;
+                if (!state.animating) render();
+            });
+
+            // ResizeObserver for rock-solid HiDPI rendering & dynamic grid resizing
+            const resizeObserver = new ResizeObserver(() => {
+                resizeCanvas();
+                render();
+            });
+            resizeObserver.observe(container);
+        }
+
+        function applyPreset(key) {
+            if (!presets[key]) return;
+            state.scenario = key;
+            const p = presets[key];
+
+            state.totalCapex = p.totalCapex;
+            state.installDuration = p.installDuration;
+            state.barrierReduction = p.barrierReduction || 0;
+            state.commissionDuration = p.commissionDuration;
+            state.opexDelta = p.opexDelta;
+            state.catalyst = p.catalyst;
+
+            // Update Slider Elements
+            sliders.capex.value = state.totalCapex;
+            sliders.installTime.value = state.installDuration;
+            sliders.barrierReduction.value = state.barrierReduction;
+            sliders.commissionTime.value = state.commissionDuration;
+            sliders.opexDelta.value = state.opexDelta;
+            sliders.catalyst.value = state.catalyst;
+
+            setPresetUI(key);
+            scenarioDesc.innerHTML = p.description;
+
+            stopAnimation();
+            state.ballProgress = 0;
+            state.ballVelocity = 0;
+            state.physicsStatus = 'ready';
+            state.statusMessage = 'Ready to roll';
+            updateTelemetryUI();
+            render();
+        }
+
+        function setPresetUI(key) {
+            document.querySelectorAll('.preset-btn').forEach(b => {
+                const pk = b.getAttribute('data-preset');
+                if (pk === key) {
+                    b.classList.add('border-blue-500', 'bg-blue-500/10');
+                    b.classList.remove('border-slate-800');
+                } else {
+                    b.classList.remove('border-blue-500', 'bg-blue-500/10');
+                    b.classList.add('border-slate-800');
+                }
+            });
+
+            if (key === null) {
+                customBadge.classList.remove('hidden');
+                scenarioDesc.innerHTML = "<strong>Custom Scenario Mode:</strong> You are dynamically controlling the thermodynamic retrofit parameters. Observe how changes in installation speedup, policy offsets, and post-retrofit operating costs shift the financial energy landscape and the property owner's motivation.";
+            } else {
+                customBadge.classList.add('hidden');
+            }
+        }
+
+        function updateStateFromSliders() {
+            state.totalCapex = parseFloat(sliders.capex.value);
+            state.installDuration = parseFloat(sliders.installTime.value);
+            state.barrierReduction = parseFloat(sliders.barrierReduction.value);
+            state.commissionDuration = parseFloat(sliders.commissionTime.value);
+            state.opexDelta = parseFloat(sliders.opexDelta.value);
+            state.catalyst = parseFloat(sliders.catalyst.value);
+            state.baselineOpex = parseFloat(sliders.baselineOpex.value);
+            state.discountRate = parseFloat(sliders.discount.value);
+            state.timeHorizon = parseFloat(sliders.horizon.value);
+        }
+
+        function updateTelemetryUI() {
+            const v0 = computeInitialVelocity();
+            const tier = getMotivationTier(v0);
+            const pvSavings = getDiscountedCumulativeSavings();
+
+            // Property Owner Motivation Badge in Header
+            if (telemetryMotivation) {
+                telemetryMotivation.innerText = tier.level;
+                telemetryMotivation.className = `px-2 py-0.5 rounded font-bold uppercase tracking-wider text-[11px] border ${tier.colorClass}`;
+            }
+            if (telemetryStatus) {
+                telemetryStatus.innerText = state.statusMessage;
+            }
+
+            // Cumulative Present Value Savings & Motivation in Chart Header
+            if (valCumSavings) {
+                if (pvSavings >= 0) {
+                    valCumSavings.innerText = `$${Math.round(pvSavings)}k`;
+                    valCumSavings.className = "text-emerald-400 font-bold font-mono";
+                } else {
+                    valCumSavings.innerText = `-$${Math.abs(Math.round(pvSavings))}k`;
+                    valCumSavings.className = "text-red-400 font-bold font-mono";
+                }
+            }
+            if (pillMotivation) {
+                pillMotivation.innerText = tier.level;
+                pillMotivation.className = `font-bold ${tier.pillColor}`;
+            }
+        }
+
+        function updateLabels() {
+            const effInstallMonths = getEffectiveInstallDuration();
+            const netTotalCapex = state.totalCapex * (1 - state.catalyst / 100);
+            const peakRateHeight = getPeakRateHeight(netTotalCapex, effInstallMonths);
+            const totalPeakRate = state.baselineOpex + peakRateHeight;
+
+            labels.capex.innerText = `$${Math.round(state.totalCapex)}k`;
+            labels.peakRate.innerText = `Peak: ~$${Math.round(totalPeakRate)}k/yr (+$${Math.round(peakRateHeight)}k)`;
+            labels.installTime.innerText = `${state.installDuration} mos`;
+
+            labels.barrierReduction.innerText = `${state.barrierReduction}% (${effInstallMonths.toFixed(1)} mos)`;
+            labels.commissionTime.innerText = `${state.commissionDuration} mos`;
+
+            if (state.opexDelta <= 0) {
+                labels.opexDelta.innerText = `-$${Math.abs(state.opexDelta)}k/yr`;
+                labels.opexDelta.className = "text-emerald-400 font-mono font-semibold";
+            } else {
+                labels.opexDelta.innerText = `+$${state.opexDelta}k/yr`;
+                labels.opexDelta.className = "text-red-400 font-mono font-semibold";
+            }
+
+            labels.catalyst.innerText = `${state.catalyst}%`;
+            labels.baselineOpex.innerText = `$${state.baselineOpex}k/yr`;
+            labels.discount.innerText = `${state.discountRate.toFixed(1)}%`;
+            labels.horizon.innerText = `${state.timeHorizon} Yrs`;
+
+            updateTelemetryUI();
+        }
+
+        function calculateFinancials() {
+            const effectiveCapEx = state.totalCapex * (1 - state.catalyst / 100); // $k
+            const annualSavings = -state.opexDelta; // $k/year saved
+
+            let payback = "N/A";
+            let paybackYears = null;
+            if (annualSavings > 0) {
+                paybackYears = effectiveCapEx / annualSavings;
+                payback = paybackYears.toFixed(1) + " yrs";
+            } else {
+                payback = "No Payback";
+            }
+
+            const r = state.discountRate / 100;
+            let npv = -effectiveCapEx;
+
+            for (let t = 1; t <= state.timeHorizon; t++) {
+                npv += annualSavings / Math.pow(1 + r, t);
+            }
+
+            // Dynamic ROI calculation directly derived from current NPV relative to Effective Cap-Ex
+            const roiVal = effectiveCapEx > 0 ? (npv / effectiveCapEx) * 100 : 0;
+            const roi = effectiveCapEx > 0 ? roiVal.toFixed(0) + "%" : "N/A";
+
+            kpis.netCapex.innerText = `$${Math.round(effectiveCapEx)}k`;
+            kpis.payback.innerText = payback;
+            if (paybackYears !== null && paybackYears < 5.0) {
+                kpis.payback.className = "text-lg font-bold font-mono text-emerald-400 mt-1";
+            } else if (paybackYears !== null && paybackYears < 10.0) {
+                kpis.payback.className = "text-lg font-bold font-mono text-amber-400 mt-1";
+            } else {
+                kpis.payback.className = "text-lg font-bold font-mono text-red-400 mt-1";
+            }
+
+            kpis.npv.innerText = `$${Math.round(npv)}k`;
+            kpis.npv.className = npv >= 0 ? "text-lg font-bold font-mono text-emerald-400 mt-1" : "text-lg font-bold font-mono text-red-400 mt-1";
+
+            kpis.roi.innerText = roi;
+            kpis.roi.className = roiVal >= 0 ? "text-lg font-bold font-mono text-emerald-400 mt-1" : "text-lg font-bold font-mono text-red-400 mt-1";
+        }
+
+        function resizeCanvas() {
+            const rect = container.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = Math.round(rect.width * dpr);
+            canvas.height = Math.round(rect.height * dpr);
+            canvas.style.width = rect.width + 'px';
+            canvas.style.height = rect.height + 'px';
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        // Mathematical Curve Function using Integrated Cap-Ex & Smooth Commissioning Decay,
+        // with the owner's discount rate visually applied to future operational savings over time
+        function getCostAtTime(tRatio) {
+            const effectiveCapEx = state.totalCapex * (1 - state.catalyst / 100);
+            const effInstallMonths = getEffectiveInstallDuration();
+
+            // Normalized timeline geometry
+            const installWidth = (effInstallMonths / 36) * 0.42;
+            const commissionWidth = (state.commissionDuration / 36) * 0.32;
+
+            const pStart = 0.12;
+            const pPeak = pStart + installWidth / 2;
+            const pInstallEnd = pStart + installWidth;
+            const pCommissionEnd = pInstallEnd + commissionWidth;
+
+            // Height of the activation barrier above baseline
+            const peakRateHeight = getPeakRateHeight(effectiveCapEx, effInstallMonths);
+
+            const targetOpex = state.baselineOpex + state.opexDelta;
+            let value = state.baselineOpex;
+
+            if (tRatio < pStart) {
+                value = state.baselineOpex;
+            } else if (tRatio >= pStart && tRatio < pInstallEnd) {
+                // Bell curve representing installation Cap-Ex deployment rate
+                const normX = (tRatio - pPeak) / (installWidth / 2);
+                const bump = Math.exp(-Math.pow(normX * 2.1, 2));
+                value = state.baselineOpex + peakRateHeight * bump;
+            } else if (tRatio >= pInstallEnd && tRatio < pCommissionEnd) {
+                // Smooth monotonic commissioning decay from end of installation down to stable initial post-retrofit state
+                const normEnd = (pInstallEnd - pPeak) / (installWidth / 2);
+                const startCost = state.baselineOpex + peakRateHeight * Math.exp(-Math.pow(normEnd * 2.1, 2));
+
+                const progress = (tRatio - pInstallEnd) / commissionWidth;
+                const smoothFactor = 3 * Math.pow(progress, 2) - 2 * Math.pow(progress, 3);
+
+                value = startCost + (targetOpex - startCost) * smoothFactor;
+            } else {
+                // Stable Zero-Emission Operation Phase with Owner Discount Rate Applied
+                // Present value rate decays over operational years from 0 to Evaluation Horizon
+                const tau = Math.min(Math.max((tRatio - pCommissionEnd) / (1.0 - pCommissionEnd), 0), 1);
+                const tYears = tau * state.timeHorizon;
+                const rDisc = state.discountRate / 100;
+
+                // Present value rate of Op-Ex Delta: Delta(t) = Delta(0) / (1 + r)^t
+                const discountedOpexDelta = state.opexDelta / Math.pow(1 + rDisc, tYears);
+                value = state.baselineOpex + discountedOpexDelta;
+            }
+
+            return {
+                value,
+                pStart,
+                pPeak,
+                pInstallEnd,
+                pCommissionEnd,
+                peakRateHeight,
+                effInstallMonths
+            };
+        }
+
+        function render() {
+            updateLabels();
+            calculateFinancials();
+
+            const rect = container.getBoundingClientRect();
+            const width = rect.width;
+            const height = rect.height;
+
+            ctx.clearRect(0, 0, width, height);
+
+            const paddingLeft = 60;
+            const paddingRight = 35;
+            const paddingTop = 45;
+            const paddingBottom = 82;
+
+            const graphW = width - paddingLeft - paddingRight;
+            const graphH = height - paddingTop - paddingBottom;
+
+            const dummyInfo = getCostAtTime(0.5);
+            const effectiveCapEx = state.totalCapex * (1 - state.catalyst / 100);
+            const maxVal = Math.max(state.baselineOpex + dummyInfo.peakRateHeight + 60, 480);
+            const minVal = Math.min(state.baselineOpex + state.opexDelta - 30, 0);
+
+            function valToY(val) {
+                const ratio = (val - minVal) / (maxVal - minVal);
+                return height - paddingBottom - ratio * graphH;
+            }
+
+            function ratioToX(r) {
+                return paddingLeft + r * graphW;
+            }
+
+            const baselineY = valToY(state.baselineOpex);
+            const phaseInfo = getCostAtTime(0);
+            const xStart = ratioToX(phaseInfo.pStart);
+            const xPeak = ratioToX(phaseInfo.pPeak);
+            const xInstallEnd = ratioToX(phaseInfo.pInstallEnd);
+            const xCommissionEnd = ratioToX(phaseInfo.pCommissionEnd);
+            const xEnd = width - paddingRight;
+
+            // Generate Horizontal Axis Time Ticks (Months and Years)
+            const xTicks = [];
+
+            // 1. Kickoff Month 0
+            xTicks.push({
+                x: xStart,
+                label: 'Mo 0',
+                color: '#94a3b8',
+                grid: false
+            });
+
+            // 2. Peak Month (if installation window is wide enough)
+            if ((xPeak - xStart) >= 44 && (xInstallEnd - xPeak) >= 44) {
+                xTicks.push({
+                    x: xPeak,
+                    label: `Mo ${(phaseInfo.effInstallMonths / 2).toFixed(0)}`,
+                    color: '#fbbf24',
+                    grid: false
+                });
+            }
+
+            // 3. Installation End Month
+            xTicks.push({
+                x: xInstallEnd,
+                label: `Mo ${phaseInfo.effInstallMonths.toFixed(0)}`,
+                color: '#f59e0b',
+                grid: false
+            });
+
+            // 4. Commissioning End / Year 0 of Operation
+            const totMonths = phaseInfo.effInstallMonths + state.commissionDuration;
+            if ((xCommissionEnd - xInstallEnd) >= 42) {
+                xTicks.push({
+                    x: xCommissionEnd,
+                    label: `Mo ${totMonths.toFixed(0)} (Yr 0)`,
+                    color: '#38bdf8',
+                    grid: false
+                });
+            } else {
+                xTicks.push({
+                    x: xCommissionEnd,
+                    label: 'Yr 0',
+                    color: '#38bdf8',
+                    grid: false
+                });
+            }
+
+            // 5. Operational Years (e.g. Yr 5, Yr 10, Yr 15, Yr 20)
+            const opWidthPx = xEnd - xCommissionEnd;
+            let yrStep = 5;
+            if (state.timeHorizon <= 10) yrStep = 2;
+            else if (opWidthPx < 350) yrStep = 10;
+            else yrStep = 5;
+
+            for (let y = yrStep; y <= state.timeHorizon; y += yrStep) {
+                const yrRatio = phaseInfo.pCommissionEnd + (y / state.timeHorizon) * (1.0 - phaseInfo.pCommissionEnd);
+                const xYr = ratioToX(yrRatio);
+                if (xYr - xCommissionEnd >= 34 && (xEnd - xYr) >= 14) {
+                    xTicks.push({
+                        x: xYr,
+                        label: `Yr ${y}`,
+                        color: '#34d399',
+                        grid: true
+                    });
+                }
+            }
+
+            // 6. Horizon End Tick
+            const lastTick = xTicks[xTicks.length - 1];
+            if (xEnd - lastTick.x >= 32) {
+                xTicks.push({
+                    x: xEnd,
+                    label: `Yr ${Math.round(state.timeHorizon)}`,
+                    color: '#34d399',
+                    grid: false
+                });
+            }
+
+            // Horizontal Grid Lines & Y-Axis Labels
+            ctx.strokeStyle = '#1e293b';
+            ctx.lineWidth = 1;
+            ctx.font = '10px Inter';
+            ctx.fillStyle = '#64748b';
+
+            const numTicks = 5;
+            for (let i = 0; i <= numTicks; i++) {
+                const v = minVal + (maxVal - minVal) * (i / numTicks);
+                const y = valToY(v);
+
+                ctx.beginPath();
+                ctx.moveTo(paddingLeft, y);
+                ctx.lineTo(width - paddingRight, y);
+                ctx.stroke();
+
+                ctx.fillText(`$${Math.round(v)}k`, 10, y + 3);
+            }
+
+            // Vertical Year Grid Lines in Chart Background
+            xTicks.filter(t => t.grid).forEach(t => {
+                ctx.beginPath();
+                ctx.strokeStyle = '#1e293b';
+                ctx.lineWidth = 1;
+                ctx.moveTo(t.x, paddingTop);
+                ctx.lineTo(t.x, height - paddingBottom);
+                ctx.stroke();
+            });
+
+            // Sample Curve Points
+            const points = [];
+            const steps = 300;
+
+            for (let i = 0; i <= steps; i++) {
+                const r = i / steps;
+                const res = getCostAtTime(r);
+                const x = ratioToX(r);
+                const y = valToY(res.value);
+                points.push({ x, y, r, val: res.value });
+            }
+
+            // Fill Shaded Regions: Red (Cost Increases) & Green (Discounted Cost Reductions)
+            for (let i = 0; i < points.length - 1; i++) {
+                const p1 = points[i];
+                const p2 = points[i + 1];
+
+                ctx.beginPath();
+                ctx.moveTo(p1.x, baselineY);
+                ctx.lineTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.lineTo(p2.x, baselineY);
+                ctx.closePath();
+
+                const avgVal = (p1.val + p2.val) / 2;
+                if (avgVal >= state.baselineOpex) {
+                    ctx.fillStyle = 'rgba(239, 68, 68, 0.25)';
+                } else {
+                    ctx.fillStyle = 'rgba(16, 185, 129, 0.25)';
+                }
+                ctx.fill();
+            }
+
+            // Baseline Dashed Line
+            ctx.beginPath();
+            ctx.setLineDash([5, 5]);
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 1.5;
+            ctx.moveTo(paddingLeft, baselineY);
+            ctx.lineTo(width - paddingRight, baselineY);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.fillStyle = '#cbd5e1';
+            ctx.font = '11px Inter';
+            ctx.fillText('Baseline Op-Ex', width - paddingRight - 90, baselineY - 8);
+
+            // Main Energy Curve Line
+            ctx.beginPath();
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 3;
+            points.forEach((p, idx) => {
+                if (idx === 0) ctx.moveTo(p.x, p.y);
+                else ctx.lineTo(p.x, p.y);
+            });
+            ctx.stroke();
+
+            // Vertical Phase Boundary Dashed Lines
+            ctx.setLineDash([3, 3]);
+            ctx.strokeStyle = '#334155';
+            [xStart, xInstallEnd, xCommissionEnd].forEach(x => {
+                ctx.beginPath();
+                ctx.moveTo(x, paddingTop);
+                ctx.lineTo(x, height - paddingBottom);
+                ctx.stroke();
+            });
+            ctx.setLineDash([]);
+
+            // X and Y Axes lines
+            const xAxisY = height - paddingBottom;
+            ctx.strokeStyle = '#475569';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            // Y Axis
+            ctx.moveTo(paddingLeft, paddingTop - 10);
+            ctx.lineTo(paddingLeft, xAxisY);
+            // X Axis
+            ctx.lineTo(width - paddingRight, xAxisY);
+            ctx.stroke();
+
+            // Axis Titles
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = 'bold 11px Inter';
+            ctx.textAlign = 'left';
+            ctx.fillText('Costs ($/yr rate)', paddingLeft, paddingTop - 22);
+
+            ctx.textAlign = 'right';
+            ctx.font = 'bold 10px Inter';
+            ctx.fillStyle = '#94a3b8';
+            ctx.fillText('Time: Construction (Months) → Operation (Years) →', width - paddingRight, xAxisY - 7);
+
+            // X-Axis Downward Ticks & Numerical Labels (Months & Years)
+            xTicks.forEach(t => {
+                // Downward Tick Mark
+                ctx.beginPath();
+                ctx.strokeStyle = '#475569';
+                ctx.lineWidth = 1.2;
+                ctx.moveTo(t.x, xAxisY);
+                ctx.lineTo(t.x, xAxisY + 5);
+                ctx.stroke();
+
+                // Tick Label
+                ctx.fillStyle = t.color;
+                ctx.font = 'bold 9px Inter';
+                ctx.textAlign = 'center';
+                ctx.fillText(t.label, t.x, xAxisY + 15);
+            });
+
+            // Dedicated Timeline Track below X-axis
+            const trackY = xAxisY + 22;
+            const trackH = 22;
+
+            function drawPhaseBadge(x1, x2, bg, border, textColor, title, sub) {
+                const w = Math.max(x2 - x1 - 4, 10);
+                const x = x1 + 2;
+
+                ctx.fillStyle = bg;
+                ctx.strokeStyle = border;
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.roundRect(x, trackY, w, trackH, 5);
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.fillStyle = textColor;
+                ctx.font = 'bold 9px Inter';
+                ctx.textAlign = 'center';
+                const midX = x + w / 2;
+
+                if (w > 65) {
+                    ctx.fillText(title, midX, trackY + 10);
+                    ctx.font = '8px Inter';
+                    ctx.fillStyle = '#94a3b8';
+                    ctx.fillText(sub, midX, trackY + 19);
+                } else if (w > 30) {
+                    ctx.fillText(title, midX, trackY + 14);
+                }
+            }
+
+            // Draw 4 distinct phase tracks below X-axis
+            drawPhaseBadge(paddingLeft, xStart, 'rgba(30, 41, 59, 0.6)', '#334155', '#94a3b8', 'Pre-Retrofit', 'Baseline');
+            drawPhaseBadge(xStart, xInstallEnd, 'rgba(245, 158, 11, 0.12)', '#f59e0b80', '#fbbf24', 'Installation', `${phaseInfo.effInstallMonths.toFixed(1)} mos`);
+            drawPhaseBadge(xInstallEnd, xCommissionEnd, 'rgba(56, 189, 248, 0.12)', '#38bdf880', '#7dd3fc', 'Commissioning', `${state.commissionDuration} mos`);
+            drawPhaseBadge(xCommissionEnd, xEnd, 'rgba(16, 185, 129, 0.12)', '#10b98180', '#34d399', 'Operation (Zero-Emission)', `${state.timeHorizon} yr Discounted`);
+
+            // Vertical Activation Barrier Dimension Line at Peak
+            const peakX = ratioToX(phaseInfo.pPeak);
+            const peakRateHeight = phaseInfo.peakRateHeight;
+            const peakY = valToY(state.baselineOpex + peakRateHeight);
+
+            ctx.strokeStyle = '#f59e0b';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(peakX, baselineY);
+            ctx.lineTo(peakX, peakY);
+            ctx.stroke();
+
+            // End tick caps
+            ctx.beginPath();
+            ctx.moveTo(peakX - 4, peakY);
+            ctx.lineTo(peakX + 4, peakY);
+            ctx.moveTo(peakX - 4, baselineY);
+            ctx.lineTo(peakX + 4, baselineY);
+            ctx.stroke();
+
+            // Text beside activation barrier
+            ctx.textAlign = 'left';
+            ctx.fillStyle = '#f59e0b';
+            ctx.font = 'bold 10px Inter';
+            ctx.fillText(`Activation Barrier: +$${Math.round(peakRateHeight)}k/yr`, peakX + 7, (baselineY + peakY) / 2 - 4);
+            ctx.font = '9px Inter';
+            ctx.fillStyle = '#fbbf24';
+            ctx.fillText(`Total Cap-Ex: $${Math.round(effectiveCapEx)}k`, peakX + 7, (baselineY + peakY) / 2 + 8);
+
+            // Op-Ex Delta Indicator in Operation Phase (Initial undiscounted rate marker)
+            const opexMarkerX = xCommissionEnd + (xEnd - xCommissionEnd) * 0.15;
+            const opexInitialY = valToY(state.baselineOpex + state.opexDelta);
+            const opexColor = state.opexDelta <= 0 ? '#10b981' : '#ef4444';
+
+            ctx.strokeStyle = opexColor;
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(opexMarkerX, baselineY);
+            ctx.lineTo(opexMarkerX, opexInitialY);
+            ctx.moveTo(opexMarkerX - 4, baselineY);
+            ctx.lineTo(opexMarkerX + 4, baselineY);
+            ctx.moveTo(opexMarkerX - 4, opexInitialY);
+            ctx.lineTo(opexMarkerX + 4, opexInitialY);
+            ctx.stroke();
+
+            ctx.fillStyle = opexColor;
+            ctx.font = 'bold 10px Inter';
+            ctx.fillText(`Initial Δ Op-Ex: ${state.opexDelta <= 0 ? '-' : '+'}$${Math.abs(state.opexDelta)}k/yr`, opexMarkerX + 6, (baselineY + opexInitialY) / 2);
+
+            // Interactive Mouse Hover Crosshair & Tooltip
+            if (state.isHovering && state.hoverRatio !== null) {
+                const hr = state.hoverRatio;
+                const hRes = getCostAtTime(hr);
+                const hX = ratioToX(hr);
+                const hY = valToY(hRes.value);
+
+                // Vertical Crosshair line
+                ctx.setLineDash([2, 2]);
+                ctx.strokeStyle = '#38bdf8';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(hX, paddingTop);
+                ctx.lineTo(hX, height - paddingBottom);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Target Circle on curve
+                ctx.beginPath();
+                ctx.arc(hX, hY, 5, 0, Math.PI * 2);
+                ctx.fillStyle = '#38bdf8';
+                ctx.fill();
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Floating Tooltip Box
+                const deltaVal = hRes.value - state.baselineOpex;
+                const deltaStr = deltaVal >= 0 ? `+$${Math.round(deltaVal)}k/yr` : `-$${Math.abs(Math.round(deltaVal))}k/yr`;
+                const deltaColor = deltaVal >= 0 ? '#ef4444' : '#10b981';
+
+                let phaseName = 'Pre-Retrofit';
+                let subTime = 'Baseline Status';
+                if (hr >= phaseInfo.pStart && hr < phaseInfo.pInstallEnd) {
+                    phaseName = 'Installation Phase';
+                    const m = ((hr - phaseInfo.pStart) / (phaseInfo.pInstallEnd - phaseInfo.pStart)) * phaseInfo.effInstallMonths;
+                    subTime = `Month ${m.toFixed(1)} of ${phaseInfo.effInstallMonths.toFixed(1)}`;
+                } else if (hr >= phaseInfo.pInstallEnd && hr < phaseInfo.pCommissionEnd) {
+                    phaseName = 'Commissioning Phase';
+                    const m = ((hr - phaseInfo.pInstallEnd) / (phaseInfo.pCommissionEnd - phaseInfo.pInstallEnd)) * state.commissionDuration;
+                    const totM = phaseInfo.effInstallMonths + m;
+                    subTime = `Month ${totM.toFixed(1)} (Comm Mo ${m.toFixed(1)}/${state.commissionDuration})`;
+                } else if (hr >= phaseInfo.pCommissionEnd) {
+                    phaseName = 'Zero-Emission Operation';
+                    const y = ((hr - phaseInfo.pCommissionEnd) / (1.0 - phaseInfo.pCommissionEnd)) * state.timeHorizon;
+                    subTime = `Year ${y.toFixed(1)} of ${state.timeHorizon} (PV Discounted)`;
+                }
+
+                const tooltipW = 165;
+                const tooltipH = 62;
+                let tipX = hX + 12;
+                if (tipX + tooltipW > width - paddingRight) tipX = hX - tooltipW - 12;
+                let tipY = Math.max(hY - tooltipH / 2, paddingTop);
+                if (tipY + tooltipH > height - paddingBottom) tipY = height - paddingBottom - tooltipH;
+
+                ctx.fillStyle = 'rgba(15, 23, 42, 0.95)';
+                ctx.strokeStyle = '#334155';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.roundRect(tipX, tipY, tooltipW, tooltipH, 6);
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.textAlign = 'left';
+                ctx.font = 'bold 9.5px Inter';
+                ctx.fillStyle = '#94a3b8';
+                ctx.fillText(phaseName, tipX + 8, tipY + 14);
+
+                ctx.font = '8.5px Inter';
+                ctx.fillStyle = '#64748b';
+                ctx.fillText(subTime, tipX + 8, tipY + 26);
+
+                ctx.font = '10px Inter';
+                ctx.fillStyle = '#f8fafc';
+                ctx.fillText(`Cost Rate: $${Math.round(hRes.value)}k/yr`, tipX + 8, tipY + 41);
+
+                ctx.font = 'bold 9.5px Inter';
+                ctx.fillStyle = deltaColor;
+                ctx.fillText(`Delta: ${deltaStr}`, tipX + 8, tipY + 54);
+            }
+
+            // Physics-Aligned Rolling Reaction Ball
+            const ballR = state.ballProgress;
+            const ballPos = getCostAtTime(ballR);
+            const ballX = ratioToX(ballR);
+            const ballY = valToY(ballPos.value);
+
+            // Compute local curve tangent angle for realistic physics seating and rolling
+            const epsR = 0.003;
+            const rPrev = Math.max(0, ballR - epsR);
+            const rNext = Math.min(1, ballR + epsR);
+            const x1 = ratioToX(rPrev);
+            const y1 = valToY(getCostAtTime(rPrev).value);
+            const x2 = ratioToX(rNext);
+            const y2 = valToY(getCostAtTime(rNext).value);
+            const tangentAngle = Math.atan2(y2 - y1, x2 - x1);
+
+            const ballRadius = 8.5;
+            // Normal offset puts the bottom of the ball tangentially on top of the curve
+            const normalAngle = tangentAngle - Math.PI / 2;
+            const ballCenterX = ballX + ballRadius * Math.cos(normalAngle);
+            const ballCenterY = ballY + ballRadius * Math.sin(normalAngle);
+
+            // Contact Shadow on Curve
+            ctx.save();
+            ctx.translate(ballX, ballY + 1);
+            ctx.rotate(tangentAngle);
+            ctx.beginPath();
+            ctx.ellipse(0, 0, 8, 2.5, 0, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
+            ctx.fill();
+            ctx.restore();
+
+            // Ball Body with Dynamic Spherical Shading
+            ctx.save();
+            ctx.translate(ballCenterX, ballCenterY);
+
+            // Radial Metallic Sphere Gradient
+            const gradient = ctx.createRadialGradient(
+                -3, -3, 1,
+                0, 0, ballRadius
+            );
+            gradient.addColorStop(0, '#ffffff');
+            gradient.addColorStop(0.35, '#38bdf8');
+            gradient.addColorStop(0.85, '#0284c7');
+            gradient.addColorStop(1, '#0c4a6e');
+
+            ctx.beginPath();
+            ctx.arc(0, 0, ballRadius, 0, Math.PI * 2);
+            ctx.fillStyle = gradient;
+            ctx.fill();
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            // Visual Rolling Rotation Indicator (Rolls physically as the ball advances)
+            ctx.rotate(state.ballRotation);
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.45)';
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.moveTo(-ballRadius + 2, 0);
+            ctx.lineTo(ballRadius - 2, 0);
+            ctx.moveTo(0, -ballRadius + 2);
+            ctx.lineTo(0, ballRadius - 2);
+            ctx.stroke();
+
+            ctx.restore();
+        }
+
+        // Animation Physics Loop
+        function toggleAnimation() {
+            if (state.animating) {
+                stopAnimation();
+            } else {
+                startAnimation();
+            }
+        }
+
+        function startAnimation() {
+            state.animating = true;
+            playIcon.className = 'fa-solid fa-pause';
+            playText.innerText = 'Pause Ball';
+
+            // Calculate Initial Velocity based on Cumulative Discounted Savings & Installation Duration
+            const v0 = computeInitialVelocity();
+            state.initialVelocity = v0;
+            const tier = getMotivationTier(v0);
+
+            // If starting near the end or stopped after rollback, restart from reactants baseline
+            if (state.ballProgress >= 0.96 || state.physicsStatus === 'rollback' || state.physicsStatus === 'settled') {
+                state.ballProgress = 0.02;
+                state.ballVelocity = v0;
+                state.ballRotation = 0;
+            } else if (state.ballVelocity === 0) {
+                state.ballVelocity = v0;
+            }
+
+            state.physicsStatus = 'running';
+            state.statusMessage = `${tier.level} Motivation: Ascending Barrier...`;
+            updateTelemetryUI();
+
+            let lastTime = performance.now();
+
+            function animateFrame(now) {
+                if (!state.animating) return;
+
+                const delta = Math.min((now - lastTime) / 1000, 0.05); // cap delta to prevent physics jumps
+                lastTime = now;
+
+                // Physics Modeling:
+                // Potential Energy landscape U(r) = cost(r). Force F = -dU/dr (slope of curve)
+                const eps = 0.003;
+                const r = state.ballProgress;
+                const y1 = getCostAtTime(Math.max(0, r - eps)).value;
+                const y2 = getCostAtTime(Math.min(1, r + eps)).value;
+                const slope = (y2 - y1) / (2 * eps); // $/yr rate slope
+
+                // Physical acceleration constants:
+                const gEff = 0.00038;
+                const friction = 0.40;
+
+                const aSlope = -gEff * slope;
+                const aFriction = -friction * state.ballVelocity;
+                const netAccel = aSlope + aFriction;
+
+                state.ballVelocity += netAccel * delta;
+                state.ballProgress += state.ballVelocity * delta;
+
+                // Update visual rolling rotation
+                const rollSpeed = state.ballVelocity * 25;
+                state.ballRotation += rollSpeed * delta;
+
+                const phase = getCostAtTime(state.ballProgress);
+                const currentTier = getMotivationTier(state.initialVelocity);
+
+                // Condition 1: Ball failed to surmount the barrier and rolled back
+                if (state.ballVelocity < 0 && state.ballProgress < phase.pPeak) {
+                    state.statusMessage = `${currentTier.level} Motivation: Rolling Back...`;
+                    if (state.ballProgress <= 0.02 || (state.ballProgress <= phase.pStart && Math.abs(state.ballVelocity) < 0.015)) {
+                        state.ballProgress = 0.02;
+                        state.ballVelocity = 0;
+                        state.physicsStatus = 'rollback';
+                        state.statusMessage = `${currentTier.level} Motivation: Payback ≥5 Yrs (Rolled Back)`;
+                        stopAnimation();
+                    }
+                }
+                // Condition 2: Ball successfully cleared the activation barrier
+                else if (state.ballProgress >= phase.pPeak && state.ballProgress < phase.pCommissionEnd) {
+                    state.statusMessage = `${currentTier.level} Motivation: Barrier Overcome (<5 Yr Payback)! Accelerating into Savings`;
+                }
+                // Condition 3: Ball entered permanent zero-emission operation phase
+                else if (state.ballProgress >= phase.pCommissionEnd) {
+                    state.statusMessage = 'Retrofit Adopted: Stable Zero-Emission Operation';
+                    // Settle gently near the end of evaluation horizon
+                    if (state.ballProgress >= 0.95 || (state.ballVelocity < 0.03 && state.ballProgress > 0.8)) {
+                        state.ballProgress = Math.min(state.ballProgress, 0.96);
+                        state.ballVelocity = 0;
+                        state.physicsStatus = 'settled';
+                        state.statusMessage = 'Retrofit Adopted: Zero-Emission State Settled';
+                        stopAnimation();
+                    }
+                }
+
+                updateTelemetryUI();
+                render();
+
+                if (state.animating) {
+                    state.animFrameId = requestAnimationFrame(animateFrame);
+                }
+            }
+
+            state.animFrameId = requestAnimationFrame(animateFrame);
+        }
+
+        function stopAnimation() {
+            state.animating = false;
+            playIcon.className = 'fa-solid fa-play';
+            playText.innerText = 'Roll Reaction Ball';
+            if (state.animFrameId) {
+                cancelAnimationFrame(state.animFrameId);
+                state.animFrameId = null;
+            }
+            updateTelemetryUI();
+        }
+
+        // Startup Initialization
+        window.onload = function () {
+            initListeners();
+            resizeCanvas();
+            applyPreset('A');
+        };
+
+    </script>
+</body>
+
+</html>
