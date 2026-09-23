@@ -23,6 +23,40 @@
             cursor: pointer;
             box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
         }
+
+        .param-tooltip-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            border-radius: 9999px;
+            color: #94a3b8;
+            transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+        }
+
+        .param-tooltip-btn:hover {
+            color: #38bdf8;
+            background-color: rgba(56, 189, 248, 0.15);
+        }
+
+        .param-tooltip-btn.active {
+            color: #38bdf8;
+            background-color: rgba(56, 189, 248, 0.2);
+        }
+
+        .param-popover {
+            opacity: 0;
+            transform: scale(0.96) translateY(-4px);
+            pointer-events: none;
+            transition: opacity 0.15s cubic-bezier(0.16, 1, 0.3, 1), transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .param-popover.open {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
+        }
     </style>
 </head>
 
@@ -121,10 +155,24 @@
 
                         <div class="space-y-5 pt-4">
                             <!-- Total Integrated Cap-Ex -->
-                            <div>
+                            <div class="relative">
                                 <div class="flex justify-between items-baseline text-sm mb-1.5">
-                                    <label class="font-medium text-slate-200">Total Integrated Cap-Ex (∫ dt)</label>
+                                    <div class="flex items-center gap-1.5">
+                                        <label class="font-medium text-slate-200">Total Integrated Cap-Ex (∫ dt)</label>
+                                        <button type="button" class="param-tooltip-btn" data-tooltip-id="tip-capex" title="Click for parameter description" aria-label="Info on Total Integrated Cap-Ex">
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
+                                        </button>
+                                    </div>
                                     <span id="val-capex" class="text-blue-400 font-mono font-bold text-base">$350k</span>
+                                </div>
+                                <div id="tip-capex" class="param-popover hidden absolute z-30 left-0 right-0 top-7 p-3 rounded-lg bg-slate-950 border border-slate-700/80 shadow-2xl text-xs text-slate-300">
+                                    <div class="flex justify-between items-start gap-2 mb-1">
+                                        <span class="font-bold text-white flex items-center gap-1.5">
+                                            <i class="fa-solid fa-circle-info text-blue-400"></i> Total Integrated Cap-Ex
+                                        </span>
+                                        <button type="button" class="close-tip text-slate-400 hover:text-white p-0.5" aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
+                                    </div>
+                                    <p class="text-slate-300 leading-relaxed">The total cumulative capital cost of the decarbonization retrofit (equipment purchases, engineering, construction, and physical installation). In kinetic theory, this represents the integrated area under the energetic hurdle ($\int \text{Cost}(t)\,dt$) that property owners must fund to cross the transition state.</p>
                                 </div>
                                 <input type="range" id="slider-capex" min="50" max="900" step="10" value="350"
                                     class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
@@ -135,10 +183,24 @@
                             </div>
 
                             <!-- Baseline Installation Duration -->
-                            <div>
+                            <div class="relative">
                                 <div class="flex justify-between items-baseline text-sm mb-1.5">
-                                    <label class="font-medium text-slate-200">Baseline Installation Duration</label>
+                                    <div class="flex items-center gap-1.5">
+                                        <label class="font-medium text-slate-200">Baseline Installation Duration</label>
+                                        <button type="button" class="param-tooltip-btn" data-tooltip-id="tip-install-time" title="Click for parameter description" aria-label="Info on Baseline Installation Duration">
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
+                                        </button>
+                                    </div>
                                     <span id="val-install-time" class="text-blue-400 font-mono font-bold text-base">6 mos</span>
+                                </div>
+                                <div id="tip-install-time" class="param-popover hidden absolute z-30 left-0 right-0 top-7 p-3 rounded-lg bg-slate-950 border border-slate-700/80 shadow-2xl text-xs text-slate-300">
+                                    <div class="flex justify-between items-start gap-2 mb-1">
+                                        <span class="font-bold text-white flex items-center gap-1.5">
+                                            <i class="fa-solid fa-circle-info text-blue-400"></i> Baseline Installation Duration
+                                        </span>
+                                        <button type="button" class="close-tip text-slate-400 hover:text-white p-0.5" aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
+                                    </div>
+                                    <p class="text-slate-300 leading-relaxed">The active construction and equipment installation window in months. Shorter implementation schedules minimize tenant disruption and business downtime, directly boosting owner confidence and kinetic forward momentum.</p>
                                 </div>
                                 <input type="range" id="slider-install-time" min="2" max="24" step="1" value="6"
                                     class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
@@ -146,10 +208,24 @@
                             </div>
 
                             <!-- Commissioning Duration -->
-                            <div>
+                            <div class="relative">
                                 <div class="flex justify-between items-baseline text-sm mb-1.5">
-                                    <label class="font-medium text-slate-200">Commissioning Duration (Months)</label>
+                                    <div class="flex items-center gap-1.5">
+                                        <label class="font-medium text-slate-200">Commissioning Duration (Months)</label>
+                                        <button type="button" class="param-tooltip-btn" data-tooltip-id="tip-commission-time" title="Click for parameter description" aria-label="Info on Commissioning Duration">
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
+                                        </button>
+                                    </div>
                                     <span id="val-commission-time" class="text-blue-400 font-mono font-bold text-base">4 mos</span>
+                                </div>
+                                <div id="tip-commission-time" class="param-popover hidden absolute z-30 left-0 right-0 top-7 p-3 rounded-lg bg-slate-950 border border-slate-700/80 shadow-2xl text-xs text-slate-300">
+                                    <div class="flex justify-between items-start gap-2 mb-1">
+                                        <span class="font-bold text-white flex items-center gap-1.5">
+                                            <i class="fa-solid fa-circle-info text-blue-400"></i> Commissioning Duration
+                                        </span>
+                                        <button type="button" class="close-tip text-slate-400 hover:text-white p-0.5" aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
+                                    </div>
+                                    <p class="text-slate-300 leading-relaxed">The post-installation tuning and verification timeframe. During commissioning, controls are calibrated, sequence of operations are finalized, and building energy management systems transition smoothly down into steady zero-emission performance.</p>
                                 </div>
                                 <input type="range" id="slider-commission-time" min="1" max="12" step="1" value="4"
                                     class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
@@ -157,11 +233,25 @@
                             </div>
 
                             <!-- Operational Savings / Delta -->
-                            <div>
+                            <div class="relative">
                                 <div class="flex justify-between items-baseline text-sm mb-1.5">
-                                    <label class="font-medium text-slate-200">Post-Retrofit Annual Op-Ex Delta</label>
+                                    <div class="flex items-center gap-1.5">
+                                        <label class="font-medium text-slate-200">Post-Retrofit Annual Op-Ex Delta</label>
+                                        <button type="button" class="param-tooltip-btn" data-tooltip-id="tip-opex-delta" title="Click for parameter description" aria-label="Info on Post-Retrofit Annual Op-Ex Delta">
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
+                                        </button>
+                                    </div>
                                     <span id="val-opex-delta"
                                         class="text-emerald-400 font-mono font-bold text-base">-$60k/yr</span>
+                                </div>
+                                <div id="tip-opex-delta" class="param-popover hidden absolute z-30 left-0 right-0 top-7 p-3 rounded-lg bg-slate-950 border border-slate-700/80 shadow-2xl text-xs text-slate-300">
+                                    <div class="flex justify-between items-start gap-2 mb-1">
+                                        <span class="font-bold text-white flex items-center gap-1.5">
+                                            <i class="fa-solid fa-circle-info text-emerald-400"></i> Annual Op-Ex Delta ($\Delta\text{Op-Ex}$)
+                                        </span>
+                                        <button type="button" class="close-tip text-slate-400 hover:text-white p-0.5" aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
+                                    </div>
+                                    <p class="text-slate-300 leading-relaxed">The permanent annual change in operational and utility expenditures ($/year) relative to the pre-retrofit baseline. Negative numbers reflect cost savings (exothermic reaction yielding financial returns); positive numbers indicate added ongoing expenses (endothermic / unfavorable).</p>
                                 </div>
                                 <input type="range" id="slider-opex-delta" min="-120" max="50" step="5" value="-60"
                                     class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
@@ -169,12 +259,26 @@
                             </div>
 
                             <!-- Owner's Discount Rate for Future Savings -->
-                            <div class="pt-3 border-t border-slate-800">
+                            <div class="pt-3 border-t border-slate-800 relative">
                                 <div class="flex justify-between items-baseline text-sm mb-1.5">
-                                    <label class="font-medium text-slate-200 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-percent text-purple-400"></i> Owner's Discount Rate (Savings)
-                                    </label>
+                                    <div class="flex items-center gap-1.5">
+                                        <label class="font-medium text-slate-200 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-percent text-purple-400"></i> Owner's Discount Rate (Savings)
+                                        </label>
+                                        <button type="button" class="param-tooltip-btn" data-tooltip-id="tip-discount" title="Click for parameter description" aria-label="Info on Owner's Discount Rate">
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
+                                        </button>
+                                    </div>
                                     <span id="val-discount" class="text-purple-400 font-mono font-bold text-base">6.0%</span>
+                                </div>
+                                <div id="tip-discount" class="param-popover hidden absolute z-30 left-0 right-0 top-10 p-3 rounded-lg bg-slate-950 border border-slate-700/80 shadow-2xl text-xs text-slate-300">
+                                    <div class="flex justify-between items-start gap-2 mb-1">
+                                        <span class="font-bold text-white flex items-center gap-1.5">
+                                            <i class="fa-solid fa-circle-info text-purple-400"></i> Owner's Discount Rate ($r$)
+                                        </span>
+                                        <button type="button" class="close-tip text-slate-400 hover:text-white p-0.5" aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
+                                    </div>
+                                    <p class="text-slate-300 leading-relaxed">The cost of capital / hurdle discount rate used to calculate the present value of future annual utility savings: $\text{PV}(t) = \Delta\text{Op-Ex} / (1+r)^t$. On the chart, higher rates gently bend the operational cost trajectory upward toward baseline over the years, visually capturing the diminished present value of distant returns.</p>
                                 </div>
                                 <input type="range" id="slider-discount" min="0" max="20" step="0.5" value="6.0"
                                     class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
@@ -191,20 +295,48 @@
                                             class="fa-solid fa-chevron-down group-open/nested:rotate-180 transition-transform text-xs"></i>
                                     </summary>
                                     <div class="space-y-4 pt-3">
-                                        <div>
+                                        <div class="relative">
                                             <div class="flex justify-between items-baseline text-sm mb-1.5">
-                                                <label class="text-slate-300">Pre-Retrofit Baseline Op-Ex</label>
+                                                <div class="flex items-center gap-1.5">
+                                                    <label class="text-slate-300">Pre-Retrofit Baseline Op-Ex</label>
+                                                    <button type="button" class="param-tooltip-btn" data-tooltip-id="tip-baseline-opex" title="Click for parameter description" aria-label="Info on Baseline Op-Ex">
+                                                        <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
+                                                    </button>
+                                                </div>
                                                 <span id="val-baseline-opex"
                                                     class="text-slate-100 font-mono font-bold text-base">$150k/yr</span>
+                                            </div>
+                                            <div id="tip-baseline-opex" class="param-popover hidden absolute z-30 left-0 right-0 top-7 p-3 rounded-lg bg-slate-950 border border-slate-700/80 shadow-2xl text-xs text-slate-300">
+                                                <div class="flex justify-between items-start gap-2 mb-1">
+                                                    <span class="font-bold text-white flex items-center gap-1.5">
+                                                        <i class="fa-solid fa-circle-info text-blue-400"></i> Pre-Retrofit Baseline Op-Ex
+                                                    </span>
+                                                    <button type="button" class="close-tip text-slate-400 hover:text-white p-0.5" aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
+                                                </div>
+                                                <p class="text-slate-300 leading-relaxed">The existing annual operating expenditure rate before any retrofit begins (the reactant baseline state, indicated by the dashed horizontal reference line). All activation peaks and operational savings are evaluated relative to this datum.</p>
                                             </div>
                                             <input type="range" id="slider-baseline-opex" min="50" max="300" step="10"
                                                 value="150"
                                                 class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
                                         </div>
-                                        <div>
+                                        <div class="relative">
                                             <div class="flex justify-between items-baseline text-sm mb-1.5">
-                                                <label class="text-slate-300">Evaluation Horizon</label>
+                                                <div class="flex items-center gap-1.5">
+                                                    <label class="text-slate-300">Evaluation Horizon</label>
+                                                    <button type="button" class="param-tooltip-btn" data-tooltip-id="tip-horizon" title="Click for parameter description" aria-label="Info on Evaluation Horizon">
+                                                        <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
+                                                    </button>
+                                                </div>
                                                 <span id="val-horizon" class="text-slate-100 font-mono font-bold text-base">20 Years</span>
+                                            </div>
+                                            <div id="tip-horizon" class="param-popover hidden absolute z-30 left-0 right-0 top-7 p-3 rounded-lg bg-slate-950 border border-slate-700/80 shadow-2xl text-xs text-slate-300">
+                                                <div class="flex justify-between items-start gap-2 mb-1">
+                                                    <span class="font-bold text-white flex items-center gap-1.5">
+                                                        <i class="fa-solid fa-circle-info text-blue-400"></i> Evaluation Horizon
+                                                    </span>
+                                                    <button type="button" class="close-tip text-slate-400 hover:text-white p-0.5" aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
+                                                </div>
+                                                <p class="text-slate-300 leading-relaxed">The total operational life-cycle in years over which cumulative net present value (NPV) and return on investment (ROI) are tracked following post-retrofit commissioning.</p>
                                             </div>
                                             <input type="range" id="slider-horizon" min="5" max="30" step="1" value="20"
                                                 class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
@@ -230,12 +362,26 @@
 
                         <div class="space-y-5 pt-4">
                             <!-- Policy Barrier Reduction -->
-                            <div>
+                            <div class="relative">
                                 <div class="flex justify-between items-baseline text-sm mb-1.5">
-                                    <label class="font-medium text-slate-200 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-file-signature text-cyan-400"></i> Barrier Reduction / Speedup
-                                    </label>
+                                    <div class="flex items-center gap-1.5">
+                                        <label class="font-medium text-slate-200 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-file-signature text-cyan-400"></i> Barrier Reduction / Speedup
+                                        </label>
+                                        <button type="button" class="param-tooltip-btn" data-tooltip-id="tip-barrier-reduction" title="Click for parameter description" aria-label="Info on Barrier Reduction / Speedup">
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
+                                        </button>
+                                    </div>
                                     <span id="val-barrier-reduction" class="text-cyan-400 font-mono font-bold text-base">0% (6 mos)</span>
+                                </div>
+                                <div id="tip-barrier-reduction" class="param-popover hidden absolute z-30 left-0 right-0 top-7 p-3 rounded-lg bg-slate-950 border border-slate-700/80 shadow-2xl text-xs text-slate-300">
+                                    <div class="flex justify-between items-start gap-2 mb-1">
+                                        <span class="font-bold text-white flex items-center gap-1.5">
+                                            <i class="fa-solid fa-circle-info text-cyan-400"></i> Barrier Reduction & Process Speedup
+                                        </span>
+                                        <button type="button" class="close-tip text-slate-400 hover:text-white p-0.5" aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
+                                    </div>
+                                    <p class="text-slate-300 leading-relaxed">Percentage reduction in installation duration achieved via municipal policy actions (streamlined plan check, expedited permitting, prefabricated assemblies, and automated inspections). Compressing project duration reduces tenant friction and significantly enhances owner adoption rates.</p>
                                 </div>
                                 <input type="range" id="slider-barrier-reduction" min="0" max="75" step="5" value="0"
                                     class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
@@ -243,12 +389,26 @@
                             </div>
 
                             <!-- Policy Catalyst / Incentive -->
-                            <div class="pt-3 border-t border-slate-800">
+                            <div class="pt-3 border-t border-slate-800 relative">
                                 <div class="flex justify-between items-baseline text-sm mb-1.5">
-                                    <label class="font-medium text-slate-200 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-flask text-amber-400"></i> Policy Catalyst / Incentive Offset
-                                    </label>
+                                    <div class="flex items-center gap-1.5">
+                                        <label class="font-medium text-slate-200 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-flask text-amber-400"></i> Policy Catalyst / Incentive Offset
+                                        </label>
+                                        <button type="button" class="param-tooltip-btn" data-tooltip-id="tip-catalyst" title="Click for parameter description" aria-label="Info on Policy Catalyst / Incentive Offset">
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
+                                        </button>
+                                    </div>
                                     <span id="val-catalyst" class="text-amber-400 font-mono font-bold text-base">0%</span>
+                                </div>
+                                <div id="tip-catalyst" class="param-popover hidden absolute z-30 left-0 right-0 top-10 p-3 rounded-lg bg-slate-950 border border-slate-700/80 shadow-2xl text-xs text-slate-300">
+                                    <div class="flex justify-between items-start gap-2 mb-1">
+                                        <span class="font-bold text-white flex items-center gap-1.5">
+                                            <i class="fa-solid fa-circle-info text-amber-400"></i> Policy Catalyst / Incentive Offset
+                                        </span>
+                                        <button type="button" class="close-tip text-slate-400 hover:text-white p-0.5" aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
+                                    </div>
+                                    <p class="text-slate-300 leading-relaxed">Financial rebates, utility incentives, and tax deductions (e.g. IRA credits) that offset gross Cap-Ex. Analogous to an enzyme or chemical catalyst, it lowers the height of the activation barrier without altering pre-retrofit or post-retrofit baseline energetics.</p>
                                 </div>
                                 <input type="range" id="slider-catalyst" min="0" max="100" step="5" value="0"
                                     class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
@@ -726,6 +886,65 @@
                 render();
             });
             resizeObserver.observe(container);
+
+            // Parameter Tooltips (Click Info Icon to Toggle Description Popover)
+            const tooltipBtns = document.querySelectorAll('.param-tooltip-btn');
+            const popovers = document.querySelectorAll('.param-popover');
+
+            function closeAllTooltips() {
+                popovers.forEach(pop => {
+                    pop.classList.remove('open');
+                    pop.classList.add('hidden');
+                });
+                tooltipBtns.forEach(b => b.classList.remove('active'));
+            }
+
+            tooltipBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const targetId = btn.getAttribute('data-tooltip-id');
+                    const targetPopover = document.getElementById(targetId);
+                    if (!targetPopover) return;
+
+                    const isOpen = targetPopover.classList.contains('open');
+                    closeAllTooltips();
+
+                    if (!isOpen) {
+                        targetPopover.classList.remove('hidden');
+                        // Tiny delay to trigger smooth transition
+                        requestAnimationFrame(() => {
+                            targetPopover.classList.add('open');
+                            btn.classList.add('active');
+                        });
+                    }
+                });
+            });
+
+            // Tooltip popover close buttons
+            document.querySelectorAll('.param-popover .close-tip').forEach(closeBtn => {
+                closeBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    closeAllTooltips();
+                });
+            });
+
+            // Prevent clicks inside open popovers from bubbling to document (closing themselves)
+            popovers.forEach(pop => {
+                pop.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+            });
+
+            // Click outside or press Escape to dismiss any active tooltip
+            document.addEventListener('click', () => {
+                closeAllTooltips();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeAllTooltips();
+                }
+            });
         }
 
         function applyPreset(key) {
