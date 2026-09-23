@@ -1743,7 +1743,7 @@
             }
 
             // Draw 4 distinct phase tracks below X-axis (Light Theme Tailored Colors)
-            drawPhaseBadge(paddingLeft, xStart, 'rgba(241, 245, 249, 0.95)', '#cbd5e1', '#475569', 'Pre-Retrofit', 'Baseline', 'Baseline');
+            drawPhaseBadge(paddingLeft, xStart, 'rgba(241, 245, 249, 0.95)', '#cbd5e1', '#475569', 'Pre-Retrofit', `$${(state.baselineOpex / 12).toFixed(1)}k/mo`, 'Baseline', `$${(state.baselineOpex / 12).toFixed(1)}k/mo`);
             drawPhaseBadge(xStart, xInstallEnd, 'rgba(254, 243, 199, 0.7)', '#f59e0b', '#b45309', 'Implementation', `${phaseInfo.effInstallMonths.toFixed(1)} mos`);
             drawPhaseBadge(xInstallEnd, xCommissionEnd, 'rgba(224, 242, 254, 0.7)', '#38bdf8', '#0369a1', 'Commissioning', `${state.commissionDuration} mos`, 'Comm.', `${state.commissionDuration}m`);
             drawPhaseBadge(xCommissionEnd, xEnd, 'rgba(209, 250, 229, 0.7)', '#10b981', '#047857', 'Operation (Zero-Emission)', `${Math.round(state.timeHorizon * 12)} mos (${state.timeHorizon} yr Horizon)`, 'Operation', `${Math.round(state.timeHorizon * 12)} mos`);
@@ -1849,16 +1849,30 @@
             ctx.lineTo(opexMarkerX + 4, opexInitialY);
             ctx.stroke();
 
-            // Smart Positioning for Project Outcomes Callout Badge
-            const totalOpSavings = Math.round(-state.opexDelta * state.timeHorizon);
+            // Smart Positioning for Project Outcomes Callout Badge (Dynamically Accounting for Discount Rate and Horizon)
+            const pvSavings = getDiscountedCumulativeSavings();
             const isSavings = state.opexDelta <= 0;
             const opexHeader = 'Project Outcomes:';
-            const opexLine1 = isSavings
-                ? `Total Op-Ex Savings: +$${totalOpSavings}k`
-                : `Total Op-Ex Penalty: +$${Math.round(state.opexDelta * state.timeHorizon)}k`;
-            const opexLine2 = isSavings
-                ? `Avg Op-Ex Savings: +$${Math.abs(opexDeltaMonthly).toFixed(1)}k/mo`
-                : `Avg Op-Ex Penalty: +$${Math.abs(opexDeltaMonthly).toFixed(1)}k/mo`;
+
+            let opexLine1, opexLine2;
+            if (state.discountRate > 0) {
+                const avgMonthlyPV = Math.abs(pvSavings) / (state.timeHorizon * 12);
+                opexLine1 = isSavings
+                    ? `Total Op-Ex Savings (PV): +$${Math.round(pvSavings)}k`
+                    : `Total Op-Ex Penalty (PV): -$${Math.abs(Math.round(pvSavings))}k`;
+                opexLine2 = isSavings
+                    ? `Avg Op-Ex Savings (PV): +$${avgMonthlyPV.toFixed(1)}k/mo`
+                    : `Avg Op-Ex Penalty (PV): -$${avgMonthlyPV.toFixed(1)}k/mo`;
+            } else {
+                const totalNominal = Math.round(-state.opexDelta * state.timeHorizon);
+                const avgMonthlyNominal = Math.abs(state.opexDelta) / 12;
+                opexLine1 = isSavings
+                    ? `Total Op-Ex Savings: +$${totalNominal}k`
+                    : `Total Op-Ex Penalty: -$${Math.abs(totalNominal)}k`;
+                opexLine2 = isSavings
+                    ? `Avg Op-Ex Savings: +$${avgMonthlyNominal.toFixed(1)}k/mo`
+                    : `Avg Op-Ex Penalty: -$${avgMonthlyNominal.toFixed(1)}k/mo`;
+            }
 
             ctx.font = 'bold 11px Inter';
             const wOpHeader = ctx.measureText(opexHeader).width;
