@@ -107,7 +107,7 @@
         </div>
     </header>
 
-    <main class="flex-1 w-full px-4 py-6 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <main class="flex-1 w-full px-4 py-6 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
         <!-- Left Controls Panel (4 Cols on lg, 3 Cols on xl/2xl) -->
         <section class="lg:col-span-4 xl:col-span-3 2xl:col-span-3 space-y-6">
@@ -544,7 +544,7 @@
 
             <!-- Chart Display Card -->
             <div
-                class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl flex-1 flex flex-col min-h-[500px] relative">
+                class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl flex flex-col h-[520px] relative">
                 <div class="flex flex-wrap justify-between items-center mb-4 gap-3">
                     <div>
                         <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
@@ -1078,6 +1078,27 @@
                     closeAllTooltips();
                 }
             });
+
+            // Re-render and resize canvas automatically when collapsible accordion panels expand or collapse
+            document.querySelectorAll('details').forEach(detail => {
+                detail.addEventListener('toggle', () => {
+                    requestAnimationFrame(() => {
+                        resizeCanvas();
+                        render();
+                    });
+                });
+            });
+
+            // Modern ResizeObserver on canvas container to handle dynamic layout shifts
+            if (window.ResizeObserver && container) {
+                const ro = new ResizeObserver(() => {
+                    if (!state.animating) {
+                        resizeCanvas();
+                        render();
+                    }
+                });
+                ro.observe(container);
+            }
         }
 
         function applyPreset(key) {
@@ -1249,11 +1270,16 @@
 
         function resizeCanvas() {
             const rect = container.getBoundingClientRect();
+            if (!rect.width || !rect.height) return;
             const dpr = window.devicePixelRatio || 1;
-            canvas.width = Math.round(rect.width * dpr);
-            canvas.height = Math.round(rect.height * dpr);
-            canvas.style.width = rect.width + 'px';
-            canvas.style.height = rect.height + 'px';
+            const targetW = Math.round(rect.width * dpr);
+            const targetH = Math.round(rect.height * dpr);
+            if (canvas.width !== targetW || canvas.height !== targetH) {
+                canvas.width = targetW;
+                canvas.height = targetH;
+                canvas.style.width = rect.width + 'px';
+                canvas.style.height = rect.height + 'px';
+            }
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         }
 
@@ -1320,12 +1346,14 @@
         }
 
         function render() {
+            resizeCanvas();
             updateLabels();
             calculateFinancials();
 
             const rect = container.getBoundingClientRect();
             const width = rect.width;
             const height = rect.height;
+            if (!width || !height) return;
 
             ctx.clearRect(0, 0, width, height);
 
