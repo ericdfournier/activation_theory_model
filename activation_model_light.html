@@ -708,6 +708,8 @@
                 commissionDuration: 6,
                 opexDelta: -60,
                 catalyst: 0,
+                yMin: 0,
+                yMax: 40,
                 description: "<strong>Scenario A (Standard / Optimal Retrofit):</strong> Rapid 4.2-year payback (<5 yrs) creates sufficient owner momentum to clear the Cap-Ex hurdle. Upfront integrated Cap-Ex is deployed over a 12-month implementation, followed by 6 months of commissioning and deep, perpetual operational cost reductions (green area)."
             },
             B: {
@@ -717,7 +719,9 @@
                 commissionDuration: 3,
                 opexDelta: -15,
                 catalyst: 0,
-                description: "<strong>Scenario B (Excessive Capital Expenditures):</strong> The integrated Cap-Ex barrier is exceptionally high ($750k, 50-year payback >> 5 yrs). The instantaneous expenditure rate spikes severely, creating an insurmountable economic hurdle where the ball runs out of momentum and rolls back."
+                yMin: 0,
+                yMax: 70,
+                description: "<strong>Scenario B (Excessive Capital Expenditures):</strong> The integrated Cap-Ex barrier is exceptionally high ($550k, 50-year payback >> 5 yrs). The instantaneous expenditure rate spikes severely, creating an insurmountable economic hurdle where the ball runs out of momentum and rolls back."
             },
             C: {
                 totalCapex: 350,
@@ -726,15 +730,19 @@
                 commissionDuration: 6,
                 opexDelta: -50,
                 catalyst: 0,
+                yMin: 0,
+                yMax: 40,
                 description: "<strong>Scenario C (Excessive Implementation Downtime):</strong> The total integrated Cap-Ex is identical to Scenario A ($350k), but spread across an elongated 18-month implementation with a 6.3-year payback (>5 yrs). The prolonged disruption and delayed savings fail to provide the kinetic momentum required to surmount the barrier, resulting in rollback."
             },
             D: {
-                totalCapex: 320,
+                totalCapex: 50,
                 installDuration: 5,
                 barrierReduction: 0,
                 commissionDuration: 5,
                 opexDelta: 25,
                 catalyst: 0,
+                yMin: 10,
+                yMax: 20,
                 description: "<strong>Scenario D (Increased Operational Expenditures):</strong> An endothermic / unfavorable outcome with no economic payback. Ongoing operational expenditures exceed the pre-retrofit baseline (red area), producing near-zero driving motivation and immediate rollback."
             }
         };
@@ -1343,6 +1351,37 @@
             };
         }
 
+        // Dynamic Y-Axis Limits based on active scenario or custom parameter ranges
+        function getAxisLimits() {
+            if (state.scenario && presets[state.scenario] && presets[state.scenario].yMin !== undefined && presets[state.scenario].yMax !== undefined) {
+                return {
+                    minVal: presets[state.scenario].yMin,
+                    maxVal: presets[state.scenario].yMax
+                };
+            }
+
+            const baselineMonthly = state.baselineOpex / 12;
+            const targetOpexMonthly = (state.baselineOpex + state.opexDelta) / 12;
+            const dummyInfo = getCostAtTime(0.5);
+            const peakMonthly = baselineMonthly + dummyInfo.peakRateHeight;
+
+            const rawMax = Math.max(baselineMonthly, targetOpexMonthly, peakMonthly);
+            const rawMin = Math.min(baselineMonthly, targetOpexMonthly);
+
+            let minVal, maxVal;
+            if (state.opexDelta >= 0) {
+                // Unfavorable / Endothermic: baseline is lowest or target is higher
+                minVal = Math.max(0, Math.floor(rawMin - 2.5));
+                maxVal = Math.ceil((rawMax + 2.5) / 5) * 5;
+                if (maxVal - minVal < 10) maxVal = minVal + 10;
+            } else {
+                // Favorable / Exothermic
+                minVal = 0;
+                maxVal = Math.max(30, Math.ceil((rawMax + 5) / 5) * 5);
+            }
+            return { minVal, maxVal };
+        }
+
         function render() {
             resizeCanvas();
             updateLabels();
@@ -1366,8 +1405,7 @@
             const dummyInfo = getCostAtTime(0.5);
             const effectiveCapEx = state.totalCapex * (1 - state.catalyst / 100);
             const baselineMonthly = state.baselineOpex / 12;
-            const maxVal = Math.max(baselineMonthly + dummyInfo.peakRateHeight + 5, 40);
-            const minVal = Math.min((state.baselineOpex + state.opexDelta) / 12 - 2.5, 0);
+            const { minVal, maxVal } = getAxisLimits();
 
             function valToY(val) {
                 const ratio = (val - minVal) / (maxVal - minVal);
@@ -1482,7 +1520,7 @@
                 ctx.lineTo(width - paddingRight, y);
                 ctx.stroke();
 
-                const labelText = Math.abs(v) < 10 ? `$${v.toFixed(1)}k` : `$${Math.round(v)}k`;
+                const labelText = (Math.abs(v - Math.round(v)) > 0.01) ? `$${v.toFixed(1)}k` : `$${Math.round(v)}k`;
                 ctx.fillText(labelText, paddingLeft - 10, y + 4);
             }
 
