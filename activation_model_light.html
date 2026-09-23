@@ -1759,41 +1759,137 @@
 
             // End tick caps
             ctx.beginPath();
-            ctx.moveTo(peakX - 5, peakY);
-            ctx.lineTo(peakX + 5, peakY);
-            ctx.moveTo(peakX - 5, baselineY);
-            ctx.lineTo(peakX + 5, baselineY);
+            ctx.moveTo(peakX - 4, peakY);
+            ctx.lineTo(peakX + 4, peakY);
+            ctx.moveTo(peakX - 4, baselineY);
+            ctx.lineTo(peakX + 4, baselineY);
             ctx.stroke();
 
-            // Text beside activation barrier ($k/mo)
+            // Smart Positioning for Activation Barrier Callout Badge
+            const actTitle = `Activation Barrier: +$${peakRateHeight.toFixed(1)}k/mo`;
+            const actSub = `Total Cap-Ex: $${Math.round(effectiveCapEx)}k`;
+            ctx.font = 'bold 11px Inter';
+            const actTitleW = ctx.measureText(actTitle).width;
+            ctx.font = '600 10.5px Inter';
+            const actSubW = ctx.measureText(actSub).width;
+            const actCardW = Math.max(actTitleW, actSubW) + 18;
+            const actCardH = 36;
+
+            let actCardX = peakX + 10;
+            let actCardY = (baselineY + peakY) / 2 - actCardH / 2;
+
+            // Space check: If space above the peak is clear (>= 42px), position callout in the open space above peak
+            if (peakY - (paddingTop + 14) >= actCardH) {
+                actCardX = Math.max(paddingLeft + 8, Math.min(peakX - actCardW / 2, width - paddingRight - actCardW - 8));
+                actCardY = peakY - actCardH - 8;
+
+                // Subtle connector leader line to peak tip
+                ctx.strokeStyle = '#f59e0b';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(peakX, peakY);
+                ctx.lineTo(peakX, actCardY + actCardH);
+                ctx.stroke();
+            } else {
+                // Peak is high: Place to side in available shoulder space
+                if (peakX + 10 + actCardW > width - paddingRight - 10) {
+                    actCardX = peakX - actCardW - 10;
+                } else {
+                    actCardX = peakX + 10;
+                }
+                actCardY = Math.max(paddingTop + 6, Math.min(peakY + 6, height - paddingBottom - actCardH - 10));
+            }
+
+            // Draw Activation Badge Card
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.94)';
+            ctx.strokeStyle = '#fde68a';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.roundRect(actCardX, actCardY, actCardW, actCardH, 6);
+            ctx.fill();
+            ctx.stroke();
+
+            // Draw Badge Text
             ctx.textAlign = 'left';
             ctx.fillStyle = '#b45309';
-            ctx.font = 'bold 12px Inter';
-            ctx.fillText(`Activation Barrier: +$${peakRateHeight.toFixed(1)}k/mo`, peakX + 9, (baselineY + peakY) / 2 - 6);
-            ctx.font = '600 11px Inter';
+            ctx.font = 'bold 11px Inter';
+            ctx.fillText(actTitle, actCardX + 9, actCardY + 14);
+
             ctx.fillStyle = '#d97706';
-            ctx.fillText(`Total Cap-Ex: $${Math.round(effectiveCapEx)}k`, peakX + 9, (baselineY + peakY) / 2 + 10);
+            ctx.font = '600 10.5px Inter';
+            ctx.fillText(actSub, actCardX + 9, actCardY + 28);
 
             // Op-Ex Delta Indicator in Operation Phase (Initial undiscounted monthly rate marker)
-            const opexMarkerX = xCommissionEnd + (xEnd - xCommissionEnd) * 0.15;
+            const opexMarkerX = xCommissionEnd + (xEnd - xCommissionEnd) * 0.16;
             const opexDeltaMonthly = state.opexDelta / 12;
             const opexInitialY = valToY(baselineMonthly + opexDeltaMonthly);
             const opexColor = state.opexDelta <= 0 ? '#059669' : '#dc2626';
+            const opexBorder = state.opexDelta <= 0 ? '#a7f3d0' : '#fecaca';
 
             ctx.strokeStyle = opexColor;
             ctx.lineWidth = 1.5;
             ctx.beginPath();
             ctx.moveTo(opexMarkerX, baselineY);
             ctx.lineTo(opexMarkerX, opexInitialY);
-            ctx.moveTo(opexMarkerX - 5, baselineY);
-            ctx.lineTo(opexMarkerX + 5, baselineY);
-            ctx.moveTo(opexMarkerX - 5, opexInitialY);
-            ctx.lineTo(opexMarkerX + 5, opexInitialY);
+            ctx.moveTo(opexMarkerX - 4, baselineY);
+            ctx.lineTo(opexMarkerX + 4, baselineY);
+            ctx.moveTo(opexMarkerX - 4, opexInitialY);
+            ctx.lineTo(opexMarkerX + 4, opexInitialY);
             ctx.stroke();
 
+            // Smart Positioning for Initial Op-Ex Callout Badge
+            const opexTitle = `Initial Δ Op-Ex: ${state.opexDelta <= 0 ? '-' : '+'}$${Math.abs(opexDeltaMonthly).toFixed(1)}k/mo`;
+            const opexSub = state.opexDelta <= 0
+                ? `Annual Savings: +$${Math.round(-state.opexDelta)}k/yr`
+                : `Annual Penalty: +$${Math.round(state.opexDelta)}k/yr`;
+
+            ctx.font = 'bold 11px Inter';
+            const opexTitleW = ctx.measureText(opexTitle).width;
+            ctx.font = '600 10px Inter';
+            const opexSubW = ctx.measureText(opexSub).width;
+            const opexCardW = Math.max(opexTitleW, opexSubW) + 18;
+            const opexCardH = 34;
+
+            let opexCardX = opexMarkerX + 10;
+            if (opexCardX + opexCardW > width - paddingRight - 10) {
+                opexCardX = opexMarkerX - opexCardW - 10;
+            }
+
+            let opexCardY;
+            const deltaH = Math.abs(baselineY - opexInitialY);
+
+            if (deltaH >= 40) {
+                // Gap is large enough to center the badge inside
+                opexCardY = (baselineY + opexInitialY) / 2 - opexCardH / 2;
+            } else if (state.opexDelta <= 0) {
+                // Cost reduction: Place badge cleanly in open space below the initial curve line
+                opexCardY = Math.min(opexInitialY + 12, height - paddingBottom - opexCardH - 6);
+                if (opexCardY + opexCardH > height - paddingBottom - 4) {
+                    opexCardY = Math.max(paddingTop + 6, baselineY - opexCardH - 10);
+                }
+            } else {
+                // Cost increase: Place badge in open space above curve line
+                opexCardY = Math.max(paddingTop + 6, opexInitialY - opexCardH - 12);
+            }
+
+            // Draw Op-Ex Badge Card
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.94)';
+            ctx.strokeStyle = opexBorder;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.roundRect(opexCardX, opexCardY, opexCardW, opexCardH, 6);
+            ctx.fill();
+            ctx.stroke();
+
+            // Draw Op-Ex Badge Text
+            ctx.textAlign = 'left';
             ctx.fillStyle = opexColor;
-            ctx.font = 'bold 12px Inter';
-            ctx.fillText(`Initial Δ Op-Ex: ${state.opexDelta <= 0 ? '-' : '+'}$${Math.abs(opexDeltaMonthly).toFixed(1)}k/mo`, opexMarkerX + 8, (baselineY + opexInitialY) / 2);
+            ctx.font = 'bold 11px Inter';
+            ctx.fillText(opexTitle, opexCardX + 9, opexCardY + 14);
+
+            ctx.fillStyle = state.opexDelta <= 0 ? '#047857' : '#b91c1c';
+            ctx.font = '600 10px Inter';
+            ctx.fillText(opexSub, opexCardX + 9, opexCardY + 26);
 
             // Interactive Mouse Hover Crosshair & Tooltip
             if (state.isHovering && state.hoverRatio !== null) {
