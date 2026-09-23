@@ -74,9 +74,10 @@
                     <i class="fa-solid fa-bolt-lightning text-2xl"></i>
                 </div>
                 <div>
-                    <h1 class="text-xl font-bold text-slate-900 tracking-tight">Zero-Emission Building Retrofit Dynamics
+                    <h1 class="text-xl font-bold text-slate-900 tracking-tight">Zero-Emission Retrofit Dynamics
                     </h1>
-                    <p class="text-sm text-slate-500">Activation Energy Model for Non-Residential Decarbonization</p>
+                    <p class="text-sm text-slate-500">An Activation Energy Based Conceptual Model for the Implementation
+                        of Zero-Emissions Decarbonization Retrofits in Non-Residential Buildings</p>
                 </div>
             </div>
             <div class="flex items-center space-x-3.5">
@@ -229,7 +230,6 @@
                                     <p class="text-slate-600 leading-relaxed">The active planning, design, and equipment
                                         implementation window in months. Shorter implementation schedules minimize
                                         tenant disruption and business downtime, directly boosting owner confidence and
-                                        kinetic
                                         forward momentum.</p>
                                 </div>
                                 <input type="range" id="slider-install-time" min="2" max="24" step="1" value="12"
@@ -553,14 +553,17 @@
                 <div class="flex flex-wrap justify-between items-center mb-4 gap-3">
                     <div>
                         <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
-                            <i class="fa-solid fa-chart-line text-emerald-600 text-lg"></i> Activation Cost Trajectory &
-                            Thermodynamic Energy Profile
+                            <i class="fa-solid fa-chart-line text-emerald-600 text-lg"></i> Zero-Emissions Project
+                            Activation Cost Trajectory
                         </h2>
                         <div class="flex flex-wrap items-center gap-2 mt-1">
-                            <p class="text-xs sm:text-sm text-slate-500">X-Axis: Project Timeline | Y-Axis: Effective Cost Rate ($/mo)</p>
-                            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-900 border border-amber-200 shadow-2xs">
+                            <p class="text-xs sm:text-sm text-slate-500">X-Axis: Project Timeline | Y-Axis: Effective
+                                Cost Rate ($/mo)</p>
+                            <span
+                                class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-900 border border-amber-200 shadow-2xs">
                                 <i class="fa-solid fa-arrows-left-right-to-line text-amber-600"></i>
-                                <span><strong>Non-Linear Scale:</strong> Zoomed Transition (Months) &bull; Compressed Operation (<span id="scale-badge-horizon">20 Yrs</span>)</span>
+                                <span><strong>Non-Linear Scale:</strong> Zoomed Transition (Months) &bull; Compressed
+                                    Operation (<span id="scale-badge-horizon">20 Yrs</span>)</span>
                             </span>
                         </div>
                     </div>
@@ -1198,7 +1201,7 @@
             const totalPeakRateMonthly = (state.baselineOpex / 12) + peakRateHeightMonthly;
 
             labels.capex.innerText = `$${Math.round(state.totalCapex)}k`;
-            labels.peakRate.innerText = `Peak: ~$${totalPeakRateMonthly.toFixed(1)}k/mo (+$${peakRateHeightMonthly.toFixed(1)}k/mo)`;
+            labels.peakRate.innerText = `Peak: ~$${peakRateHeightMonthly.toFixed(1)}k/mo`;
             labels.installTime.innerText = `${state.installDuration} mos`;
 
             labels.barrierReduction.innerText = `${state.barrierReduction}% (${effInstallMonths.toFixed(1)} mos)`;
@@ -1838,10 +1841,11 @@
             ctx.stroke();
 
             // Smart Positioning for Initial Op-Ex Callout Badge
+            const totalOpSavings = Math.round(-state.opexDelta * state.timeHorizon);
             const opexTitle = `Initial Δ Op-Ex: ${state.opexDelta <= 0 ? '-' : '+'}$${Math.abs(opexDeltaMonthly).toFixed(1)}k/mo`;
             const opexSub = state.opexDelta <= 0
-                ? `Annual Savings: +$${Math.round(-state.opexDelta)}k/yr`
-                : `Annual Penalty: +$${Math.round(state.opexDelta)}k/yr`;
+                ? `Total Op-Ex Savings: +$${totalOpSavings}k`
+                : `Total Op-Ex Penalty: +$${Math.round(state.opexDelta * state.timeHorizon)}k`;
 
             ctx.font = 'bold 11px Inter';
             const opexTitleW = ctx.measureText(opexTitle).width;
