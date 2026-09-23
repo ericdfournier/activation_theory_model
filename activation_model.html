@@ -7,6 +7,10 @@
     <title>An Activation Model of Zero-Emission (ZE) Building Retrofits</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- KaTeX for fast, robust mathematical typesetting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -911,6 +915,7 @@
 
                     if (!isOpen) {
                         targetPopover.classList.remove('hidden');
+                        renderAllMath(targetPopover);
                         // Tiny delay to trigger smooth transition
                         requestAnimationFrame(() => {
                             targetPopover.classList.add('open');
@@ -969,6 +974,7 @@
 
             setPresetUI(key);
             scenarioDesc.innerHTML = p.description;
+            renderAllMath(scenarioDesc);
 
             stopAnimation();
             state.ballProgress = 0;
@@ -1791,11 +1797,40 @@
             updateTelemetryUI();
         }
 
+        // Mathematical Typesetting (KaTeX Auto-Render)
+        function renderAllMath(target = document.body) {
+            if (typeof renderMathInElement === 'function') {
+                renderMathInElement(target, {
+                    delimiters: [
+                        { left: '$$', right: '$$', display: true },
+                        { left: '$', right: '$', display: false },
+                        { left: '\\(', right: '\\)', display: false },
+                        { left: '\\[', right: '\\]', display: true }
+                    ],
+                    throwOnError: false,
+                    ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+                });
+            }
+        }
+
         // Startup Initialization
         window.onload = function () {
             initListeners();
             resizeCanvas();
             applyPreset('A');
+
+            // Render math once KaTeX finishes loading
+            if (typeof renderMathInElement === 'function') {
+                renderAllMath();
+            } else {
+                const checkKatexInterval = setInterval(() => {
+                    if (typeof renderMathInElement === 'function') {
+                        clearInterval(checkKatexInterval);
+                        renderAllMath();
+                    }
+                }, 50);
+                setTimeout(() => clearInterval(checkKatexInterval), 4000);
+            }
         };
 
     </script>
