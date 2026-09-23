@@ -542,6 +542,97 @@
                     </details>
                 </div>
 
+                <!-- Card 4: Project Financing & Debt Service (Collapsible) -->
+                <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+                    <details class="group" id="details-financing" open>
+                        <summary class="cursor-pointer list-none flex items-center justify-between select-none">
+                            <h2
+                                class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+                                <i class="fa-solid fa-hand-holding-dollar text-emerald-600"></i> Project Financing &amp; Debt
+                                <span id="badge-financing-active"
+                                    class="hidden text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full border border-emerald-300 font-bold">Active</span>
+                            </h2>
+                            <i
+                                class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform text-sm"></i>
+                        </summary>
+
+                        <div class="space-y-4 pt-4">
+                            <!-- Financing Enable Toggle -->
+                            <div class="flex items-center justify-between p-3 bg-slate-50 rounded-lg border border-slate-200">
+                                <div>
+                                    <label for="toggle-financing"
+                                        class="font-semibold text-slate-800 text-sm block cursor-pointer">Enable Debt Financing</label>
+                                    <p class="text-xs text-slate-500">Amortize Cap-Ex &amp; service debt via Op-Ex</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" id="toggle-financing" class="sr-only peer">
+                                    <div
+                                        class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600">
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- Controls container (disabled/opacity if not checked) -->
+                            <div id="financing-controls-group"
+                                class="space-y-4 opacity-50 pointer-events-none transition-opacity">
+                                <!-- Financed Debt Share (%) -->
+                                <div class="relative">
+                                    <div class="flex justify-between items-baseline text-sm mb-1.5">
+                                        <label class="font-medium text-slate-700">Financed Debt Share (%)</label>
+                                        <span id="val-financed-pct"
+                                            class="text-emerald-700 font-mono font-bold text-base">100% ($250k Debt)</span>
+                                    </div>
+                                    <input type="range" id="slider-financed-pct" min="10" max="100" step="5" value="100"
+                                        class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                                    <p class="text-xs text-slate-500 mt-1">Remainder represents upfront equity down payment.</p>
+                                </div>
+
+                                <!-- Loan Term (Years) -->
+                                <div class="relative">
+                                    <div class="flex justify-between items-baseline text-sm mb-1.5">
+                                        <label class="font-medium text-slate-700">Loan Term (Years)</label>
+                                        <span id="val-loan-term"
+                                            class="text-blue-700 font-mono font-bold text-base">10 Yrs (120 Mos)</span>
+                                    </div>
+                                    <input type="range" id="slider-loan-term" min="3" max="25" step="1" value="10"
+                                        class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                                    <p class="text-xs text-slate-500 mt-1">Duration over which capital debt is amortized.</p>
+                                </div>
+
+                                <!-- Interest Rate (%) -->
+                                <div class="relative">
+                                    <div class="flex justify-between items-baseline text-sm mb-1.5">
+                                        <label class="font-medium text-slate-700">Interest Rate (%)</label>
+                                        <span id="val-interest-rate"
+                                            class="text-purple-700 font-mono font-bold text-base">6.0%</span>
+                                    </div>
+                                    <input type="range" id="slider-interest-rate" min="2.0" max="12.0" step="0.25"
+                                        value="6.0" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                                    <p class="text-xs text-slate-500 mt-1">Annual percentage rate (APR) for debt financing.</p>
+                                </div>
+
+                                <!-- Live Telemetry Pill inside card -->
+                                <div class="p-3 bg-emerald-50/70 border border-emerald-200 rounded-lg text-xs space-y-1.5">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-slate-600 font-medium">Monthly Debt Service:</span>
+                                        <span id="val-monthly-debt"
+                                            class="font-mono font-bold text-slate-900">$2.8k/mo</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-slate-600 font-medium">Debt Coverage (DSCR):</span>
+                                        <span id="val-dscr" class="font-mono font-bold text-emerald-700">1.80x (Self-Funding)</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-slate-600 font-medium">Net Retained Cash Flow:</span>
+                                        <span id="val-retained-flow"
+                                            class="font-mono font-bold text-emerald-700">+$2.2k/mo</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
             </div>
         </section>
 
@@ -557,8 +648,8 @@
                             Activation Cost Trajectory
                         </h2>
                         <div class="flex flex-wrap items-center gap-2 mt-1">
-                            <p class="text-xs sm:text-sm text-slate-500">X-Axis: Project Timeline | Y-Axis: Effective
-                                Cost Rate ($/mo)</p>
+                            <p class="text-xs sm:text-sm text-slate-500">Y-Axis: Effective Cost Rate ($/mo) | X-Axis:
+                                Project Timeline</p>
                             <span
                                 class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-900 border border-amber-200 shadow-2xs">
                                 <i class="fa-solid fa-arrows-left-right-to-line text-amber-600"></i>
@@ -586,6 +677,12 @@
                             <span class="flex items-center gap-1.5"><span
                                     class="w-3 h-3 rounded-full bg-emerald-500 inline-block shadow-xs"></span> Cost
                                 Reduction</span>
+                            <span id="legend-debt-service" class="hidden flex items-center gap-1.5"><span
+                                    class="w-3 h-3 rounded-full bg-amber-400 inline-block shadow-xs"></span> Debt
+                                Service</span>
+                            <span id="legend-ghost-barrier" class="hidden flex items-center gap-1.5"><span
+                                    class="w-3.5 h-0.5 border-b-2 border-dashed border-slate-400 inline-block"></span>
+                                Unfinanced Barrier</span>
                             <span class="flex items-center gap-1.5"><span
                                     class="w-3.5 h-0.5 border-b-2 border-dashed border-slate-400 inline-block"></span>
                                 Baseline Op-Ex</span>
@@ -603,7 +700,7 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <!-- KPI 1: Net Present Value -->
                 <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
-                    <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Net Present Value (NPV)
+                    <div id="kpi-npv-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Net Present Value (NPV)
                     </div>
                     <div id="kpi-npv" class="text-2xl font-bold font-mono text-emerald-600 mt-1.5">$0</div>
                     <div id="kpi-npv-sub" class="text-xs text-slate-400 mt-1">Lifetime net value</div>
@@ -611,7 +708,7 @@
 
                 <!-- KPI 2: Simple Payback -->
                 <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
-                    <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Simple Payback</div>
+                    <div id="kpi-payback-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Simple Payback</div>
                     <div id="kpi-payback" class="text-2xl font-bold font-mono text-emerald-600 mt-1.5">0.0 yrs</div>
                     <div id="kpi-payback-sub" class="text-xs text-slate-400 mt-1">Break-even (&lt;5 yrs rolls over)
                     </div>
@@ -619,14 +716,14 @@
 
                 <!-- KPI 3: ROI -->
                 <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
-                    <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Project ROI</div>
+                    <div id="kpi-roi-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Project ROI</div>
                     <div id="kpi-roi" class="text-2xl font-bold font-mono text-emerald-600 mt-1.5">0%</div>
                     <div id="kpi-roi-sub" class="text-xs text-slate-400 mt-1">Return on investment (NPV / Cap-Ex)</div>
                 </div>
 
                 <!-- KPI 4: Effective Cap-Ex -->
                 <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
-                    <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Effective Cap-Ex Barrier
+                    <div id="kpi-net-capex-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Effective Cap-Ex Barrier
                     </div>
                     <div id="kpi-net-capex" class="text-2xl font-bold font-mono text-amber-600 mt-1.5">$0</div>
                     <div id="kpi-net-capex-sub" class="text-xs text-slate-400 mt-1">After policy incentive offset</div>
@@ -682,6 +779,12 @@
             discountRate: 6.0,       // %
             timeHorizon: 20,         // years
 
+            // Project Financing & Debt Service State
+            financingEnabled: false, // toggled via checkbox
+            financedPct: 100,        // % debt share (10% to 100%)
+            loanTerm: 10,            // loan term in years (3 to 25)
+            interestRate: 6.0,       // annual interest rate % (2.0% to 12.0%)
+
             // Physics Animation State
             animating: false,
             ballProgress: 0,         // normalized progress r: 0 to 1
@@ -721,7 +824,7 @@
                 catalyst: 0,
                 yMin: 0,
                 yMax: 70,
-                description: "<strong>Scenario B (Excessive Capital Expenditures):</strong> The integrated Cap-Ex barrier is exceptionally high ($550k, 50-year payback >> 5 yrs). The instantaneous expenditure rate spikes severely, creating an insurmountable economic hurdle where the ball runs out of momentum and rolls back."
+                description: "<strong>Scenario B (Excessive Capital Expenditures):</strong> The integrated Cap-Ex barrier is exceptionally high ($550k, 36.7-year payback >> 5 yrs). The instantaneous expenditure rate spikes severely, creating an insurmountable economic hurdle where the ball runs out of momentum and rolls back."
             },
             C: {
                 totalCapex: 350,
@@ -732,14 +835,14 @@
                 catalyst: 0,
                 yMin: 0,
                 yMax: 40,
-                description: "<strong>Scenario C (Excessive Implementation Downtime):</strong> The total integrated Cap-Ex is identical to Scenario A ($350k), but spread across an elongated 18-month implementation with a 6.3-year payback (>5 yrs). The prolonged disruption and delayed savings fail to provide the kinetic momentum required to surmount the barrier, resulting in rollback."
+                description: "<strong>Scenario C (Excessive Implementation Downtime):</strong> The total integrated Cap-Ex is identical to Scenario A ($350k), but spread across an elongated 18-month implementation with a 7.0-year payback (>5 yrs). The prolonged disruption and delayed savings fail to provide the kinetic momentum required to surmount the barrier, resulting in rollback."
             },
             D: {
                 totalCapex: 50,
                 installDuration: 5,
                 barrierReduction: 0,
                 commissionDuration: 5,
-                opexDelta: 25,
+                opexDelta: 20,
                 catalyst: 0,
                 yMin: 10,
                 yMax: 20,
@@ -761,7 +864,10 @@
             catalyst: document.getElementById('slider-catalyst'),
             baselineOpex: document.getElementById('slider-baseline-opex'),
             discount: document.getElementById('slider-discount'),
-            horizon: document.getElementById('slider-horizon')
+            horizon: document.getElementById('slider-horizon'),
+            financedPct: document.getElementById('slider-financed-pct'),
+            loanTerm: document.getElementById('slider-loan-term'),
+            interestRate: document.getElementById('slider-interest-rate')
         };
 
         const labels = {
@@ -774,7 +880,13 @@
             catalyst: document.getElementById('val-catalyst'),
             baselineOpex: document.getElementById('val-baseline-opex'),
             discount: document.getElementById('val-discount'),
-            horizon: document.getElementById('val-horizon')
+            horizon: document.getElementById('val-horizon'),
+            financedPct: document.getElementById('val-financed-pct'),
+            loanTerm: document.getElementById('val-loan-term'),
+            interestRate: document.getElementById('val-interest-rate'),
+            monthlyDebt: document.getElementById('val-monthly-debt'),
+            dscr: document.getElementById('val-dscr'),
+            retainedFlow: document.getElementById('val-retained-flow')
         };
 
         const kpis = {
@@ -783,6 +895,23 @@
             roi: document.getElementById('kpi-roi'),
             netCapex: document.getElementById('kpi-net-capex')
         };
+
+        const kpiLabels = {
+            npv: document.getElementById('kpi-npv-label'),
+            payback: document.getElementById('kpi-payback-label'),
+            roi: document.getElementById('kpi-roi-label'),
+            netCapex: document.getElementById('kpi-net-capex-label'),
+            npvSub: document.getElementById('kpi-npv-sub'),
+            paybackSub: document.getElementById('kpi-payback-sub'),
+            roiSub: document.getElementById('kpi-roi-sub'),
+            netCapexSub: document.getElementById('kpi-net-capex-sub')
+        };
+
+        const toggleFinancing = document.getElementById('toggle-financing');
+        const financingControlsGroup = document.getElementById('financing-controls-group');
+        const badgeFinancingActive = document.getElementById('badge-financing-active');
+        const legendDebtService = document.getElementById('legend-debt-service');
+        const legendGhostBarrier = document.getElementById('legend-ghost-barrier');
 
         const playBtn = document.getElementById('btn-play-animation');
         const playIcon = document.getElementById('play-icon');
@@ -797,6 +926,42 @@
         function getEffectiveInstallDuration() {
             const rawDuration = state.installDuration * (1 - state.barrierReduction / 100);
             return Math.max(rawDuration, 0.5); // Minimum 0.5 months
+        }
+
+        // Project Financing & Debt Service Calculations
+        function calculateDebtService() {
+            const netCapex = state.totalCapex * (1 - state.catalyst / 100);
+            const financedPct = state.financingEnabled ? (state.financedPct || 100) : 0;
+            const debtPrincipal = state.financingEnabled ? netCapex * (financedPct / 100) : 0;
+            const equityDown = state.financingEnabled ? netCapex - debtPrincipal : netCapex;
+
+            const annualRate = (state.interestRate || 6.0) / 100;
+            const r_m = annualRate / 12;
+            const n = Math.max(1, (state.loanTerm || 10) * 12);
+
+            let monthlyPayment = 0;
+            if (debtPrincipal > 0 && n > 0) {
+                if (r_m > 0) {
+                    monthlyPayment = debtPrincipal * (r_m * Math.pow(1 + r_m, n)) / (Math.pow(1 + r_m, n) - 1);
+                } else {
+                    monthlyPayment = debtPrincipal / n;
+                }
+            }
+
+            const monthlySavings = -state.opexDelta / 12; // positive for cost savings, negative for increased costs
+            const dscr = monthlyPayment > 0 ? (monthlySavings / monthlyPayment) : (monthlySavings > 0 ? 99 : 0);
+            const netMonthlySavings = monthlySavings - monthlyPayment;
+
+            return {
+                netCapex,
+                debtPrincipal,
+                equityDown,
+                monthlyPayment,
+                annualPayment: monthlyPayment * 12,
+                dscr,
+                netMonthlySavings,
+                loanMonths: n
+            };
         }
 
         // Present Value of Cumulative operational savings over evaluation horizon ($k)
@@ -827,7 +992,10 @@
         // Exact critical initial velocity (vc) required to reach the peak of the barrier (pPeak)
         // under the current physics landscape (potential energy slope + friction)
         function getCriticalVelocity() {
-            const effectiveCapEx = state.totalCapex * (1 - state.catalyst / 100);
+            const debtInfo = calculateDebtService();
+            const effectiveCapEx = state.financingEnabled ? debtInfo.equityDown : (state.totalCapex * (1 - state.catalyst / 100));
+            if (effectiveCapEx <= 0) return 0.05; // No hurdle when 100% financed
+
             const effInstallMonths = getEffectiveInstallDuration();
             const installWidth = (effInstallMonths / 36) * 0.42;
             const pStart = 0.12;
@@ -874,14 +1042,24 @@
 
         // Compute initial velocity of the reaction ball:
         function computeInitialVelocity() {
-            const effectiveCapEx = state.totalCapex * (1 - state.catalyst / 100);
             const annualSavings = -state.opexDelta; // $k/yr
             const vc = getCriticalVelocity();
+
+            if (state.financingEnabled) {
+                const debtInfo = calculateDebtService();
+                if (annualSavings > 0 && debtInfo.dscr >= 1.0) {
+                    // Debt service is self-funding from day 1, zero/low cash barrier
+                    return Math.max(0.65, vc * 1.35);
+                } else if (annualSavings > 0 && debtInfo.dscr > 0.4) {
+                    return Math.max(0.35, vc * 0.90);
+                }
+            }
 
             if (annualSavings <= 0) {
                 return Math.max(0.08, vc * 0.15);
             }
 
+            const effectiveCapEx = state.totalCapex * (1 - state.catalyst / 100);
             const payback = effectiveCapEx / annualSavings; // simple payback in years
             const durMultiplier = getDurationMotivationMultiplier();
 
@@ -899,6 +1077,41 @@
 
         // Qualitative Property Owner Motivation Metric [Low, Medium, High, Very High]
         function getMotivationTier(v0) {
+            if (state.financingEnabled) {
+                const debtInfo = calculateDebtService();
+                const annualSavings = -state.opexDelta;
+                if (annualSavings <= 0) {
+                    return {
+                        level: 'Low',
+                        colorClass: 'text-red-700 bg-red-50 border-red-200',
+                        pillColor: 'text-red-600',
+                        desc: 'Financed: Unfavorable Economics (No Op-Ex Savings)'
+                    };
+                }
+                if (debtInfo.dscr >= 1.25) {
+                    return {
+                        level: 'Very High',
+                        colorClass: 'text-emerald-700 bg-emerald-50 border-emerald-200',
+                        pillColor: 'text-emerald-600',
+                        desc: `Financed: Cash-Flow Positive (${debtInfo.dscr.toFixed(2)}x DSCR, $0 Upfront Hurdle)`
+                    };
+                } else if (debtInfo.dscr >= 1.0) {
+                    return {
+                        level: 'High',
+                        colorClass: 'text-teal-700 bg-teal-50 border-teal-200',
+                        pillColor: 'text-teal-600',
+                        desc: `Financed: Self-Funding via Op-Ex (${debtInfo.dscr.toFixed(2)}x DSCR)`
+                    };
+                } else {
+                    return {
+                        level: 'Medium',
+                        colorClass: 'text-amber-700 bg-amber-50 border-amber-200',
+                        pillColor: 'text-amber-600',
+                        desc: `Financed: Deficit During Debt Term (${debtInfo.dscr.toFixed(2)}x DSCR)`
+                    };
+                }
+            }
+
             const effectiveCapEx = state.totalCapex * (1 - state.catalyst / 100);
             const annualSavings = -state.opexDelta;
 
@@ -962,6 +1175,19 @@
                 sliders.baselineOpex.value = 150;
                 state.timeHorizon = 20;
                 sliders.horizon.value = 20;
+
+                // Reset financing
+                state.financingEnabled = false;
+                if (toggleFinancing) toggleFinancing.checked = false;
+                state.financedPct = 100;
+                if (sliders.financedPct) sliders.financedPct.value = 100;
+                state.loanTerm = 10;
+                if (sliders.loanTerm) sliders.loanTerm.value = 10;
+                state.interestRate = 6.0;
+                if (sliders.interestRate) sliders.interestRate.value = 6.0;
+                if (financingControlsGroup) financingControlsGroup.classList.add('opacity-50', 'pointer-events-none');
+                if (badgeFinancingActive) badgeFinancingActive.classList.add('hidden');
+
                 customBadge.classList.add('hidden');
                 stopAnimation();
                 state.ballProgress = 0.02;
@@ -984,15 +1210,21 @@
                 { slider: sliders.catalyst, key: 'catalyst', float: false },
                 { slider: sliders.baselineOpex, key: 'baselineOpex', float: false },
                 { slider: sliders.discount, key: 'discountRate', float: true },
-                { slider: sliders.horizon, key: 'timeHorizon', float: false }
+                { slider: sliders.horizon, key: 'timeHorizon', float: false },
+                { slider: sliders.financedPct, key: 'financedPct', float: false },
+                { slider: sliders.loanTerm, key: 'loanTerm', float: false },
+                { slider: sliders.interestRate, key: 'interestRate', float: true }
             ];
 
             sliderConfig.forEach(({ slider, key, float }) => {
+                if (!slider) return;
                 slider.addEventListener('input', (e) => {
                     state[key] = float ? parseFloat(e.target.value) : parseInt(e.target.value, 10);
-                    customBadge.classList.remove('hidden');
-                    state.scenario = 'Custom';
-                    scenarioDesc.innerHTML = `<strong>Custom Scenario:</strong> User-adjusted parameters (Total Cap-Ex: $${Math.round(state.totalCapex)}k, Implementation: ${state.installDuration} mos, Op-Ex Delta: ${state.opexDelta <= 0 ? '-' : '+'}$${Math.abs(state.opexDelta)}k/yr).`;
+                    if (['financedPct', 'loanTerm', 'interestRate'].indexOf(key) === -1) {
+                        customBadge.classList.remove('hidden');
+                        state.scenario = 'Custom';
+                        scenarioDesc.innerHTML = `<strong>Custom Scenario:</strong> User-adjusted parameters (Total Cap-Ex: $${Math.round(state.totalCapex)}k, Implementation: ${state.installDuration} mos, Op-Ex Delta: ${state.opexDelta <= 0 ? '-' : '+'}$${Math.abs(state.opexDelta)}k/yr).`;
+                    }
 
                     if (!state.animating) {
                         state.ballProgress = 0.02;
@@ -1003,6 +1235,28 @@
                     render();
                 });
             });
+
+            // Toggle Financing Checkbox
+            if (toggleFinancing) {
+                toggleFinancing.addEventListener('change', (e) => {
+                    state.financingEnabled = e.target.checked;
+                    if (state.financingEnabled) {
+                        if (financingControlsGroup) financingControlsGroup.classList.remove('opacity-50', 'pointer-events-none');
+                        if (badgeFinancingActive) badgeFinancingActive.classList.remove('hidden');
+                    } else {
+                        if (financingControlsGroup) financingControlsGroup.classList.add('opacity-50', 'pointer-events-none');
+                        if (badgeFinancingActive) badgeFinancingActive.classList.add('hidden');
+                    }
+
+                    if (!state.animating) {
+                        state.ballProgress = 0.02;
+                        state.ballVelocity = 0;
+                        state.physicsStatus = 'ready';
+                        state.statusMessage = 'Ready to roll';
+                    }
+                    render();
+                });
+            }
 
             // Canvas Hover Handling for Interactive Inspection
             container.addEventListener('mousemove', (e) => {
@@ -1231,47 +1485,147 @@
             const scaleBadgeHorizon = document.getElementById('scale-badge-horizon');
             if (scaleBadgeHorizon) scaleBadgeHorizon.innerText = `${state.timeHorizon} Yrs`;
 
+            // Project Financing Labels & Live Telemetry
+            const debtInfo = calculateDebtService();
+            if (labels.financedPct) {
+                labels.financedPct.innerText = `${state.financedPct}% ($${Math.round(debtInfo.debtPrincipal)}k Debt)`;
+            }
+            if (labels.loanTerm) {
+                labels.loanTerm.innerText = `${state.loanTerm} Yrs (${Math.round(state.loanTerm * 12)} Mos)`;
+            }
+            if (labels.interestRate) {
+                labels.interestRate.innerText = `${state.interestRate.toFixed(2)}%`;
+            }
+            if (labels.monthlyDebt) {
+                labels.monthlyDebt.innerText = `$${debtInfo.monthlyPayment.toFixed(1)}k/mo ($${Math.round(debtInfo.annualPayment)}k/yr)`;
+            }
+            if (labels.dscr) {
+                if (-state.opexDelta <= 0) {
+                    labels.dscr.innerText = "0.00x (No Op-Ex Savings)";
+                    labels.dscr.className = "font-mono font-bold text-red-600";
+                } else if (debtInfo.dscr >= 1.0) {
+                    labels.dscr.innerText = `${debtInfo.dscr.toFixed(2)}x (Self-Funding)`;
+                    labels.dscr.className = "font-mono font-bold text-emerald-700";
+                } else {
+                    labels.dscr.innerText = `${debtInfo.dscr.toFixed(2)}x (Cash Deficit)`;
+                    labels.dscr.className = "font-mono font-bold text-amber-700";
+                }
+            }
+            if (labels.retainedFlow) {
+                const rf = debtInfo.netMonthlySavings;
+                if (rf >= 0) {
+                    labels.retainedFlow.innerText = `+$${rf.toFixed(2)}k/mo`;
+                    labels.retainedFlow.className = "font-mono font-bold text-emerald-700";
+                } else {
+                    labels.retainedFlow.innerText = `-$${Math.abs(rf).toFixed(2)}k/mo`;
+                    labels.retainedFlow.className = "font-mono font-bold text-red-600";
+                }
+            }
+
             updateTelemetryUI();
         }
 
         function calculateFinancials() {
-            const effectiveCapEx = state.totalCapex * (1 - state.catalyst / 100); // $k
-            const annualSavings = -state.opexDelta; // $k/year saved
-
-            let payback = "N/A";
-            let paybackYears = null;
-            if (annualSavings > 0) {
-                paybackYears = effectiveCapEx / annualSavings;
-                payback = paybackYears.toFixed(1) + " yrs";
-            } else {
-                payback = "No Payback";
-            }
-
             const r = state.discountRate / 100;
-            let npv = -effectiveCapEx;
+            const netCapex = state.totalCapex * (1 - state.catalyst / 100);
+            const annualSavings = -state.opexDelta; // $k/year saved
+            const debtInfo = calculateDebtService();
 
-            for (let t = 1; t <= state.timeHorizon; t++) {
-                npv += annualSavings / Math.pow(1 + r, t);
-            }
+            if (state.financingEnabled) {
+                // Project Financing Mode
+                const upfrontEquity = debtInfo.equityDown;
+                const annualDebt = debtInfo.annualPayment;
+                const loanTerm = state.loanTerm;
 
-            const roiVal = effectiveCapEx > 0 ? (npv / effectiveCapEx) * 100 : 0;
-            const roi = effectiveCapEx > 0 ? roiVal.toFixed(0) + "%" : "N/A";
+                let financedNpv = -upfrontEquity;
+                for (let t = 1; t <= state.timeHorizon; t++) {
+                    const cf = (t <= loanTerm) ? (annualSavings - annualDebt) : annualSavings;
+                    financedNpv += cf / Math.pow(1 + r, t);
+                }
 
-            kpis.netCapex.innerText = `$${Math.round(effectiveCapEx)}k`;
-            kpis.payback.innerText = payback;
-            if (paybackYears !== null && paybackYears < 5.0) {
-                kpis.payback.className = "text-2xl font-bold font-mono text-emerald-600 mt-1.5";
-            } else if (paybackYears !== null && paybackYears < 10.0) {
-                kpis.payback.className = "text-2xl font-bold font-mono text-amber-600 mt-1.5";
+                const y1NetCashFlow = annualSavings - annualDebt;
+
+                // KPI 1: Financed NPV
+                if (kpiLabels.npv) kpiLabels.npv.innerText = "Financed NPV";
+                if (kpiLabels.npvSub) kpiLabels.npvSub.innerText = "Lifetime net value with debt service";
+                kpis.npv.innerText = `$${Math.round(financedNpv)}k`;
+                kpis.npv.className = financedNpv >= 0 ? "text-2xl font-bold font-mono text-emerald-600 mt-1.5" : "text-2xl font-bold font-mono text-red-600 mt-1.5";
+
+                // KPI 2: Debt Service Coverage (DSCR)
+                if (kpiLabels.payback) kpiLabels.payback.innerText = "Debt Coverage (DSCR)";
+                if (annualSavings <= 0) {
+                    kpis.payback.innerText = "0.00x";
+                    if (kpiLabels.paybackSub) kpiLabels.paybackSub.innerText = "No Op-Ex savings to service debt";
+                    kpis.payback.className = "text-2xl font-bold font-mono text-red-600 mt-1.5";
+                } else if (debtInfo.dscr >= 1.0) {
+                    kpis.payback.innerText = `${debtInfo.dscr.toFixed(2)}x`;
+                    if (kpiLabels.paybackSub) kpiLabels.paybackSub.innerText = "Self-funding: Op-Ex covers debt";
+                    kpis.payback.className = "text-2xl font-bold font-mono text-emerald-600 mt-1.5";
+                } else {
+                    kpis.payback.innerText = `${debtInfo.dscr.toFixed(2)}x`;
+                    if (kpiLabels.paybackSub) kpiLabels.paybackSub.innerText = "Partial coverage (cash deficit)";
+                    kpis.payback.className = "text-2xl font-bold font-mono text-amber-600 mt-1.5";
+                }
+
+                // KPI 3: Year 1 Net Cash Flow
+                if (kpiLabels.roi) kpiLabels.roi.innerText = "Yr 1 Net Cash Flow";
+                kpis.roi.innerText = (y1NetCashFlow >= 0 ? "+$" : "-$") + `${Math.abs(Math.round(y1NetCashFlow))}k/yr`;
+                if (kpiLabels.roiSub) kpiLabels.roiSub.innerText = y1NetCashFlow >= 0 ? "Retained cash flow after debt payment" : "Operating cash deficit during loan";
+                kpis.roi.className = y1NetCashFlow >= 0 ? "text-2xl font-bold font-mono text-emerald-600 mt-1.5" : "text-2xl font-bold font-mono text-red-600 mt-1.5";
+
+                // KPI 4: Upfront Equity Required
+                if (kpiLabels.netCapex) kpiLabels.netCapex.innerText = "Upfront Equity Required";
+                kpis.netCapex.innerText = `$${Math.round(upfrontEquity)}k`;
+                if (kpiLabels.netCapexSub) kpiLabels.netCapexSub.innerText = state.financedPct === 100 ? "100% Financed (Zero upfront hurdle)" : `${100 - state.financedPct}% equity down payment`;
+                kpis.netCapex.className = upfrontEquity === 0 ? "text-2xl font-bold font-mono text-emerald-600 mt-1.5" : "text-2xl font-bold font-mono text-amber-600 mt-1.5";
+
             } else {
-                kpis.payback.className = "text-2xl font-bold font-mono text-red-600 mt-1.5";
+                // Standard Unfinanced Mode
+                if (kpiLabels.npv) kpiLabels.npv.innerText = "Net Present Value (NPV)";
+                if (kpiLabels.npvSub) kpiLabels.npvSub.innerText = "Lifetime net value";
+                if (kpiLabels.payback) kpiLabels.payback.innerText = "Simple Payback";
+                if (kpiLabels.paybackSub) kpiLabels.paybackSub.innerText = "Break-even (<5 yrs rolls over)";
+                if (kpiLabels.roi) kpiLabels.roi.innerText = "Project ROI";
+                if (kpiLabels.roiSub) kpiLabels.roiSub.innerText = "Return on investment (NPV / Cap-Ex)";
+                if (kpiLabels.netCapex) kpiLabels.netCapex.innerText = "Effective Cap-Ex Barrier";
+                if (kpiLabels.netCapexSub) kpiLabels.netCapexSub.innerText = "After policy incentive offset";
+
+                const effectiveCapEx = netCapex;
+                let payback = "N/A";
+                let paybackYears = null;
+                if (annualSavings > 0) {
+                    paybackYears = effectiveCapEx / annualSavings;
+                    payback = paybackYears.toFixed(1) + " yrs";
+                } else {
+                    payback = "No Payback";
+                }
+
+                let npv = -effectiveCapEx;
+                for (let t = 1; t <= state.timeHorizon; t++) {
+                    npv += annualSavings / Math.pow(1 + r, t);
+                }
+
+                const roiVal = effectiveCapEx > 0 ? (npv / effectiveCapEx) * 100 : 0;
+                const roi = effectiveCapEx > 0 ? roiVal.toFixed(0) + "%" : "N/A";
+
+                kpis.netCapex.innerText = `$${Math.round(effectiveCapEx)}k`;
+                kpis.netCapex.className = "text-2xl font-bold font-mono text-amber-600 mt-1.5";
+
+                kpis.payback.innerText = payback;
+                if (paybackYears !== null && paybackYears < 5.0) {
+                    kpis.payback.className = "text-2xl font-bold font-mono text-emerald-600 mt-1.5";
+                } else if (paybackYears !== null && paybackYears < 10.0) {
+                    kpis.payback.className = "text-2xl font-bold font-mono text-amber-600 mt-1.5";
+                } else {
+                    kpis.payback.className = "text-2xl font-bold font-mono text-red-600 mt-1.5";
+                }
+
+                kpis.npv.innerText = `$${Math.round(npv)}k`;
+                kpis.npv.className = npv >= 0 ? "text-2xl font-bold font-mono text-emerald-600 mt-1.5" : "text-2xl font-bold font-mono text-red-600 mt-1.5";
+
+                kpis.roi.innerText = roi;
+                kpis.roi.className = roiVal >= 0 ? "text-2xl font-bold font-mono text-emerald-600 mt-1.5" : "text-2xl font-bold font-mono text-red-600 mt-1.5";
             }
-
-            kpis.npv.innerText = `$${Math.round(npv)}k`;
-            kpis.npv.className = npv >= 0 ? "text-2xl font-bold font-mono text-emerald-600 mt-1.5" : "text-2xl font-bold font-mono text-red-600 mt-1.5";
-
-            kpis.roi.innerText = roi;
-            kpis.roi.className = roiVal >= 0 ? "text-2xl font-bold font-mono text-emerald-600 mt-1.5" : "text-2xl font-bold font-mono text-red-600 mt-1.5";
         }
 
         function resizeCanvas() {
@@ -1291,8 +1645,10 @@
 
         // Mathematical Curve Function using Integrated Cap-Ex & Smooth Commissioning Decay,
         // with all cost rates calculated in dollars per month ($k/mo) and the owner's discount rate visually applied
-        function getCostAtTime(tRatio) {
-            const effectiveCapEx = state.totalCapex * (1 - state.catalyst / 100);
+        function getCostAtTime(tRatio, forceUnfinanced = false) {
+            const isFinanced = state.financingEnabled && !forceUnfinanced;
+            const debtInfo = calculateDebtService();
+            const effectiveCapEx = isFinanced ? debtInfo.equityDown : (state.totalCapex * (1 - state.catalyst / 100));
             const effInstallMonths = getEffectiveInstallDuration();
 
             // Normalized timeline geometry
@@ -1311,18 +1667,33 @@
             const peakRateHeightMonthly = peakRateHeightAnnual / 12;
 
             let value = baselineMonthly;
+            let isUnderDebtTerm = false;
+            let activeDebtMonthly = 0;
+            let tYears = 0;
 
             if (tRatio < pStart) {
                 value = baselineMonthly;
             } else if (tRatio >= pStart && tRatio < pInstallEnd) {
+                // When opexDelta > 0 (cost increase / endothermic), the operating baseline transitions
+                // up to targetOpexMonthly across implementation so that costs at the end of implementation
+                // taper smoothly into post-retrofit costs rather than dipping below and rebounding.
+                let baseRate = baselineMonthly;
+                if (targetOpexMonthly > baselineMonthly) {
+                    const progress = (tRatio - pStart) / installWidth;
+                    const smoothProgress = 3 * Math.pow(progress, 2) - 2 * Math.pow(progress, 3);
+                    baseRate = baselineMonthly + (targetOpexMonthly - baselineMonthly) * smoothProgress;
+                }
+
                 // Bell curve representing implementation Cap-Ex deployment rate ($k/mo)
                 const normX = (tRatio - pPeak) / (installWidth / 2);
                 const bump = Math.exp(-Math.pow(normX * 2.1, 2));
-                value = baselineMonthly + peakRateHeightMonthly * bump;
+                value = baseRate + peakRateHeightMonthly * bump;
             } else if (tRatio >= pInstallEnd && tRatio < pCommissionEnd) {
                 // Smooth monotonic commissioning decay from end of implementation down to stable initial post-retrofit state
                 const normEnd = (pInstallEnd - pPeak) / (installWidth / 2);
-                const startCost = baselineMonthly + peakRateHeightMonthly * Math.exp(-Math.pow(normEnd * 2.1, 2));
+                const endBump = Math.exp(-Math.pow(normEnd * 2.1, 2));
+                const baseEnd = (targetOpexMonthly > baselineMonthly) ? targetOpexMonthly : baselineMonthly;
+                const startCost = baseEnd + peakRateHeightMonthly * endBump;
 
                 const progress = (tRatio - pInstallEnd) / commissionWidth;
                 const smoothFactor = 3 * Math.pow(progress, 2) - 2 * Math.pow(progress, 3);
@@ -1332,12 +1703,17 @@
                 // Stable Zero-Emission Operation Phase with Owner Discount Rate Applied
                 // Present value rate decays over operational timeline from 0 to Evaluation Horizon
                 const tau = Math.min(Math.max((tRatio - pCommissionEnd) / (1.0 - pCommissionEnd), 0), 1);
-                const tYears = tau * state.timeHorizon;
+                tYears = tau * state.timeHorizon;
                 const rDisc = state.discountRate / 100;
 
-                // Present value rate of Op-Ex Delta: Delta(t) = Delta(0) / (1 + r)^t ($k/mo)
-                const discountedOpexDeltaMonthly = (state.opexDelta / 12) / Math.pow(1 + rDisc, tYears);
-                value = baselineMonthly + discountedOpexDeltaMonthly;
+                isUnderDebtTerm = isFinanced && (tYears <= state.loanTerm);
+                activeDebtMonthly = isUnderDebtTerm ? debtInfo.monthlyPayment : 0;
+
+                // Present value rate of Op-Ex Delta + Debt Service:
+                // Nominal monthly net delta from baseline is (opexDelta/12) + activeDebtMonthly
+                const nominalDelta = (state.opexDelta / 12) + activeDebtMonthly;
+                const discountedDelta = nominalDelta / Math.pow(1 + rDisc, tYears);
+                value = baselineMonthly + discountedDelta;
             }
 
             return {
@@ -1347,13 +1723,16 @@
                 pInstallEnd,
                 pCommissionEnd,
                 peakRateHeight: peakRateHeightMonthly, // in $k/mo
-                effInstallMonths
+                effInstallMonths,
+                isUnderDebtTerm,
+                activeDebtMonthly,
+                tYears
             };
         }
 
         // Dynamic Y-Axis Limits based on active scenario or custom parameter ranges
         function getAxisLimits() {
-            if (state.scenario && presets[state.scenario] && presets[state.scenario].yMin !== undefined && presets[state.scenario].yMax !== undefined) {
+            if (state.scenario && presets[state.scenario] && presets[state.scenario].yMin !== undefined && presets[state.scenario].yMax !== undefined && !state.financingEnabled) {
                 return {
                     minVal: presets[state.scenario].yMin,
                     maxVal: presets[state.scenario].yMax
@@ -1362,14 +1741,17 @@
 
             const baselineMonthly = state.baselineOpex / 12;
             const targetOpexMonthly = (state.baselineOpex + state.opexDelta) / 12;
-            const dummyInfo = getCostAtTime(0.5);
-            const peakMonthly = baselineMonthly + dummyInfo.peakRateHeight;
+            const dummyUnfinInfo = getCostAtTime(0.5, true);
+            const peakMonthly = baselineMonthly + dummyUnfinInfo.peakRateHeight;
 
-            const rawMax = Math.max(baselineMonthly, targetOpexMonthly, peakMonthly);
-            const rawMin = Math.min(baselineMonthly, targetOpexMonthly);
+            const debtInfo = calculateDebtService();
+            const financedDebtRateMonthly = state.financingEnabled ? (targetOpexMonthly + debtInfo.monthlyPayment) : targetOpexMonthly;
+
+            const rawMax = Math.max(baselineMonthly, targetOpexMonthly, peakMonthly, financedDebtRateMonthly);
+            const rawMin = Math.min(baselineMonthly, targetOpexMonthly, financedDebtRateMonthly);
 
             let minVal, maxVal;
-            if (state.opexDelta >= 0) {
+            if (state.opexDelta >= 0 || financedDebtRateMonthly > baselineMonthly) {
                 // Unfavorable / Endothermic: baseline is lowest or target is higher
                 minVal = Math.max(0, Math.floor(rawMin - 2.5));
                 maxVal = Math.ceil((rawMax + 2.5) / 5) * 5;
@@ -1387,6 +1769,15 @@
             updateLabels();
             calculateFinancials();
 
+            // Toggle visibility of debt-related legends
+            if (state.financingEnabled) {
+                if (legendDebtService) legendDebtService.classList.remove('hidden');
+                if (legendGhostBarrier) legendGhostBarrier.classList.remove('hidden');
+            } else {
+                if (legendDebtService) legendDebtService.classList.add('hidden');
+                if (legendGhostBarrier) legendGhostBarrier.classList.add('hidden');
+            }
+
             const rect = container.getBoundingClientRect();
             const width = rect.width;
             const height = rect.height;
@@ -1402,8 +1793,8 @@
             const graphW = width - paddingLeft - paddingRight;
             const graphH = height - paddingTop - paddingBottom;
 
-            const dummyInfo = getCostAtTime(0.5);
-            const effectiveCapEx = state.totalCapex * (1 - state.catalyst / 100);
+            const debtInfo = calculateDebtService();
+            const effectiveCapEx = state.financingEnabled ? debtInfo.equityDown : (state.totalCapex * (1 - state.catalyst / 100));
             const baselineMonthly = state.baselineOpex / 12;
             const { minVal, maxVal } = getAxisLimits();
 
@@ -1543,7 +1934,7 @@
                 const res = getCostAtTime(r);
                 const x = ratioToX(r);
                 const y = valToY(res.value);
-                points.push({ x, y, r, val: res.value });
+                points.push({ x, y, r, val: res.value, res });
             }
 
             // Fill Shaded Regions: Red (Cost Increases) & Green (Discounted Cost Reductions)
@@ -1567,6 +1958,30 @@
                 ctx.fill();
             }
 
+            // If financing is active, highlight the debt service tranche during the loan term with an amber tint
+            if (state.financingEnabled) {
+                const rDisc = state.discountRate / 100;
+                for (let i = 0; i < points.length - 1; i++) {
+                    const p1 = points[i];
+                    const p2 = points[i + 1];
+                    if (p1.res && p1.res.isUnderDebtTerm && p2.res && p2.res.isUnderDebtTerm) {
+                        const unfinVal1 = baselineMonthly + (state.opexDelta / 12) / Math.pow(1 + rDisc, p1.res.tYears);
+                        const unfinVal2 = baselineMonthly + (state.opexDelta / 12) / Math.pow(1 + rDisc, p2.res.tYears);
+                        const uy1 = valToY(unfinVal1);
+                        const uy2 = valToY(unfinVal2);
+
+                        ctx.beginPath();
+                        ctx.moveTo(p1.x, uy1);
+                        ctx.lineTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.lineTo(p2.x, uy2);
+                        ctx.closePath();
+                        ctx.fillStyle = 'rgba(245, 158, 11, 0.24)'; // amber debt service band
+                        ctx.fill();
+                    }
+                }
+            }
+
             // Baseline Dashed Line
             ctx.beginPath();
             ctx.setLineDash([6, 6]);
@@ -1581,6 +1996,37 @@
             ctx.font = '600 13px Inter';
             ctx.textAlign = 'right';
             ctx.fillText(`Baseline Op-Ex ($${(state.baselineOpex / 12).toFixed(1)}k/mo)`, width - paddingRight - 15, baselineY - 10);
+
+            // Ghost Dashed Line for Unfinanced Activation Barrier (if financing enabled)
+            if (state.financingEnabled && state.financedPct > 0) {
+                ctx.save();
+                ctx.beginPath();
+                ctx.setLineDash([5, 4]);
+                ctx.strokeStyle = '#94a3b8';
+                ctx.lineWidth = 2.0;
+
+                const ghostSteps = 60;
+                for (let i = 0; i <= ghostSteps; i++) {
+                    const r = phaseInfo.pStart + (i / ghostSteps) * (phaseInfo.pCommissionEnd - phaseInfo.pStart);
+                    const unfinRes = getCostAtTime(r, true);
+                    const gx = ratioToX(r);
+                    const gy = valToY(unfinRes.value);
+                    if (i === 0) ctx.moveTo(gx, gy);
+                    else ctx.lineTo(gx, gy);
+                }
+                ctx.stroke();
+
+                // Ghost Barrier Label near peak
+                const unfinPeakRes = getCostAtTime(phaseInfo.pPeak, true);
+                const gPeakX = ratioToX(phaseInfo.pPeak);
+                const gPeakY = valToY(unfinPeakRes.value);
+                ctx.fillStyle = '#64748b';
+                ctx.font = 'italic 10px Inter';
+                ctx.textAlign = 'center';
+                const netCapGross = state.totalCapex * (1 - state.catalyst / 100);
+                ctx.fillText(`Original Unfinanced Barrier ($${Math.round(netCapGross)}k)`, gPeakX, Math.max(paddingTop + 14, gPeakY - 8));
+                ctx.restore();
+            }
 
             // Main Energy Curve Line (Vibrant Blue on White)
             ctx.beginPath();
@@ -1602,6 +2048,42 @@
                 ctx.stroke();
             });
             ctx.setLineDash([]);
+
+            // Milestone Marker at Loan Payoff Year (if financing is active)
+            if (state.financingEnabled && state.loanTerm < state.timeHorizon) {
+                const rLoanEnd = phaseInfo.pCommissionEnd + (state.loanTerm / state.timeHorizon) * (1.0 - phaseInfo.pCommissionEnd);
+                const xLoanEnd = ratioToX(rLoanEnd);
+
+                ctx.save();
+                ctx.setLineDash([4, 4]);
+                ctx.strokeStyle = '#059669';
+                ctx.lineWidth = 1.75;
+                ctx.beginPath();
+                ctx.moveTo(xLoanEnd, paddingTop);
+                ctx.lineTo(xLoanEnd, height - paddingBottom);
+                ctx.stroke();
+
+                // Milestone badge pill at top
+                const msText = `🏁 Debt Retired (Yr ${state.loanTerm})`;
+                ctx.font = 'bold 10px Inter';
+                const msW = ctx.measureText(msText).width + 14;
+                const msH = 20;
+                const msX = Math.max(paddingLeft, Math.min(xLoanEnd - msW / 2, width - paddingRight - msW));
+                const msY = paddingTop + 5;
+
+                ctx.fillStyle = 'rgba(236, 253, 245, 0.95)';
+                ctx.strokeStyle = '#10b981';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.roundRect(msX, msY, msW, msH, 4);
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.fillStyle = '#065f46';
+                ctx.textAlign = 'center';
+                ctx.fillText(msText, msX + msW / 2, msY + 14);
+                ctx.restore();
+            }
 
             // X and Y Axes lines
             const xAxisY = height - paddingBottom;
@@ -1809,9 +2291,21 @@
             // Smart Positioning for Activation Barrier Callout Badge
             const effInstallMonths = phaseInfo.effInstallMonths;
             const avgMonthlyCapex = effectiveCapEx / effInstallMonths;
-            const actHeader = 'Activation Barrier:';
-            const actLine1 = `Total Cap-Ex: $${Math.round(effectiveCapEx)}k`;
-            const actLine2 = `Avg Monthly Cap-Ex: $${avgMonthlyCapex.toFixed(1)}k/mo`;
+            let actHeader = 'Activation Barrier:';
+            let actLine1 = `Total Cap-Ex: $${Math.round(effectiveCapEx)}k`;
+            let actLine2 = `Avg Monthly Cap-Ex: $${avgMonthlyCapex.toFixed(1)}k/mo`;
+
+            if (state.financingEnabled) {
+                if (debtInfo.equityDown === 0) {
+                    actHeader = 'Barrier Leveled (100% Debt):';
+                    actLine1 = `Upfront Equity: $0k ($${Math.round(debtInfo.debtPrincipal)}k Financed)`;
+                    actLine2 = `Debt Service: $${debtInfo.monthlyPayment.toFixed(1)}k/mo (${state.loanTerm} yrs)`;
+                } else {
+                    actHeader = `Barrier Mitigated (${state.financedPct}% Debt):`;
+                    actLine1 = `Upfront Equity: $${Math.round(debtInfo.equityDown)}k (${100 - state.financedPct}%)`;
+                    actLine2 = `Financed: $${Math.round(debtInfo.debtPrincipal)}k @ $${debtInfo.monthlyPayment.toFixed(1)}k/mo`;
+                }
+            }
 
             ctx.font = 'bold 11px Inter';
             const wHeader = ctx.measureText(actHeader).width;
@@ -1887,13 +2381,20 @@
             ctx.lineTo(opexMarkerX + 4, opexInitialY);
             ctx.stroke();
 
-            // Smart Positioning for Project Outcomes Callout Badge (Dynamically Accounting for Discount Rate and Horizon)
+            // Smart Positioning for Project Outcomes Callout Badge (Dynamically Accounting for Discount Rate, Horizon, and Debt)
             const pvSavings = getDiscountedCumulativeSavings();
             const isSavings = state.opexDelta <= 0;
-            const opexHeader = 'Project Outcomes:';
-
+            let opexHeader = 'Project Outcomes:';
             let opexLine1, opexLine2;
-            if (state.discountRate > 0) {
+
+            if (state.financingEnabled) {
+                const dscrDesc = debtInfo.dscr >= 1.0 ? `${debtInfo.dscr.toFixed(2)}x (Self-Funding)` : `${debtInfo.dscr.toFixed(2)}x (Deficit)`;
+                opexHeader = `Financed Operations (${state.loanTerm}-Yr Loan):`;
+                opexLine1 = `Debt Service: $${debtInfo.monthlyPayment.toFixed(1)}k/mo (DSCR: ${dscrDesc})`;
+                opexLine2 = debtInfo.netMonthlySavings >= 0
+                    ? `Net Retained: +$${debtInfo.netMonthlySavings.toFixed(1)}k/mo (Yr ${state.loanTerm}+: +$${(-state.opexDelta / 12).toFixed(1)}k/mo)`
+                    : `Operating Cash Deficit: -$${Math.abs(debtInfo.netMonthlySavings).toFixed(1)}k/mo (Yr ${state.loanTerm}+: +$${(-state.opexDelta / 12).toFixed(1)}k/mo)`;
+            } else if (state.discountRate > 0) {
                 const avgMonthlyPV = Math.abs(pvSavings) / (state.timeHorizon * 12);
                 opexLine1 = isSavings
                     ? `Total Op-Ex Savings (PV): +$${Math.round(pvSavings)}k`
@@ -2008,13 +2509,24 @@
                     const totM = phaseInfo.effInstallMonths + m;
                     subTime = `Project Mo ${totM.toFixed(1)} (Comm Mo ${m.toFixed(1)}/${state.commissionDuration})`;
                 } else if (hr >= phaseInfo.pCommissionEnd) {
-                    phaseName = 'Zero-Emission Operation';
-                    const mOp = ((hr - phaseInfo.pCommissionEnd) / (1.0 - phaseInfo.pCommissionEnd)) * (state.timeHorizon * 12);
-                    subTime = `Month ${mOp.toFixed(1)} of ${Math.round(state.timeHorizon * 12)} (PV Discounted)`;
+                    if (state.financingEnabled) {
+                        const mOp = ((hr - phaseInfo.pCommissionEnd) / (1.0 - phaseInfo.pCommissionEnd)) * (state.timeHorizon * 12);
+                        const yrOp = mOp / 12;
+                        const isUnderDebt = yrOp <= state.loanTerm;
+                        phaseName = isUnderDebt ? `Operation (Debt Term - Yr ${yrOp.toFixed(1)})` : `Operation (Unencumbered - Yr ${yrOp.toFixed(1)})`;
+                        subTime = isUnderDebt
+                            ? `Debt Payment: $${debtInfo.monthlyPayment.toFixed(2)}k/mo (${state.loanTerm} yr term)`
+                            : `Debt Retired (100% Unencumbered Savings)`;
+                    } else {
+                        phaseName = 'Zero-Emission Operation';
+                        const mOp = ((hr - phaseInfo.pCommissionEnd) / (1.0 - phaseInfo.pCommissionEnd)) * (state.timeHorizon * 12);
+                        subTime = `Month ${mOp.toFixed(1)} of ${Math.round(state.timeHorizon * 12)} (PV Discounted)`;
+                    }
                 }
 
-                const tooltipW = 195;
-                const tooltipH = 74;
+                const isFinancedOp = state.financingEnabled && (hr >= phaseInfo.pCommissionEnd);
+                const tooltipW = isFinancedOp ? 260 : 230;
+                const tooltipH = isFinancedOp ? 96 : 78;
                 let tipX = hX + 14;
                 if (tipX + tooltipW > width - paddingRight) tipX = hX - tooltipW - 14;
                 let tipY = Math.max(hY - tooltipH / 2, paddingTop);
@@ -2039,11 +2551,23 @@
 
                 ctx.font = 'bold 12px Inter';
                 ctx.fillStyle = '#0f172a';
-                ctx.fillText(`Cost Rate: $${hRes.value.toFixed(2)}k/mo`, tipX + 10, tipY + 48);
+                ctx.fillText(`Discounted Cost Rate: $${hRes.value.toFixed(2)}k/mo`, tipX + 10, tipY + 49);
 
                 ctx.font = 'bold 11.5px Inter';
                 ctx.fillStyle = deltaColor;
-                ctx.fillText(`Delta: ${deltaStr}`, tipX + 10, tipY + 64);
+                ctx.fillText(`Cost Delta: ${deltaStr}`, tipX + 10, tipY + 66);
+
+                if (isFinancedOp) {
+                    const yrOp = (((hr - phaseInfo.pCommissionEnd) / (1.0 - phaseInfo.pCommissionEnd)) * (state.timeHorizon * 12)) / 12;
+                    ctx.font = '600 10.5px Inter';
+                    if (yrOp <= state.loanTerm) {
+                        ctx.fillStyle = debtInfo.netMonthlySavings >= 0 ? '#047857' : '#b45309';
+                        ctx.fillText(`Net Retained Cash Flow: ${debtInfo.netMonthlySavings >= 0 ? '+' : ''}$${debtInfo.netMonthlySavings.toFixed(2)}k/mo`, tipX + 10, tipY + 84);
+                    } else {
+                        ctx.fillStyle = '#047857';
+                        ctx.fillText(`Unencumbered Savings: +$${(-state.opexDelta / 12).toFixed(2)}k/mo`, tipX + 10, tipY + 84);
+                    }
+                }
             }
 
             // Physics-Aligned Rolling Reaction Ball
@@ -2180,18 +2704,26 @@
                         state.ballProgress = 0.02;
                         state.ballVelocity = 0;
                         state.physicsStatus = 'rollback';
-                        state.statusMessage = `${currentTier.level} Motivation: Payback ≥5 Yrs (Rolled Back)`;
+                        state.statusMessage = state.financingEnabled
+                            ? `${currentTier.level} Motivation: Insufficient Coverage / Cash Flow (Rolled Back)`
+                            : `${currentTier.level} Motivation: Payback ≥5 Yrs (Rolled Back)`;
                         stopAnimation();
                     }
                 } else if (state.ballProgress >= phase.pPeak && state.ballProgress < phase.pCommissionEnd) {
-                    state.statusMessage = `${currentTier.level} Motivation: Barrier Overcome (<5 Yr Payback)! Accelerating into Savings`;
+                    state.statusMessage = state.financingEnabled
+                        ? `${currentTier.level} Motivation: Barrier Overcome via Financing! Accelerating into Savings`
+                        : `${currentTier.level} Motivation: Barrier Overcome (<5 Yr Payback)! Accelerating into Savings`;
                 } else if (state.ballProgress >= phase.pCommissionEnd) {
-                    state.statusMessage = 'Retrofit Adopted: Stable Zero-Emission Operation';
+                    state.statusMessage = state.financingEnabled
+                        ? (phase.isUnderDebtTerm ? 'Zero-Emission Operation: Debt Serviced by Op-Ex' : 'Zero-Emission Operation: Debt Fully Retired')
+                        : 'Retrofit Adopted: Stable Zero-Emission Operation';
                     if (state.ballProgress >= 0.95 || (state.ballVelocity < 0.03 && state.ballProgress > 0.8)) {
                         state.ballProgress = Math.min(state.ballProgress, 0.96);
                         state.ballVelocity = 0;
                         state.physicsStatus = 'settled';
-                        state.statusMessage = 'Retrofit Adopted: Zero-Emission State Settled';
+                        state.statusMessage = state.financingEnabled
+                            ? 'Retrofit Adopted: Zero-Emission State Settled (Financed)'
+                            : 'Retrofit Adopted: Zero-Emission State Settled';
                         stopAnimation();
                     }
                 }
