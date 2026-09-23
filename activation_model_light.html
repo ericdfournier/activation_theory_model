@@ -548,7 +548,8 @@
                         <summary class="cursor-pointer list-none flex items-center justify-between select-none">
                             <h2
                                 class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
-                                <i class="fa-solid fa-hand-holding-dollar text-emerald-600"></i> Project Financing &amp; Debt
+                                <i class="fa-solid fa-hand-holding-dollar text-emerald-600"></i> Project Financing &amp;
+                                Debt
                                 <span id="badge-financing-active"
                                     class="hidden text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full border border-emerald-300 font-bold">Active</span>
                             </h2>
@@ -558,10 +559,12 @@
 
                         <div class="space-y-4 pt-4">
                             <!-- Financing Enable Toggle -->
-                            <div class="flex items-center justify-between p-3 bg-slate-50 rounded-lg border border-slate-200">
+                            <div
+                                class="flex items-center justify-between p-3 bg-slate-50 rounded-lg border border-slate-200">
                                 <div>
                                     <label for="toggle-financing"
-                                        class="font-semibold text-slate-800 text-sm block cursor-pointer">Enable Debt Financing</label>
+                                        class="font-semibold text-slate-800 text-sm block cursor-pointer">Enable Debt
+                                        Financing</label>
                                     <p class="text-xs text-slate-500">Amortize Cap-Ex &amp; service debt via Op-Ex</p>
                                 </div>
                                 <label class="relative inline-flex items-center cursor-pointer">
@@ -580,23 +583,26 @@
                                     <div class="flex justify-between items-baseline text-sm mb-1.5">
                                         <label class="font-medium text-slate-700">Financed Debt Share (%)</label>
                                         <span id="val-financed-pct"
-                                            class="text-emerald-700 font-mono font-bold text-base">100% ($250k Debt)</span>
+                                            class="text-emerald-700 font-mono font-bold text-base">100% ($250k
+                                            Debt)</span>
                                     </div>
                                     <input type="range" id="slider-financed-pct" min="10" max="100" step="5" value="100"
                                         class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                                    <p class="text-xs text-slate-500 mt-1">Remainder represents upfront equity down payment.</p>
+                                    <p class="text-xs text-slate-500 mt-1">Remainder represents upfront equity down
+                                        payment.</p>
                                 </div>
 
                                 <!-- Loan Term (Years) -->
                                 <div class="relative">
                                     <div class="flex justify-between items-baseline text-sm mb-1.5">
                                         <label class="font-medium text-slate-700">Loan Term (Years)</label>
-                                        <span id="val-loan-term"
-                                            class="text-blue-700 font-mono font-bold text-base">10 Yrs (120 Mos)</span>
+                                        <span id="val-loan-term" class="text-blue-700 font-mono font-bold text-base">10
+                                            Yrs (120 Mos)</span>
                                     </div>
                                     <input type="range" id="slider-loan-term" min="3" max="25" step="1" value="10"
                                         class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                                    <p class="text-xs text-slate-500 mt-1">Duration over which capital debt is amortized.</p>
+                                    <p class="text-xs text-slate-500 mt-1">Duration over which capital debt is
+                                        amortized.</p>
                                 </div>
 
                                 <!-- Interest Rate (%) -->
@@ -607,12 +613,15 @@
                                             class="text-purple-700 font-mono font-bold text-base">6.0%</span>
                                     </div>
                                     <input type="range" id="slider-interest-rate" min="2.0" max="12.0" step="0.25"
-                                        value="6.0" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                                    <p class="text-xs text-slate-500 mt-1">Annual percentage rate (APR) for debt financing.</p>
+                                        value="6.0"
+                                        class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                                    <p class="text-xs text-slate-500 mt-1">Annual percentage rate (APR) for debt
+                                        financing.</p>
                                 </div>
 
                                 <!-- Live Telemetry Pill inside card -->
-                                <div class="p-3 bg-emerald-50/70 border border-emerald-200 rounded-lg text-xs space-y-1.5">
+                                <div
+                                    class="p-3 bg-emerald-50/70 border border-emerald-200 rounded-lg text-xs space-y-1.5">
                                     <div class="flex justify-between items-center">
                                         <span class="text-slate-600 font-medium">Monthly Debt Service:</span>
                                         <span id="val-monthly-debt"
@@ -620,7 +629,8 @@
                                     </div>
                                     <div class="flex justify-between items-center">
                                         <span class="text-slate-600 font-medium">Debt Coverage (DSCR):</span>
-                                        <span id="val-dscr" class="font-mono font-bold text-emerald-700">1.80x (Self-Funding)</span>
+                                        <span id="val-dscr" class="font-mono font-bold text-emerald-700">1.80x
+                                            (Self-Funding)</span>
                                     </div>
                                     <div class="flex justify-between items-center">
                                         <span class="text-slate-600 font-medium">Net Retained Cash Flow:</span>
@@ -700,7 +710,8 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <!-- KPI 1: Net Present Value -->
                 <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
-                    <div id="kpi-npv-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Net Present Value (NPV)
+                    <div id="kpi-npv-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Net
+                        Present Value (NPV)
                     </div>
                     <div id="kpi-npv" class="text-2xl font-bold font-mono text-emerald-600 mt-1.5">$0</div>
                     <div id="kpi-npv-sub" class="text-xs text-slate-400 mt-1">Lifetime net value</div>
@@ -708,7 +719,8 @@
 
                 <!-- KPI 2: Simple Payback -->
                 <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
-                    <div id="kpi-payback-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Simple Payback</div>
+                    <div id="kpi-payback-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                        Simple Payback</div>
                     <div id="kpi-payback" class="text-2xl font-bold font-mono text-emerald-600 mt-1.5">0.0 yrs</div>
                     <div id="kpi-payback-sub" class="text-xs text-slate-400 mt-1">Break-even (&lt;5 yrs rolls over)
                     </div>
@@ -716,14 +728,16 @@
 
                 <!-- KPI 3: ROI -->
                 <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
-                    <div id="kpi-roi-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Project ROI</div>
+                    <div id="kpi-roi-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                        Project ROI</div>
                     <div id="kpi-roi" class="text-2xl font-bold font-mono text-emerald-600 mt-1.5">0%</div>
                     <div id="kpi-roi-sub" class="text-xs text-slate-400 mt-1">Return on investment (NPV / Cap-Ex)</div>
                 </div>
 
                 <!-- KPI 4: Effective Cap-Ex -->
                 <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
-                    <div id="kpi-net-capex-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Effective Cap-Ex Barrier
+                    <div id="kpi-net-capex-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                        Effective Cap-Ex Barrier
                     </div>
                     <div id="kpi-net-capex" class="text-2xl font-bold font-mono text-amber-600 mt-1.5">$0</div>
                     <div id="kpi-net-capex-sub" class="text-xs text-slate-400 mt-1">After policy incentive offset</div>
@@ -2316,7 +2330,7 @@
             const avgMonthlyCapex = effectiveCapEx / effInstallMonths;
             let actHeader = 'Activation Barrier:';
             let actLine1 = `Total Cap-Ex: $${Math.round(effectiveCapEx)}k`;
-            let actLine2 = `Avg Monthly Cap-Ex: $${avgMonthlyCapex.toFixed(1)}k/mo`;
+            let actLine2 = `Avg Cap-Ex: $${avgMonthlyCapex.toFixed(1)}k/mo`;
 
             if (state.financingEnabled) {
                 if (debtInfo.equityDown === 0) {
@@ -2433,7 +2447,17 @@
             ctx.lineTo(opexMarkerX + 4, opexInitialY);
             ctx.stroke();
 
-            // Smart Positioning for Project Outcomes Callout Badge (Dynamically Accounting for Discount Rate, Horizon, and Debt)
+            // Compact Op-Ex delta label directly at indicator cap
+            if (Math.abs(opexDeltaMonthly) > 0.5) {
+                ctx.fillStyle = opexColor;
+                ctx.font = 'bold 9.5px Inter';
+                ctx.textAlign = 'center';
+                const tagStr = opexDeltaMonthly < 0 ? `-$${Math.abs(opexDeltaMonthly).toFixed(1)}k/mo` : `+$${opexDeltaMonthly.toFixed(1)}k/mo`;
+                const tagY = opexInitialY > baselineY ? opexInitialY + 12 : opexInitialY - 6;
+                ctx.fillText(tagStr, opexMarkerX, tagY);
+            }
+
+            // Project Outcomes Callout Badge (Anchored cleanly to the upper right-hand corner of the graph)
             const pvSavings = getDiscountedCumulativeSavings();
             const isSavings = state.opexDelta <= 0;
             let opexHeader = 'Project Outcomes:';
@@ -2473,32 +2497,29 @@
             const opexCardW = Math.max(wOpHeader, wOpLine1, wOpLine2) + 20;
             const opexCardH = 48;
 
-            let opexCardX = opexMarkerX + 10;
-            if (opexCardX + opexCardW > width - paddingRight - 10) {
-                opexCardX = opexMarkerX - opexCardW - 10;
-            }
+            // Anchor cleanly to the upper right-hand corner within graph margins
+            let opexCardX = width - paddingRight - opexCardW - 14;
+            let opexCardY = paddingTop + 10;
 
-            let opexCardY;
-            const deltaH = Math.abs(baselineY - opexInitialY);
-
-            if (deltaH >= 52) {
-                // Gap is large enough to center the badge inside
-                opexCardY = (baselineY + opexInitialY) / 2 - opexCardH / 2;
-            } else if (isSavings) {
-                // Cost reduction: Place badge cleanly in open space below the initial curve line
-                opexCardY = Math.min(opexInitialY + 12, height - paddingBottom - opexCardH - 6);
-                if (opexCardY + opexCardH > height - paddingBottom - 4) {
-                    opexCardY = Math.max(paddingTop + 6, baselineY - opexCardH - 10);
+            // If debt retirement milestone marker is positioned at top-right, drop below it
+            if (state.financingEnabled && rLoanEnd !== null) {
+                const xLoanEnd = ratioToX(rLoanEnd);
+                if (xLoanEnd >= opexCardX - 25 && xLoanEnd <= opexCardX + opexCardW + 25) {
+                    opexCardY = paddingTop + 34;
                 }
-            } else {
-                // Cost increase: Place badge in open space above curve line
-                opexCardY = Math.max(paddingTop + 6, opexInitialY - opexCardH - 12);
             }
 
-            // Prevent overlap between opexCard and actCard if they share a vertical band
-            if (Math.abs(opexCardY - actCardY) < actCardH + 10 && opexCardX < actCardX + actCardW + 10) {
-                opexCardX = actCardX + actCardW + 12;
+            // If baseline line is near the top and conflicts with opexCard, place opexCard cleanly below baseline
+            if (baselineY - paddingTop < 80) {
+                opexCardY = Math.max(opexCardY, baselineY + 12);
             }
+
+            // If container is narrow, stack opexCard below actCard to avoid collision
+            if (opexCardX < actCardX + actCardW + 10) {
+                opexCardY = Math.max(opexCardY, actCardY + actCardH + 8);
+            }
+
+            opexCardY = Math.min(opexCardY, height - paddingBottom - opexCardH - 10);
 
             // Draw Op-Ex Badge Card
             ctx.save();
