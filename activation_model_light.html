@@ -729,7 +729,7 @@
                 description: "<strong>Scenario C (Excessive Implementation Downtime):</strong> The total integrated Cap-Ex is identical to Scenario A ($350k), but spread across an elongated 18-month implementation with a 6.3-year payback (>5 yrs). The prolonged disruption and delayed savings fail to provide the kinetic momentum required to surmount the barrier, resulting in rollback."
             },
             D: {
-                totalCapex: 320,
+                totalCapex: 50,
                 installDuration: 5,
                 barrierReduction: 0,
                 commissionDuration: 5,
@@ -1366,8 +1366,28 @@
             const dummyInfo = getCostAtTime(0.5);
             const effectiveCapEx = state.totalCapex * (1 - state.catalyst / 100);
             const baselineMonthly = state.baselineOpex / 12;
-            const maxVal = Math.max(baselineMonthly + dummyInfo.peakRateHeight + 5, 40);
-            const minVal = Math.min((state.baselineOpex + state.opexDelta) / 12 - 2.5, 0);
+            const targetOpexMonthly = (state.baselineOpex + state.opexDelta) / 12;
+            const peakRateHeight = dummyInfo.peakRateHeight;
+            const peakMonthly = baselineMonthly + peakRateHeight;
+
+            // Determine data extents across all segments of the trajectory
+            const lowestVal = Math.min(baselineMonthly, targetOpexMonthly);
+            const highestVal = Math.max(peakMonthly, baselineMonthly, targetOpexMonthly);
+
+            let minVal, maxVal;
+
+            if (state.scenario === 'D' || state.opexDelta >= 0) {
+                // For Scenario D / endothermic cost increases:
+                // Provide a high-resolution, zoomed-in view focusing tightly on the baseline datum,
+                // the Cap-Ex hurdle peak, and the elevated post-retrofit Op-Ex trajectory.
+                const valRange = highestVal - lowestVal;
+                minVal = Math.max(0, Math.floor(lowestVal - Math.max(valRange * 0.22, 2.5)));
+                maxVal = Math.ceil(highestVal + Math.max(valRange * 0.22, 3));
+            } else {
+                // For standard scenarios (A, B, C) with operational savings:
+                minVal = Math.min(Math.floor(lowestVal - 2.5), 0);
+                maxVal = Math.max(Math.ceil(highestVal + 5), 40);
+            }
 
             function valToY(val) {
                 const ratio = (val - minVal) / (maxVal - minVal);
@@ -1482,7 +1502,7 @@
                 ctx.lineTo(width - paddingRight, y);
                 ctx.stroke();
 
-                const labelText = Math.abs(v) < 10 ? `$${v.toFixed(1)}k` : `$${Math.round(v)}k`;
+                const labelText = (Math.abs(v % 1) > 0.05 || (maxVal - minVal) < 25) ? `$${v.toFixed(1)}k` : `$${Math.round(v)}k`;
                 ctx.fillText(labelText, paddingLeft - 10, y + 4);
             }
 
