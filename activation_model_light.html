@@ -2311,36 +2311,7 @@
             drawPhaseBadge(xInstallEnd, xCommissionEnd, 'rgba(224, 242, 254, 0.7)', '#38bdf8', '#0369a1', 'Commissioning', `${state.commissionDuration} mos`, 'Comm.', `${state.commissionDuration}m`);
             drawPhaseBadge(xCommissionEnd, xEnd, 'rgba(209, 250, 229, 0.7)', '#10b981', '#047857', 'Operation (Zero-Emission)', `${Math.round(state.timeHorizon * 12)} mos (${state.timeHorizon} yr Horizon)`, 'Operation', `${Math.round(state.timeHorizon * 12)} mos`);
 
-            // Vertical Activation Barrier Dimension Line at Peak
-            const peakX = ratioToX(phaseInfo.pPeak);
-            const peakRateHeight = phaseInfo.peakRateHeight;
-            const peakY = valToY(baselineMonthly + peakRateHeight);
-
-            if (peakRateHeight > 0.5) {
-                ctx.strokeStyle = '#d97706';
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.moveTo(peakX, baselineY);
-                ctx.lineTo(peakX, peakY);
-                ctx.stroke();
-
-                // End tick caps
-                ctx.beginPath();
-                ctx.moveTo(peakX - 4, peakY);
-                ctx.lineTo(peakX + 4, peakY);
-                ctx.moveTo(peakX - 4, baselineY);
-                ctx.lineTo(peakX + 4, baselineY);
-                ctx.stroke();
-
-                // Compact peak rate label directly above peak cap
-                ctx.fillStyle = '#b45309';
-                ctx.font = 'bold 9.5px Inter';
-                ctx.textAlign = 'center';
-                const peakTag = `+~$${peakRateHeight >= 10 ? Math.round(peakRateHeight) : peakRateHeight.toFixed(1)}k/mo`;
-                ctx.fillText(peakTag, peakX, Math.max(paddingTop + 12, peakY - 6));
-            }
-
-            // Activation Barrier Callout Badge (Positioned on the right-hand side to avoid plot interference)
+            // Activation Barrier Callout Badge (Anchored cleanly to the upper left-hand corner of the graph)
             const effInstallMonths = phaseInfo.effInstallMonths;
             const avgMonthlyCapex = effectiveCapEx / effInstallMonths;
             let actHeader = 'Activation Barrier:';
@@ -2367,14 +2338,14 @@
             const actCardW = Math.max(wHeader, wLine1, wLine2) + 20;
             const actCardH = 48;
 
-            // Dock cleanly on the right-hand side within chart plot margins
-            let actCardX = width - paddingRight - actCardW - 14;
+            // Anchor cleanly to the upper left-hand corner within graph margins
+            let actCardX = paddingLeft + 12;
             let actCardY = paddingTop + 10;
 
-            // If debt retirement milestone marker is positioned at top-right, drop below it
+            // If debt retirement milestone marker is positioned at top-left, drop below it
             if (state.financingEnabled && rLoanEnd !== null) {
                 const xLoanEnd = ratioToX(rLoanEnd);
-                if (xLoanEnd >= actCardX - 30) {
+                if (xLoanEnd >= actCardX - 10 && xLoanEnd <= actCardX + actCardW + 10) {
                     actCardY = paddingTop + 34;
                 }
             }
@@ -2385,7 +2356,38 @@
             }
             actCardY = Math.min(actCardY, height - paddingBottom - actCardH - 10);
 
-            // Draw Activation Badge Card (Crisp floating light theme card)
+            // Vertical Activation Barrier Dimension Line at Peak
+            const peakX = ratioToX(phaseInfo.pPeak);
+            const peakRateHeight = phaseInfo.peakRateHeight;
+            const peakY = valToY(baselineMonthly + peakRateHeight);
+
+            if (peakRateHeight > 0.5) {
+                ctx.strokeStyle = '#d97706';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(peakX, baselineY);
+                ctx.lineTo(peakX, peakY);
+                ctx.stroke();
+
+                // End tick caps
+                ctx.beginPath();
+                ctx.moveTo(peakX - 4, peakY);
+                ctx.lineTo(peakX + 4, peakY);
+                ctx.moveTo(peakX - 4, baselineY);
+                ctx.lineTo(peakX + 4, baselineY);
+                ctx.stroke();
+
+                // Compact peak rate label directly above peak cap (only if clear of upper-left card)
+                if (peakX > actCardX + actCardW + 8 || peakY > actCardY + actCardH + 12) {
+                    ctx.fillStyle = '#b45309';
+                    ctx.font = 'bold 9.5px Inter';
+                    ctx.textAlign = 'center';
+                    const peakTag = `+~$${peakRateHeight >= 10 ? Math.round(peakRateHeight) : peakRateHeight.toFixed(1)}k/mo`;
+                    ctx.fillText(peakTag, peakX, Math.max(paddingTop + 12, peakY - 6));
+                }
+            }
+
+            // Draw Activation Badge Card (Crisp floating light theme card anchored in upper-left)
             ctx.save();
             ctx.shadowColor = 'rgba(0, 0, 0, 0.04)';
             ctx.shadowBlur = 6;
@@ -2494,8 +2496,8 @@
             }
 
             // Prevent overlap between opexCard and actCard if they share a vertical band
-            if (Math.abs(opexCardY - actCardY) < actCardH + 10 && opexCardX + opexCardW > actCardX - 10) {
-                opexCardX = Math.max(paddingLeft + 10, actCardX - opexCardW - 14);
+            if (Math.abs(opexCardY - actCardY) < actCardH + 10 && opexCardX < actCardX + actCardW + 10) {
+                opexCardX = actCardX + actCardW + 12;
             }
 
             // Draw Op-Ex Badge Card
