@@ -195,7 +195,7 @@
                                 <input type="range" id="slider-capex" min="50" max="900" step="10" value="350"
                                     class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
                                 <div class="flex justify-between items-center text-xs text-slate-500 mt-1.5">
-                                    <span>Total investment over implementation period</span>
+                                    <span>Total investment over the implementation period.</span>
                                     <span id="val-peak-rate" class="text-amber-600 font-mono font-medium">Peak:
                                         ~$47.5k/mo</span>
                                 </div>
@@ -205,7 +205,7 @@
                             <div class="relative">
                                 <div class="flex justify-between items-baseline text-sm mb-1.5">
                                     <div class="flex items-center gap-1.5">
-                                        <label class="font-medium text-slate-700">Implementation Duration
+                                        <label class="font-medium text-slate-700">Implementation Period
                                             (Months)</label>
                                         <button type="button" class="param-tooltip-btn"
                                             data-tooltip-id="tip-install-time" title="Click for parameter description"
@@ -234,15 +234,15 @@
                                 </div>
                                 <input type="range" id="slider-install-time" min="2" max="24" step="1" value="12"
                                     class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Shorter implementation windows
-                                    reduce disruption and strongly elevate owner motivation.</p>
+                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Shorter implementation periods
+                                    increase owner motivation.</p>
                             </div>
 
                             <!-- Commissioning Duration -->
                             <div class="relative">
                                 <div class="flex justify-between items-baseline text-sm mb-1.5">
                                     <div class="flex items-center gap-1.5">
-                                        <label class="font-medium text-slate-700">Commissioning Duration
+                                        <label class="font-medium text-slate-700">Commissioning Period
                                             (Months)</label>
                                         <button type="button" class="param-tooltip-btn"
                                             data-tooltip-id="tip-commission-time"
@@ -271,8 +271,8 @@
                                 </div>
                                 <input type="range" id="slider-commission-time" min="1" max="12" step="1" value="6"
                                     class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Transitional optimization
-                                    period toward stable zero-emission operation.</p>
+                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Transitional
+                                    period before reaching operational cost equilibrium.</p>
                             </div>
 
                             <!-- Operational Savings / Delta -->
@@ -309,8 +309,8 @@
                                 </div>
                                 <input type="range" id="slider-opex-delta" min="-120" max="50" step="5" value="-60"
                                     class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                                <p class="text-xs text-slate-500 mt-1.5">Negative values = Green savings. Positive
-                                    values = Red added costs.</p>
+                                <p class="text-xs text-slate-500 mt-1.5">Negative values = savings (green). Positive
+                                    values = added costs (red).</p>
                             </div>
 
                             <!-- Ownership Discount Rate for Future Savings -->
@@ -350,7 +350,7 @@
                                 <input type="range" id="slider-discount" min="0" max="20" step="0.5" value="6.0"
                                     class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
                                 <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Discounts the present value of
-                                    future annual Op-Ex savings across operational years.</p>
+                                    future annual Op-Ex savings across operational time horizon.</p>
                             </div>
 
                         </div>
@@ -497,7 +497,7 @@
                                 <input type="range" id="slider-barrier-reduction" min="0" max="75" step="5" value="0"
                                     class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
                                 <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Accelerates permitting &
-                                    inspections, directly boosting owner momentum.</p>
+                                    inspections, directly boosting owner motivation.</p>
                             </div>
 
                             <!-- Policy Catalyst / Incentive -->
@@ -535,8 +535,8 @@
                                 </div>
                                 <input type="range" id="slider-catalyst" min="0" max="100" step="5" value="0"
                                     class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Lowers the Cap-Ex peak like a
-                                    chemical catalyst lowers activation energy.</p>
+                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Lowers the Cap-Ex requirements
+                                    directly increasing owner motivation.</p>
                             </div>
                         </div>
                     </details>
@@ -655,7 +655,7 @@
                     <div>
                         <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
                             <i class="fa-solid fa-chart-line text-emerald-600 text-lg"></i> Zero-Emissions Project
-                            Activation Cost Trajectory
+                            Cost Trajectory
                         </h2>
                         <div class="flex flex-wrap items-center gap-2 mt-1">
                             <p class="text-xs sm:text-sm text-slate-500">Y-Axis: Effective Cost Rate ($/mo) | X-Axis:
