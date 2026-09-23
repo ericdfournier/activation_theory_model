@@ -52,7 +52,7 @@ Traditional building retrofit analyses focus strictly on static payback periods 
 
 | Scenario | Title | Description | Outcome |
 | :--- | :--- | :--- | :--- |
-| **A** | Standard / Optimal | Rapid payback (<5 yrs), standard 6-month implementation, prompt commissioning, deep operational savings. | **Barrier Overcome** (Rolls into ZE state) |
+| **A** | Standard / Optimal | Rapid payback (<5 yrs), 12-month implementation, 6-month commissioning, deep operational savings. | **Barrier Overcome** (Rolls into ZE state) |
 | **B** | Excessive Cap-Ex | High initial capital barrier ($550k+), prolonged payback >> 5 yrs creating an insurmountable economic hurdle. | **Rollback** (Returns to baseline) |
 | **C** | Long Downtime | Identical Cap-Ex to standard, but elongated implementation (18 mos); disruption penalties degrade owner momentum. | **Rollback** (Halts on slope) |
 | **D** | Increased Op-Ex | Unfavorable economics where post-retrofit operating costs exceed baseline (endothermic reaction). | **Immediate Rollback** (No driving force) |

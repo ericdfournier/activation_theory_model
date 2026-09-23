@@ -212,7 +212,7 @@
                                             <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
                                         </button>
                                     </div>
-                                    <span id="val-install-time" class="text-blue-600 font-mono font-bold text-base">6
+                                    <span id="val-install-time" class="text-blue-600 font-mono font-bold text-base">12
                                         mos</span>
                                 </div>
                                 <div id="tip-install-time"
@@ -232,7 +232,7 @@
                                         kinetic
                                         forward momentum.</p>
                                 </div>
-                                <input type="range" id="slider-install-time" min="2" max="24" step="1" value="6"
+                                <input type="range" id="slider-install-time" min="2" max="24" step="1" value="12"
                                     class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
                                 <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Shorter implementation windows
                                     reduce disruption and strongly elevate owner motivation.</p>
@@ -251,7 +251,7 @@
                                             <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
                                         </button>
                                     </div>
-                                    <span id="val-commission-time" class="text-blue-600 font-mono font-bold text-base">4
+                                    <span id="val-commission-time" class="text-blue-600 font-mono font-bold text-base">6
                                         mos</span>
                                 </div>
                                 <div id="tip-commission-time"
@@ -269,7 +269,7 @@
                                         of operations are finalized, and building energy management systems transition
                                         smoothly down into steady zero-emission performance.</p>
                                 </div>
-                                <input type="range" id="slider-commission-time" min="1" max="12" step="1" value="4"
+                                <input type="range" id="slider-commission-time" min="1" max="12" step="1" value="6"
                                     class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
                                 <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Transitional optimization
                                     period toward stable zero-emission operation.</p>
@@ -669,10 +669,10 @@
         // State Object
         const state = {
             scenario: 'A',
-            totalCapex: 350,         // Time-integrated Cap-Ex in $k (∫ Cost dt)
-            installDuration: 6,      // baseline duration in months
+            totalCapex: 250,         // Time-integrated Cap-Ex in $k (∫ Cost dt)
+            installDuration: 12,     // baseline duration in months
             barrierReduction: 0,     // % speedup / duration reduction
-            commissionDuration: 4,   // in months
+            commissionDuration: 6,   // in months
             opexDelta: -60,          // in $k / year
             catalyst: 0,            // % reduction
             baselineOpex: 150,       // in $k / year
@@ -700,12 +700,12 @@
         const presets = {
             A: {
                 totalCapex: 250,
-                installDuration: 6,
+                installDuration: 12,
                 barrierReduction: 0,
-                commissionDuration: 4,
+                commissionDuration: 6,
                 opexDelta: -60,
                 catalyst: 0,
-                description: "<strong>Scenario A (Standard / Optimal Retrofit):</strong> Rapid 4.7-year payback (<5 yrs) creates sufficient owner momentum to clear the Cap-Ex hurdle. Upfront integrated Cap-Ex is concentrated over a standard 6-month implementation, followed by prompt commissioning and deep, perpetual operational cost reductions (green area)."
+                description: "<strong>Scenario A (Standard / Optimal Retrofit):</strong> Rapid 4.2-year payback (<5 yrs) creates sufficient owner momentum to clear the Cap-Ex hurdle. Upfront integrated Cap-Ex is deployed over a 12-month implementation, followed by 6 months of commissioning and deep, perpetual operational cost reductions (green area)."
             },
             B: {
                 totalCapex: 550,
