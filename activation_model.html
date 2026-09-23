@@ -217,14 +217,16 @@
                                     class="param-popover hidden absolute z-30 left-0 right-0 top-7 p-3 rounded-lg bg-slate-950 border border-slate-700/80 shadow-2xl text-xs text-slate-300">
                                     <div class="flex justify-between items-start gap-2 mb-1">
                                         <span class="font-bold text-white flex items-center gap-1.5">
-                                            <i class="fa-solid fa-circle-info text-blue-400"></i> Baseline Implementation
+                                            <i class="fa-solid fa-circle-info text-blue-400"></i> Baseline
+                                            Implementation
                                             Duration
                                         </span>
                                         <button type="button" class="close-tip text-slate-400 hover:text-white p-0.5"
                                             aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
                                     </div>
                                     <p class="text-slate-300 leading-relaxed">The active planning, design, and equipment
-                                        implementation window in months. Shorter implementation schedules minimize tenant
+                                        implementation window in months. Shorter implementation schedules minimize
+                                        tenant
                                         disruption and business downtime, directly boosting owner confidence and kinetic
                                         forward momentum.</p>
                                 </div>
@@ -549,9 +551,8 @@
                             <i class="fa-solid fa-chart-line text-emerald-400 text-lg"></i> Activation Cost Trajectory &
                             Thermodynamic Energy Profile
                         </h2>
-                        <p class="text-xs sm:text-sm text-slate-400 mt-0.5">X-Axis: Project Timeline (Construction
-                            Months &amp;
-                            Operational Years) | Y-Axis: Effective Cost Rate ($/yr)</p>
+                        <p class="text-xs sm:text-sm text-slate-400 mt-0.5">X-Axis: Project Timeline (Months) |
+                            Y-Axis: Effective Cost Rate ($/mo)</p>
                     </div>
 
                     <!-- Driving Force & Legend Controls -->
@@ -638,7 +639,7 @@
                     </div>
                     <div class="bg-slate-950/40 p-3 rounded-lg border border-slate-800 leading-relaxed">
                         <span class="font-bold text-slate-100 block mb-1 text-sm text-amber-400">2. Activation Barrier
-                            (Cap-Ex + Implementation Downtime & Disruptions)</span>
+                            (Cap-Ex + Disruptions)</span>
                         Barriers related to upfront capital expenditures, equipment procurement, implementation
                         disruption,
                         and commissioning
@@ -814,10 +815,10 @@
             const installWidth = (effInstallMonths / 36) * 0.42;
             const pStart = 0.12;
             const pPeak = pStart + installWidth / 2;
-            const peakRateHeight = getPeakRateHeight(effectiveCapEx, effInstallMonths);
+            const peakRateHeightMonthly = getPeakRateHeight(effectiveCapEx, effInstallMonths) / 12;
             const halfW = installWidth / 2;
 
-            const gEff = 0.00038;
+            const gEff = 0.00456; // 0.00038 * 12 to maintain identical dynamics with monthly $/mo slopes
             const friction = 0.40;
             const dt = 0.008;
 
@@ -830,7 +831,7 @@
                     if (r >= pStart && r <= pStart + installWidth) {
                         const u = ((r - pPeak) / halfW) * 2.1;
                         const bump = Math.exp(-(u * u));
-                        slope = peakRateHeight * bump * (-2.0 * u * (2.1 / halfW));
+                        slope = peakRateHeightMonthly * bump * (-2.0 * u * (2.1 / halfW));
                     }
                     v += (-gEff * slope - friction * v) * dt;
                     r += v * dt;
@@ -1177,28 +1178,30 @@
         function updateLabels() {
             const effInstallMonths = getEffectiveInstallDuration();
             const netTotalCapex = state.totalCapex * (1 - state.catalyst / 100);
-            const peakRateHeight = getPeakRateHeight(netTotalCapex, effInstallMonths);
-            const totalPeakRate = state.baselineOpex + peakRateHeight;
+            const peakRateHeightAnnual = getPeakRateHeight(netTotalCapex, effInstallMonths);
+            const peakRateHeightMonthly = peakRateHeightAnnual / 12;
+            const totalPeakRateMonthly = (state.baselineOpex / 12) + peakRateHeightMonthly;
 
             labels.capex.innerText = `$${Math.round(state.totalCapex)}k`;
-            labels.peakRate.innerText = `Peak: ~$${Math.round(totalPeakRate)}k/yr (+$${Math.round(peakRateHeight)}k)`;
+            labels.peakRate.innerText = `Peak: ~$${totalPeakRateMonthly.toFixed(1)}k/mo (+$${peakRateHeightMonthly.toFixed(1)}k/mo)`;
             labels.installTime.innerText = `${state.installDuration} mos`;
 
             labels.barrierReduction.innerText = `${state.barrierReduction}% (${effInstallMonths.toFixed(1)} mos)`;
             labels.commissionTime.innerText = `${state.commissionDuration} mos`;
 
+            const opexDeltaMonthly = state.opexDelta / 12;
             if (state.opexDelta <= 0) {
-                labels.opexDelta.innerText = `-$${Math.abs(state.opexDelta)}k/yr`;
+                labels.opexDelta.innerText = `-$${Math.abs(state.opexDelta)}k/yr (-$${Math.abs(opexDeltaMonthly).toFixed(1)}k/mo)`;
                 labels.opexDelta.className = "text-emerald-400 font-mono font-semibold";
             } else {
-                labels.opexDelta.innerText = `+$${state.opexDelta}k/yr`;
+                labels.opexDelta.innerText = `+$${state.opexDelta}k/yr (+$${opexDeltaMonthly.toFixed(1)}k/mo)`;
                 labels.opexDelta.className = "text-red-400 font-mono font-semibold";
             }
 
             labels.catalyst.innerText = `${state.catalyst}%`;
-            labels.baselineOpex.innerText = `$${state.baselineOpex}k/yr`;
+            labels.baselineOpex.innerText = `$${state.baselineOpex}k/yr ($${(state.baselineOpex / 12).toFixed(1)}k/mo)`;
             labels.discount.innerText = `${state.discountRate.toFixed(1)}%`;
-            labels.horizon.innerText = `${state.timeHorizon} Yrs`;
+            labels.horizon.innerText = `${state.timeHorizon} Yrs (${Math.round(state.timeHorizon * 12)} Mos)`;
 
             updateTelemetryUI();
         }
@@ -1255,7 +1258,7 @@
         }
 
         // Mathematical Curve Function using Integrated Cap-Ex & Smooth Commissioning Decay,
-        // with the owner's discount rate visually applied to future operational savings over time
+        // with all cost rates calculated in dollars per month ($k/mo) and the owner's discount rate visually applied
         function getCostAtTime(tRatio) {
             const effectiveCapEx = state.totalCapex * (1 - state.catalyst / 100);
             const effInstallMonths = getEffectiveInstallDuration();
@@ -1269,47 +1272,49 @@
             const pInstallEnd = pStart + installWidth;
             const pCommissionEnd = pInstallEnd + commissionWidth;
 
-            // Height of the activation barrier above baseline
-            const peakRateHeight = getPeakRateHeight(effectiveCapEx, effInstallMonths);
+            // Monthly rates ($k/mo)
+            const baselineMonthly = state.baselineOpex / 12;
+            const targetOpexMonthly = (state.baselineOpex + state.opexDelta) / 12;
+            const peakRateHeightAnnual = getPeakRateHeight(effectiveCapEx, effInstallMonths);
+            const peakRateHeightMonthly = peakRateHeightAnnual / 12;
 
-            const targetOpex = state.baselineOpex + state.opexDelta;
-            let value = state.baselineOpex;
+            let value = baselineMonthly;
 
             if (tRatio < pStart) {
-                value = state.baselineOpex;
+                value = baselineMonthly;
             } else if (tRatio >= pStart && tRatio < pInstallEnd) {
-                // Bell curve representing implementation Cap-Ex deployment rate
+                // Bell curve representing implementation Cap-Ex deployment rate ($k/mo)
                 const normX = (tRatio - pPeak) / (installWidth / 2);
                 const bump = Math.exp(-Math.pow(normX * 2.1, 2));
-                value = state.baselineOpex + peakRateHeight * bump;
+                value = baselineMonthly + peakRateHeightMonthly * bump;
             } else if (tRatio >= pInstallEnd && tRatio < pCommissionEnd) {
                 // Smooth monotonic commissioning decay from end of implementation down to stable initial post-retrofit state
                 const normEnd = (pInstallEnd - pPeak) / (installWidth / 2);
-                const startCost = state.baselineOpex + peakRateHeight * Math.exp(-Math.pow(normEnd * 2.1, 2));
+                const startCost = baselineMonthly + peakRateHeightMonthly * Math.exp(-Math.pow(normEnd * 2.1, 2));
 
                 const progress = (tRatio - pInstallEnd) / commissionWidth;
                 const smoothFactor = 3 * Math.pow(progress, 2) - 2 * Math.pow(progress, 3);
 
-                value = startCost + (targetOpex - startCost) * smoothFactor;
+                value = startCost + (targetOpexMonthly - startCost) * smoothFactor;
             } else {
                 // Stable Zero-Emission Operation Phase with Owner Discount Rate Applied
-                // Present value rate decays over operational years from 0 to Evaluation Horizon
+                // Present value rate decays over operational timeline from 0 to Evaluation Horizon
                 const tau = Math.min(Math.max((tRatio - pCommissionEnd) / (1.0 - pCommissionEnd), 0), 1);
                 const tYears = tau * state.timeHorizon;
                 const rDisc = state.discountRate / 100;
 
-                // Present value rate of Op-Ex Delta: Delta(t) = Delta(0) / (1 + r)^t
-                const discountedOpexDelta = state.opexDelta / Math.pow(1 + rDisc, tYears);
-                value = state.baselineOpex + discountedOpexDelta;
+                // Present value rate of Op-Ex Delta: Delta(t) = Delta(0) / (1 + r)^t ($k/mo)
+                const discountedOpexDeltaMonthly = (state.opexDelta / 12) / Math.pow(1 + rDisc, tYears);
+                value = baselineMonthly + discountedOpexDeltaMonthly;
             }
 
             return {
-                value,
+                value, // in $k/mo
                 pStart,
                 pPeak,
                 pInstallEnd,
                 pCommissionEnd,
-                peakRateHeight,
+                peakRateHeight: peakRateHeightMonthly, // in $k/mo
                 effInstallMonths
             };
         }
@@ -1334,8 +1339,9 @@
 
             const dummyInfo = getCostAtTime(0.5);
             const effectiveCapEx = state.totalCapex * (1 - state.catalyst / 100);
-            const maxVal = Math.max(state.baselineOpex + dummyInfo.peakRateHeight + 60, 480);
-            const minVal = Math.min(state.baselineOpex + state.opexDelta - 30, 0);
+            const baselineMonthly = state.baselineOpex / 12;
+            const maxVal = Math.max(baselineMonthly + dummyInfo.peakRateHeight + 5, 40);
+            const minVal = Math.min((state.baselineOpex + state.opexDelta) / 12 - 2.5, 0);
 
             function valToY(val) {
                 const ratio = (val - minVal) / (maxVal - minVal);
@@ -1346,7 +1352,7 @@
                 return paddingLeft + r * graphW;
             }
 
-            const baselineY = valToY(state.baselineOpex);
+            const baselineY = valToY(baselineMonthly);
             const phaseInfo = getCostAtTime(0);
             const xStart = ratioToX(phaseInfo.pStart);
             const xPeak = ratioToX(phaseInfo.pPeak);
@@ -1354,7 +1360,7 @@
             const xCommissionEnd = ratioToX(phaseInfo.pCommissionEnd);
             const xEnd = width - paddingRight;
 
-            // Generate Horizontal Axis Time Ticks (Months and Years)
+            // Generate Horizontal Axis Time Ticks in Monthly Intervals
             const xTicks = [];
 
             // 1. Kickoff Month 0
@@ -1385,38 +1391,40 @@
                 });
             }
 
-            // 4. Commissioning End / Year 0 of Operation
+            // 4. Commissioning End Month
             const totMonths = phaseInfo.effInstallMonths + state.commissionDuration;
             if ((xCommissionEnd - xInstallEnd) >= 48) {
                 xTicks.push({
                     x: xCommissionEnd,
-                    label: `Mo ${totMonths.toFixed(0)} (Yr 0)`,
+                    label: `Mo ${totMonths.toFixed(0)}`,
                     color: '#38bdf8',
                     grid: false
                 });
             } else if ((xCommissionEnd - xStart) >= 54) {
                 xTicks.push({
                     x: xCommissionEnd,
-                    label: 'Yr 0',
+                    label: `Mo ${totMonths.toFixed(0)}`,
                     color: '#38bdf8',
                     grid: false
                 });
             }
 
-            // 5. Operational Years (e.g. Yr 5, Yr 10, Yr 15, Yr 20)
+            // 5. Operational Horizon Ticks in Monthly Intervals
+            const totalOpMonths = state.timeHorizon * 12;
             const opWidthPx = xEnd - xCommissionEnd;
-            let yrStep = 5;
-            if (state.timeHorizon <= 10) yrStep = 2;
-            else if (opWidthPx < 400) yrStep = 10;
-            else yrStep = 5;
+            let moStep = 60;
+            if (totalOpMonths <= 60) moStep = 12;
+            else if (totalOpMonths <= 120) moStep = 24;
+            else if (totalOpMonths <= 240) moStep = 60;
+            else moStep = 120;
 
-            for (let y = yrStep; y <= state.timeHorizon; y += yrStep) {
-                const yrRatio = phaseInfo.pCommissionEnd + (y / state.timeHorizon) * (1.0 - phaseInfo.pCommissionEnd);
-                const xYr = ratioToX(yrRatio);
-                if (xYr - xCommissionEnd >= 42 && (xEnd - xYr) >= 20) {
+            for (let m = moStep; m <= totalOpMonths; m += moStep) {
+                const moRatio = phaseInfo.pCommissionEnd + (m / totalOpMonths) * (1.0 - phaseInfo.pCommissionEnd);
+                const xMo = ratioToX(moRatio);
+                if (xMo - xCommissionEnd >= 42 && (xEnd - xMo) >= 20) {
                     xTicks.push({
-                        x: xYr,
-                        label: `Yr ${y}`,
+                        x: xMo,
+                        label: `Mo ${m}`,
                         color: '#34d399',
                         grid: true
                     });
@@ -1428,13 +1436,13 @@
             if (xEnd - lastTick.x >= 38) {
                 xTicks.push({
                     x: xEnd,
-                    label: `Yr ${Math.round(state.timeHorizon)}`,
+                    label: `Mo ${Math.round(totalOpMonths)}`,
                     color: '#34d399',
                     grid: false
                 });
             }
 
-            // Horizontal Grid Lines & Y-Axis Labels
+            // Horizontal Grid Lines & Y-Axis Labels ($k/mo)
             ctx.strokeStyle = '#1e293b';
             ctx.lineWidth = 1;
             ctx.font = '12px Inter';
@@ -1451,10 +1459,11 @@
                 ctx.lineTo(width - paddingRight, y);
                 ctx.stroke();
 
-                ctx.fillText(`$${Math.round(v)}k`, paddingLeft - 10, y + 4);
+                const labelText = Math.abs(v) < 10 ? `$${v.toFixed(1)}k` : `$${Math.round(v)}k`;
+                ctx.fillText(labelText, paddingLeft - 10, y + 4);
             }
 
-            // Vertical Year Grid Lines in Chart Background
+            // Vertical Month Grid Lines in Chart Background
             xTicks.filter(t => t.grid).forEach(t => {
                 ctx.beginPath();
                 ctx.strokeStyle = '#1e293b';
@@ -1489,7 +1498,7 @@
                 ctx.closePath();
 
                 const avgVal = (p1.val + p2.val) / 2;
-                if (avgVal >= state.baselineOpex) {
+                if (avgVal >= baselineMonthly) {
                     ctx.fillStyle = 'rgba(239, 68, 68, 0.25)';
                 } else {
                     ctx.fillStyle = 'rgba(16, 185, 129, 0.25)';
@@ -1510,7 +1519,7 @@
             ctx.fillStyle = '#e2e8f0';
             ctx.font = '600 13px Inter';
             ctx.textAlign = 'right';
-            ctx.fillText('Baseline Op-Ex', width - paddingRight - 15, baselineY - 10);
+            ctx.fillText(`Baseline Op-Ex ($${(state.baselineOpex / 12).toFixed(1)}k/mo)`, width - paddingRight - 15, baselineY - 10);
 
             // Main Energy Curve Line
             ctx.beginPath();
@@ -1549,14 +1558,14 @@
             ctx.fillStyle = '#cbd5e1';
             ctx.font = 'bold 13px Inter';
             ctx.textAlign = 'left';
-            ctx.fillText('Costs ($/yr rate)', paddingLeft, paddingTop - 22);
+            ctx.fillText('Costs ($/mo rate)', paddingLeft, paddingTop - 22);
 
             ctx.textAlign = 'right';
             ctx.font = 'bold 12px Inter';
             ctx.fillStyle = '#cbd5e1';
-            ctx.fillText('Time: Construction (Months) → Operation (Years) →', width - paddingRight, xAxisY - 9);
+            ctx.fillText('Time: Total Project Timeline (Months) →', width - paddingRight, xAxisY - 9);
 
-            // X-Axis Downward Ticks & Numerical Labels (Months & Years)
+            // X-Axis Downward Ticks & Numerical Labels (Monthly Intervals)
             xTicks.forEach(t => {
                 // Downward Tick Mark
                 ctx.beginPath();
@@ -1608,12 +1617,12 @@
             drawPhaseBadge(paddingLeft, xStart, 'rgba(30, 41, 59, 0.6)', '#334155', '#94a3b8', 'Pre-Retrofit', 'Baseline');
             drawPhaseBadge(xStart, xInstallEnd, 'rgba(245, 158, 11, 0.12)', '#f59e0b80', '#fbbf24', 'Implementation', `${phaseInfo.effInstallMonths.toFixed(1)} mos`);
             drawPhaseBadge(xInstallEnd, xCommissionEnd, 'rgba(56, 189, 248, 0.12)', '#38bdf880', '#7dd3fc', 'Commissioning', `${state.commissionDuration} mos`);
-            drawPhaseBadge(xCommissionEnd, xEnd, 'rgba(16, 185, 129, 0.12)', '#10b98180', '#34d399', 'Operation (Zero-Emission)', `${state.timeHorizon} yr Discounted`);
+            drawPhaseBadge(xCommissionEnd, xEnd, 'rgba(16, 185, 129, 0.12)', '#10b98180', '#34d399', 'Operation (Zero-Emission)', `${Math.round(state.timeHorizon * 12)} mos (${state.timeHorizon} yr Horizon)`);
 
             // Vertical Activation Barrier Dimension Line at Peak
             const peakX = ratioToX(phaseInfo.pPeak);
             const peakRateHeight = phaseInfo.peakRateHeight;
-            const peakY = valToY(state.baselineOpex + peakRateHeight);
+            const peakY = valToY(baselineMonthly + peakRateHeight);
 
             ctx.strokeStyle = '#f59e0b';
             ctx.lineWidth = 1.5;
@@ -1630,18 +1639,19 @@
             ctx.lineTo(peakX + 5, baselineY);
             ctx.stroke();
 
-            // Text beside activation barrier
+            // Text beside activation barrier ($k/mo)
             ctx.textAlign = 'left';
             ctx.fillStyle = '#f59e0b';
             ctx.font = 'bold 12px Inter';
-            ctx.fillText(`Activation Barrier: +$${Math.round(peakRateHeight)}k/yr`, peakX + 9, (baselineY + peakY) / 2 - 6);
+            ctx.fillText(`Activation Barrier: +$${peakRateHeight.toFixed(1)}k/mo`, peakX + 9, (baselineY + peakY) / 2 - 6);
             ctx.font = '600 11px Inter';
             ctx.fillStyle = '#fbbf24';
             ctx.fillText(`Total Cap-Ex: $${Math.round(effectiveCapEx)}k`, peakX + 9, (baselineY + peakY) / 2 + 10);
 
-            // Op-Ex Delta Indicator in Operation Phase (Initial undiscounted rate marker)
+            // Op-Ex Delta Indicator in Operation Phase (Initial undiscounted monthly rate marker)
             const opexMarkerX = xCommissionEnd + (xEnd - xCommissionEnd) * 0.15;
-            const opexInitialY = valToY(state.baselineOpex + state.opexDelta);
+            const opexDeltaMonthly = state.opexDelta / 12;
+            const opexInitialY = valToY(baselineMonthly + opexDeltaMonthly);
             const opexColor = state.opexDelta <= 0 ? '#10b981' : '#ef4444';
 
             ctx.strokeStyle = opexColor;
@@ -1657,7 +1667,7 @@
 
             ctx.fillStyle = opexColor;
             ctx.font = 'bold 12px Inter';
-            ctx.fillText(`Initial Δ Op-Ex: ${state.opexDelta <= 0 ? '-' : '+'}$${Math.abs(state.opexDelta)}k/yr`, opexMarkerX + 8, (baselineY + opexInitialY) / 2);
+            ctx.fillText(`Initial Δ Op-Ex: ${state.opexDelta <= 0 ? '-' : '+'}$${Math.abs(opexDeltaMonthly).toFixed(1)}k/mo`, opexMarkerX + 8, (baselineY + opexInitialY) / 2);
 
             // Interactive Mouse Hover Crosshair & Tooltip
             if (state.isHovering && state.hoverRatio !== null) {
@@ -1686,8 +1696,8 @@
                 ctx.stroke();
 
                 // Floating Tooltip Box
-                const deltaVal = hRes.value - state.baselineOpex;
-                const deltaStr = deltaVal >= 0 ? `+$${Math.round(deltaVal)}k/yr` : `-$${Math.abs(Math.round(deltaVal))}k/yr`;
+                const deltaVal = hRes.value - baselineMonthly;
+                const deltaStr = deltaVal >= 0 ? `+$${deltaVal.toFixed(2)}k/mo` : `-$${Math.abs(deltaVal).toFixed(2)}k/mo`;
                 const deltaColor = deltaVal >= 0 ? '#ef4444' : '#10b981';
 
                 let phaseName = 'Pre-Retrofit';
@@ -1700,14 +1710,14 @@
                     phaseName = 'Commissioning Phase';
                     const m = ((hr - phaseInfo.pInstallEnd) / (phaseInfo.pCommissionEnd - phaseInfo.pInstallEnd)) * state.commissionDuration;
                     const totM = phaseInfo.effInstallMonths + m;
-                    subTime = `Month ${totM.toFixed(1)} (Comm Mo ${m.toFixed(1)}/${state.commissionDuration})`;
+                    subTime = `Project Mo ${totM.toFixed(1)} (Comm Mo ${m.toFixed(1)}/${state.commissionDuration})`;
                 } else if (hr >= phaseInfo.pCommissionEnd) {
                     phaseName = 'Zero-Emission Operation';
-                    const y = ((hr - phaseInfo.pCommissionEnd) / (1.0 - phaseInfo.pCommissionEnd)) * state.timeHorizon;
-                    subTime = `Year ${y.toFixed(1)} of ${state.timeHorizon} (PV Discounted)`;
+                    const mOp = ((hr - phaseInfo.pCommissionEnd) / (1.0 - phaseInfo.pCommissionEnd)) * (state.timeHorizon * 12);
+                    subTime = `Month ${mOp.toFixed(1)} of ${Math.round(state.timeHorizon * 12)} (PV Discounted)`;
                 }
 
-                const tooltipW = 190;
+                const tooltipW = 195;
                 const tooltipH = 74;
                 let tipX = hX + 14;
                 if (tipX + tooltipW > width - paddingRight) tipX = hX - tooltipW - 14;
@@ -1733,7 +1743,7 @@
 
                 ctx.font = 'bold 12px Inter';
                 ctx.fillStyle = '#f8fafc';
-                ctx.fillText(`Cost Rate: $${Math.round(hRes.value)}k/yr`, tipX + 10, tipY + 48);
+                ctx.fillText(`Cost Rate: $${hRes.value.toFixed(2)}k/mo`, tipX + 10, tipY + 48);
 
                 ctx.font = 'bold 11.5px Inter';
                 ctx.fillStyle = deltaColor;
@@ -1849,15 +1859,15 @@
                 lastTime = now;
 
                 // Physics Modeling:
-                // Potential Energy landscape U(r) = cost(r). Force F = -dU/dr (slope of curve)
+                // Potential Energy landscape U(r) = cost(r). Force F = -dU/dr (slope of curve in $/mo rate)
                 const eps = 0.003;
                 const r = state.ballProgress;
                 const y1 = getCostAtTime(Math.max(0, r - eps)).value;
                 const y2 = getCostAtTime(Math.min(1, r + eps)).value;
-                const slope = (y2 - y1) / (2 * eps); // $/yr rate slope
+                const slope = (y2 - y1) / (2 * eps); // $/mo rate slope
 
                 // Physical acceleration constants:
-                const gEff = 0.00038;
+                const gEff = 0.00456; // scaled for monthly $/mo rate slope
                 const friction = 0.40;
 
                 const aSlope = -gEff * slope;

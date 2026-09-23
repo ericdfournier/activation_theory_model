@@ -29,7 +29,7 @@ Traditional building retrofit analyses focus strictly on static payback periods 
 ## ⚡ Key Features
 
 - **Dynamic Interactive Simulation Canvas:**
-  - Real-time HTML5 2D canvas plotting project timeline vs. effective cost rate ($/year).
+  - Real-time HTML5 2D canvas plotting project timeline vs. effective cost rate ($/month).
   - Visual differentiation between baseline Op-Ex, Cap-Ex deployment peak, commissioning decay curve, and discounted operational savings.
 - **Physics-Based Reaction Ball Simulation:**
   - Simulates a rolling particle along the potential energy landscape $U(r) = \text{Cost}(r)$ subject to slope driving forces ($-\nabla U$) and velocity-dependent damping.
@@ -94,7 +94,7 @@ Then visit `http://localhost:8000/activation_model.html`.
 $$\tau_{\text{eff}} = \max\left( \tau_{\text{install}} \times (1 - \text{speedup}),\, 0.5 \text{ months} \right)$$
 
 ### 2. Barrier Height Scaling (Peak Rate)
-The peak expenditure rate ($/yr) scales inversely with implementation duration window to preserve total integrated Cap-Ex:
+The peak expenditure rate ($/mo) scales inversely with implementation duration window to preserve total integrated Cap-Ex:
 $$\Delta\text{CapEx}_{\text{eff}} = \text{CapEx}_{\text{total}} \times (1 - \text{catalyst})$$
 $$\text{Peak Height} \propto \frac{\Delta\text{CapEx}_{\text{eff}}}{\left( \tau_{\text{eff}} / \tau_{\text{base}} \right)^{0.75}}$$
 
