@@ -185,28 +185,28 @@
                                     </div>
                                     <p class="text-slate-300 leading-relaxed">The total cumulative capital cost of the
                                         decarbonization retrofit (equipment purchases, engineering, construction, and
-                                        physical installation). In kinetic theory, this represents the integrated area
+                                        physical implementation). In kinetic theory, this represents the integrated area
                                         under the energetic hurdle ($\int \text{Cost}(t)\,dt$) that property owners must
                                         fund to cross the transition state.</p>
                                 </div>
                                 <input type="range" id="slider-capex" min="50" max="900" step="10" value="350"
                                     class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
                                 <div class="flex justify-between items-center text-xs text-slate-400 mt-1.5">
-                                    <span>Total investment over installation period</span>
+                                    <span>Total investment over implementation period</span>
                                     <span id="val-peak-rate" class="text-amber-400 font-mono font-medium">Peak:
                                         $420k/yr</span>
                                 </div>
                             </div>
 
-                            <!-- Baseline Installation Duration -->
+                            <!-- Baseline Implementation Duration -->
                             <div class="relative">
                                 <div class="flex justify-between items-baseline text-sm mb-1.5">
                                     <div class="flex items-center gap-1.5">
-                                        <label class="font-medium text-slate-200">Baseline Installation Duration
+                                        <label class="font-medium text-slate-200">Baseline Implementation Duration
                                             (Months)</label>
                                         <button type="button" class="param-tooltip-btn"
                                             data-tooltip-id="tip-install-time" title="Click for parameter description"
-                                            aria-label="Info on Baseline Installation Duration">
+                                            aria-label="Info on Baseline Implementation Duration">
                                             <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
                                         </button>
                                     </div>
@@ -217,14 +217,14 @@
                                     class="param-popover hidden absolute z-30 left-0 right-0 top-7 p-3 rounded-lg bg-slate-950 border border-slate-700/80 shadow-2xl text-xs text-slate-300">
                                     <div class="flex justify-between items-start gap-2 mb-1">
                                         <span class="font-bold text-white flex items-center gap-1.5">
-                                            <i class="fa-solid fa-circle-info text-blue-400"></i> Baseline Installation
+                                            <i class="fa-solid fa-circle-info text-blue-400"></i> Baseline Implementation
                                             Duration
                                         </span>
                                         <button type="button" class="close-tip text-slate-400 hover:text-white p-0.5"
                                             aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
                                     </div>
-                                    <p class="text-slate-300 leading-relaxed">The active construction and equipment
-                                        installation window in months. Shorter implementation schedules minimize tenant
+                                    <p class="text-slate-300 leading-relaxed">The active planning, design, and equipment
+                                        implementation window in months. Shorter implementation schedules minimize tenant
                                         disruption and business downtime, directly boosting owner confidence and kinetic
                                         forward momentum.</p>
                                 </div>
@@ -259,7 +259,7 @@
                                         <button type="button" class="close-tip text-slate-400 hover:text-white p-0.5"
                                             aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
                                     </div>
-                                    <p class="text-slate-300 leading-relaxed">The post-installation tuning and
+                                    <p class="text-slate-300 leading-relaxed">The post-implementation tuning and
                                         verification timeframe. During commissioning, controls are calibrated, sequence
                                         of operations are finalized, and building energy management systems transition
                                         smoothly down into steady zero-emission performance.</p>
@@ -350,178 +350,189 @@
                     </details>
                 </div>
 
-            <!-- Card 2: Financial Horizon & Baseline (Collapsible) -->
-            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl">
-                <details class="group">
-                    <summary class="cursor-pointer list-none flex items-center justify-between select-none">
-                        <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
-                            <i class="fa-solid fa-coins text-purple-400"></i> Financial Horizon &amp; Baseline
-                        </h2>
-                        <i
-                            class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform text-sm"></i>
-                    </summary>
+                <!-- Card 2: Financial Horizon & Baseline (Collapsible) -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl">
+                    <details class="group">
+                        <summary class="cursor-pointer list-none flex items-center justify-between select-none">
+                            <h2
+                                class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+                                <i class="fa-solid fa-coins text-purple-400"></i> Financial Horizon &amp; Baseline
+                            </h2>
+                            <i
+                                class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform text-sm"></i>
+                        </summary>
 
-                    <div class="space-y-5 pt-4">
-                        <!-- Pre-Retrofit Baseline Op-Ex -->
-                        <div class="relative">
-                            <div class="flex justify-between items-baseline text-sm mb-1.5">
-                                <div class="flex items-center gap-1.5">
-                                    <label class="font-medium text-slate-200">Pre-Retrofit Baseline Op-Ex
-                                        ($/Year)</label>
-                                    <button type="button" class="param-tooltip-btn" data-tooltip-id="tip-baseline-opex"
-                                        title="Click for parameter description" aria-label="Info on Baseline Op-Ex">
-                                        <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
-                                    </button>
+                        <div class="space-y-5 pt-4">
+                            <!-- Pre-Retrofit Baseline Op-Ex -->
+                            <div class="relative">
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
+                                    <div class="flex items-center gap-1.5">
+                                        <label class="font-medium text-slate-200">Pre-Retrofit Baseline Op-Ex
+                                            ($/Year)</label>
+                                        <button type="button" class="param-tooltip-btn"
+                                            data-tooltip-id="tip-baseline-opex" title="Click for parameter description"
+                                            aria-label="Info on Baseline Op-Ex">
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
+                                        </button>
+                                    </div>
+                                    <span id="val-baseline-opex"
+                                        class="text-slate-100 font-mono font-bold text-base">$150k/yr</span>
                                 </div>
-                                <span id="val-baseline-opex"
-                                    class="text-slate-100 font-mono font-bold text-base">$150k/yr</span>
-                            </div>
-                            <div id="tip-baseline-opex"
-                                class="param-popover hidden absolute z-30 left-0 right-0 top-7 p-3 rounded-lg bg-slate-950 border border-slate-700/80 shadow-2xl text-xs text-slate-300">
-                                <div class="flex justify-between items-start gap-2 mb-1">
-                                    <span class="font-bold text-white flex items-center gap-1.5">
-                                        <i class="fa-solid fa-circle-info text-blue-400"></i> Pre-Retrofit Baseline
-                                        Op-Ex
-                                    </span>
-                                    <button type="button" class="close-tip text-slate-400 hover:text-white p-0.5"
-                                        aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
+                                <div id="tip-baseline-opex"
+                                    class="param-popover hidden absolute z-30 left-0 right-0 top-7 p-3 rounded-lg bg-slate-950 border border-slate-700/80 shadow-2xl text-xs text-slate-300">
+                                    <div class="flex justify-between items-start gap-2 mb-1">
+                                        <span class="font-bold text-white flex items-center gap-1.5">
+                                            <i class="fa-solid fa-circle-info text-blue-400"></i> Pre-Retrofit Baseline
+                                            Op-Ex
+                                        </span>
+                                        <button type="button" class="close-tip text-slate-400 hover:text-white p-0.5"
+                                            aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
+                                    </div>
+                                    <p class="text-slate-300 leading-relaxed">The existing annual operating expenditure
+                                        rate
+                                        before any retrofit begins (the reactant baseline state, indicated by the dashed
+                                        horizontal reference line). All activation peaks and operational savings are
+                                        evaluated relative to this datum.</p>
                                 </div>
-                                <p class="text-slate-300 leading-relaxed">The existing annual operating expenditure rate
-                                    before any retrofit begins (the reactant baseline state, indicated by the dashed
-                                    horizontal reference line). All activation peaks and operational savings are
-                                    evaluated relative to this datum.</p>
+                                <input type="range" id="slider-baseline-opex" min="50" max="300" step="10" value="150"
+                                    class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">Pre-retrofit baseline operating
+                                    expenditure datum.</p>
                             </div>
-                            <input type="range" id="slider-baseline-opex" min="50" max="300" step="10" value="150"
-                                class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
-                            <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">Pre-retrofit baseline operating
-                                expenditure datum.</p>
+
+                            <!-- Evaluation Horizon -->
+                            <div class="relative">
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
+                                    <div class="flex items-center gap-1.5">
+                                        <label class="font-medium text-slate-200">Evaluation Horizon (Years)</label>
+                                        <button type="button" class="param-tooltip-btn" data-tooltip-id="tip-horizon"
+                                            title="Click for parameter description"
+                                            aria-label="Info on Evaluation Horizon">
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
+                                        </button>
+                                    </div>
+                                    <span id="val-horizon" class="text-slate-100 font-mono font-bold text-base">20
+                                        Years</span>
+                                </div>
+                                <div id="tip-horizon"
+                                    class="param-popover hidden absolute z-30 left-0 right-0 top-7 p-3 rounded-lg bg-slate-950 border border-slate-700/80 shadow-2xl text-xs text-slate-300">
+                                    <div class="flex justify-between items-start gap-2 mb-1">
+                                        <span class="font-bold text-white flex items-center gap-1.5">
+                                            <i class="fa-solid fa-circle-info text-blue-400"></i> Evaluation Horizon
+                                        </span>
+                                        <button type="button" class="close-tip text-slate-400 hover:text-white p-0.5"
+                                            aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
+                                    </div>
+                                    <p class="text-slate-300 leading-relaxed">The total operational life-cycle in years
+                                        over
+                                        which cumulative net present value (NPV) and return on investment (ROI) are
+                                        tracked
+                                        following post-retrofit commissioning.</p>
+                                </div>
+                                <input type="range" id="slider-horizon" min="5" max="30" step="1" value="20"
+                                    class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">Total operational horizon for
+                                    NPV
+                                    and ROI tracking.</p>
+                            </div>
                         </div>
+                    </details>
+                </div>
 
-                        <!-- Evaluation Horizon -->
-                        <div class="relative">
-                            <div class="flex justify-between items-baseline text-sm mb-1.5">
-                                <div class="flex items-center gap-1.5">
-                                    <label class="font-medium text-slate-200">Evaluation Horizon (Years)</label>
-                                    <button type="button" class="param-tooltip-btn" data-tooltip-id="tip-horizon"
-                                        title="Click for parameter description" aria-label="Info on Evaluation Horizon">
-                                        <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
-                                    </button>
+                <!-- Card 3: Policy Interventions (Collapsible) -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl">
+                    <details class="group">
+                        <summary class="cursor-pointer list-none flex items-center justify-between select-none">
+                            <h2
+                                class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+                                <i class="fa-solid fa-landmark text-cyan-400"></i> Policy Interventions
+                            </h2>
+                            <i
+                                class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform text-sm"></i>
+                        </summary>
+
+                        <div class="space-y-5 pt-4">
+                            <!-- Policy Barrier Reduction -->
+                            <div class="relative">
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
+                                    <div class="flex items-center gap-1.5">
+                                        <label class="font-medium text-slate-200 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-file-signature text-cyan-400"></i> Barrier Reduction /
+                                            Speedup
+                                        </label>
+                                        <button type="button" class="param-tooltip-btn"
+                                            data-tooltip-id="tip-barrier-reduction"
+                                            title="Click for parameter description"
+                                            aria-label="Info on Barrier Reduction / Speedup">
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
+                                        </button>
+                                    </div>
+                                    <span id="val-barrier-reduction"
+                                        class="text-cyan-400 font-mono font-bold text-base">0%
+                                        (6 mos)</span>
                                 </div>
-                                <span id="val-horizon" class="text-slate-100 font-mono font-bold text-base">20
-                                    Years</span>
-                            </div>
-                            <div id="tip-horizon"
-                                class="param-popover hidden absolute z-30 left-0 right-0 top-7 p-3 rounded-lg bg-slate-950 border border-slate-700/80 shadow-2xl text-xs text-slate-300">
-                                <div class="flex justify-between items-start gap-2 mb-1">
-                                    <span class="font-bold text-white flex items-center gap-1.5">
-                                        <i class="fa-solid fa-circle-info text-blue-400"></i> Evaluation Horizon
-                                    </span>
-                                    <button type="button" class="close-tip text-slate-400 hover:text-white p-0.5"
-                                        aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
+                                <div id="tip-barrier-reduction"
+                                    class="param-popover hidden absolute z-30 left-0 right-0 top-7 p-3 rounded-lg bg-slate-950 border border-slate-700/80 shadow-2xl text-xs text-slate-300">
+                                    <div class="flex justify-between items-start gap-2 mb-1">
+                                        <span class="font-bold text-white flex items-center gap-1.5">
+                                            <i class="fa-solid fa-circle-info text-cyan-400"></i> Barrier Reduction &
+                                            Process Speedup
+                                        </span>
+                                        <button type="button" class="close-tip text-slate-400 hover:text-white p-0.5"
+                                            aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
+                                    </div>
+                                    <p class="text-slate-300 leading-relaxed">Percentage reduction in implementation
+                                        duration achieved via municipal policy actions (streamlined plan check,
+                                        expedited permitting, prefabricated assemblies, and automated inspections).
+                                        Compressing project duration reduces tenant friction and significantly enhances
+                                        owner adoption rates.</p>
                                 </div>
-                                <p class="text-slate-300 leading-relaxed">The total operational life-cycle in years over
-                                    which cumulative net present value (NPV) and return on investment (ROI) are tracked
-                                    following post-retrofit commissioning.</p>
+                                <input type="range" id="slider-barrier-reduction" min="0" max="75" step="5" value="0"
+                                    class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">Accelerates permitting &
+                                    inspections, directly boosting owner momentum.</p>
                             </div>
-                            <input type="range" id="slider-horizon" min="5" max="30" step="1" value="20"
-                                class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
-                            <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">Total operational horizon for NPV
-                                and ROI tracking.</p>
+
+                            <!-- Policy Catalyst / Incentive -->
+                            <div class="pt-3 border-t border-slate-800 relative">
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
+                                    <div class="flex items-center gap-1.5">
+                                        <label class="font-medium text-slate-200 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-flask text-amber-400"></i> Policy Catalyst / Incentive
+                                            Offset
+                                        </label>
+                                        <button type="button" class="param-tooltip-btn" data-tooltip-id="tip-catalyst"
+                                            title="Click for parameter description"
+                                            aria-label="Info on Policy Catalyst / Incentive Offset">
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
+                                        </button>
+                                    </div>
+                                    <span id="val-catalyst"
+                                        class="text-amber-400 font-mono font-bold text-base">0%</span>
+                                </div>
+                                <div id="tip-catalyst"
+                                    class="param-popover hidden absolute z-30 left-0 right-0 top-10 p-3 rounded-lg bg-slate-950 border border-slate-700/80 shadow-2xl text-xs text-slate-300">
+                                    <div class="flex justify-between items-start gap-2 mb-1">
+                                        <span class="font-bold text-white flex items-center gap-1.5">
+                                            <i class="fa-solid fa-circle-info text-amber-400"></i> Policy Catalyst /
+                                            Incentive Offset
+                                        </span>
+                                        <button type="button" class="close-tip text-slate-400 hover:text-white p-0.5"
+                                            aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
+                                    </div>
+                                    <p class="text-slate-300 leading-relaxed">Financial rebates, utility incentives, and
+                                        tax deductions (e.g. IRA credits) that offset gross Cap-Ex. Analogous to an
+                                        enzyme or chemical catalyst, it lowers the height of the activation barrier
+                                        without altering pre-retrofit or post-retrofit baseline energetics.</p>
+                                </div>
+                                <input type="range" id="slider-catalyst" min="0" max="100" step="5" value="0"
+                                    class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">Lowers the Cap-Ex peak like a
+                                    chemical catalyst lowers activation energy.</p>
+                            </div>
                         </div>
-                    </div>
-                </details>
-            </div>
-
-            <!-- Card 3: Policy Interventions (Collapsible) -->
-            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl">
-                <details class="group">
-                    <summary class="cursor-pointer list-none flex items-center justify-between select-none">
-                        <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
-                            <i class="fa-solid fa-landmark text-cyan-400"></i> Policy Interventions
-                        </h2>
-                        <i
-                            class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform text-sm"></i>
-                    </summary>
-
-                    <div class="space-y-5 pt-4">
-                        <!-- Policy Barrier Reduction -->
-                        <div class="relative">
-                            <div class="flex justify-between items-baseline text-sm mb-1.5">
-                                <div class="flex items-center gap-1.5">
-                                    <label class="font-medium text-slate-200 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-file-signature text-cyan-400"></i> Barrier Reduction /
-                                        Speedup
-                                    </label>
-                                    <button type="button" class="param-tooltip-btn"
-                                        data-tooltip-id="tip-barrier-reduction" title="Click for parameter description"
-                                        aria-label="Info on Barrier Reduction / Speedup">
-                                        <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
-                                    </button>
-                                </div>
-                                <span id="val-barrier-reduction" class="text-cyan-400 font-mono font-bold text-base">0%
-                                    (6 mos)</span>
-                            </div>
-                            <div id="tip-barrier-reduction"
-                                class="param-popover hidden absolute z-30 left-0 right-0 top-7 p-3 rounded-lg bg-slate-950 border border-slate-700/80 shadow-2xl text-xs text-slate-300">
-                                <div class="flex justify-between items-start gap-2 mb-1">
-                                    <span class="font-bold text-white flex items-center gap-1.5">
-                                        <i class="fa-solid fa-circle-info text-cyan-400"></i> Barrier Reduction &
-                                        Process Speedup
-                                    </span>
-                                    <button type="button" class="close-tip text-slate-400 hover:text-white p-0.5"
-                                        aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
-                                </div>
-                                <p class="text-slate-300 leading-relaxed">Percentage reduction in installation
-                                    duration achieved via municipal policy actions (streamlined plan check,
-                                    expedited permitting, prefabricated assemblies, and automated inspections).
-                                    Compressing project duration reduces tenant friction and significantly enhances
-                                    owner adoption rates.</p>
-                            </div>
-                            <input type="range" id="slider-barrier-reduction" min="0" max="75" step="5" value="0"
-                                class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
-                            <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">Accelerates permitting &
-                                inspections, directly boosting owner momentum.</p>
-                        </div>
-
-                        <!-- Policy Catalyst / Incentive -->
-                        <div class="pt-3 border-t border-slate-800 relative">
-                            <div class="flex justify-between items-baseline text-sm mb-1.5">
-                                <div class="flex items-center gap-1.5">
-                                    <label class="font-medium text-slate-200 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-flask text-amber-400"></i> Policy Catalyst / Incentive
-                                        Offset
-                                    </label>
-                                    <button type="button" class="param-tooltip-btn" data-tooltip-id="tip-catalyst"
-                                        title="Click for parameter description"
-                                        aria-label="Info on Policy Catalyst / Incentive Offset">
-                                        <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
-                                    </button>
-                                </div>
-                                <span id="val-catalyst" class="text-amber-400 font-mono font-bold text-base">0%</span>
-                            </div>
-                            <div id="tip-catalyst"
-                                class="param-popover hidden absolute z-30 left-0 right-0 top-10 p-3 rounded-lg bg-slate-950 border border-slate-700/80 shadow-2xl text-xs text-slate-300">
-                                <div class="flex justify-between items-start gap-2 mb-1">
-                                    <span class="font-bold text-white flex items-center gap-1.5">
-                                        <i class="fa-solid fa-circle-info text-amber-400"></i> Policy Catalyst /
-                                        Incentive Offset
-                                    </span>
-                                    <button type="button" class="close-tip text-slate-400 hover:text-white p-0.5"
-                                        aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
-                                </div>
-                                <p class="text-slate-300 leading-relaxed">Financial rebates, utility incentives, and
-                                    tax deductions (e.g. IRA credits) that offset gross Cap-Ex. Analogous to an
-                                    enzyme or chemical catalyst, it lowers the height of the activation barrier
-                                    without altering pre-retrofit or post-retrofit baseline energetics.</p>
-                            </div>
-                            <input type="range" id="slider-catalyst" min="0" max="100" step="5" value="0"
-                                class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
-                            <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">Lowers the Cap-Ex peak like a
-                                chemical catalyst lowers activation energy.</p>
-                        </div>
-                    </div>
-                </details>
-            </div>
+                    </details>
+                </div>
 
             </div>
         </section>
@@ -627,8 +638,9 @@
                     </div>
                     <div class="bg-slate-950/40 p-3 rounded-lg border border-slate-800 leading-relaxed">
                         <span class="font-bold text-slate-100 block mb-1 text-sm text-amber-400">2. Activation Barrier
-                            (Cap-Ex)</span>
-                        Barriers related to upfront capital expenditures, equipment procurement, installation disruption,
+                            (Cap-Ex + Implementation Downtime & Disruptions)</span>
+                        Barriers related to upfront capital expenditures, equipment procurement, implementation
+                        disruption,
                         and commissioning
                         required to cross the energetic threshold.
                     </div>
@@ -685,7 +697,7 @@
                 commissionDuration: 4,
                 opexDelta: -60,
                 catalyst: 0,
-                description: "<strong>Scenario A (Standard / Optimal Retrofit):</strong> Rapid 4.7-year payback (<5 yrs) creates sufficient owner momentum to clear the Cap-Ex hurdle. Upfront integrated Cap-Ex is concentrated over a standard 6-month installation, followed by prompt commissioning and deep, perpetual operational cost reductions (green area)."
+                description: "<strong>Scenario A (Standard / Optimal Retrofit):</strong> Rapid 4.7-year payback (<5 yrs) creates sufficient owner momentum to clear the Cap-Ex hurdle. Upfront integrated Cap-Ex is concentrated over a standard 6-month implementation, followed by prompt commissioning and deep, perpetual operational cost reductions (green area)."
             },
             B: {
                 totalCapex: 550,
@@ -703,7 +715,7 @@
                 commissionDuration: 6,
                 opexDelta: -50,
                 catalyst: 0,
-                description: "<strong>Scenario C (Excessive Installation Downtime):</strong> The total integrated Cap-Ex is identical to Scenario A ($350k), but spread across an elongated 18-month installation with a 6.3-year payback (>5 yrs). The prolonged disruption and delayed savings fail to provide the kinetic momentum required to surmount the barrier, resulting in rollback."
+                description: "<strong>Scenario C (Excessive Implementation Downtime):</strong> The total integrated Cap-Ex is identical to Scenario A ($350k), but spread across an elongated 18-month implementation with a 6.3-year payback (>5 yrs). The prolonged disruption and delayed savings fail to provide the kinetic momentum required to surmount the barrier, resulting in rollback."
             },
             D: {
                 totalCapex: 320,
@@ -779,7 +791,7 @@
             return pv;
         }
 
-        // Multiplier where shorter installation periods contribute positively to motivation & velocity
+        // Multiplier where shorter implementation periods contribute positively to motivation & velocity
         function getDurationMotivationMultiplier() {
             const effInstallMonths = getEffectiveInstallDuration();
             // Benchmark is 6 months. Shorter projects boost motivation; elongated projects penalize it.
@@ -860,7 +872,7 @@
 
             if (payback < 5.0) {
                 // Guaranteed v0 > vc: Ball always surmounts the barrier and rolls into zero-emission state!
-                // Shorter payback (<5 yrs) and prompt installation further elevate velocity and momentum.
+                // Shorter payback (<5 yrs) and prompt implementation further elevate velocity and momentum.
                 const paybackBoost = 1.10 + 0.35 * ((5.0 - payback) / 5.0);
                 const durFactor = Math.max(0.95, Math.min(1.20, durMultiplier));
                 return vc * paybackBoost * durFactor;
@@ -1114,7 +1126,7 @@
 
             if (key === null) {
                 customBadge.classList.remove('hidden');
-                scenarioDesc.innerHTML = "<strong>Custom Scenario Mode:</strong> You are dynamically controlling the thermodynamic retrofit parameters. Observe how changes in installation speedup, policy offsets, and post-retrofit operating costs shift the financial energy landscape and the property owner's motivation.";
+                scenarioDesc.innerHTML = "<strong>Custom Scenario Mode:</strong> You are dynamically controlling the thermodynamic retrofit parameters. Observe how changes in implementation speedup, policy offsets, and post-retrofit operating costs shift the financial energy landscape and the property owner's motivation.";
             } else {
                 customBadge.classList.add('hidden');
             }
@@ -1266,12 +1278,12 @@
             if (tRatio < pStart) {
                 value = state.baselineOpex;
             } else if (tRatio >= pStart && tRatio < pInstallEnd) {
-                // Bell curve representing installation Cap-Ex deployment rate
+                // Bell curve representing implementation Cap-Ex deployment rate
                 const normX = (tRatio - pPeak) / (installWidth / 2);
                 const bump = Math.exp(-Math.pow(normX * 2.1, 2));
                 value = state.baselineOpex + peakRateHeight * bump;
             } else if (tRatio >= pInstallEnd && tRatio < pCommissionEnd) {
-                // Smooth monotonic commissioning decay from end of installation down to stable initial post-retrofit state
+                // Smooth monotonic commissioning decay from end of implementation down to stable initial post-retrofit state
                 const normEnd = (pInstallEnd - pPeak) / (installWidth / 2);
                 const startCost = state.baselineOpex + peakRateHeight * Math.exp(-Math.pow(normEnd * 2.1, 2));
 
@@ -1353,7 +1365,7 @@
                 grid: false
             });
 
-            // 2. Peak Month (if installation window is wide enough)
+            // 2. Peak Month (if implementation window is wide enough)
             if ((xPeak - xStart) >= 50 && (xInstallEnd - xPeak) >= 50) {
                 xTicks.push({
                     x: xPeak,
@@ -1363,7 +1375,7 @@
                 });
             }
 
-            // 3. Installation End Month (only display if well separated from Start)
+            // 3. Implementation End Month (only display if well separated from Start)
             if ((xInstallEnd - xStart) >= 46) {
                 xTicks.push({
                     x: xInstallEnd,
@@ -1594,7 +1606,7 @@
 
             // Draw 4 distinct phase tracks below X-axis
             drawPhaseBadge(paddingLeft, xStart, 'rgba(30, 41, 59, 0.6)', '#334155', '#94a3b8', 'Pre-Retrofit', 'Baseline');
-            drawPhaseBadge(xStart, xInstallEnd, 'rgba(245, 158, 11, 0.12)', '#f59e0b80', '#fbbf24', 'Installation', `${phaseInfo.effInstallMonths.toFixed(1)} mos`);
+            drawPhaseBadge(xStart, xInstallEnd, 'rgba(245, 158, 11, 0.12)', '#f59e0b80', '#fbbf24', 'Implementation', `${phaseInfo.effInstallMonths.toFixed(1)} mos`);
             drawPhaseBadge(xInstallEnd, xCommissionEnd, 'rgba(56, 189, 248, 0.12)', '#38bdf880', '#7dd3fc', 'Commissioning', `${state.commissionDuration} mos`);
             drawPhaseBadge(xCommissionEnd, xEnd, 'rgba(16, 185, 129, 0.12)', '#10b98180', '#34d399', 'Operation (Zero-Emission)', `${state.timeHorizon} yr Discounted`);
 
@@ -1681,7 +1693,7 @@
                 let phaseName = 'Pre-Retrofit';
                 let subTime = 'Baseline Status';
                 if (hr >= phaseInfo.pStart && hr < phaseInfo.pInstallEnd) {
-                    phaseName = 'Installation Phase';
+                    phaseName = 'Implementation Phase';
                     const m = ((hr - phaseInfo.pStart) / (phaseInfo.pInstallEnd - phaseInfo.pStart)) * phaseInfo.effInstallMonths;
                     subTime = `Month ${m.toFixed(1)} of ${phaseInfo.effInstallMonths.toFixed(1)}`;
                 } else if (hr >= phaseInfo.pInstallEnd && hr < phaseInfo.pCommissionEnd) {
@@ -1810,7 +1822,7 @@
             playIcon.className = 'fa-solid fa-pause';
             playText.innerText = 'Pause Ball';
 
-            // Calculate Initial Velocity based on Cumulative Discounted Savings & Installation Duration
+            // Calculate Initial Velocity based on Cumulative Discounted Savings & Implementation Duration
             const v0 = computeInitialVelocity();
             state.initialVelocity = v0;
             const tier = getMotivationTier(v0);

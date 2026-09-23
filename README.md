@@ -11,7 +11,7 @@ Traditional building retrofit analyses focus strictly on static payback periods 
 ```
 [ Pre-Retrofit State ]  ──( Activation Barrier / Cap-Ex )──►  [ Zero-Emission State ]
       Reactants                   Transition State                    Products
- (Baseline Op-Ex/Carbon)      (Installation & Disruption)       (Permanent Op-Ex Savings)
+ (Baseline Op-Ex/Carbon)     (Implementation & Disruption)      (Permanent Op-Ex Savings)
 ```
 
 1. **Reactants (Pre-Retrofit Baseline):**
@@ -22,7 +22,7 @@ Traditional building retrofit analyses focus strictly on static payback periods 
    - An *exothermic* financial and carbon return where ongoing building operational expenditures drop permanently below the pre-retrofit baseline.
 4. **Catalysts (Policy & Financial Interventions):**
    - Financial incentives (rebates, tax credits) directly reduce barrier height ($E_a$).
-   - Streamlined permitting and expedited inspections reduce barrier width / installation duration ($\tau$), directly elevating property owner momentum.
+   - Streamlined permitting and expedited inspections reduce barrier width / implementation duration ($\tau$), directly elevating property owner momentum.
 
 ---
 
@@ -42,7 +42,7 @@ Traditional building retrofit analyses focus strictly on static payback periods 
   - Cumulative Present Value Savings
   - Property Owner Motivation Telemetry (`Low`, `Medium`, `High`, `Very High`)
 - **Interactive Controls & Presets:**
-  - Sliders for Cap-Ex, installation duration, commissioning window, Op-Ex delta, discount rates, pre-retrofit baseline, and evaluation horizons.
+  - Sliders for Cap-Ex, implementation duration, commissioning window, Op-Ex delta, discount rates, pre-retrofit baseline, and evaluation horizons.
   - Policy interventions: speedup/barrier reduction (%) and catalytic incentives (%).
   - Pre-configured case studies: Scenarios A, B, C, and D.
 
@@ -52,9 +52,9 @@ Traditional building retrofit analyses focus strictly on static payback periods 
 
 | Scenario | Title | Description | Outcome |
 | :--- | :--- | :--- | :--- |
-| **A** | Standard / Optimal | Rapid payback (<5 yrs), standard 6-month installation, prompt commissioning, deep operational savings. | **Barrier Overcome** (Rolls into ZE state) |
+| **A** | Standard / Optimal | Rapid payback (<5 yrs), standard 6-month implementation, prompt commissioning, deep operational savings. | **Barrier Overcome** (Rolls into ZE state) |
 | **B** | Excessive Cap-Ex | High initial capital barrier ($550k+), prolonged payback >> 5 yrs creating an insurmountable economic hurdle. | **Rollback** (Returns to baseline) |
-| **C** | Long Downtime | Identical Cap-Ex to standard, but elongated installation (18 mos); disruption penalties degrade owner momentum. | **Rollback** (Halts on slope) |
+| **C** | Long Downtime | Identical Cap-Ex to standard, but elongated implementation (18 mos); disruption penalties degrade owner momentum. | **Rollback** (Halts on slope) |
 | **D** | Increased Op-Ex | Unfavorable economics where post-retrofit operating costs exceed baseline (endothermic reaction). | **Immediate Rollback** (No driving force) |
 
 ---
@@ -90,17 +90,17 @@ Then visit `http://localhost:8000/activation_model.html`.
 
 ## 🧮 Mathematical Model
 
-### 1. Effective Installation Duration
+### 1. Effective Implementation Duration
 $$\tau_{\text{eff}} = \max\left( \tau_{\text{install}} \times (1 - \text{speedup}),\, 0.5 \text{ months} \right)$$
 
 ### 2. Barrier Height Scaling (Peak Rate)
-The peak expenditure rate ($/yr) scales inversely with installation duration window to preserve total integrated Cap-Ex:
+The peak expenditure rate ($/yr) scales inversely with implementation duration window to preserve total integrated Cap-Ex:
 $$\Delta\text{CapEx}_{\text{eff}} = \text{CapEx}_{\text{total}} \times (1 - \text{catalyst})$$
 $$\text{Peak Height} \propto \frac{\Delta\text{CapEx}_{\text{eff}}}{\left( \tau_{\text{eff}} / \tau_{\text{base}} \right)^{0.75}}$$
 
 ### 3. Transition Dynamics
-- **Installation Phase:** Symmetrical Gaussian deployment rate curve centered at peak installation.
-- **Commissioning Phase:** Smooth cubic Hermite polynomial decay ($3s^2 - 2s^3$) from installation conclusion to stabilized operations.
+- **Implementation Phase:** Symmetrical Gaussian deployment rate curve centered at peak implementation.
+- **Commissioning Phase:** Smooth cubic Hermite polynomial decay ($3s^2 - 2s^3$) from implementation conclusion to stabilized operations.
 - **Operational Phase:** Discounted annual savings projected across the evaluation horizon:
 $$\Delta\text{OpEx}(t) = \frac{\Delta\text{OpEx}_0}{(1 + r)^t}$$
 
