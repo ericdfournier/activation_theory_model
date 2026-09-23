@@ -2074,10 +2074,10 @@
             ctx.setLineDash([]);
 
             // Milestone Marker at Loan Payoff (measured from Month 0 / Start of Implementation)
+            let rLoanEnd = null;
             if (state.financingEnabled) {
                 const loanMonths = debtInfo.loanMonths;
                 const totTransMonths = phaseInfo.totTransMonths;
-                let rLoanEnd = null;
 
                 if (loanMonths > totTransMonths) {
                     const opYearsAtPayoff = (loanMonths - totTransMonths) / 12;
@@ -2316,22 +2316,31 @@
             const peakRateHeight = phaseInfo.peakRateHeight;
             const peakY = valToY(baselineMonthly + peakRateHeight);
 
-            ctx.strokeStyle = '#d97706';
-            ctx.lineWidth = 1.5;
-            ctx.beginPath();
-            ctx.moveTo(peakX, baselineY);
-            ctx.lineTo(peakX, peakY);
-            ctx.stroke();
+            if (peakRateHeight > 0.5) {
+                ctx.strokeStyle = '#d97706';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(peakX, baselineY);
+                ctx.lineTo(peakX, peakY);
+                ctx.stroke();
 
-            // End tick caps
-            ctx.beginPath();
-            ctx.moveTo(peakX - 4, peakY);
-            ctx.lineTo(peakX + 4, peakY);
-            ctx.moveTo(peakX - 4, baselineY);
-            ctx.lineTo(peakX + 4, baselineY);
-            ctx.stroke();
+                // End tick caps
+                ctx.beginPath();
+                ctx.moveTo(peakX - 4, peakY);
+                ctx.lineTo(peakX + 4, peakY);
+                ctx.moveTo(peakX - 4, baselineY);
+                ctx.lineTo(peakX + 4, baselineY);
+                ctx.stroke();
 
-            // Smart Positioning for Activation Barrier Callout Badge
+                // Compact peak rate label directly above peak cap
+                ctx.fillStyle = '#b45309';
+                ctx.font = 'bold 9.5px Inter';
+                ctx.textAlign = 'center';
+                const peakTag = `+~$${peakRateHeight >= 10 ? Math.round(peakRateHeight) : peakRateHeight.toFixed(1)}k/mo`;
+                ctx.fillText(peakTag, peakX, Math.max(paddingTop + 12, peakY - 6));
+            }
+
+            // Activation Barrier Callout Badge (Positioned on the right-hand side to avoid plot interference)
             const effInstallMonths = phaseInfo.effInstallMonths;
             const avgMonthlyCapex = effectiveCapEx / effInstallMonths;
             let actHeader = 'Activation Barrier:';
@@ -2358,39 +2367,37 @@
             const actCardW = Math.max(wHeader, wLine1, wLine2) + 20;
             const actCardH = 48;
 
-            let actCardX = peakX + 10;
-            let actCardY = (baselineY + peakY) / 2 - actCardH / 2;
+            // Dock cleanly on the right-hand side within chart plot margins
+            let actCardX = width - paddingRight - actCardW - 14;
+            let actCardY = paddingTop + 10;
 
-            // Space check: If space above the peak is clear (>= 52px), position callout in the open space above peak
-            if (peakY - (paddingTop + 14) >= actCardH) {
-                actCardX = Math.max(paddingLeft + 8, Math.min(peakX - actCardW / 2, width - paddingRight - actCardW - 8));
-                actCardY = peakY - actCardH - 8;
-
-                // Subtle connector leader line to peak tip
-                ctx.strokeStyle = '#f59e0b';
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.moveTo(peakX, peakY);
-                ctx.lineTo(peakX, actCardY + actCardH);
-                ctx.stroke();
-            } else {
-                // Peak is high: Place to side in available shoulder space
-                if (peakX + 10 + actCardW > width - paddingRight - 10) {
-                    actCardX = peakX - actCardW - 10;
-                } else {
-                    actCardX = peakX + 10;
+            // If debt retirement milestone marker is positioned at top-right, drop below it
+            if (state.financingEnabled && rLoanEnd !== null) {
+                const xLoanEnd = ratioToX(rLoanEnd);
+                if (xLoanEnd >= actCardX - 30) {
+                    actCardY = paddingTop + 34;
                 }
-                actCardY = Math.max(paddingTop + 6, Math.min(peakY + 6, height - paddingBottom - actCardH - 10));
             }
 
-            // Draw Activation Badge Card
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.94)';
+            // If baseline line is near the top and conflicts with actCard, place actCard cleanly below baseline
+            if (baselineY - paddingTop < 80) {
+                actCardY = Math.max(actCardY, baselineY + 12);
+            }
+            actCardY = Math.min(actCardY, height - paddingBottom - actCardH - 10);
+
+            // Draw Activation Badge Card (Crisp floating light theme card)
+            ctx.save();
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.04)';
+            ctx.shadowBlur = 6;
+            ctx.shadowOffsetY = 2;
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.96)';
             ctx.strokeStyle = '#fde68a';
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.roundRect(actCardX, actCardY, actCardW, actCardH, 6);
             ctx.fill();
             ctx.stroke();
+            ctx.restore();
 
             // Draw Badge Text
             ctx.textAlign = 'left';
@@ -2486,14 +2493,24 @@
                 opexCardY = Math.max(paddingTop + 6, opexInitialY - opexCardH - 12);
             }
 
+            // Prevent overlap between opexCard and actCard if they share a vertical band
+            if (Math.abs(opexCardY - actCardY) < actCardH + 10 && opexCardX + opexCardW > actCardX - 10) {
+                opexCardX = Math.max(paddingLeft + 10, actCardX - opexCardW - 14);
+            }
+
             // Draw Op-Ex Badge Card
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.94)';
+            ctx.save();
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.04)';
+            ctx.shadowBlur = 6;
+            ctx.shadowOffsetY = 2;
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.96)';
             ctx.strokeStyle = opexBorder;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.roundRect(opexCardX, opexCardY, opexCardW, opexCardH, 6);
             ctx.fill();
             ctx.stroke();
+            ctx.restore();
 
             // Draw Op-Ex Badge Text
             ctx.textAlign = 'left';
