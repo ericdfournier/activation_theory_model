@@ -1591,38 +1591,71 @@
             const trackY = xAxisY + 28;
             const trackH = 26;
 
-            function drawPhaseBadge(x1, x2, bg, border, textColor, title, sub) {
-                const w = Math.max(x2 - x1 - 4, 10);
+            function drawPhaseBadge(x1, x2, bg, border, textColor, title, sub, shortTitle, shortSub) {
+                const w = Math.max(x2 - x1 - 4, 2);
                 const x = x1 + 2;
 
+                const radius = Math.min(6, Math.max(1, Math.floor(w / 2)));
                 ctx.fillStyle = bg;
                 ctx.strokeStyle = border;
                 ctx.lineWidth = 1;
                 ctx.beginPath();
-                ctx.roundRect(x, trackY, w, trackH, 6);
+                ctx.roundRect(x, trackY, w, trackH, radius);
                 ctx.fill();
                 ctx.stroke();
 
-                ctx.fillStyle = textColor;
-                ctx.font = 'bold 11px Inter';
-                ctx.textAlign = 'center';
+                const padding = 8; // 4px padding on each side
+                const maxAvailableW = w - padding;
+                if (maxAvailableW <= 12) return; // Bubble too narrow for text
+
                 const midX = x + w / 2;
 
-                if (w > 80) {
-                    ctx.fillText(title, midX, trackY + 12);
+                // Check title fit (full title or optional shortened fallback)
+                ctx.font = 'bold 11px Inter';
+                let displayTitle = title;
+                let titleW = ctx.measureText(displayTitle).width;
+                if (titleW > maxAvailableW && shortTitle) {
+                    displayTitle = shortTitle;
+                    titleW = ctx.measureText(displayTitle).width;
+                }
+
+                // If even the title does not fit within available width, omit labels to prevent overlap
+                if (titleW > maxAvailableW) {
+                    return;
+                }
+
+                // Check subtitle fit (full subtitle or optional shortened fallback)
+                ctx.font = '10px Inter';
+                let displaySub = sub;
+                let subW = sub ? ctx.measureText(displaySub).width : 0;
+                if (subW > maxAvailableW && shortSub) {
+                    displaySub = shortSub;
+                    subW = ctx.measureText(displaySub).width;
+                }
+
+                // If subtitle fits alongside title, render 2-line badge; otherwise render single centered title
+                if (sub && subW <= maxAvailableW) {
+                    ctx.fillStyle = textColor;
+                    ctx.font = 'bold 11px Inter';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(displayTitle, midX, trackY + 12);
+
                     ctx.font = '10px Inter';
                     ctx.fillStyle = '#64748b';
-                    ctx.fillText(sub, midX, trackY + 22);
-                } else if (w > 36) {
-                    ctx.fillText(title, midX, trackY + 16);
+                    ctx.fillText(displaySub, midX, trackY + 22);
+                } else {
+                    ctx.fillStyle = textColor;
+                    ctx.font = 'bold 11px Inter';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(displayTitle, midX, trackY + 17);
                 }
             }
 
             // Draw 4 distinct phase tracks below X-axis (Light Theme Tailored Colors)
-            drawPhaseBadge(paddingLeft, xStart, 'rgba(241, 245, 249, 0.95)', '#cbd5e1', '#475569', 'Pre-Retrofit', 'Baseline');
+            drawPhaseBadge(paddingLeft, xStart, 'rgba(241, 245, 249, 0.95)', '#cbd5e1', '#475569', 'Pre-Retrofit', 'Baseline', 'Baseline');
             drawPhaseBadge(xStart, xInstallEnd, 'rgba(254, 243, 199, 0.7)', '#f59e0b', '#b45309', 'Implementation', `${phaseInfo.effInstallMonths.toFixed(1)} mos`);
-            drawPhaseBadge(xInstallEnd, xCommissionEnd, 'rgba(224, 242, 254, 0.7)', '#38bdf8', '#0369a1', 'Commissioning', `${state.commissionDuration} mos`);
-            drawPhaseBadge(xCommissionEnd, xEnd, 'rgba(209, 250, 229, 0.7)', '#10b981', '#047857', 'Operation (Zero-Emission)', `${Math.round(state.timeHorizon * 12)} mos (${state.timeHorizon} yr Horizon)`);
+            drawPhaseBadge(xInstallEnd, xCommissionEnd, 'rgba(224, 242, 254, 0.7)', '#38bdf8', '#0369a1', 'Commissioning', `${state.commissionDuration} mos`, 'Comm.', `${state.commissionDuration}m`);
+            drawPhaseBadge(xCommissionEnd, xEnd, 'rgba(209, 250, 229, 0.7)', '#10b981', '#047857', 'Operation (Zero-Emission)', `${Math.round(state.timeHorizon * 12)} mos (${state.timeHorizon} yr Horizon)`, 'Operation', `${Math.round(state.timeHorizon * 12)} mos`);
 
             // Vertical Activation Barrier Dimension Line at Peak
             const peakX = ratioToX(phaseInfo.pPeak);
