@@ -67,26 +67,26 @@
 <body class="min-h-screen flex flex-col overflow-x-hidden bg-slate-50 text-slate-800">
 
     <header class="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-50 shadow-sm">
-        <div class="w-full px-4 py-2.5 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 flex flex-col gap-2">
+        <div class="w-full px-4 py-3 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 flex flex-col gap-2.5">
             <div class="flex items-center space-x-3">
-                <div class="p-2 bg-emerald-50 rounded-xl border border-emerald-200 text-emerald-600 flex-shrink-0">
-                    <i class="fa-solid fa-bolt-lightning text-xl"></i>
+                <div class="p-2.5 bg-emerald-50 rounded-xl border border-emerald-200 text-emerald-600 flex-shrink-0">
+                    <i class="fa-solid fa-bolt-lightning text-2xl"></i>
                 </div>
                 <div>
-                    <h1 class="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">Zero-Emission Retrofit Dynamics</h1>
-                    <p class="text-xs sm:text-sm text-slate-500">An Activation Energy Based Conceptual Model for the Implementation
+                    <h1 class="text-xl font-bold text-slate-900 tracking-tight">Zero-Emission Retrofit Dynamics</h1>
+                    <p class="text-sm text-slate-500">An Activation Energy Based Conceptual Model for the Implementation
                         of Zero-Emissions Decarbonization Retrofits in Non-Residential Buildings</p>
                 </div>
             </div>
-            <div class="pt-1.5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2.5">
-                <div class="flex items-center gap-2">
+            <div class="pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-2.5">
                     <button id="btn-play-animation"
-                        class="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition shadow-sm shadow-blue-600/20">
+                        class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold flex items-center gap-2 transition shadow-md shadow-blue-600/20">
                         <i class="fa-solid fa-play" id="play-icon"></i>
                         <span id="play-text">Roll Reaction Ball</span>
                     </button>
                     <button id="btn-reset"
-                        class="px-3 py-1.5 bg-white hover:bg-slate-100 text-slate-700 rounded-lg text-xs sm:text-sm font-medium border border-slate-300 transition flex items-center gap-1.5 shadow-xs">
+                        class="px-3.5 py-2 bg-white hover:bg-slate-100 text-slate-700 rounded-lg text-sm font-medium border border-slate-300 transition flex items-center gap-1.5 shadow-sm">
                         <i class="fa-solid fa-rotate-right text-slate-500"></i>
                         <span>Reset</span>
                     </button>
@@ -94,13 +94,13 @@
 
                 <!-- Property Owner Motivation Telemetry Badge -->
                 <div id="physics-telemetry"
-                    class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-xs sm:text-sm">
+                    class="flex items-center gap-2.5 px-3.5 py-2 rounded-lg bg-slate-100 border border-slate-200 text-sm">
                     <span class="flex items-center gap-1.5 text-slate-700 font-medium flex-shrink-0">
-                        <i class="fa-solid fa-user-tie text-blue-600 text-sm"></i>
+                        <i class="fa-solid fa-user-tie text-blue-600 text-base"></i>
                         <span>Owner Motivation:</span>
                     </span>
                     <span id="telemetry-motivation"
-                        class="px-2 py-0.5 rounded font-bold uppercase tracking-wider text-[11px] sm:text-xs bg-emerald-100 text-emerald-800 border border-emerald-300 flex-shrink-0">High</span>
+                        class="px-2.5 py-0.5 rounded font-bold uppercase tracking-wider text-xs bg-emerald-100 text-emerald-800 border border-emerald-300 flex-shrink-0">High</span>
                     <span class="text-slate-300 flex-shrink-0">|</span>
                     <span id="telemetry-status" class="text-slate-800 font-medium">Ready</span>
                 </div>
@@ -109,71 +109,71 @@
     </header>
 
     <main
-        class="flex-1 w-full px-4 py-3 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-start">
+        class="flex-1 w-full px-4 py-6 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
         <!-- Left Controls Panel (4 Cols on lg, 3 Cols on xl/2xl) -->
-        <section class="lg:col-span-4 xl:col-span-3 2xl:col-span-3 space-y-3">
+        <section class="lg:col-span-4 xl:col-span-3 2xl:col-span-3 space-y-6">
 
             <!-- Preset Selection Card -->
-            <div class="bg-white border border-slate-200 rounded-xl p-3.5 shadow-sm">
-                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-600 mb-2 flex items-center gap-1.5">
+            <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+                <h2 class="text-sm font-bold uppercase tracking-wider text-slate-600 mb-3 flex items-center gap-2">
                     <i class="fa-solid fa-sliders text-blue-600"></i> Model Scenario Presets
                 </h2>
-                <div class="grid grid-cols-2 gap-2">
+                <div class="grid grid-cols-2 gap-2.5">
                     <button data-preset="A"
-                        class="preset-btn px-2.5 py-1.5 text-left rounded-lg border border-slate-200 hover:border-emerald-400 bg-slate-50 hover:bg-emerald-50/60 transition group shadow-xs">
-                        <div class="text-xs font-bold text-slate-800 group-hover:text-emerald-700">Scenario A</div>
-                        <div class="text-[11px] text-slate-500">Standard / Optimal</div>
+                        class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-200 hover:border-emerald-400 bg-slate-50 hover:bg-emerald-50/60 transition group shadow-xs">
+                        <div class="text-sm font-bold text-slate-800 group-hover:text-emerald-700">Scenario A</div>
+                        <div class="text-xs text-slate-500">Standard / Optimal</div>
                     </button>
                     <button data-preset="B"
-                        class="preset-btn px-2.5 py-1.5 text-left rounded-lg border border-slate-200 hover:border-red-400 bg-slate-50 hover:bg-red-50/60 transition group shadow-xs">
-                        <div class="text-xs font-bold text-slate-800 group-hover:text-red-700">Scenario B</div>
-                        <div class="text-[11px] text-slate-500">Excessive Cap-Ex</div>
+                        class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-200 hover:border-red-400 bg-slate-50 hover:bg-red-50/60 transition group shadow-xs">
+                        <div class="text-sm font-bold text-slate-800 group-hover:text-red-700">Scenario B</div>
+                        <div class="text-xs text-slate-500">Excessive Cap-Ex</div>
                     </button>
                     <button data-preset="C"
-                        class="preset-btn px-2.5 py-1.5 text-left rounded-lg border border-slate-200 hover:border-amber-400 bg-slate-50 hover:bg-amber-50/60 transition group shadow-xs">
-                        <div class="text-xs font-bold text-slate-800 group-hover:text-amber-700">Scenario C</div>
-                        <div class="text-[11px] text-slate-500">Long Downtime</div>
+                        class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-200 hover:border-amber-400 bg-slate-50 hover:bg-amber-50/60 transition group shadow-xs">
+                        <div class="text-sm font-bold text-slate-800 group-hover:text-amber-700">Scenario C</div>
+                        <div class="text-xs text-slate-500">Long Downtime</div>
                     </button>
                     <button data-preset="D"
-                        class="preset-btn px-2.5 py-1.5 text-left rounded-lg border border-slate-200 hover:border-rose-400 bg-slate-50 hover:bg-rose-50/60 transition group shadow-xs">
-                        <div class="text-xs font-bold text-slate-800 group-hover:text-rose-700">Scenario D</div>
-                        <div class="text-[11px] text-slate-500">Increased Op-Ex</div>
+                        class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-200 hover:border-rose-400 bg-slate-50 hover:bg-rose-50/60 transition group shadow-xs">
+                        <div class="text-sm font-bold text-slate-800 group-hover:text-rose-700">Scenario D</div>
+                        <div class="text-xs text-slate-500">Increased Op-Ex</div>
                     </button>
                 </div>
             </div>
 
             <!-- Parameter Controls Container -->
-            <div class="space-y-2.5">
+            <div class="space-y-4">
 
                 <!-- Card 1: Input Parameters (Collapsible) -->
-                <div class="bg-white border border-slate-200 rounded-xl p-3.5 shadow-sm">
+                <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
                     <details class="group">
                         <summary class="cursor-pointer list-none flex items-center justify-between select-none">
                             <h2
-                                class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                                class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
                                 <i class="fa-solid fa-gears text-blue-600"></i> Input Parameters
                                 <span id="custom-badge"
-                                    class="hidden text-[10px] bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded-full border border-blue-300">Customized</span>
+                                    class="hidden text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full border border-blue-300">Customized</span>
                             </h2>
                             <i
-                                class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform text-xs"></i>
+                                class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform text-sm"></i>
                         </summary>
 
-                        <div class="space-y-3.5 pt-3">
+                        <div class="space-y-5 pt-4">
                             <!-- Total Integrated Cap-Ex -->
                             <div class="relative">
-                                <div class="flex justify-between items-baseline text-xs mb-1">
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
                                     <div class="flex items-center gap-1.5">
                                         <label class="font-medium text-slate-700">Total Integrated Cap-Ex ($)</label>
                                         <button type="button" class="param-tooltip-btn" data-tooltip-id="tip-capex"
                                             title="Click for parameter description"
                                             aria-label="Info on Total Integrated Cap-Ex">
-                                            <i class="fa-solid fa-circle-info text-[11px] pointer-events-none"></i>
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
                                         </button>
                                     </div>
                                     <span id="val-capex"
-                                        class="text-blue-600 font-mono font-bold text-sm">$350k</span>
+                                        class="text-blue-600 font-mono font-bold text-base">$350k</span>
                                 </div>
                                 <div id="tip-capex"
                                     class="param-popover hidden absolute z-30 left-0 right-0 top-7 p-3 rounded-lg bg-white border border-slate-300 shadow-xl text-xs text-slate-700">
@@ -193,9 +193,9 @@
                                         fund to cross the transition state.</p>
                                 </div>
                                 <input type="range" id="slider-capex" min="50" max="900" step="10" value="350"
-                                    class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                                <div class="flex justify-between items-center text-[11px] text-slate-500 mt-1">
-                                    <span>Investment over implementation</span>
+                                    class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                                <div class="flex justify-between items-center text-xs text-slate-500 mt-1.5">
+                                    <span>Total investment over implementation period</span>
                                     <span id="val-peak-rate" class="text-amber-600 font-mono font-medium">Peak:
                                         ~$47.5k/mo</span>
                                 </div>
@@ -203,17 +203,17 @@
 
                             <!-- Baseline Implementation Duration -->
                             <div class="relative">
-                                <div class="flex justify-between items-baseline text-xs mb-1">
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
                                     <div class="flex items-center gap-1.5">
                                         <label class="font-medium text-slate-700">Implementation Duration
                                             (Months)</label>
                                         <button type="button" class="param-tooltip-btn"
                                             data-tooltip-id="tip-install-time" title="Click for parameter description"
                                             aria-label="Info on Implementation Duration">
-                                            <i class="fa-solid fa-circle-info text-[11px] pointer-events-none"></i>
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
                                         </button>
                                     </div>
-                                    <span id="val-install-time" class="text-blue-600 font-mono font-bold text-sm">12
+                                    <span id="val-install-time" class="text-blue-600 font-mono font-bold text-base">12
                                         mos</span>
                                 </div>
                                 <div id="tip-install-time"
@@ -233,14 +233,14 @@
                                         forward momentum.</p>
                                 </div>
                                 <input type="range" id="slider-install-time" min="2" max="24" step="1" value="12"
-                                    class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                                <p class="text-[11px] text-slate-500 mt-1 leading-snug">Shorter implementation windows
-                                    reduce disruption and elevate motivation.</p>
+                                    class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Shorter implementation windows
+                                    reduce disruption and strongly elevate owner motivation.</p>
                             </div>
 
                             <!-- Commissioning Duration -->
                             <div class="relative">
-                                <div class="flex justify-between items-baseline text-xs mb-1">
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
                                     <div class="flex items-center gap-1.5">
                                         <label class="font-medium text-slate-700">Commissioning Duration
                                             (Months)</label>
@@ -248,10 +248,10 @@
                                             data-tooltip-id="tip-commission-time"
                                             title="Click for parameter description"
                                             aria-label="Info on Commissioning Duration">
-                                            <i class="fa-solid fa-circle-info text-[11px] pointer-events-none"></i>
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
                                         </button>
                                     </div>
-                                    <span id="val-commission-time" class="text-blue-600 font-mono font-bold text-sm">6
+                                    <span id="val-commission-time" class="text-blue-600 font-mono font-bold text-base">6
                                         mos</span>
                                 </div>
                                 <div id="tip-commission-time"
@@ -270,25 +270,25 @@
                                         smoothly down into steady zero-emission performance.</p>
                                 </div>
                                 <input type="range" id="slider-commission-time" min="1" max="12" step="1" value="6"
-                                    class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                                <p class="text-[11px] text-slate-500 mt-1 leading-snug">Transitional optimization
-                                    period toward steady zero-emission operation.</p>
+                                    class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Transitional optimization
+                                    period toward stable zero-emission operation.</p>
                             </div>
 
                             <!-- Operational Savings / Delta -->
                             <div class="relative">
-                                <div class="flex justify-between items-baseline text-xs mb-1">
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
                                     <div class="flex items-center gap-1.5">
                                         <label class="font-medium text-slate-700">Post-Retrofit Annual Op-Ex Delta
                                             ($/Year) </label>
                                         <button type="button" class="param-tooltip-btn" data-tooltip-id="tip-opex-delta"
                                             title="Click for parameter description"
                                             aria-label="Info on Post-Retrofit Annual Op-Ex Delta">
-                                            <i class="fa-solid fa-circle-info text-[11px] pointer-events-none"></i>
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
                                         </button>
                                     </div>
                                     <span id="val-opex-delta"
-                                        class="text-emerald-600 font-mono font-bold text-sm">-$60k/yr</span>
+                                        class="text-emerald-600 font-mono font-bold text-base">-$60k/yr</span>
                                 </div>
                                 <div id="tip-opex-delta"
                                     class="param-popover hidden absolute z-30 left-0 right-0 top-7 p-3 rounded-lg bg-white border border-slate-300 shadow-xl text-xs text-slate-700">
@@ -308,14 +308,14 @@
                                         unfavorable).</p>
                                 </div>
                                 <input type="range" id="slider-opex-delta" min="-120" max="50" step="5" value="-60"
-                                    class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                                <p class="text-[11px] text-slate-500 mt-1">Negative values = Green savings. Positive
+                                    class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-xs text-slate-500 mt-1.5">Negative values = Green savings. Positive
                                     values = Red added costs.</p>
                             </div>
 
                             <!-- Ownership Discount Rate for Future Savings -->
-                            <div class="pt-2.5 border-t border-slate-200 relative">
-                                <div class="flex justify-between items-baseline text-xs mb-1">
+                            <div class="pt-3 border-t border-slate-200 relative">
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
                                     <div class="flex items-center gap-1.5">
                                         <label class="font-medium text-slate-700 flex items-center gap-1.5">
                                             <i class="fa-solid fa-percent text-purple-600"></i> Ownership Discount Rate
@@ -324,11 +324,11 @@
                                         <button type="button" class="param-tooltip-btn" data-tooltip-id="tip-discount"
                                             title="Click for parameter description"
                                             aria-label="Info on Ownership Discount Rate">
-                                            <i class="fa-solid fa-circle-info text-[11px] pointer-events-none"></i>
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
                                         </button>
                                     </div>
                                     <span id="val-discount"
-                                        class="text-purple-600 font-mono font-bold text-sm">6.0%</span>
+                                        class="text-purple-600 font-mono font-bold text-base">6.0%</span>
                                 </div>
                                 <div id="tip-discount"
                                     class="param-popover hidden absolute z-30 left-0 right-0 top-10 p-3 rounded-lg bg-white border border-slate-300 shadow-xl text-xs text-slate-700">
@@ -348,9 +348,9 @@
                                         visually capturing the diminished present value of distant returns.</p>
                                 </div>
                                 <input type="range" id="slider-discount" min="0" max="20" step="0.5" value="6.0"
-                                    class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                                <p class="text-[11px] text-slate-500 mt-1 leading-snug">Discounts present value of
-                                    future annual Op-Ex savings across years.</p>
+                                    class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Discounts the present value of
+                                    future annual Op-Ex savings across operational years.</p>
                             </div>
 
                         </div>
@@ -358,32 +358,32 @@
                 </div>
 
                 <!-- Card 2: Financial Horizon & Baseline (Collapsible) -->
-                <div class="bg-white border border-slate-200 rounded-xl p-3.5 shadow-sm">
+                <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
                     <details class="group">
                         <summary class="cursor-pointer list-none flex items-center justify-between select-none">
                             <h2
-                                class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                                class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
                                 <i class="fa-solid fa-coins text-purple-600"></i> Financial Horizon &amp; Baseline
                             </h2>
                             <i
-                                class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform text-xs"></i>
+                                class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform text-sm"></i>
                         </summary>
 
-                        <div class="space-y-3.5 pt-3">
+                        <div class="space-y-5 pt-4">
                             <!-- Pre-Retrofit Baseline Op-Ex -->
                             <div class="relative">
-                                <div class="flex justify-between items-baseline text-xs mb-1">
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
                                     <div class="flex items-center gap-1.5">
                                         <label class="font-medium text-slate-700">Pre-Retrofit Baseline Op-Ex
                                             ($/Year)</label>
                                         <button type="button" class="param-tooltip-btn"
                                             data-tooltip-id="tip-baseline-opex" title="Click for parameter description"
                                             aria-label="Info on Baseline Op-Ex">
-                                            <i class="fa-solid fa-circle-info text-[11px] pointer-events-none"></i>
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
                                         </button>
                                     </div>
                                     <span id="val-baseline-opex"
-                                        class="text-slate-800 font-mono font-bold text-sm">$150k/yr</span>
+                                        class="text-slate-800 font-mono font-bold text-base">$150k/yr</span>
                                 </div>
                                 <div id="tip-baseline-opex"
                                     class="param-popover hidden absolute z-30 left-0 right-0 top-7 p-3 rounded-lg bg-white border border-slate-300 shadow-xl text-xs text-slate-700">
@@ -403,23 +403,23 @@
                                         evaluated relative to this datum.</p>
                                 </div>
                                 <input type="range" id="slider-baseline-opex" min="50" max="300" step="10" value="150"
-                                    class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                                <p class="text-[11px] text-slate-500 mt-1 leading-snug">Pre-retrofit baseline operating
+                                    class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Pre-retrofit baseline operating
                                     expenditure datum.</p>
                             </div>
 
                             <!-- Evaluation Horizon -->
                             <div class="relative">
-                                <div class="flex justify-between items-baseline text-xs mb-1">
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
                                     <div class="flex items-center gap-1.5">
                                         <label class="font-medium text-slate-700">Evaluation Horizon (Years)</label>
                                         <button type="button" class="param-tooltip-btn" data-tooltip-id="tip-horizon"
                                             title="Click for parameter description"
                                             aria-label="Info on Evaluation Horizon">
-                                            <i class="fa-solid fa-circle-info text-[11px] pointer-events-none"></i>
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
                                         </button>
                                     </div>
-                                    <span id="val-horizon" class="text-slate-800 font-mono font-bold text-sm">20
+                                    <span id="val-horizon" class="text-slate-800 font-mono font-bold text-base">20
                                         Years</span>
                                 </div>
                                 <div id="tip-horizon"
@@ -437,8 +437,8 @@
                                         tracked following post-retrofit commissioning.</p>
                                 </div>
                                 <input type="range" id="slider-horizon" min="5" max="30" step="1" value="20"
-                                    class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                                <p class="text-[11px] text-slate-500 mt-1 leading-snug">Total operational horizon for
+                                    class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Total operational horizon for
                                     NPV and ROI tracking.</p>
                             </div>
                         </div>
@@ -446,21 +446,21 @@
                 </div>
 
                 <!-- Card 3: Policy Interventions (Collapsible) -->
-                <div class="bg-white border border-slate-200 rounded-xl p-3.5 shadow-sm">
+                <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
                     <details class="group">
                         <summary class="cursor-pointer list-none flex items-center justify-between select-none">
                             <h2
-                                class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                                class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
                                 <i class="fa-solid fa-landmark text-cyan-600"></i> Policy Interventions
                             </h2>
                             <i
-                                class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform text-xs"></i>
+                                class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform text-sm"></i>
                         </summary>
 
-                        <div class="space-y-3.5 pt-3">
+                        <div class="space-y-5 pt-4">
                             <!-- Policy Barrier Reduction -->
                             <div class="relative">
-                                <div class="flex justify-between items-baseline text-xs mb-1">
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
                                     <div class="flex items-center gap-1.5">
                                         <label class="font-medium text-slate-700 flex items-center gap-1.5">
                                             <i class="fa-solid fa-file-signature text-cyan-600"></i> Barrier Reduction /
@@ -470,11 +470,11 @@
                                             data-tooltip-id="tip-barrier-reduction"
                                             title="Click for parameter description"
                                             aria-label="Info on Barrier Reduction / Speedup">
-                                            <i class="fa-solid fa-circle-info text-[11px] pointer-events-none"></i>
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
                                         </button>
                                     </div>
                                     <span id="val-barrier-reduction"
-                                        class="text-cyan-700 font-mono font-bold text-sm">0%
+                                        class="text-cyan-700 font-mono font-bold text-base">0%
                                         (6 mos)</span>
                                 </div>
                                 <div id="tip-barrier-reduction"
@@ -495,14 +495,14 @@
                                         owner adoption rates.</p>
                                 </div>
                                 <input type="range" id="slider-barrier-reduction" min="0" max="75" step="5" value="0"
-                                    class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                                <p class="text-[11px] text-slate-500 mt-1 leading-snug">Accelerates permitting &
-                                    inspections, boosting momentum.</p>
+                                    class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Accelerates permitting &
+                                    inspections, directly boosting owner momentum.</p>
                             </div>
 
                             <!-- Policy Catalyst / Incentive -->
-                            <div class="pt-2.5 border-t border-slate-200 relative">
-                                <div class="flex justify-between items-baseline text-xs mb-1">
+                            <div class="pt-3 border-t border-slate-200 relative">
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
                                     <div class="flex items-center gap-1.5">
                                         <label class="font-medium text-slate-700 flex items-center gap-1.5">
                                             <i class="fa-solid fa-flask text-amber-600"></i> Policy Catalyst / Incentive
@@ -511,11 +511,11 @@
                                         <button type="button" class="param-tooltip-btn" data-tooltip-id="tip-catalyst"
                                             title="Click for parameter description"
                                             aria-label="Info on Policy Catalyst / Incentive Offset">
-                                            <i class="fa-solid fa-circle-info text-[11px] pointer-events-none"></i>
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
                                         </button>
                                     </div>
                                     <span id="val-catalyst"
-                                        class="text-amber-600 font-mono font-bold text-sm">0%</span>
+                                        class="text-amber-600 font-mono font-bold text-base">0%</span>
                                 </div>
                                 <div id="tip-catalyst"
                                     class="param-popover hidden absolute z-30 left-0 right-0 top-10 p-3 rounded-lg bg-white border border-slate-300 shadow-xl text-xs text-slate-700">
@@ -534,8 +534,8 @@
                                         without altering pre-retrofit or post-retrofit baseline energetics.</p>
                                 </div>
                                 <input type="range" id="slider-catalyst" min="0" max="100" step="5" value="0"
-                                    class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                                <p class="text-[11px] text-slate-500 mt-1 leading-snug">Lowers the Cap-Ex peak like a
+                                    class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Lowers the Cap-Ex peak like a
                                     chemical catalyst lowers activation energy.</p>
                             </div>
                         </div>
@@ -546,20 +546,21 @@
         </section>
 
         <!-- Right Display & Graph Area (8 Cols on lg, 9 Cols on xl/2xl) -->
-        <section class="lg:col-span-8 xl:col-span-9 2xl:col-span-9 space-y-3.5 flex flex-col">
+        <section class="lg:col-span-8 xl:col-span-9 2xl:col-span-9 space-y-6 flex flex-col">
 
             <!-- Chart Display Card -->
-            <div class="bg-white border border-slate-200 rounded-xl p-3.5 sm:p-4 shadow-sm flex flex-col h-[370px] lg:h-[390px] xl:h-[410px] 2xl:h-[440px] relative">
-                <div class="flex flex-wrap justify-between items-center mb-2.5 gap-2">
+            <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex flex-col h-[520px] relative">
+                <div class="flex flex-wrap justify-between items-center mb-4 gap-3">
                     <div>
-                        <h2 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
-                            <i class="fa-solid fa-chart-line text-emerald-600 text-base sm:text-lg"></i> Zero-Emissions Project
+                        <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line text-emerald-600 text-lg"></i> Zero-Emissions Project
                             Activation Cost Trajectory
                         </h2>
-                        <div class="flex flex-wrap items-center gap-2 mt-0.5">
-                            <p class="text-xs text-slate-500">X-Axis: Project Timeline | Y-Axis: Effective Cost Rate ($/mo)</p>
+                        <div class="flex flex-wrap items-center gap-2 mt-1">
+                            <p class="text-xs sm:text-sm text-slate-500">X-Axis: Project Timeline | Y-Axis: Effective
+                                Cost Rate ($/mo)</p>
                             <span
-                                class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium bg-amber-50 text-amber-900 border border-amber-200 shadow-2xs">
+                                class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-900 border border-amber-200 shadow-2xs">
                                 <i class="fa-solid fa-arrows-left-right-to-line text-amber-600"></i>
                                 <span><strong>Non-Linear Scale:</strong> Zoomed Transition (Months) &bull; Compressed
                                     Operation (<span id="scale-badge-horizon">20 Yrs</span>)</span>
@@ -568,25 +569,25 @@
                     </div>
 
                     <!-- Driving Force & Legend Controls -->
-                    <div class="flex flex-wrap items-center gap-2.5 text-xs">
+                    <div class="flex flex-wrap items-center gap-3.5 text-xs">
                         <div id="pill-driving-force"
-                            class="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200 font-mono text-slate-700 flex items-center gap-1.5 shadow-2xs">
+                            class="px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 font-mono text-slate-700 flex items-center gap-2 shadow-2xs">
                             <span class="text-slate-500 font-sans">Cumulative Savings (PV):</span>
-                            <span id="val-cum-savings" class="text-emerald-600 font-bold text-xs sm:text-sm">$688k</span>
+                            <span id="val-cum-savings" class="text-emerald-600 font-bold text-sm">$688k</span>
                             <span class="text-slate-300">|</span>
                             <span class="text-slate-500 font-sans">Motivation:</span>
-                            <span id="pill-motivation-level" class="font-bold text-emerald-600 text-xs sm:text-sm">High</span>
+                            <span id="pill-motivation-level" class="font-bold text-emerald-600 text-sm">High</span>
                         </div>
 
-                        <div class="flex items-center gap-2.5 text-[11px] text-slate-600">
-                            <span class="flex items-center gap-1"><span
-                                    class="w-2.5 h-2.5 rounded-full bg-red-500 inline-block shadow-xs"></span> Cost
+                        <div class="flex items-center gap-3.5 text-xs text-slate-600">
+                            <span class="flex items-center gap-1.5"><span
+                                    class="w-3 h-3 rounded-full bg-red-500 inline-block shadow-xs"></span> Cost
                                 Increase</span>
-                            <span class="flex items-center gap-1"><span
-                                    class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block shadow-xs"></span> Cost
+                            <span class="flex items-center gap-1.5"><span
+                                    class="w-3 h-3 rounded-full bg-emerald-500 inline-block shadow-xs"></span> Cost
                                 Reduction</span>
-                            <span class="flex items-center gap-1"><span
-                                    class="w-3 h-0.5 border-b-2 border-dashed border-slate-400 inline-block"></span>
+                            <span class="flex items-center gap-1.5"><span
+                                    class="w-3.5 h-0.5 border-b-2 border-dashed border-slate-400 inline-block"></span>
                                 Baseline Op-Ex</span>
                         </div>
                     </div>
@@ -594,65 +595,68 @@
 
                 <!-- Canvas Container with Hover Tooltip Integration -->
                 <div id="canvas-container"
-                    class="relative flex-1 w-full h-full min-h-[250px] bg-white rounded-lg border border-slate-200 overflow-hidden cursor-crosshair shadow-inner">
+                    class="relative flex-1 w-full h-full min-h-[380px] bg-white rounded-lg border border-slate-200 overflow-hidden cursor-crosshair shadow-inner">
                     <canvas id="activationCanvas" class="absolute inset-0 w-full h-full"></canvas>
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <!-- KPI 1: Net Present Value -->
-                <div class="bg-white border border-slate-200 rounded-xl p-3 shadow-sm">
-                    <div class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Net Present Value (NPV)</div>
-                    <div id="kpi-npv" class="text-xl sm:text-2xl font-bold font-mono text-emerald-600 mt-1">$0</div>
-                    <div id="kpi-npv-sub" class="text-[11px] text-slate-400 mt-0.5">Lifetime net value</div>
+                <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                    <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Net Present Value (NPV)
+                    </div>
+                    <div id="kpi-npv" class="text-2xl font-bold font-mono text-emerald-600 mt-1.5">$0</div>
+                    <div id="kpi-npv-sub" class="text-xs text-slate-400 mt-1">Lifetime net value</div>
                 </div>
 
                 <!-- KPI 2: Simple Payback -->
-                <div class="bg-white border border-slate-200 rounded-xl p-3 shadow-sm">
-                    <div class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Simple Payback</div>
-                    <div id="kpi-payback" class="text-xl sm:text-2xl font-bold font-mono text-emerald-600 mt-1">0.0 yrs</div>
-                    <div id="kpi-payback-sub" class="text-[11px] text-slate-400 mt-0.5">Break-even (&lt;5 yrs rolls over)</div>
+                <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                    <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Simple Payback</div>
+                    <div id="kpi-payback" class="text-2xl font-bold font-mono text-emerald-600 mt-1.5">0.0 yrs</div>
+                    <div id="kpi-payback-sub" class="text-xs text-slate-400 mt-1">Break-even (&lt;5 yrs rolls over)
+                    </div>
                 </div>
 
                 <!-- KPI 3: ROI -->
-                <div class="bg-white border border-slate-200 rounded-xl p-3 shadow-sm">
-                    <div class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Project ROI</div>
-                    <div id="kpi-roi" class="text-xl sm:text-2xl font-bold font-mono text-emerald-600 mt-1">0%</div>
-                    <div id="kpi-roi-sub" class="text-[11px] text-slate-400 mt-0.5">Return on investment (NPV / Cap-Ex)</div>
+                <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                    <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Project ROI</div>
+                    <div id="kpi-roi" class="text-2xl font-bold font-mono text-emerald-600 mt-1.5">0%</div>
+                    <div id="kpi-roi-sub" class="text-xs text-slate-400 mt-1">Return on investment (NPV / Cap-Ex)</div>
                 </div>
 
                 <!-- KPI 4: Effective Cap-Ex -->
-                <div class="bg-white border border-slate-200 rounded-xl p-3 shadow-sm">
-                    <div class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Effective Cap-Ex Barrier</div>
-                    <div id="kpi-net-capex" class="text-xl sm:text-2xl font-bold font-mono text-amber-600 mt-1">$0</div>
-                    <div id="kpi-net-capex-sub" class="text-[11px] text-slate-400 mt-0.5">After policy incentive offset</div>
+                <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                    <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Effective Cap-Ex Barrier
+                    </div>
+                    <div id="kpi-net-capex" class="text-2xl font-bold font-mono text-amber-600 mt-1.5">$0</div>
+                    <div id="kpi-net-capex-sub" class="text-xs text-slate-400 mt-1">After policy incentive offset</div>
                 </div>
             </div>
 
-            <div class="bg-white border border-slate-200 rounded-xl p-3.5 shadow-sm">
-                <h3 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
-                    <i class="fa-solid fa-atom text-purple-600 text-sm"></i> Conceptual Framework: Analogizing
+            <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-slate-700 mb-2.5 flex items-center gap-2">
+                    <i class="fa-solid fa-atom text-purple-600 text-base"></i> Conceptual Framework: Analogizing
                     Zero-Emission Building Retrofit Dynamics to Chemical Reaction Kinetics
                 </h3>
-                <p id="scenario-description" class="text-xs sm:text-sm text-slate-700 leading-normal font-normal">
+                <p id="scenario-description" class="text-sm text-slate-700 leading-relaxed font-normal">
                     Loading scenario overview...
                 </p>
                 <div
-                    class="grid grid-cols-1 md:grid-cols-3 gap-2.5 mt-2.5 text-xs text-slate-600 border-t border-slate-200 pt-2.5">
-                    <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200 leading-relaxed">
-                        <span class="font-bold block mb-0.5 text-xs sm:text-sm text-emerald-700">1. Reactants
+                    class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mt-4 text-xs sm:text-sm text-slate-600 border-t border-slate-200 pt-3.5">
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 leading-relaxed">
+                        <span class="font-bold block mb-1 text-sm text-emerald-700">1. Reactants
                             (Pre-Retrofit State)</span>
                         Baseline operational state with existing installed emissive equipment. Project
                         implementation costs and disruptions must be weighed against anticipated future savings.
                     </div>
-                    <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200 leading-relaxed">
-                        <span class="font-bold block mb-0.5 text-xs sm:text-sm text-amber-700">2. Activation Barrier
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 leading-relaxed">
+                        <span class="font-bold block mb-1 text-sm text-amber-700">2. Activation Barrier
                             (Cap-Ex + Disruptions)</span>
                         Barriers related to upfront capital expenditures, equipment procurement, implementation
                         disruption, and commissioning required (Red shaded region).
                     </div>
-                    <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200 leading-relaxed">
-                        <span class="font-bold block mb-0.5 text-xs sm:text-sm text-cyan-700">3. Products
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 leading-relaxed">
+                        <span class="font-bold block mb-1 text-sm text-cyan-700">3. Products
                             (Zero-Emission State)</span>
                         Financial return when operational expenditures change permanently relative to pre-retrofit
                         baseline levels (Green or Red shaded region).
@@ -725,13 +729,13 @@
                 description: "<strong>Scenario C (Excessive Implementation Downtime):</strong> The total integrated Cap-Ex is identical to Scenario A ($350k), but spread across an elongated 18-month implementation with a 6.3-year payback (>5 yrs). The prolonged disruption and delayed savings fail to provide the kinetic momentum required to surmount the barrier, resulting in rollback."
             },
             D: {
-                totalCapex: 50,
+                totalCapex: 320,
                 installDuration: 5,
                 barrierReduction: 0,
                 commissionDuration: 5,
                 opexDelta: 25,
                 catalyst: 0,
-                description: "<strong>Scenario D (Increased Operational Expenditures):</strong> An endothermic / unfavorable outcome with no economic payback. Even with a modest upfront Cap-Ex ($50k), ongoing operational expenditures exceed the pre-retrofit baseline (red area), producing near-zero driving motivation and immediate rollback."
+                description: "<strong>Scenario D (Increased Operational Expenditures):</strong> An endothermic / unfavorable outcome with no economic payback. Ongoing operational expenditures exceed the pre-retrofit baseline (red area), producing near-zero driving motivation and immediate rollback."
             }
         };
 
