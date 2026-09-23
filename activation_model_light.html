@@ -2334,11 +2334,11 @@
 
             if (state.financingEnabled) {
                 if (debtInfo.equityDown === 0) {
-                    actHeader = 'Barrier Leveled (100% Debt):';
+                    actHeader = 'Activation Barrier';
                     actLine1 = `Upfront Equity: $0k ($${Math.round(debtInfo.debtPrincipal)}k Financed)`;
                     actLine2 = `Debt Service: $${debtInfo.monthlyPayment.toFixed(1)}k/mo (Starts Mo 0)`;
                 } else {
-                    actHeader = `Barrier Mitigated (${state.financedPct}% Debt):`;
+                    actHeader = `Debt (${state.financedPct}%):`;
                     actLine1 = `Upfront Equity: $${Math.round(debtInfo.equityDown)}k (${100 - state.financedPct}%)`;
                     actLine2 = `Financed: $${Math.round(debtInfo.debtPrincipal)}k @ $${debtInfo.monthlyPayment.toFixed(1)}k/mo (Starts Mo 0)`;
                 }
