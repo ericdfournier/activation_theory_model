@@ -544,7 +544,7 @@
 
                 <!-- Card 4: Project Financing & Debt Service (Collapsible) -->
                 <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
-                    <details class="group" id="details-financing" open>
+                    <details class="group" id="details-financing">
                         <summary class="cursor-pointer list-none flex items-center justify-between select-none">
                             <h2
                                 class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
@@ -744,7 +744,8 @@
                 </div>
             </div>
 
-            <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+            <!-- Conceptual Framework: Chemical Reaction Kinetics (Default / Unfinanced) -->
+            <div id="card-framework-kinetics" class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
                 <h3 class="text-sm font-bold uppercase tracking-wider text-slate-700 mb-2.5 flex items-center gap-2">
                     <i class="fa-solid fa-atom text-purple-600 text-base"></i> Conceptual Framework: Analogizing
                     Zero-Emission Building Retrofit Dynamics to Chemical Reaction Kinetics
@@ -772,6 +773,78 @@
                         Financial return when operational expenditures change permanently relative to pre-retrofit
                         baseline levels (Green or Red shaded region).
                     </div>
+                </div>
+            </div>
+
+            <!-- Conceptual Framework: Project Financing & Debt Service Dynamics (Financed Mode) -->
+            <div id="card-framework-financing"
+                class="hidden bg-white border border-emerald-200 rounded-xl p-5 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-2.5">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-hand-holding-dollar text-emerald-600 text-base"></i>
+                        Financing Framework: Debt Service Coverage &amp; Owner Motivation Dynamics
+                    </h3>
+                    <span id="framework-dscr-pill"
+                        class="px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-emerald-100 text-emerald-800 border border-emerald-300">
+                        DSCR: 1.80x (Self-Funding)
+                    </span>
+                </div>
+                <p id="financing-framework-desc" class="text-sm text-slate-700 leading-relaxed font-normal">
+                    Under project debt financing, upfront capital expenditures are amortized into recurring monthly debt
+                    service payments ($D$), shifting decision economics from a simple payback constraint to ongoing
+                    <strong>Debt Service Coverage Ratio (DSCR)</strong> and cash-flow viability. Property owner
+                    motivation and kinetic trajectory velocity are directly governed by whether operational cost savings
+                    service the debt from Month 0:
+                </p>
+                <div
+                    class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mt-4 text-xs sm:text-sm text-slate-600 border-t border-slate-200 pt-3.5">
+                    <div id="tier-card-high"
+                        class="p-3 rounded-lg border transition-all leading-relaxed bg-slate-50 border-slate-200">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="font-bold text-sm text-emerald-700">1. Self-Funding &amp; Cash-Flow+</span>
+                            <span
+                                class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-200">DSCR
+                                ≥ 1.0x</span>
+                        </div>
+                        <p class="mb-1.5"><strong class="text-slate-800">High / Very High Motivation:</strong> Monthly
+                            Op-Ex savings fully offset or exceed monthly debt payments. If DSCR ≥ 1.25x, the project
+                            yields immediate net positive retained income.</p>
+                    </div>
+                    <div id="tier-card-medium"
+                        class="p-3 rounded-lg border transition-all leading-relaxed bg-slate-50 border-slate-200">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="font-bold text-sm text-amber-700">2. Operating Cash Deficit</span>
+                            <span
+                                class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-200">0
+                                &lt; DSCR &lt; 1.0x</span>
+                        </div>
+                        <p class="mb-1.5"><strong class="text-slate-800">Medium Motivation:</strong> Operational savings
+                            exist but fall short of servicing the full monthly loan payment during the amortization
+                            period.</p>
+                    </div>
+                    <div id="tier-card-low"
+                        class="p-3 rounded-lg border transition-all leading-relaxed bg-slate-50 border-slate-200">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="font-bold text-sm text-rose-700">3. Unfavorable Economics</span>
+                            <span
+                                class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-rose-100 text-rose-800 border border-rose-200">No
+                                Savings</span>
+                        </div>
+                        <p class="mb-1.5"><strong class="text-slate-800">Low Motivation:</strong> Project increases
+                            ongoing operational expenditures (e.g. Scenario D) on top of new debt service commitments.
+                        </p>
+                    </div>
+                </div>
+                <div id="framework-milestone-footer"
+                    class="mt-3.5 pt-3 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-600 bg-emerald-50/50 p-2.5 rounded-lg border border-emerald-100">
+                    <span id="framework-milestone-text" class="flex items-center gap-1.5 font-medium text-slate-700">
+                        <i class="fa-solid fa-flag-checkered text-emerald-600"></i>
+                        <span>Debt Retirement: After Year 10 (Month 120), debt is 100% retired, unlocking full
+                            unencumbered savings.</span>
+                    </span>
+                    <span id="framework-status-summary" class="font-mono font-bold text-emerald-700">
+                        Active: +$2.22k/mo Net Retained Cash Flow
+                    </span>
                 </div>
             </div>
 
@@ -1536,6 +1609,7 @@
                 }
             }
 
+            updateFrameworkCard();
             updateTelemetryUI();
         }
 
@@ -1639,6 +1713,85 @@
 
                 kpis.roi.innerText = roi;
                 kpis.roi.className = roiVal >= 0 ? "text-2xl font-bold font-mono text-emerald-600 mt-1.5" : "text-2xl font-bold font-mono text-red-600 mt-1.5";
+            }
+
+            updateFrameworkCard();
+        }
+
+        // Toggles and updates the Conceptual Framework card when debt financing is enabled
+        function updateFrameworkCard() {
+            const cardKinetics = document.getElementById('card-framework-kinetics');
+            const cardFinancing = document.getElementById('card-framework-financing');
+            if (!cardKinetics || !cardFinancing) return;
+
+            if (state.financingEnabled) {
+                cardKinetics.classList.add('hidden');
+                cardFinancing.classList.remove('hidden');
+
+                const debtInfo = calculateDebtService();
+                const annualSavings = -state.opexDelta;
+                const dscrPill = document.getElementById('framework-dscr-pill');
+                const tierHigh = document.getElementById('tier-card-high');
+                const tierMedium = document.getElementById('tier-card-medium');
+                const tierLow = document.getElementById('tier-card-low');
+                const milestoneText = document.getElementById('framework-milestone-text');
+                const statusSummary = document.getElementById('framework-status-summary');
+
+                // Update DSCR Pill in header
+                if (dscrPill) {
+                    if (annualSavings <= 0) {
+                        dscrPill.innerText = "DSCR: 0.00x (No Op-Ex Savings)";
+                        dscrPill.className = "px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-red-100 text-red-800 border border-red-300";
+                    } else if (debtInfo.dscr >= 1.25) {
+                        dscrPill.innerText = `DSCR: ${debtInfo.dscr.toFixed(2)}x (Cash-Flow Positive)`;
+                        dscrPill.className = "px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-emerald-100 text-emerald-800 border border-emerald-300";
+                    } else if (debtInfo.dscr >= 1.0) {
+                        dscrPill.innerText = `DSCR: ${debtInfo.dscr.toFixed(2)}x (Self-Funding)`;
+                        dscrPill.className = "px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-teal-100 text-teal-800 border border-teal-300";
+                    } else {
+                        dscrPill.innerText = `DSCR: ${debtInfo.dscr.toFixed(2)}x (Cash Deficit)`;
+                        dscrPill.className = "px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-amber-100 text-amber-800 border border-amber-300";
+                    }
+                }
+
+                // Highlight active motivation tier
+                const baseInactiveClass = "p-3 rounded-lg border transition-all leading-relaxed bg-slate-50 border-slate-200 opacity-60";
+                if (tierHigh && tierMedium && tierLow) {
+                    if (annualSavings <= 0) {
+                        tierLow.className = "p-3 rounded-lg border transition-all leading-relaxed bg-rose-50/80 border-rose-300 ring-2 ring-rose-400 shadow-sm";
+                        tierMedium.className = baseInactiveClass;
+                        tierHigh.className = baseInactiveClass;
+                    } else if (debtInfo.dscr >= 1.0) {
+                        tierHigh.className = "p-3 rounded-lg border transition-all leading-relaxed bg-emerald-50/80 border-emerald-300 ring-2 ring-emerald-400 shadow-sm";
+                        tierMedium.className = baseInactiveClass;
+                        tierLow.className = baseInactiveClass;
+                    } else {
+                        tierMedium.className = "p-3 rounded-lg border transition-all leading-relaxed bg-amber-50/80 border-amber-300 ring-2 ring-amber-400 shadow-sm";
+                        tierHigh.className = baseInactiveClass;
+                        tierLow.className = baseInactiveClass;
+                    }
+                }
+
+                // Update milestone and status footer
+                if (milestoneText) {
+                    milestoneText.innerHTML = `<i class="fa-solid fa-flag-checkered text-emerald-600"></i><span><strong>Debt Retirement:</strong> After Year ${state.loanTerm} (Month ${Math.round(debtInfo.loanMonths)}), debt is 100% retired ($0/mo). Full savings of +$${Math.round(annualSavings > 0 ? annualSavings : 0)}k/yr (+${(Math.max(0, annualSavings) / 12).toFixed(1)}k/mo) become unencumbered through Yr ${state.timeHorizon}.</span>`;
+                }
+
+                if (statusSummary) {
+                    if (annualSavings <= 0) {
+                        statusSummary.innerText = `Active: -$${Math.abs(debtInfo.netMonthlySavings).toFixed(1)}k/mo Deficit`;
+                        statusSummary.className = "font-mono font-bold text-red-600";
+                    } else if (debtInfo.netMonthlySavings >= 0) {
+                        statusSummary.innerText = `Active: +$${debtInfo.netMonthlySavings.toFixed(1)}k/mo Net Retained Cash Flow`;
+                        statusSummary.className = "font-mono font-bold text-emerald-700";
+                    } else {
+                        statusSummary.innerText = `Active: -$${Math.abs(debtInfo.netMonthlySavings).toFixed(1)}k/mo Operating Subsidy Required`;
+                        statusSummary.className = "font-mono font-bold text-amber-700";
+                    }
+                }
+            } else {
+                cardKinetics.classList.remove('hidden');
+                cardFinancing.classList.add('hidden');
             }
         }
 
@@ -2335,7 +2488,7 @@
             if (state.financingEnabled) {
                 if (debtInfo.equityDown === 0) {
                     actHeader = 'Activation Barrier';
-                    actLine1 = `Upfront Equity: $0k ($${Math.round(debtInfo.debtPrincipal)}k Financed)`;
+                    actLine1 = `Upfront Equity: $0k \n($${Math.round(debtInfo.debtPrincipal)}k Financed)`;
                     actLine2 = `Debt Service: $${debtInfo.monthlyPayment.toFixed(1)}k/mo (Starts Mo 0)`;
                 } else {
                     actHeader = `Debt (${state.financedPct}%):`;
@@ -2347,10 +2500,12 @@
             ctx.font = 'bold 11px Inter';
             const wHeader = ctx.measureText(actHeader).width;
             ctx.font = '600 10.5px Inter';
-            const wLine1 = ctx.measureText(actLine1).width;
+            const line1Parts = actLine1.split('\n');
+            const wLine1 = Math.max(...line1Parts.map(p => ctx.measureText(p).width));
             const wLine2 = ctx.measureText(actLine2).width;
             const actCardW = Math.max(wHeader, wLine1, wLine2) + 20;
-            const actCardH = 48;
+            const hasMultiline = line1Parts.length > 1;
+            const actCardH = hasMultiline ? 58 : 48;
 
             // Anchor cleanly to the upper left-hand corner within graph margins
             let actCardX = paddingLeft + 12;
@@ -2423,11 +2578,16 @@
 
             ctx.fillStyle = '#78350f';
             ctx.font = '600 10.5px Inter';
-            ctx.fillText(actLine1, actCardX + 9, actCardY + 27);
-
-            ctx.fillStyle = '#92400e';
-            ctx.font = '600 10.5px Inter';
-            ctx.fillText(actLine2, actCardX + 9, actCardY + 40);
+            if (hasMultiline) {
+                ctx.fillText(line1Parts[0], actCardX + 9, actCardY + 25);
+                ctx.fillText(line1Parts[1], actCardX + 9, actCardY + 37);
+                ctx.fillStyle = '#92400e';
+                ctx.fillText(actLine2, actCardX + 9, actCardY + 50);
+            } else {
+                ctx.fillText(actLine1, actCardX + 9, actCardY + 27);
+                ctx.fillStyle = '#92400e';
+                ctx.fillText(actLine2, actCardX + 9, actCardY + 40);
+            }
 
             // Op-Ex Delta Indicator in Operation Phase (Initial undiscounted monthly rate marker)
             const opexMarkerX = xCommissionEnd + (xEnd - xCommissionEnd) * 0.16;
