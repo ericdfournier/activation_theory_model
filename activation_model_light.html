@@ -556,8 +556,13 @@
                             <i class="fa-solid fa-chart-line text-emerald-600 text-lg"></i> Activation Cost Trajectory &
                             Thermodynamic Energy Profile
                         </h2>
-                        <p class="text-xs sm:text-sm text-slate-500 mt-0.5">X-Axis: Project Timeline (Months) |
-                            Y-Axis: Effective Cost Rate ($/mo)</p>
+                        <div class="flex flex-wrap items-center gap-2 mt-1">
+                            <p class="text-xs sm:text-sm text-slate-500">X-Axis: Project Timeline | Y-Axis: Effective Cost Rate ($/mo)</p>
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-900 border border-amber-200 shadow-2xs">
+                                <i class="fa-solid fa-arrows-left-right-to-line text-amber-600"></i>
+                                <span><strong>Non-Linear Scale:</strong> Zoomed Transition (Months) &bull; Compressed Operation (<span id="scale-badge-horizon">20 Yrs</span>)</span>
+                            </span>
+                        </div>
                     </div>
 
                     <!-- Driving Force & Legend Controls -->
@@ -1212,6 +1217,8 @@
             labels.baselineOpex.innerText = `$${state.baselineOpex}k/yr ($${(state.baselineOpex / 12).toFixed(1)}k/mo)`;
             labels.discount.innerText = `${state.discountRate.toFixed(1)}%`;
             labels.horizon.innerText = `${state.timeHorizon} Yrs (${Math.round(state.timeHorizon * 12)} Mos)`;
+            const scaleBadgeHorizon = document.getElementById('scale-badge-horizon');
+            if (scaleBadgeHorizon) scaleBadgeHorizon.innerText = `${state.timeHorizon} Yrs`;
 
             updateTelemetryUI();
         }
@@ -1577,6 +1584,76 @@
             ctx.font = 'bold 12px Inter';
             ctx.fillStyle = '#1e293b';
             ctx.fillText('Time: Project Timeline (Months & 5-Yr Intervals) →', width - paddingRight, xAxisY - 9);
+
+            // Top Timeline Scale Interval Indicators (Visualizing Piecewise Non-Linear Resolution)
+            const topBarY = paddingTop - 22;
+
+            // 1. Zoomed Transition Phase Bracket (Months)
+            if ((xCommissionEnd - xStart) >= 50) {
+                ctx.strokeStyle = '#f59e0b';
+                ctx.lineWidth = 1.25;
+                ctx.beginPath();
+                ctx.moveTo(xStart, topBarY);
+                ctx.lineTo(xCommissionEnd, topBarY);
+                // End tick caps
+                ctx.moveTo(xStart, topBarY - 4);
+                ctx.lineTo(xStart, topBarY + 4);
+                ctx.moveTo(xCommissionEnd, topBarY - 4);
+                ctx.lineTo(xCommissionEnd, topBarY + 4);
+                ctx.stroke();
+
+                const transMidX = (xStart + xCommissionEnd) / 2;
+                ctx.fillStyle = '#b45309';
+                ctx.font = 'bold 10px Inter';
+                ctx.textAlign = 'center';
+                const transText = (xCommissionEnd - xStart >= 120) ? '🔍 Zoomed Transition (Months)' : '🔍 Transition (Mo)';
+                if (ctx.measureText(transText).width <= (xCommissionEnd - xStart - 8)) {
+                    ctx.fillText(transText, transMidX, topBarY - 5);
+                }
+            }
+
+            // 2. Operational Lifecycle Horizon Bracket (Years)
+            if ((xEnd - xCommissionEnd) >= 70) {
+                ctx.strokeStyle = '#10b981';
+                ctx.lineWidth = 1.25;
+                ctx.beginPath();
+                ctx.moveTo(xCommissionEnd, topBarY);
+                ctx.lineTo(xEnd, topBarY);
+                // End tick caps
+                ctx.moveTo(xCommissionEnd, topBarY - 4);
+                ctx.lineTo(xCommissionEnd, topBarY + 4);
+                ctx.moveTo(xEnd, topBarY - 4);
+                ctx.lineTo(xEnd, topBarY + 4);
+                ctx.stroke();
+
+                const opMidX = (xCommissionEnd + xEnd) / 2;
+                ctx.fillStyle = '#047857';
+                ctx.font = 'bold 10px Inter';
+                ctx.textAlign = 'center';
+                const opText = (xEnd - xCommissionEnd >= 140) ? `⏳ Operational Horizon (${state.timeHorizon} Yrs)` : `⏳ ${state.timeHorizon} Yrs`;
+                if (ctx.measureText(opText).width <= (xEnd - xCommissionEnd - 8)) {
+                    ctx.fillText(opText, opMidX, topBarY - 5);
+                }
+            }
+
+            // 3. Axis Scale Break Glyphs (//) at Transition Boundary
+            function drawScaleBreak(bx, by) {
+                ctx.save();
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(bx - 4, by - 6, 8, 12);
+                ctx.strokeStyle = '#64748b';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(bx - 3, by + 5);
+                ctx.lineTo(bx - 1, by - 5);
+                ctx.moveTo(bx + 1, by + 5);
+                ctx.lineTo(bx + 3, by - 5);
+                ctx.stroke();
+                ctx.restore();
+            }
+
+            drawScaleBreak(xCommissionEnd, xAxisY);
+            drawScaleBreak(xCommissionEnd, topBarY);
 
             // X-Axis Downward Ticks & Numerical Labels
             xTicks.forEach(t => {
