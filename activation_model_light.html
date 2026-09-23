@@ -1425,36 +1425,33 @@
                 });
             }
 
-            // 5. Operational Horizon Ticks in Monthly Intervals
-            const totalOpMonths = state.timeHorizon * 12;
-            const opWidthPx = xEnd - xCommissionEnd;
-            let moStep = 60;
-            if (totalOpMonths <= 60) moStep = 12;
-            else if (totalOpMonths <= 120) moStep = 24;
-            else if (totalOpMonths <= 240) moStep = 60;
-            else moStep = 120;
-
-            for (let m = moStep; m <= totalOpMonths; m += moStep) {
-                const moRatio = phaseInfo.pCommissionEnd + (m / totalOpMonths) * (1.0 - phaseInfo.pCommissionEnd);
-                const xMo = ratioToX(moRatio);
-                if (xMo - xCommissionEnd >= 42 && (xEnd - xMo) >= 20) {
+            // 5. Major Ticks at 5-Year Intervals across the Operational Horizon (Yr 5, Yr 10, Yr 15, Yr 20, etc.)
+            const totalOpYears = state.timeHorizon;
+            for (let yr = 5; yr <= totalOpYears; yr += 5) {
+                const yrRatio = phaseInfo.pCommissionEnd + (yr / totalOpYears) * (1.0 - phaseInfo.pCommissionEnd);
+                const xYr = ratioToX(yrRatio);
+                if ((xYr - xCommissionEnd) >= 28 && (xEnd - xYr) >= 12) {
                     xTicks.push({
-                        x: xMo,
-                        label: `Mo ${m}`,
-                        color: '#059669',
-                        grid: true
+                        x: xYr,
+                        label: `Yr ${yr}`,
+                        fullLabel: `Yr ${yr} (${yr * 12}m)`,
+                        color: '#0f172a',
+                        grid: true,
+                        isMajor: true
                     });
                 }
             }
 
-            // 6. Horizon End Tick
+            // 6. Horizon End Tick (if not matching an exact 5-year mark)
             const lastTick = xTicks[xTicks.length - 1];
-            if (xEnd - lastTick.x >= 38) {
+            if (lastTick && (xEnd - lastTick.x) >= 36) {
                 xTicks.push({
                     x: xEnd,
-                    label: `Mo ${Math.round(totalOpMonths)}`,
-                    color: '#059669',
-                    grid: false
+                    label: `Yr ${totalOpYears}`,
+                    fullLabel: `Yr ${totalOpYears} (${Math.round(totalOpYears * 12)}m)`,
+                    color: '#0f172a',
+                    grid: true,
+                    isMajor: (totalOpYears % 5 === 0)
                 });
             }
 
@@ -1479,11 +1476,11 @@
                 ctx.fillText(labelText, paddingLeft - 10, y + 4);
             }
 
-            // Vertical Month Grid Lines in Chart Background
+            // Vertical 5-Year Major Grid Lines in Chart Background
             xTicks.filter(t => t.grid).forEach(t => {
                 ctx.beginPath();
-                ctx.strokeStyle = '#f1f5f9';
-                ctx.lineWidth = 1;
+                ctx.strokeStyle = t.isMajor ? '#e2e8f0' : '#f1f5f9';
+                ctx.lineWidth = t.isMajor ? 1.25 : 1;
                 ctx.moveTo(t.x, paddingTop);
                 ctx.lineTo(t.x, height - paddingBottom);
                 ctx.stroke();
@@ -1579,23 +1576,26 @@
             ctx.textAlign = 'right';
             ctx.font = 'bold 12px Inter';
             ctx.fillStyle = '#1e293b';
-            ctx.fillText('Time: Total Project Timeline (Months) →', width - paddingRight, xAxisY - 9);
+            ctx.fillText('Time: Project Timeline (Months & 5-Yr Intervals) →', width - paddingRight, xAxisY - 9);
 
-            // X-Axis Downward Ticks & Numerical Labels (Monthly Intervals)
+            // X-Axis Downward Ticks & Numerical Labels
             xTicks.forEach(t => {
                 // Downward Tick Mark
                 ctx.beginPath();
-                ctx.strokeStyle = '#94a3b8';
-                ctx.lineWidth = 1.5;
+                ctx.strokeStyle = t.isMajor ? '#0f172a' : '#64748b';
+                ctx.lineWidth = t.isMajor ? 2.0 : 1.25;
+                const tickLen = t.isMajor ? 8 : 5;
                 ctx.moveTo(t.x, xAxisY);
-                ctx.lineTo(t.x, xAxisY + 6);
+                ctx.lineTo(t.x, xAxisY + tickLen);
                 ctx.stroke();
 
                 // Tick Label
-                ctx.fillStyle = t.color;
-                ctx.font = 'bold 11px Inter';
+                ctx.fillStyle = t.isMajor ? '#0f172a' : (t.color || '#475569');
+                ctx.font = t.isMajor ? 'bold 11px Inter' : '600 10.5px Inter';
                 ctx.textAlign = 'center';
-                ctx.fillText(t.label, t.x, xAxisY + 18);
+
+                const displayLabel = (t.isMajor && t.fullLabel && (graphW > 580)) ? t.fullLabel : t.label;
+                ctx.fillText(displayLabel, t.x, xAxisY + 18);
             });
 
             // Dedicated Timeline Track below X-axis
