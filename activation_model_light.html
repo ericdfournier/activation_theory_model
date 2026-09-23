@@ -1769,19 +1769,24 @@
             ctx.stroke();
 
             // Smart Positioning for Activation Barrier Callout Badge
-            const actTitle = `Activation Barrier: +$${peakRateHeight.toFixed(1)}k/mo`;
-            const actSub = `Total Cap-Ex: $${Math.round(effectiveCapEx)}k`;
+            const effInstallMonths = phaseInfo.effInstallMonths;
+            const avgMonthlyCapex = effectiveCapEx / effInstallMonths;
+            const actHeader = 'Activation Barrier:';
+            const actLine1 = `Total Cap-Ex: $${Math.round(effectiveCapEx)}k`;
+            const actLine2 = `Avg Monthly Cap-Ex: $${avgMonthlyCapex.toFixed(1)}k/mo`;
+
             ctx.font = 'bold 11px Inter';
-            const actTitleW = ctx.measureText(actTitle).width;
+            const wHeader = ctx.measureText(actHeader).width;
             ctx.font = '600 10.5px Inter';
-            const actSubW = ctx.measureText(actSub).width;
-            const actCardW = Math.max(actTitleW, actSubW) + 18;
-            const actCardH = 36;
+            const wLine1 = ctx.measureText(actLine1).width;
+            const wLine2 = ctx.measureText(actLine2).width;
+            const actCardW = Math.max(wHeader, wLine1, wLine2) + 20;
+            const actCardH = 48;
 
             let actCardX = peakX + 10;
             let actCardY = (baselineY + peakY) / 2 - actCardH / 2;
 
-            // Space check: If space above the peak is clear (>= 42px), position callout in the open space above peak
+            // Space check: If space above the peak is clear (>= 52px), position callout in the open space above peak
             if (peakY - (paddingTop + 14) >= actCardH) {
                 actCardX = Math.max(paddingLeft + 8, Math.min(peakX - actCardW / 2, width - paddingRight - actCardW - 8));
                 actCardY = peakY - actCardH - 8;
@@ -1816,11 +1821,15 @@
             ctx.textAlign = 'left';
             ctx.fillStyle = '#b45309';
             ctx.font = 'bold 11px Inter';
-            ctx.fillText(actTitle, actCardX + 9, actCardY + 14);
+            ctx.fillText(actHeader, actCardX + 9, actCardY + 13);
 
-            ctx.fillStyle = '#d97706';
+            ctx.fillStyle = '#78350f';
             ctx.font = '600 10.5px Inter';
-            ctx.fillText(actSub, actCardX + 9, actCardY + 28);
+            ctx.fillText(actLine1, actCardX + 9, actCardY + 27);
+
+            ctx.fillStyle = '#92400e';
+            ctx.font = '600 10.5px Inter';
+            ctx.fillText(actLine2, actCardX + 9, actCardY + 40);
 
             // Op-Ex Delta Indicator in Operation Phase (Initial undiscounted monthly rate marker)
             const opexMarkerX = xCommissionEnd + (xEnd - xCommissionEnd) * 0.16;
