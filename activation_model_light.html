@@ -1650,10 +1650,12 @@
             const debtInfo = calculateDebtService();
             const effectiveCapEx = isFinanced ? debtInfo.equityDown : (state.totalCapex * (1 - state.catalyst / 100));
             const effInstallMonths = getEffectiveInstallDuration();
+            const commissionDuration = state.commissionDuration;
+            const totTransMonths = effInstallMonths + commissionDuration;
 
             // Normalized timeline geometry
             const installWidth = (effInstallMonths / 36) * 0.42;
-            const commissionWidth = (state.commissionDuration / 36) * 0.32;
+            const commissionWidth = (commissionDuration / 36) * 0.32;
 
             const pStart = 0.12;
             const pPeak = pStart + installWidth / 2;
@@ -1665,68 +1667,93 @@
             const targetOpexMonthly = (state.baselineOpex + state.opexDelta) / 12;
             const peakRateHeightAnnual = getPeakRateHeight(effectiveCapEx, effInstallMonths);
             const peakRateHeightMonthly = peakRateHeightAnnual / 12;
+            const rDisc = state.discountRate / 100;
 
             let value = baselineMonthly;
+            let baseCostWithoutDebt = baselineMonthly;
             let isUnderDebtTerm = false;
             let activeDebtMonthly = 0;
-            let tYears = 0;
+            let projMonth = 0;
+            let tProjYears = 0;
+            let tOpYears = 0;
 
             if (tRatio < pStart) {
                 value = baselineMonthly;
+                baseCostWithoutDebt = baselineMonthly;
             } else if (tRatio >= pStart && tRatio < pInstallEnd) {
-                // When opexDelta > 0 (cost increase / endothermic), the operating baseline transitions
-                // up to targetOpexMonthly across implementation so that costs at the end of implementation
-                // taper smoothly into post-retrofit costs rather than dipping below and rebounding.
+                // Implementation Phase: Loan repayment begins at pStart (Month 0)
+                const u = (tRatio - pStart) / installWidth;
+                projMonth = u * effInstallMonths;
+                tProjYears = projMonth / 12;
+
+                isUnderDebtTerm = isFinanced && (projMonth <= debtInfo.loanMonths);
+                // Smooth ramp-in over the first month from baseline to baseline + monthly debt payment
+                const rampIn = Math.min(1.0, Math.max(0.0, projMonth / Math.min(1.0, effInstallMonths)));
+                activeDebtMonthly = isUnderDebtTerm ? (debtInfo.monthlyPayment * rampIn) : 0;
+                const discountedDebt = activeDebtMonthly / Math.pow(1 + rDisc, tProjYears);
+
                 let baseRate = baselineMonthly;
                 if (targetOpexMonthly > baselineMonthly) {
-                    const progress = (tRatio - pStart) / installWidth;
-                    const smoothProgress = 3 * Math.pow(progress, 2) - 2 * Math.pow(progress, 3);
+                    const smoothProgress = 3 * Math.pow(u, 2) - 2 * Math.pow(u, 3);
                     baseRate = baselineMonthly + (targetOpexMonthly - baselineMonthly) * smoothProgress;
                 }
 
-                // Bell curve representing implementation Cap-Ex deployment rate ($k/mo)
+                // Bell curve representing equity Cap-Ex deployment rate ($k/mo) (0 if 100% financed)
                 const normX = (tRatio - pPeak) / (installWidth / 2);
                 const bump = Math.exp(-Math.pow(normX * 2.1, 2));
-                value = baseRate + peakRateHeightMonthly * bump;
+
+                baseCostWithoutDebt = baseRate + peakRateHeightMonthly * bump;
+                value = baseCostWithoutDebt + discountedDebt;
             } else if (tRatio >= pInstallEnd && tRatio < pCommissionEnd) {
-                // Smooth monotonic commissioning decay from end of implementation down to stable initial post-retrofit state
+                // Commissioning Phase: Loan repayment continues
+                const u = (tRatio - pInstallEnd) / commissionWidth;
+                projMonth = effInstallMonths + u * commissionDuration;
+                tProjYears = projMonth / 12;
+
+                isUnderDebtTerm = isFinanced && (projMonth <= debtInfo.loanMonths);
+                activeDebtMonthly = isUnderDebtTerm ? debtInfo.monthlyPayment : 0;
+                const discountedDebt = activeDebtMonthly / Math.pow(1 + rDisc, tProjYears);
+
                 const normEnd = (pInstallEnd - pPeak) / (installWidth / 2);
                 const endBump = Math.exp(-Math.pow(normEnd * 2.1, 2));
                 const baseEnd = (targetOpexMonthly > baselineMonthly) ? targetOpexMonthly : baselineMonthly;
                 const startCost = baseEnd + peakRateHeightMonthly * endBump;
 
-                const progress = (tRatio - pInstallEnd) / commissionWidth;
-                const smoothFactor = 3 * Math.pow(progress, 2) - 2 * Math.pow(progress, 3);
-
-                value = startCost + (targetOpexMonthly - startCost) * smoothFactor;
+                const smoothFactor = 3 * Math.pow(u, 2) - 2 * Math.pow(u, 3);
+                baseCostWithoutDebt = startCost + (targetOpexMonthly - startCost) * smoothFactor;
+                value = baseCostWithoutDebt + discountedDebt;
             } else {
-                // Stable Zero-Emission Operation Phase with Owner Discount Rate Applied
-                // Present value rate decays over operational timeline from 0 to Evaluation Horizon
+                // Operation Phase:
                 const tau = Math.min(Math.max((tRatio - pCommissionEnd) / (1.0 - pCommissionEnd), 0), 1);
-                tYears = tau * state.timeHorizon;
-                const rDisc = state.discountRate / 100;
+                tOpYears = tau * state.timeHorizon;
+                projMonth = totTransMonths + tOpYears * 12;
+                tProjYears = projMonth / 12;
 
-                isUnderDebtTerm = isFinanced && (tYears <= state.loanTerm);
+                isUnderDebtTerm = isFinanced && (projMonth <= debtInfo.loanMonths);
                 activeDebtMonthly = isUnderDebtTerm ? debtInfo.monthlyPayment : 0;
 
-                // Present value rate of Op-Ex Delta + Debt Service:
-                // Nominal monthly net delta from baseline is (opexDelta/12) + activeDebtMonthly
+                baseCostWithoutDebt = baselineMonthly + (state.opexDelta / 12) / Math.pow(1 + rDisc, tOpYears);
+
                 const nominalDelta = (state.opexDelta / 12) + activeDebtMonthly;
-                const discountedDelta = nominalDelta / Math.pow(1 + rDisc, tYears);
+                const discountedDelta = nominalDelta / Math.pow(1 + rDisc, tOpYears);
                 value = baselineMonthly + discountedDelta;
             }
 
             return {
                 value, // in $k/mo
+                baseCostWithoutDebt,
                 pStart,
                 pPeak,
                 pInstallEnd,
                 pCommissionEnd,
                 peakRateHeight: peakRateHeightMonthly, // in $k/mo
                 effInstallMonths,
+                totTransMonths,
                 isUnderDebtTerm,
                 activeDebtMonthly,
-                tYears
+                projMonth,
+                tProjYears,
+                tOpYears
             };
         }
 
@@ -1958,17 +1985,14 @@
                 ctx.fill();
             }
 
-            // If financing is active, highlight the debt service tranche during the loan term with an amber tint
+            // If financing is active, highlight the debt service tranche with an amber tint
             if (state.financingEnabled) {
-                const rDisc = state.discountRate / 100;
                 for (let i = 0; i < points.length - 1; i++) {
                     const p1 = points[i];
                     const p2 = points[i + 1];
                     if (p1.res && p1.res.isUnderDebtTerm && p2.res && p2.res.isUnderDebtTerm) {
-                        const unfinVal1 = baselineMonthly + (state.opexDelta / 12) / Math.pow(1 + rDisc, p1.res.tYears);
-                        const unfinVal2 = baselineMonthly + (state.opexDelta / 12) / Math.pow(1 + rDisc, p2.res.tYears);
-                        const uy1 = valToY(unfinVal1);
-                        const uy2 = valToY(unfinVal2);
+                        const uy1 = valToY(p1.res.baseCostWithoutDebt);
+                        const uy2 = valToY(p2.res.baseCostWithoutDebt);
 
                         ctx.beginPath();
                         ctx.moveTo(p1.x, uy1);
@@ -1976,7 +2000,7 @@
                         ctx.lineTo(p2.x, p2.y);
                         ctx.lineTo(p2.x, uy2);
                         ctx.closePath();
-                        ctx.fillStyle = 'rgba(245, 158, 11, 0.24)'; // amber debt service band
+                        ctx.fillStyle = 'rgba(245, 158, 11, 0.26)'; // amber debt service band
                         ctx.fill();
                     }
                 }
@@ -2049,40 +2073,59 @@
             });
             ctx.setLineDash([]);
 
-            // Milestone Marker at Loan Payoff Year (if financing is active)
-            if (state.financingEnabled && state.loanTerm < state.timeHorizon) {
-                const rLoanEnd = phaseInfo.pCommissionEnd + (state.loanTerm / state.timeHorizon) * (1.0 - phaseInfo.pCommissionEnd);
-                const xLoanEnd = ratioToX(rLoanEnd);
+            // Milestone Marker at Loan Payoff (measured from Month 0 / Start of Implementation)
+            if (state.financingEnabled) {
+                const loanMonths = debtInfo.loanMonths;
+                const totTransMonths = phaseInfo.totTransMonths;
+                let rLoanEnd = null;
 
-                ctx.save();
-                ctx.setLineDash([4, 4]);
-                ctx.strokeStyle = '#059669';
-                ctx.lineWidth = 1.75;
-                ctx.beginPath();
-                ctx.moveTo(xLoanEnd, paddingTop);
-                ctx.lineTo(xLoanEnd, height - paddingBottom);
-                ctx.stroke();
+                if (loanMonths > totTransMonths) {
+                    const opYearsAtPayoff = (loanMonths - totTransMonths) / 12;
+                    if (opYearsAtPayoff < state.timeHorizon) {
+                        const tauLoanEnd = opYearsAtPayoff / state.timeHorizon;
+                        rLoanEnd = phaseInfo.pCommissionEnd + tauLoanEnd * (1.0 - phaseInfo.pCommissionEnd);
+                    }
+                } else if (loanMonths > phaseInfo.effInstallMonths) {
+                    const u = (loanMonths - phaseInfo.effInstallMonths) / state.commissionDuration;
+                    rLoanEnd = phaseInfo.pInstallEnd + u * (phaseInfo.pCommissionEnd - phaseInfo.pInstallEnd);
+                } else if (loanMonths > 0) {
+                    const u = loanMonths / phaseInfo.effInstallMonths;
+                    rLoanEnd = phaseInfo.pStart + u * (phaseInfo.pInstallEnd - phaseInfo.pStart);
+                }
 
-                // Milestone badge pill at top
-                const msText = `🏁 Debt Retired (Yr ${state.loanTerm})`;
-                ctx.font = 'bold 10px Inter';
-                const msW = ctx.measureText(msText).width + 14;
-                const msH = 20;
-                const msX = Math.max(paddingLeft, Math.min(xLoanEnd - msW / 2, width - paddingRight - msW));
-                const msY = paddingTop + 5;
+                if (rLoanEnd !== null && rLoanEnd <= 1.0) {
+                    const xLoanEnd = ratioToX(rLoanEnd);
 
-                ctx.fillStyle = 'rgba(236, 253, 245, 0.95)';
-                ctx.strokeStyle = '#10b981';
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.roundRect(msX, msY, msW, msH, 4);
-                ctx.fill();
-                ctx.stroke();
+                    ctx.save();
+                    ctx.setLineDash([4, 4]);
+                    ctx.strokeStyle = '#059669';
+                    ctx.lineWidth = 1.75;
+                    ctx.beginPath();
+                    ctx.moveTo(xLoanEnd, paddingTop);
+                    ctx.lineTo(xLoanEnd, height - paddingBottom);
+                    ctx.stroke();
 
-                ctx.fillStyle = '#065f46';
-                ctx.textAlign = 'center';
-                ctx.fillText(msText, msX + msW / 2, msY + 14);
-                ctx.restore();
+                    // Milestone badge pill at top
+                    const msText = `🏁 Debt Retired (Yr ${state.loanTerm} / Mo ${Math.round(loanMonths)})`;
+                    ctx.font = 'bold 10px Inter';
+                    const msW = ctx.measureText(msText).width + 14;
+                    const msH = 20;
+                    const msX = Math.max(paddingLeft, Math.min(xLoanEnd - msW / 2, width - paddingRight - msW));
+                    const msY = paddingTop + 5;
+
+                    ctx.fillStyle = 'rgba(236, 253, 245, 0.95)';
+                    ctx.strokeStyle = '#10b981';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.roundRect(msX, msY, msW, msH, 4);
+                    ctx.fill();
+                    ctx.stroke();
+
+                    ctx.fillStyle = '#065f46';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(msText, msX + msW / 2, msY + 14);
+                    ctx.restore();
+                }
             }
 
             // X and Y Axes lines
@@ -2299,11 +2342,11 @@
                 if (debtInfo.equityDown === 0) {
                     actHeader = 'Barrier Leveled (100% Debt):';
                     actLine1 = `Upfront Equity: $0k ($${Math.round(debtInfo.debtPrincipal)}k Financed)`;
-                    actLine2 = `Debt Service: $${debtInfo.monthlyPayment.toFixed(1)}k/mo (${state.loanTerm} yrs)`;
+                    actLine2 = `Debt Service: $${debtInfo.monthlyPayment.toFixed(1)}k/mo (Starts Mo 0)`;
                 } else {
                     actHeader = `Barrier Mitigated (${state.financedPct}% Debt):`;
                     actLine1 = `Upfront Equity: $${Math.round(debtInfo.equityDown)}k (${100 - state.financedPct}%)`;
-                    actLine2 = `Financed: $${Math.round(debtInfo.debtPrincipal)}k @ $${debtInfo.monthlyPayment.toFixed(1)}k/mo`;
+                    actLine2 = `Financed: $${Math.round(debtInfo.debtPrincipal)}k @ $${debtInfo.monthlyPayment.toFixed(1)}k/mo (Starts Mo 0)`;
                 }
             }
 
@@ -2502,20 +2545,26 @@
                 if (hr >= phaseInfo.pStart && hr < phaseInfo.pInstallEnd) {
                     phaseName = 'Implementation Phase';
                     const m = ((hr - phaseInfo.pStart) / (phaseInfo.pInstallEnd - phaseInfo.pStart)) * phaseInfo.effInstallMonths;
-                    subTime = `Month ${m.toFixed(1)} of ${phaseInfo.effInstallMonths.toFixed(1)}`;
+                    subTime = state.financingEnabled
+                        ? `Mo ${m.toFixed(1)}/${phaseInfo.effInstallMonths.toFixed(1)} • Loan Active ($${debtInfo.monthlyPayment.toFixed(2)}k/mo)`
+                        : `Month ${m.toFixed(1)} of ${phaseInfo.effInstallMonths.toFixed(1)}`;
                 } else if (hr >= phaseInfo.pInstallEnd && hr < phaseInfo.pCommissionEnd) {
                     phaseName = 'Commissioning Phase';
                     const m = ((hr - phaseInfo.pInstallEnd) / (phaseInfo.pCommissionEnd - phaseInfo.pInstallEnd)) * state.commissionDuration;
                     const totM = phaseInfo.effInstallMonths + m;
-                    subTime = `Project Mo ${totM.toFixed(1)} (Comm Mo ${m.toFixed(1)}/${state.commissionDuration})`;
+                    subTime = state.financingEnabled
+                        ? `Project Mo ${totM.toFixed(1)} • Loan Active ($${debtInfo.monthlyPayment.toFixed(2)}k/mo)`
+                        : `Project Mo ${totM.toFixed(1)} (Comm Mo ${m.toFixed(1)}/${state.commissionDuration})`;
                 } else if (hr >= phaseInfo.pCommissionEnd) {
                     if (state.financingEnabled) {
                         const mOp = ((hr - phaseInfo.pCommissionEnd) / (1.0 - phaseInfo.pCommissionEnd)) * (state.timeHorizon * 12);
-                        const yrOp = mOp / 12;
-                        const isUnderDebt = yrOp <= state.loanTerm;
-                        phaseName = isUnderDebt ? `Operation (Debt Term - Yr ${yrOp.toFixed(1)})` : `Operation (Unencumbered - Yr ${yrOp.toFixed(1)})`;
+                        const totProjM = phaseInfo.totTransMonths + mOp;
+                        const isUnderDebt = hRes.isUnderDebtTerm;
+                        phaseName = isUnderDebt
+                            ? `Operation (Debt Term - Proj Mo ${Math.round(totProjM)})`
+                            : `Operation (Unencumbered - Proj Mo ${Math.round(totProjM)})`;
                         subTime = isUnderDebt
-                            ? `Debt Payment: $${debtInfo.monthlyPayment.toFixed(2)}k/mo (${state.loanTerm} yr term)`
+                            ? `Debt Payment: $${debtInfo.monthlyPayment.toFixed(2)}k/mo (${state.loanTerm}-Yr Term from Mo 0)`
                             : `Debt Retired (100% Unencumbered Savings)`;
                     } else {
                         phaseName = 'Zero-Emission Operation';
@@ -2524,9 +2573,9 @@
                     }
                 }
 
-                const isFinancedOp = state.financingEnabled && (hr >= phaseInfo.pCommissionEnd);
-                const tooltipW = isFinancedOp ? 260 : 230;
-                const tooltipH = isFinancedOp ? 96 : 78;
+                const isFinancedActive = state.financingEnabled && (hr >= phaseInfo.pStart);
+                const tooltipW = isFinancedActive ? 260 : 230;
+                const tooltipH = isFinancedActive ? 96 : 78;
                 let tipX = hX + 14;
                 if (tipX + tooltipW > width - paddingRight) tipX = hX - tooltipW - 14;
                 let tipY = Math.max(hY - tooltipH / 2, paddingTop);
@@ -2557,10 +2606,12 @@
                 ctx.fillStyle = deltaColor;
                 ctx.fillText(`Cost Delta: ${deltaStr}`, tipX + 10, tipY + 66);
 
-                if (isFinancedOp) {
-                    const yrOp = (((hr - phaseInfo.pCommissionEnd) / (1.0 - phaseInfo.pCommissionEnd)) * (state.timeHorizon * 12)) / 12;
+                if (isFinancedActive) {
                     ctx.font = '600 10.5px Inter';
-                    if (yrOp <= state.loanTerm) {
+                    if (hr < phaseInfo.pCommissionEnd) {
+                        ctx.fillStyle = '#b45309';
+                        ctx.fillText(`Debt Service Active: $${debtInfo.monthlyPayment.toFixed(2)}k/mo`, tipX + 10, tipY + 84);
+                    } else if (hRes.isUnderDebtTerm) {
                         ctx.fillStyle = debtInfo.netMonthlySavings >= 0 ? '#047857' : '#b45309';
                         ctx.fillText(`Net Retained Cash Flow: ${debtInfo.netMonthlySavings >= 0 ? '+' : ''}$${debtInfo.netMonthlySavings.toFixed(2)}k/mo`, tipX + 10, tipY + 84);
                     } else {
