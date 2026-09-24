@@ -1192,24 +1192,31 @@
                             <tbody class="divide-y border-slate-200">
                                 <tr class="hover:bg-slate-50/50">
                                     <td class="p-2.5 font-bold text-slate-800">Initial Hurdle ($E_a$)</td>
-                                    <td class="p-2.5 text-slate-600">Peak rate <span id="table-self-peak"
-                                            class="font-bold text-slate-800">+$49.5k/mo</span> (<span
-                                            id="table-self-capex">$250k total</span>)</td>
-                                    <td class="p-2.5 text-slate-600">Leveled into monthly payments (<span
-                                            id="table-debt-down">$0k down</span>, <span id="table-debt-principal">$250k
-                                            financed</span>)</td>
+                                    <td class="p-2.5 text-slate-600"><span id="table-self-peak"
+                                            class="font-mono font-bold text-amber-700">+$49.5k/mo</span> peak draw
+                                        (<span id="table-self-capex" class="font-medium text-slate-700">$250k
+                                            total</span>)</td>
+                                    <td class="p-2.5 text-slate-600"><span id="table-debt-payment"
+                                            class="font-mono font-bold text-slate-900">$2.8k/mo</span> amortized (<span
+                                            id="table-debt-down" class="font-medium text-slate-700">$0k down</span>,
+                                        <span id="table-debt-principal" class="font-medium text-slate-700">$250k
+                                            debt</span>)</td>
                                 </tr>
                                 <tr class="hover:bg-slate-50/50">
                                     <td class="p-2.5 font-bold text-slate-800">Cash-Flow Timing</td>
-                                    <td class="p-2.5 text-slate-600">Outflow during <span id="table-self-duration">12
-                                            mos</span>, then <span id="table-self-monthly-savings">+$5.0k/mo</span>
+                                    <td class="p-2.5 text-slate-600"><span id="table-self-duration"
+                                            class="font-semibold text-slate-800">12 mos</span> cash outflow &rarr; <span
+                                            id="table-self-monthly-savings"
+                                            class="font-mono font-bold text-emerald-600">+$5.0k/mo</span> ongoing
                                         savings</td>
-                                    <td class="p-2.5 text-slate-600">Net cash flow <span
-                                            id="table-debt-net-flow">+$2.2k/mo</span> during loan, expanding after
-                                        payoff</td>
+                                    <td class="p-2.5 text-slate-600"><span id="table-debt-net-flow"
+                                            class="font-mono font-bold text-emerald-600">+$2.2k/mo</span> during loan
+                                        &rarr; <span id="table-debt-post-savings"
+                                            class="font-mono font-bold text-emerald-600">+$5.0k/mo</span> post-payoff
+                                    </td>
                                 </tr>
                                 <tr class="hover:bg-slate-50/50">
-                                    <td class="p-2.5 font-bold text-slate-800">Primary Decision Metric</td>
+                                    <td class="p-2.5 font-bold text-slate-800">PrimDecision Metric</td>
                                     <td class="p-2.5 text-slate-600">Simple Payback: <span id="table-self-payback"
                                             class="font-mono font-bold text-slate-900">4.2 yrs</span> (<span
                                             id="table-self-hurdle" class="text-emerald-600 font-semibold">≤ 5.0y
