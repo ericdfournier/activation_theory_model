@@ -744,107 +744,116 @@
                 </div>
             </div>
 
-            <!-- Conceptual Framework: Chemical Reaction Kinetics (Default / Unfinanced) -->
+            <!-- Conceptual Framework: Unified Narrative (Self-Financed vs. Debt-Financed Dynamics) -->
             <div id="card-framework-kinetics" class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
-                <h3 class="text-sm font-bold uppercase tracking-wider text-slate-700 mb-2.5 flex items-center gap-2">
-                    <i class="fa-solid fa-atom text-purple-600 text-base"></i> Conceptual Framework: Analogizing
-                    Zero-Emission Building Retrofit Dynamics to Chemical Reaction Kinetics
-                </h3>
-                <p id="scenario-description" class="text-sm text-slate-700 leading-relaxed font-normal">
-                    Loading scenario overview...
-                </p>
-                <div
-                    class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mt-4 text-xs sm:text-sm text-slate-600 border-t border-slate-200 pt-3.5">
-                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 leading-relaxed">
-                        <span class="font-bold block mb-1 text-sm text-emerald-700">1. Reactants
-                            (Pre-Retrofit State)</span>
-                        Baseline operational state with existing installed emissive equipment. Project
-                        implementation costs and disruptions must be weighed against anticipated future savings.
-                    </div>
-                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 leading-relaxed">
-                        <span class="font-bold block mb-1 text-sm text-amber-700">2. Activation Barrier
-                            (Cap-Ex + Disruptions)</span>
-                        Barriers related to upfront capital expenditures, equipment procurement, implementation
-                        disruption, and commissioning required (Red shaded region).
-                    </div>
-                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 leading-relaxed">
-                        <span class="font-bold block mb-1 text-sm text-cyan-700">3. Products
-                            (Zero-Emission State)</span>
-                        Financial return when operational expenditures change permanently relative to pre-retrofit
-                        baseline levels (Green or Red shaded region).
-                    </div>
-                </div>
-            </div>
-
-            <!-- Conceptual Framework: Project Financing & Debt Service Dynamics (Financed Mode) -->
-            <div id="card-framework-financing"
-                class="hidden bg-white border border-emerald-200 rounded-xl p-5 shadow-sm">
                 <div class="flex flex-wrap items-center justify-between gap-3 mb-2.5">
                     <h3 class="text-sm font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
-                        <i class="fa-solid fa-hand-holding-dollar text-emerald-600 text-base"></i>
-                        Financing Framework: Debt Service Coverage &amp; Owner Motivation Dynamics
+                        <i class="fa-solid fa-atom text-purple-600 text-base"></i> Conceptual Framework: Analogizing
+                        Zero-Emission Building Retrofit Dynamics to Chemical Reaction Kinetics
                     </h3>
-                    <span id="framework-dscr-pill"
-                        class="px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-emerald-100 text-emerald-800 border border-emerald-300">
-                        DSCR: 1.80x (Self-Funding)
+                    <span id="framework-active-badge"
+                        class="px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-purple-100 text-purple-800 border border-purple-300">
+                        Active Regime: Self-Financed (100% Equity)
                     </span>
                 </div>
-                <p id="financing-framework-desc" class="text-sm text-slate-700 leading-relaxed font-normal">
-                    Under project debt financing, upfront capital expenditures are amortized into recurring monthly debt
-                    service payments ($D$), shifting decision economics from a simple payback constraint to ongoing
-                    <strong>Debt Service Coverage Ratio (DSCR)</strong> and cash-flow viability. Property owner
-                    motivation and kinetic trajectory velocity are directly governed by whether operational cost savings
-                    service the debt from Month 0:
+
+                <p id="scenario-description" class="text-xs sm:text-sm text-slate-600 bg-slate-50 border border-slate-200 rounded-lg p-3 mb-4 leading-relaxed font-normal">
+                    Loading scenario overview...
                 </p>
-                <div
-                    class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mt-4 text-xs sm:text-sm text-slate-600 border-t border-slate-200 pt-3.5">
-                    <div id="tier-card-high"
-                        class="p-3 rounded-lg border transition-all leading-relaxed bg-slate-50 border-slate-200">
-                        <div class="flex items-center justify-between mb-1.5">
-                            <span class="font-bold text-sm text-emerald-700">1. Self-Funding &amp; Cash-Flow+</span>
-                            <span
-                                class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-200">DSCR
-                                ≥ 1.0x</span>
+
+                <p class="text-xs sm:text-sm text-slate-700 leading-relaxed mb-4">
+                    This model evaluates capital facility upgrades (e.g., energy efficiency, electrification, decarbonization) by mapping thermodynamic states and reaction kinetics onto corporate financial decision-making across four continuous project phases: <strong>Pre-Implementation (Baseline)</strong>, <strong>Implementation</strong>, <strong>Commissioning</strong>, and <strong>Operation</strong>.
+                </p>
+
+                <!-- Two Regimes: Self-Financed vs Debt-Financed -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+                    <!-- Regime 1: Self-Financed -->
+                    <div id="regime-card-self" class="p-4 rounded-xl border-2 border-purple-400 bg-purple-50/40 shadow-sm transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="font-bold text-sm text-slate-800 flex items-center gap-2">
+                                    <i class="fa-solid fa-money-bill-wave text-amber-600"></i> 1. Self-Financed Regime (High Barrier)
+                                </h4>
+                                <span id="pill-self-status" class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 border border-purple-300">
+                                    Active: 100% Equity Hurdle (Ea)
+                                </span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-2 leading-relaxed">
+                                The asset owner pays 100% of net capital expenditures (Cap-Ex) from working capital or cash reserves across the implementation window:
+                            </p>
+                            <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
+                                <li><strong class="text-slate-800">The Kinetic Barrier (Ea):</strong> Creates a sharp, concentrated financial obstacle with monthly capital outflows spiking into negative territory.</li>
+                                <li><strong class="text-slate-800">The Adoption Bottleneck:</strong> Even when strongly NPV positive (ΔOp-Ex &lt; 0), projects stall if organizational liquidity or hurdle rate (analogous to thermal kinetic energy, kB·T) cannot clear the barrier peak.</li>
+                                <li><strong class="text-slate-800">Return Profile:</strong> Deep J-curve deficit during implementation, followed by gradual simple payback as 100% of operational savings are captured post-commissioning.</li>
+                            </ul>
                         </div>
-                        <p class="mb-1.5"><strong class="text-slate-800">High / Very High Motivation:</strong> Monthly
-                            Op-Ex savings fully offset or exceed monthly debt payments. If DSCR ≥ 1.25x, the project
-                            yields immediate net positive retained income.</p>
                     </div>
-                    <div id="tier-card-medium"
-                        class="p-3 rounded-lg border transition-all leading-relaxed bg-slate-50 border-slate-200">
-                        <div class="flex items-center justify-between mb-1.5">
-                            <span class="font-bold text-sm text-amber-700">2. Operating Cash Deficit</span>
-                            <span
-                                class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-200">0
-                                &lt; DSCR &lt; 1.0x</span>
+
+                    <!-- Regime 2: Debt-Financed -->
+                    <div id="regime-card-debt" class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 opacity-80 transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="font-bold text-sm text-slate-800 flex items-center gap-2">
+                                    <i class="fa-solid fa-hand-holding-dollar text-emerald-600"></i> 2. Debt-Financed Regime (Catalyzed Pathway)
+                                </h4>
+                                <span id="pill-debt-status" class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-300">
+                                    Amortized (Ea ≈ 0)
+                                </span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-2 leading-relaxed">
+                                Debt financing acts as a financial catalyst, amortizing upfront Cap-Ex into fixed monthly debt service (D) commencing at project kickoff (Month 0):
+                            </p>
+                            <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
+                                <li><strong class="text-slate-800">Barrier Mitigation (Ea → 0):</strong> Upfront equity drops to $0 (or down payment). The Cap-Ex spike is leveled into a predictable monthly debt service payment.</li>
+                                <li><strong class="text-slate-800">Self-Funding Dynamics &amp; DSCR:</strong> Feasibility is governed by the Debt Service Coverage Ratio (DSCR = |ΔOp-Ex| / 12 / D). When DSCR ≥ 1.0x, utility savings exceed debt payments, paying for itself from Day 1 out of operating savings.</li>
+                                <li><strong class="text-slate-800">Debt Retirement Milestone:</strong> Upon loan maturity, debt service drops to $0, unlocking full, unencumbered operating savings through the remaining operating horizon.</li>
+                            </ul>
                         </div>
-                        <p class="mb-1.5"><strong class="text-slate-800">Medium Motivation:</strong> Operational savings
-                            exist but fall short of servicing the full monthly loan payment during the amortization
-                            period.</p>
-                    </div>
-                    <div id="tier-card-low"
-                        class="p-3 rounded-lg border transition-all leading-relaxed bg-slate-50 border-slate-200">
-                        <div class="flex items-center justify-between mb-1.5">
-                            <span class="font-bold text-sm text-rose-700">3. Unfavorable Economics</span>
-                            <span
-                                class="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-rose-100 text-rose-800 border border-rose-200">No
-                                Savings</span>
+                        <div id="framework-debt-milestone" class="mt-3 pt-2.5 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs">
+                            <span id="framework-milestone-text" class="text-slate-600 flex items-center gap-1.5 font-medium">
+                                <i class="fa-solid fa-info-circle text-slate-400"></i>
+                                <span>Enable debt financing in the sidebar to simulate amortized cash flow.</span>
+                            </span>
+                            <span id="framework-dscr-pill" class="font-mono font-bold px-2.5 py-0.5 rounded text-xs bg-slate-100 text-slate-600 border border-slate-200">
+                                Financing Inactive
+                            </span>
                         </div>
-                        <p class="mb-1.5"><strong class="text-slate-800">Low Motivation:</strong> Project increases
-                            ongoing operational expenditures (e.g. Scenario D) on top of new debt service commitments.
-                        </p>
                     </div>
                 </div>
-                <div id="framework-milestone-footer"
-                    class="mt-3.5 pt-3 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-600 bg-emerald-50/50 p-2.5 rounded-lg border border-emerald-100">
-                    <span id="framework-milestone-text" class="flex items-center gap-1.5 font-medium text-slate-700">
-                        <i class="fa-solid fa-flag-checkered text-emerald-600"></i>
-                        <span>Debt Retirement: After Year 10 (Month 120), debt is 100% retired, unlocking full
-                            unencumbered savings.</span>
-                    </span>
-                    <span id="framework-status-summary" class="font-mono font-bold text-emerald-700">
-                        Active: +$2.22k/mo Net Retained Cash Flow
-                    </span>
+
+                <!-- Comparative Synthesis Table -->
+                <div class="overflow-x-auto rounded-lg border border-slate-200">
+                    <table class="w-full text-left text-xs text-slate-700">
+                        <thead class="bg-slate-100/80 text-slate-600 font-semibold border-b border-slate-200">
+                            <tr>
+                                <th class="p-2.5">Dimension</th>
+                                <th class="p-2.5">Self-Financed (100% Equity)</th>
+                                <th class="p-2.5">Debt-Financed (Amortized Loan)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-2.5 font-bold text-slate-800">Initial Hurdle (Ea)</td>
+                                <td class="p-2.5 text-slate-600">High upfront peak (+$ / mo cash outflow)</td>
+                                <td class="p-2.5 text-slate-600">Flat or near-zero ($0 to down-payment equity)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-2.5 font-bold text-slate-800">Cash-Flow Timing</td>
+                                <td class="p-2.5 text-slate-600">Deep J-curve deficit followed by gradual payback</td>
+                                <td class="p-2.5 text-slate-600">Immediate net-neutral or net-positive (ΔCFnet)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-2.5 font-bold text-slate-800">Primary Decision Metric</td>
+                                <td class="p-2.5 text-slate-600">Simple Payback Period &amp; Balance Sheet Capital</td>
+                                <td class="p-2.5 text-slate-600">Debt Service Coverage Ratio (DSCR)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-2.5 font-bold text-slate-800">Organizational Impact</td>
+                                <td class="p-2.5 text-slate-600">Competes against limited capital budget reserves</td>
+                                <td class="p-2.5 text-slate-600">Funded via ongoing operating budget savings</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
@@ -1718,80 +1727,88 @@
             updateFrameworkCard();
         }
 
-        // Toggles and updates the Conceptual Framework card when debt financing is enabled
+        // Updates the Conceptual Framework card elements when state/financing changes
         function updateFrameworkCard() {
-            const cardKinetics = document.getElementById('card-framework-kinetics');
-            const cardFinancing = document.getElementById('card-framework-financing');
-            if (!cardKinetics || !cardFinancing) return;
+            const activeBadge = document.getElementById('framework-active-badge');
+            const cardSelf = document.getElementById('regime-card-self');
+            const cardDebt = document.getElementById('regime-card-debt');
+            const pillSelf = document.getElementById('pill-self-status');
+            const pillDebt = document.getElementById('pill-debt-status');
+            const dscrPill = document.getElementById('framework-dscr-pill');
+            const milestoneText = document.getElementById('framework-milestone-text');
+
+            if (!cardSelf || !cardDebt) return;
+
+            const debtInfo = calculateDebtService();
+            const annualSavings = -state.opexDelta;
 
             if (state.financingEnabled) {
-                cardKinetics.classList.add('hidden');
-                cardFinancing.classList.remove('hidden');
+                if (activeBadge) {
+                    activeBadge.innerText = "Active Regime: Debt-Financed (Amortized Loan)";
+                    activeBadge.className = "px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-emerald-100 text-emerald-800 border border-emerald-300";
+                }
 
-                const debtInfo = calculateDebtService();
-                const annualSavings = -state.opexDelta;
-                const dscrPill = document.getElementById('framework-dscr-pill');
-                const tierHigh = document.getElementById('tier-card-high');
-                const tierMedium = document.getElementById('tier-card-medium');
-                const tierLow = document.getElementById('tier-card-low');
-                const milestoneText = document.getElementById('framework-milestone-text');
-                const statusSummary = document.getElementById('framework-status-summary');
+                // Highlight Debt card
+                cardDebt.className = "p-4 rounded-xl border-2 border-emerald-400 bg-emerald-50/40 shadow-sm transition-all flex flex-col justify-between";
+                cardSelf.className = "p-4 rounded-xl border border-slate-200 bg-slate-50/50 opacity-75 transition-all flex flex-col justify-between";
 
-                // Update DSCR Pill in header
+                if (pillSelf) {
+                    pillSelf.className = "text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200";
+                    pillSelf.innerText = "Unfinanced Baseline";
+                }
+
+                if (pillDebt) {
+                    pillDebt.className = "text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300";
+                    pillDebt.innerText = state.financedPct === 100 ? "Active: 100% Debt (Ea ≈ 0)" : `Active: ${state.financedPct}% Financed`;
+                }
+
                 if (dscrPill) {
                     if (annualSavings <= 0) {
                         dscrPill.innerText = "DSCR: 0.00x (No Op-Ex Savings)";
-                        dscrPill.className = "px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-red-100 text-red-800 border border-red-300";
+                        dscrPill.className = "font-mono font-bold px-2.5 py-0.5 rounded text-xs bg-red-100 text-red-800 border border-red-300";
                     } else if (debtInfo.dscr >= 1.25) {
                         dscrPill.innerText = `DSCR: ${debtInfo.dscr.toFixed(2)}x (Cash-Flow Positive)`;
-                        dscrPill.className = "px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-emerald-100 text-emerald-800 border border-emerald-300";
+                        dscrPill.className = "font-mono font-bold px-2.5 py-0.5 rounded text-xs bg-emerald-100 text-emerald-800 border border-emerald-300";
                     } else if (debtInfo.dscr >= 1.0) {
                         dscrPill.innerText = `DSCR: ${debtInfo.dscr.toFixed(2)}x (Self-Funding)`;
-                        dscrPill.className = "px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-teal-100 text-teal-800 border border-teal-300";
+                        dscrPill.className = "font-mono font-bold px-2.5 py-0.5 rounded text-xs bg-teal-100 text-teal-800 border border-teal-300";
                     } else {
                         dscrPill.innerText = `DSCR: ${debtInfo.dscr.toFixed(2)}x (Cash Deficit)`;
-                        dscrPill.className = "px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-amber-100 text-amber-800 border border-amber-300";
+                        dscrPill.className = "font-mono font-bold px-2.5 py-0.5 rounded text-xs bg-amber-100 text-amber-800 border border-amber-300";
                     }
                 }
 
-                // Highlight active motivation tier
-                const baseInactiveClass = "p-3 rounded-lg border transition-all leading-relaxed bg-slate-50 border-slate-200 opacity-60";
-                if (tierHigh && tierMedium && tierLow) {
-                    if (annualSavings <= 0) {
-                        tierLow.className = "p-3 rounded-lg border transition-all leading-relaxed bg-rose-50/80 border-rose-300 ring-2 ring-rose-400 shadow-sm";
-                        tierMedium.className = baseInactiveClass;
-                        tierHigh.className = baseInactiveClass;
-                    } else if (debtInfo.dscr >= 1.0) {
-                        tierHigh.className = "p-3 rounded-lg border transition-all leading-relaxed bg-emerald-50/80 border-emerald-300 ring-2 ring-emerald-400 shadow-sm";
-                        tierMedium.className = baseInactiveClass;
-                        tierLow.className = baseInactiveClass;
-                    } else {
-                        tierMedium.className = "p-3 rounded-lg border transition-all leading-relaxed bg-amber-50/80 border-amber-300 ring-2 ring-amber-400 shadow-sm";
-                        tierHigh.className = baseInactiveClass;
-                        tierLow.className = baseInactiveClass;
-                    }
-                }
-
-                // Update milestone and status footer
                 if (milestoneText) {
-                    milestoneText.innerHTML = `<i class="fa-solid fa-flag-checkered text-emerald-600"></i><span><strong>Debt Retirement:</strong> After Year ${state.loanTerm} (Month ${Math.round(debtInfo.loanMonths)}), debt is 100% retired ($0/mo). Full savings of +$${Math.round(annualSavings > 0 ? annualSavings : 0)}k/yr (+${(Math.max(0, annualSavings) / 12).toFixed(1)}k/mo) become unencumbered through Yr ${state.timeHorizon}.</span>`;
-                }
-
-                if (statusSummary) {
-                    if (annualSavings <= 0) {
-                        statusSummary.innerText = `Active: -$${Math.abs(debtInfo.netMonthlySavings).toFixed(1)}k/mo Deficit`;
-                        statusSummary.className = "font-mono font-bold text-red-600";
-                    } else if (debtInfo.netMonthlySavings >= 0) {
-                        statusSummary.innerText = `Active: +$${debtInfo.netMonthlySavings.toFixed(1)}k/mo Net Retained Cash Flow`;
-                        statusSummary.className = "font-mono font-bold text-emerald-700";
-                    } else {
-                        statusSummary.innerText = `Active: -$${Math.abs(debtInfo.netMonthlySavings).toFixed(1)}k/mo Operating Subsidy Required`;
-                        statusSummary.className = "font-mono font-bold text-amber-700";
-                    }
+                    milestoneText.innerHTML = `<i class="fa-solid fa-flag-checkered text-emerald-600"></i><span>Debt Retirement: After Year ${state.loanTerm} (Month ${Math.round(debtInfo.loanMonths)}), debt is 100% retired ($0/mo). Full unencumbered savings: +$${Math.round(annualSavings > 0 ? annualSavings : 0)}k/yr through Yr ${state.timeHorizon}.</span>`;
                 }
             } else {
-                cardKinetics.classList.remove('hidden');
-                cardFinancing.classList.add('hidden');
+                if (activeBadge) {
+                    activeBadge.innerText = "Active Regime: Self-Financed (100% Equity)";
+                    activeBadge.className = "px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-purple-100 text-purple-800 border border-purple-300";
+                }
+
+                // Highlight Self card
+                cardSelf.className = "p-4 rounded-xl border-2 border-purple-400 bg-purple-50/40 shadow-sm transition-all flex flex-col justify-between";
+                cardDebt.className = "p-4 rounded-xl border border-slate-200 bg-slate-50/50 opacity-75 transition-all flex flex-col justify-between";
+
+                if (pillSelf) {
+                    pillSelf.className = "text-[11px] font-bold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 border border-purple-300";
+                    pillSelf.innerText = "Active: 100% Equity Hurdle (Ea)";
+                }
+
+                if (pillDebt) {
+                    pillDebt.className = "text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 border border-slate-200";
+                    pillDebt.innerText = "Financing Inactive";
+                }
+
+                if (dscrPill) {
+                    dscrPill.innerText = "Financing Disabled";
+                    dscrPill.className = "font-mono font-medium px-2.5 py-0.5 rounded text-xs bg-slate-100 text-slate-500 border border-slate-200";
+                }
+
+                if (milestoneText) {
+                    milestoneText.innerHTML = `<i class="fa-solid fa-info-circle text-slate-400"></i><span>Enable debt financing in the sidebar to simulate amortized cash flow.</span>`;
+                }
             }
         }
 
