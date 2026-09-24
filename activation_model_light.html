@@ -832,8 +832,8 @@
                     </button>
                     <button id="tab-btn-framework" type="button"
                         class="tab-btn inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300 transition">
-                        <i class="fa-solid fa-atom text-purple-600"></i>
-                        <span>Conceptual Framework</span>
+                        <i class="fa-solid fa-scale-balanced text-purple-600"></i>
+                        <span>Decision Factors</span>
                     </button>
                 </nav>
             </div>
@@ -943,23 +943,21 @@
                 </div>
             </div>
 
-            <!-- Tab 2: Conceptual Framework (Kinetics & Financing Narrative) -->
+            <!-- Tab 2: Decision Factors (Operative Dynamics & Financing Criteria) -->
             <div id="tab-pane-framework" class="hidden space-y-4 flex flex-col">
                 <div id="card-framework-kinetics" class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
                     <div class="flex flex-wrap items-center justify-between gap-3 mb-2.5">
                         <h3 class="text-sm font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
-                            <i class="fa-solid fa-atom text-purple-600 text-base"></i> Conceptual Framework: Analogizing
-                            Zero-Emission Building Retrofit Dynamics to Chemical Reaction Kinetics
+                            <i class="fa-solid fa-scale-balanced text-purple-600 text-base"></i> Decision Factors: Operative Dynamics &amp; Financing Pathways
                         </h3>
                         <span id="framework-active-badge"
                             class="px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-purple-100 text-purple-800 border border-purple-300">
-                            Active Regime: 100% Self-Financed (Cash Reserves)
+                            Active Model: Self-Financed Pathway (Cash Reserves)
                         </span>
                     </div>
 
                     <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                        Comparative thermodynamic and cash-flow mechanics governing capital retrofit adoption under
-                        self-financing (cash reserves) versus amortized third-party debt financing:
+                        Comparative financial kinetics, operative dynamics, and live decision criteria governing capital retrofit adoption under self-financing (cash reserves) versus amortized third-party debt financing:
                     </p>
 
                     <!-- Two Regimes: Self-Financed vs Debt-Financed -->
@@ -970,38 +968,70 @@
                             <div>
                                 <div class="flex items-center justify-between mb-2">
                                     <h4 class="font-bold text-sm text-slate-800 flex items-center gap-2">
-                                        <i class="fa-solid fa-money-bill-wave text-amber-600"></i> 1. Self-Financed
-                                        Regime
-                                        (High Barrier)
+                                        <i class="fa-solid fa-wallet text-amber-600"></i> 1. Self-Financed Pathway (Cash Reserves)
                                     </h4>
                                     <span id="pill-self-status"
                                         class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 border border-purple-300">
                                         Active: 100% Cash Hurdle (Ea)
                                     </span>
                                 </div>
-                                <p class="text-xs text-slate-600 mb-2 leading-relaxed">
-                                    The asset owner pays 100% of net capital expenditures (Cap-Ex) from working capital
-                                    or
-                                    cash reserves across the implementation window:
+                                <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+                                    The asset owner deploys working capital or cash reserves to fund net capital expenditures ($E_a$) across the implementation window:
                                 </p>
-                                <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
-                                    <li><strong class="text-slate-800">The Kinetic Barrier (Ea):</strong> Creates a
-                                        sharp,
-                                        concentrated financial obstacle with monthly capital outflows spiking into
-                                        negative
-                                        territory.</li>
-                                    <li><strong class="text-slate-800">The Adoption Bottleneck:</strong> Even when
-                                        strongly
-                                        NPV positive (ΔOp-Ex &lt; 0), projects stall if organizational liquidity or
-                                        hurdle
-                                        rate (analogous to thermal kinetic energy, kB·T) cannot clear the barrier peak.
-                                    </li>
-                                    <li><strong class="text-slate-800">Return Profile:</strong> Deep J-curve deficit
-                                        during
-                                        implementation, followed by gradual simple payback as 100% of operational
-                                        savings
-                                        are captured post-commissioning.</li>
-                                </ul>
+
+                                <!-- Operative Dynamics -->
+                                <div class="mb-3.5 bg-white/80 rounded-lg p-2.5 border border-slate-200/80 text-xs text-slate-700 space-y-1.5">
+                                    <div class="font-bold text-slate-800 text-[11px] uppercase tracking-wider flex items-center gap-1.5 mb-1">
+                                        <i class="fa-solid fa-gears text-purple-600"></i> Operative Dynamics
+                                    </div>
+                                    <div>
+                                        <strong class="text-slate-800">The Kinetic Barrier ($E_a$):</strong> Produces a severe, concentrated cash drain during implementation with monthly expenditures peaking at <span id="df-self-peak" class="font-bold font-mono text-amber-700">+$49.5k/mo</span> above baseline.
+                                    </div>
+                                    <div>
+                                        <strong class="text-slate-800">Adoption Bottleneck:</strong> Even when strongly NPV positive, projects stall if owner liquidity or hurdle rate cannot surmount the upfront capital peak.
+                                    </div>
+                                    <div>
+                                        <strong class="text-slate-800">Payoff Profile:</strong> Implementation J-curve deficit followed by 100% unencumbered retention of utility savings (<span id="df-self-savings" class="font-bold font-mono text-emerald-700">+$60k/yr</span>) post-commissioning.
+                                    </div>
+                                </div>
+
+                                <!-- Live Decision Criteria Values -->
+                                <div class="bg-white/90 rounded-lg p-2.5 border border-slate-200 text-xs space-y-2">
+                                    <div class="font-bold text-slate-800 text-[11px] uppercase tracking-wider flex items-center justify-between">
+                                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-calculator text-blue-600"></i> Active Decision Criteria</span>
+                                        <span id="df-self-verdict-badge" class="font-bold text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-200">Meets Hurdle</span>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-2 pt-1 border-t border-slate-100">
+                                        <div>
+                                            <span class="text-slate-500 block text-[11px]">Primary Decision Metric:</span>
+                                            <span id="df-self-payback-val" class="font-mono font-bold text-slate-900 text-sm">4.2 yrs</span>
+                                            <span class="text-[10px] text-slate-500 block">Criterion: Simple Payback ≤ 5.0 yrs</span>
+                                        </div>
+                                        <div>
+                                            <span class="text-slate-500 block text-[11px]">Payback Hurdle Verdict:</span>
+                                            <div id="df-self-payback-verdict" class="font-bold text-emerald-600 text-xs mt-0.5">✓ Favorable (4.2 ≤ 5.0y)</div>
+                                            <span class="text-[10px] text-slate-500 block">Owner Hurdle Threshold</span>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-2 pt-1.5 border-t border-slate-100">
+                                        <div>
+                                            <span class="text-slate-500 block text-[11px]">Net Capital Hurdle ($E_a$):</span>
+                                            <span id="df-self-capex" class="font-mono font-bold text-slate-900 text-xs">$250k net</span>
+                                            <span id="df-self-duration" class="text-[10px] text-slate-500 block">Over 12 mos implementation</span>
+                                        </div>
+                                        <div>
+                                            <span class="text-slate-500 block text-[11px]">Project NPV (20-Yr Horizon):</span>
+                                            <span id="df-self-npv" class="font-mono font-bold text-emerald-600 text-xs">+$438k NPV</span>
+                                            <span class="text-[10px] text-slate-500 block">Discounted @ 6.0%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="df-self-footer" class="mt-3 pt-2.5 border-t border-purple-200/60 flex items-center justify-between text-xs">
+                                <span class="text-slate-600 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-circle-check text-purple-600"></i>
+                                    <span id="df-self-summary">Owner momentum sufficient to clear upfront hurdle without third-party debt.</span>
+                                </span>
                             </div>
                         </div>
 
@@ -1011,47 +1041,75 @@
                             <div>
                                 <div class="flex items-center justify-between mb-2">
                                     <h4 class="font-bold text-sm text-slate-800 flex items-center gap-2">
-                                        <i class="fa-solid fa-hand-holding-dollar text-emerald-600"></i> 2.
-                                        Debt-Financed
-                                        Regime (Catalyzed Pathway)
+                                        <i class="fa-solid fa-hand-holding-dollar text-emerald-600"></i> 2. Debt-Financed Pathway (Amortized Facility)
                                     </h4>
                                     <span id="pill-debt-status"
                                         class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-300">
                                         Amortized (Ea ≈ 0)
                                     </span>
                                 </div>
-                                <p class="text-xs text-slate-600 mb-2 leading-relaxed">
-                                    Debt financing acts as a financial catalyst, amortizing upfront Cap-Ex into fixed
-                                    monthly debt service (D) commencing at project kickoff (Month 0):
+                                <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+                                    Debt financing acts as a financial catalyst, amortizing upfront Cap-Ex into fixed monthly debt service ($D$) commencing at project kickoff (Month 0):
                                 </p>
-                                <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
-                                    <li><strong class="text-slate-800">Barrier Mitigation (Ea → 0):</strong> Upfront
-                                        cash
-                                        outlay drops to $0 (or cash down payment). The Cap-Ex spike is leveled into a
-                                        predictable
-                                        monthly debt service payment.</li>
-                                    <li><strong class="text-slate-800">Self-Funding Dynamics &amp; DSCR:</strong>
-                                        Feasibility is governed by the Debt Service Coverage Ratio (DSCR = |ΔOp-Ex| / 12
-                                        /
-                                        D). When DSCR ≥ 1.0x, utility savings exceed debt payments, paying for itself
-                                        from
-                                        Day 1 out of operating savings.</li>
-                                    <li><strong class="text-slate-800">Debt Retirement Milestone:</strong> Upon loan
-                                        maturity, debt service drops to $0, unlocking full, unencumbered operating
-                                        savings
-                                        through the remaining operating horizon.</li>
-                                </ul>
+
+                                <!-- Operative Dynamics -->
+                                <div class="mb-3.5 bg-white/80 rounded-lg p-2.5 border border-slate-200/80 text-xs text-slate-700 space-y-1.5">
+                                    <div class="font-bold text-slate-800 text-[11px] uppercase tracking-wider flex items-center gap-1.5 mb-1">
+                                        <i class="fa-solid fa-gears text-emerald-600"></i> Operative Dynamics
+                                    </div>
+                                    <div>
+                                        <strong class="text-slate-800">Barrier Elimination ($E_a \to 0$):</strong> Upfront balance sheet cash outlay is eliminated (or reduced to down payment <span id="df-debt-down" class="font-mono font-bold text-slate-800">$0k</span>), leveling the peak expenditure mountain into flat monthly debt service.
+                                    </div>
+                                    <div>
+                                        <strong class="text-slate-800">Self-Funding Mechanism:</strong> Project viability is governed by the Debt Service Coverage Ratio ($\text{DSCR} = \frac{|\Delta\text{Op-Ex}|/12}{D}$). When $\text{DSCR} \ge 1.0\text{x}$, energy savings exceed debt service, creating a self-funding project from Day 1.
+                                    </div>
+                                    <div>
+                                        <strong class="text-slate-800">Retirement Cash Expansion:</strong> Upon loan maturity (<span id="df-debt-retire-yr" class="font-bold font-mono text-emerald-700">Year 10</span>), debt service drops to $0, unlocking full operational utility savings (<span id="df-debt-full-savings" class="font-bold font-mono text-emerald-700">+$60k/yr</span>) through Year <span id="df-debt-horizon-yr" class="font-mono">20</span>.
+                                    </div>
+                                </div>
+
+                                <!-- Live Decision Criteria Values -->
+                                <div class="bg-white/90 rounded-lg p-2.5 border border-slate-200 text-xs space-y-2">
+                                    <div class="font-bold text-slate-800 text-[11px] uppercase tracking-wider flex items-center justify-between">
+                                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-calculator text-blue-600"></i> Active Decision Criteria</span>
+                                        <span id="df-debt-verdict-badge" class="font-bold text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-200">Self-Funding</span>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-2 pt-1 border-t border-slate-100">
+                                        <div>
+                                            <span class="text-slate-500 block text-[11px]">Primary Decision Metric:</span>
+                                            <span id="df-debt-dscr-val" class="font-mono font-bold text-slate-900 text-sm">1.80x DSCR</span>
+                                            <span class="text-[10px] text-slate-500 block">Criteria: ≥ 1.0x Self-Funding | ≥ 1.25x Bankable</span>
+                                        </div>
+                                        <div>
+                                            <span class="text-slate-500 block text-[11px]">Debt Coverage Verdict:</span>
+                                            <div id="df-debt-dscr-verdict" class="font-bold text-emerald-600 text-xs mt-0.5">✓ Bankable (1.80x ≥ 1.25x)</div>
+                                            <span class="text-[10px] text-slate-500 block">Surplus Cash Flow Retained</span>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-2 pt-1.5 border-t border-slate-100">
+                                        <div>
+                                            <span class="text-slate-500 block text-[11px]">Monthly Debt Service ($D$):</span>
+                                            <span id="df-debt-service-val" class="font-mono font-bold text-slate-900 text-xs">$2.8k/mo</span>
+                                            <span id="df-debt-principal-val" class="text-[10px] text-slate-500 block">$250k financed (10 yr @ 6.0%)</span>
+                                        </div>
+                                        <div>
+                                            <span class="text-slate-500 block text-[11px]">Net Retained Cash Flow ($\Delta CF_{\text{net}}$):</span>
+                                            <span id="df-debt-retained-val" class="font-mono font-bold text-emerald-600 text-xs">+$2.2k/mo (+ $26.6k/yr)</span>
+                                            <span id="df-debt-timing-val" class="text-[10px] text-slate-500 block">Immediate net-positive savings</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div id="framework-debt-milestone"
                                 class="mt-3 pt-2.5 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs">
                                 <span id="framework-milestone-text"
                                     class="text-slate-600 flex items-center gap-1.5 font-medium">
-                                    <i class="fa-solid fa-info-circle text-slate-400"></i>
-                                    <span>Enable debt financing in the sidebar to simulate amortized cash flow.</span>
+                                    <i class="fa-solid fa-flag-checkered text-emerald-600"></i>
+                                    <span>Debt Retirement: After Year 10 (Month 120), debt is 100% retired ($0/mo). Full unencumbered savings: +$60k/yr through Yr 20.</span>
                                 </span>
                                 <span id="framework-dscr-pill"
-                                    class="font-mono font-bold px-2.5 py-0.5 rounded text-xs bg-slate-100 text-slate-600 border border-slate-200">
-                                    Financing Inactive
+                                    class="font-mono font-bold px-2.5 py-0.5 rounded text-xs bg-emerald-100 text-emerald-800 border border-emerald-300">
+                                    DSCR: 1.80x (Cash-Flow Positive)
                                 </span>
                             </div>
                         </div>
@@ -1063,33 +1121,30 @@
                             <thead class="bg-slate-100/80 text-slate-600 font-semibold border-b border-slate-200">
                                 <tr>
                                     <th class="p-2.5">Dimension</th>
-                                    <th class="p-2.5">Self-Financed (100% Cash Reserves)</th>
-                                    <th class="p-2.5">Debt-Financed (Amortized Loan)</th>
+                                    <th class="p-2.5">Self-Financed Pathway (Balance Sheet)</th>
+                                    <th class="p-2.5">Debt-Financed Pathway (Amortized Debt)</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y border-slate-200">
                                 <tr class="hover:bg-slate-50/50">
-                                    <td class="p-2.5 font-bold text-slate-800">Initial Hurdle (Ea)</td>
-                                    <td class="p-2.5 text-slate-600">High upfront peak (+$ / mo cash outflow)</td>
-                                    <td class="p-2.5 text-slate-600">Flat or near-zero ($0 to cash down payment)</td>
+                                    <td class="p-2.5 font-bold text-slate-800">Initial Hurdle ($E_a$)</td>
+                                    <td class="p-2.5 text-slate-600">Peak rate <span id="table-self-peak" class="font-bold text-slate-800">+$49.5k/mo</span> (<span id="table-self-capex">$250k total</span>)</td>
+                                    <td class="p-2.5 text-slate-600">Leveled into monthly payments (<span id="table-debt-down">$0k down</span>, <span id="table-debt-principal">$250k financed</span>)</td>
                                 </tr>
                                 <tr class="hover:bg-slate-50/50">
                                     <td class="p-2.5 font-bold text-slate-800">Cash-Flow Timing</td>
-                                    <td class="p-2.5 text-slate-600">Deep J-curve deficit followed by gradual payback
-                                    </td>
-                                    <td class="p-2.5 text-slate-600">Immediate net-neutral or net-positive (ΔCFnet)</td>
+                                    <td class="p-2.5 text-slate-600">Outflow during <span id="table-self-duration">12 mos</span>, then <span id="table-self-monthly-savings">+$5.0k/mo</span> savings</td>
+                                    <td class="p-2.5 text-slate-600">Net cash flow <span id="table-debt-net-flow">+$2.2k/mo</span> during loan, expanding after payoff</td>
                                 </tr>
                                 <tr class="hover:bg-slate-50/50">
                                     <td class="p-2.5 font-bold text-slate-800">Primary Decision Metric</td>
-                                    <td class="p-2.5 text-slate-600">Simple Payback Period &amp; Balance Sheet Capital
-                                    </td>
-                                    <td class="p-2.5 text-slate-600">Debt Service Coverage Ratio (DSCR)</td>
+                                    <td class="p-2.5 text-slate-600">Simple Payback: <span id="table-self-payback" class="font-mono font-bold text-slate-900">4.2 yrs</span> (<span id="table-self-hurdle" class="text-emerald-600 font-semibold">≤ 5.0y hurdle</span>)</td>
+                                    <td class="p-2.5 text-slate-600">Coverage Ratio: <span id="table-debt-dscr" class="font-mono font-bold text-slate-900">1.80x DSCR</span> (<span id="table-debt-bankable" class="text-emerald-600 font-semibold">≥ 1.25x bankable</span>)</td>
                                 </tr>
                                 <tr class="hover:bg-slate-50/50">
                                     <td class="p-2.5 font-bold text-slate-800">Organizational Impact</td>
-                                    <td class="p-2.5 text-slate-600">Competes against limited capital budget reserves
-                                    </td>
-                                    <td class="p-2.5 text-slate-600">Funded via ongoing operating budget savings</td>
+                                    <td class="p-2.5 text-slate-600">Competes against limited capital budget reserves; liquidity constrained</td>
+                                    <td class="p-2.5 text-slate-600">Funded via ongoing operating budget savings; self-funding facility</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1558,7 +1613,7 @@
             // Animation Play/Pause
             playBtn.addEventListener('click', toggleAnimation);
 
-            // Primary Dashboard Tab Switching (Trajectory/Results vs Conceptual Framework)
+            // Primary Dashboard Tab Switching (Trajectory/Results vs Decision Factors)
             const tabBtnVisualizer = document.getElementById('tab-btn-visualizer');
             const tabBtnFramework = document.getElementById('tab-btn-framework');
             const tabPaneVisualizer = document.getElementById('tab-pane-visualizer');
@@ -1585,6 +1640,7 @@
                     if (tabBtnVisualizer) {
                         tabBtnVisualizer.className = 'tab-btn inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300 transition';
                     }
+                    updateFrameworkCard();
                 }
             }
 
@@ -2044,7 +2100,7 @@
             updateFrameworkCard();
         }
 
-        // Updates the Conceptual Framework card elements when state/financing changes
+        // Updates the Decision Factors card elements and metrics when state/financing changes
         function updateFrameworkCard() {
             const activeBadge = document.getElementById('framework-active-badge');
             const cardSelf = document.getElementById('regime-card-self');
@@ -2057,21 +2113,201 @@
             if (!cardSelf || !cardDebt) return;
 
             const debtInfo = calculateDebtService();
-            const annualSavings = -state.opexDelta;
+            const effInstallMonths = getEffectiveInstallDuration();
+            const netTotalCapex = state.totalCapex * (1 - state.catalyst / 100);
+            const peakRateHeightMonthly = getPeakRateHeight(netTotalCapex, effInstallMonths);
+            const annualSavings = -state.opexDelta; // $k/year saved
+            const monthlySavings = annualSavings / 12; // $k/month saved
+            const r = state.discountRate / 100;
 
+            let npv = -netTotalCapex;
+            for (let t = 1; t <= state.timeHorizon; t++) {
+                npv += annualSavings / Math.pow(1 + r, t);
+            }
+
+            let paybackYears = null;
+            if (annualSavings > 0) {
+                paybackYears = netTotalCapex / annualSavings;
+            }
+
+            const monthlyNetCashFlow = monthlySavings - debtInfo.monthlyPayment;
+            const y1NetCashFlow = annualSavings - (debtInfo.monthlyPayment * 12);
+
+            // 1. Update Self-Financed Card Dynamic Content
+            const elSelfPeak = document.getElementById('df-self-peak');
+            if (elSelfPeak) elSelfPeak.innerText = `+$${peakRateHeightMonthly.toFixed(1)}k/mo`;
+
+            const elSelfSavings = document.getElementById('df-self-savings');
+            if (elSelfSavings) {
+                elSelfSavings.innerText = `${annualSavings >= 0 ? '+' : '-'}$${Math.abs(annualSavings).toFixed(0)}k/yr (${annualSavings >= 0 ? '+' : '-'}$${Math.abs(monthlySavings).toFixed(1)}k/mo)`;
+                elSelfSavings.className = annualSavings >= 0 ? "font-bold font-mono text-emerald-700" : "font-bold font-mono text-red-700";
+            }
+
+            const elSelfCapex = document.getElementById('df-self-capex');
+            if (elSelfCapex) elSelfCapex.innerText = `$${Math.round(netTotalCapex)}k net`;
+
+            const elSelfDuration = document.getElementById('df-self-duration');
+            if (elSelfDuration) elSelfDuration.innerText = `Over ${effInstallMonths.toFixed(1)} mos implementation`;
+
+            const elSelfPaybackVal = document.getElementById('df-self-payback-val');
+            if (elSelfPaybackVal) {
+                elSelfPaybackVal.innerText = paybackYears !== null ? `${paybackYears.toFixed(1)} yrs` : 'No Payback';
+                elSelfPaybackVal.className = (paybackYears !== null && paybackYears <= 5.0) ? "font-mono font-bold text-emerald-600 text-sm" : "font-mono font-bold text-slate-900 text-sm";
+            }
+
+            const elSelfPaybackVerdict = document.getElementById('df-self-payback-verdict');
+            const elSelfVerdictBadge = document.getElementById('df-self-verdict-badge');
+            const elSelfSummary = document.getElementById('df-self-summary');
+
+            if (annualSavings <= 0) {
+                if (elSelfPaybackVerdict) elSelfPaybackVerdict.innerHTML = `<span class="text-red-600 font-bold">✗ Non-Viable (No Payback)</span>`;
+                if (elSelfVerdictBadge) {
+                    elSelfVerdictBadge.innerText = "Non-Viable";
+                    elSelfVerdictBadge.className = "font-bold text-[10px] px-2 py-0.5 rounded-full bg-red-100 text-red-700 border border-red-200";
+                }
+                if (elSelfSummary) elSelfSummary.innerText = "Operational expenses exceed baseline; project lacks financial motivation and rolls back immediately.";
+            } else if (paybackYears <= 5.0) {
+                if (elSelfPaybackVerdict) elSelfPaybackVerdict.innerHTML = `<span class="text-emerald-600 font-bold">✓ Favorable (${paybackYears.toFixed(1)}y ≤ 5.0y)</span>`;
+                if (elSelfVerdictBadge) {
+                    elSelfVerdictBadge.innerText = "Meets Hurdle (≤ 5.0y)";
+                    elSelfVerdictBadge.className = "font-bold text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-200";
+                }
+                if (elSelfSummary) elSelfSummary.innerText = `Rapid payback (${paybackYears.toFixed(1)} yrs ≤ 5.0 yrs) generates sufficient owner momentum to surmount the upfront capital peak without third-party debt.`;
+            } else {
+                if (elSelfPaybackVerdict) elSelfPaybackVerdict.innerHTML = `<span class="text-amber-600 font-bold">✗ Bottleneck (${paybackYears.toFixed(1)}y > 5.0y)</span>`;
+                if (elSelfVerdictBadge) {
+                    elSelfVerdictBadge.innerText = "Exceeds Hurdle (> 5.0y)";
+                    elSelfVerdictBadge.className = "font-bold text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 border border-amber-200";
+                }
+                if (elSelfSummary) elSelfSummary.innerText = `Payback period (${paybackYears.toFixed(1)} yrs > 5.0 yrs) exceeds standard organizational investment hurdle; project stalls at the activation barrier unless catalyzed.`;
+            }
+
+            const elSelfNpv = document.getElementById('df-self-npv');
+            if (elSelfNpv) {
+                elSelfNpv.innerText = `${npv >= 0 ? '+$' : '-$'}${Math.abs(Math.round(npv))}k NPV`;
+                elSelfNpv.className = npv >= 0 ? "font-mono font-bold text-emerald-600 text-xs" : "font-mono font-bold text-red-600 text-xs";
+            }
+
+            // 2. Update Debt-Financed Card Dynamic Content
+            const elDebtDown = document.getElementById('df-debt-down');
+            if (elDebtDown) elDebtDown.innerText = `$${Math.round(debtInfo.cashDown)}k (${100 - state.financedPct}%)`;
+
+            const elDebtRetireYr = document.getElementById('df-debt-retire-yr');
+            if (elDebtRetireYr) elDebtRetireYr.innerText = `Year ${state.loanTerm}`;
+
+            const elDebtFullSavings = document.getElementById('df-debt-full-savings');
+            if (elDebtFullSavings) elDebtFullSavings.innerText = `${annualSavings >= 0 ? '+' : '-'}$${Math.abs(Math.round(annualSavings))}k/yr`;
+
+            const elDebtHorizonYr = document.getElementById('df-debt-horizon-yr');
+            if (elDebtHorizonYr) elDebtHorizonYr.innerText = `${state.timeHorizon}`;
+
+            const elDebtDscrVal = document.getElementById('df-debt-dscr-val');
+            if (elDebtDscrVal) {
+                elDebtDscrVal.innerText = annualSavings <= 0 ? '0.00x DSCR' : `${debtInfo.dscr.toFixed(2)}x DSCR`;
+                elDebtDscrVal.className = (annualSavings > 0 && debtInfo.dscr >= 1.25) ? "font-mono font-bold text-emerald-600 text-sm" : ((annualSavings > 0 && debtInfo.dscr >= 1.0) ? "font-mono font-bold text-teal-600 text-sm" : "font-mono font-bold text-amber-600 text-sm");
+            }
+
+            const elDebtDscrVerdict = document.getElementById('df-debt-dscr-verdict');
+            const elDebtVerdictBadge = document.getElementById('df-debt-verdict-badge');
+
+            if (annualSavings <= 0) {
+                if (elDebtDscrVerdict) elDebtDscrVerdict.innerHTML = `<span class="text-red-600 font-bold">✗ Deficit (No Op-Ex Savings)</span>`;
+                if (elDebtVerdictBadge) {
+                    elDebtVerdictBadge.innerText = "Deficit / Infeasible";
+                    elDebtVerdictBadge.className = "font-bold text-[10px] px-2 py-0.5 rounded-full bg-red-100 text-red-700 border border-red-200";
+                }
+            } else if (debtInfo.dscr >= 1.25) {
+                if (elDebtDscrVerdict) elDebtDscrVerdict.innerHTML = `<span class="text-emerald-600 font-bold">✓ Bankable (${debtInfo.dscr.toFixed(2)}x ≥ 1.25x)</span>`;
+                if (elDebtVerdictBadge) {
+                    elDebtVerdictBadge.innerText = "Bankable (Surplus)";
+                    elDebtVerdictBadge.className = "font-bold text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-200";
+                }
+            } else if (debtInfo.dscr >= 1.0) {
+                if (elDebtDscrVerdict) elDebtDscrVerdict.innerHTML = `<span class="text-teal-600 font-bold">✓ Self-Funding (${debtInfo.dscr.toFixed(2)}x ≥ 1.0x)</span>`;
+                if (elDebtVerdictBadge) {
+                    elDebtVerdictBadge.innerText = "Self-Funding (Net-Neutral)";
+                    elDebtVerdictBadge.className = "font-bold text-[10px] px-2 py-0.5 rounded-full bg-teal-100 text-teal-700 border border-teal-200";
+                }
+            } else {
+                if (elDebtDscrVerdict) elDebtDscrVerdict.innerHTML = `<span class="text-amber-600 font-bold">⚠ Operating Deficit (${debtInfo.dscr.toFixed(2)}x < 1.0x)</span>`;
+                if (elDebtVerdictBadge) {
+                    elDebtVerdictBadge.innerText = "Operating Deficit";
+                    elDebtVerdictBadge.className = "font-bold text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 border border-amber-200";
+                }
+            }
+
+            const elDebtServiceVal = document.getElementById('df-debt-service-val');
+            if (elDebtServiceVal) elDebtServiceVal.innerText = `$${debtInfo.monthlyPayment.toFixed(1)}k/mo ($${(debtInfo.monthlyPayment * 12).toFixed(1)}k/yr)`;
+
+            const elDebtPrincipalVal = document.getElementById('df-debt-principal-val');
+            if (elDebtPrincipalVal) elDebtPrincipalVal.innerText = `$${Math.round(debtInfo.debtPrincipal)}k financed (${state.loanTerm} yr @ ${state.interestRate.toFixed(1)}% APR)`;
+
+            const elDebtRetainedVal = document.getElementById('df-debt-retained-val');
+            if (elDebtRetainedVal) {
+                elDebtRetainedVal.innerText = `${monthlyNetCashFlow >= 0 ? '+' : '-'}$${Math.abs(monthlyNetCashFlow).toFixed(1)}k/mo (${y1NetCashFlow >= 0 ? '+' : '-'}$${Math.abs(Math.round(y1NetCashFlow))}k/yr)`;
+                elDebtRetainedVal.className = monthlyNetCashFlow >= 0 ? "font-mono font-bold text-emerald-600 text-xs" : "font-mono font-bold text-red-600 text-xs";
+            }
+
+            const elDebtTimingVal = document.getElementById('df-debt-timing-val');
+            if (elDebtTimingVal) {
+                if (annualSavings <= 0) {
+                    elDebtTimingVal.innerText = "Operating cash deficit throughout project";
+                } else if (monthlyNetCashFlow >= 0) {
+                    elDebtTimingVal.innerText = "Immediate net-positive operating cash flow from Month 0";
+                } else {
+                    elDebtTimingVal.innerText = `Operating cash deficit during ${state.loanTerm}-yr debt term`;
+                }
+            }
+
+            // 3. Update Synthesis Table Elements
+            const tSelfPeak = document.getElementById('table-self-peak');
+            if (tSelfPeak) tSelfPeak.innerText = `+$${peakRateHeightMonthly.toFixed(1)}k/mo ($${Math.round(netTotalCapex)}k total)`;
+
+            const tDebtDown = document.getElementById('table-debt-down');
+            if (tDebtDown) tDebtDown.innerText = `$${Math.round(debtInfo.cashDown)}k down, $${Math.round(debtInfo.debtPrincipal)}k financed`;
+
+            const tSelfDuration = document.getElementById('table-self-duration');
+            if (tSelfDuration) tSelfDuration.innerText = `${effInstallMonths.toFixed(1)} mos outflow, then ${annualSavings >= 0 ? '+' : '-'}$${Math.abs(monthlySavings).toFixed(1)}k/mo savings`;
+
+            const tDebtNetFlow = document.getElementById('table-debt-net-flow');
+            if (tDebtNetFlow) tDebtNetFlow.innerText = `${monthlyNetCashFlow >= 0 ? '+' : '-'}$${Math.abs(monthlyNetCashFlow).toFixed(1)}k/mo during loan, expanding after payoff`;
+
+            const tSelfPayback = document.getElementById('table-self-payback');
+            if (tSelfPayback) {
+                tSelfPayback.innerText = paybackYears !== null ? `${paybackYears.toFixed(1)} yrs` : 'No Payback';
+                tSelfPayback.className = paybackYears !== null && paybackYears <= 5.0 ? "font-mono font-bold text-emerald-600" : "font-mono font-bold text-red-600";
+            }
+
+            const tSelfHurdle = document.getElementById('table-self-hurdle');
+            if (tSelfHurdle) {
+                tSelfHurdle.innerText = paybackYears !== null && paybackYears <= 5.0 ? '≤ 5.0y hurdle (Pass)' : (paybackYears !== null ? '> 5.0y hurdle (Fail)' : 'No Payback');
+                tSelfHurdle.className = paybackYears !== null && paybackYears <= 5.0 ? "text-emerald-600 font-semibold" : "text-red-600 font-semibold";
+            }
+
+            const tDebtDscr = document.getElementById('table-debt-dscr');
+            if (tDebtDscr) {
+                tDebtDscr.innerText = annualSavings <= 0 ? '0.00x DSCR' : `${debtInfo.dscr.toFixed(2)}x DSCR`;
+                tDebtDscr.className = debtInfo.dscr >= 1.0 ? "font-mono font-bold text-emerald-600" : "font-mono font-bold text-red-600";
+            }
+
+            const tDebtBankable = document.getElementById('table-debt-bankable');
+            if (tDebtBankable) {
+                tDebtBankable.innerText = debtInfo.dscr >= 1.25 ? '≥ 1.25x bankable' : (debtInfo.dscr >= 1.0 ? '≥ 1.0x self-funding' : '< 1.0x deficit');
+                tDebtBankable.className = debtInfo.dscr >= 1.0 ? "text-emerald-600 font-semibold" : "text-amber-600 font-semibold";
+            }
+
+            // 4. Update Regime Cards Active Status Border & Pill
             if (state.financingEnabled) {
                 if (activeBadge) {
-                    activeBadge.innerText = "Active Regime: Debt-Financed (Amortized Loan)";
+                    activeBadge.innerText = "Active Model: Debt-Financed Pathway (Amortized Debt)";
                     activeBadge.className = "px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-emerald-100 text-emerald-800 border border-emerald-300";
                 }
-
-                // Highlight Debt card
                 cardDebt.className = "p-4 rounded-xl border-2 border-emerald-400 bg-emerald-50/40 shadow-sm transition-all flex flex-col justify-between";
                 cardSelf.className = "p-4 rounded-xl border border-slate-200 bg-slate-50/50 opacity-75 transition-all flex flex-col justify-between";
 
                 if (pillSelf) {
                     pillSelf.className = "text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200";
-                    pillSelf.innerText = "Unfinanced Baseline";
+                    pillSelf.innerText = "Alternate (Unfinanced)";
                 }
 
                 if (pillDebt) {
@@ -2100,11 +2336,9 @@
                 }
             } else {
                 if (activeBadge) {
-                    activeBadge.innerText = "Active Regime: 100% Self-Financed (Cash Reserves)";
+                    activeBadge.innerText = "Active Model: Self-Financed Pathway (Cash Reserves)";
                     activeBadge.className = "px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-purple-100 text-purple-800 border border-purple-300";
                 }
-
-                // Highlight Self card
                 cardSelf.className = "p-4 rounded-xl border-2 border-purple-400 bg-purple-50/40 shadow-sm transition-all flex flex-col justify-between";
                 cardDebt.className = "p-4 rounded-xl border border-slate-200 bg-slate-50/50 opacity-75 transition-all flex flex-col justify-between";
 
@@ -2115,7 +2349,7 @@
 
                 if (pillDebt) {
                     pillDebt.className = "text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 border border-slate-200";
-                    pillDebt.innerText = "Financing Inactive";
+                    pillDebt.innerText = "Alternate (Debt-Financed)";
                 }
 
                 if (dscrPill) {
