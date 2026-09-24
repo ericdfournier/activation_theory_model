@@ -649,6 +649,32 @@
         <!-- Right Display & Graph Area (8 Cols on lg, 9 Cols on xl/2xl) -->
         <section class="lg:col-span-8 xl:col-span-9 2xl:col-span-9 space-y-6 flex flex-col">
 
+            <!-- Card 0: Active Scenario Profile & Project Lifecycle Structure -->
+            <div id="card-scenario-overview" class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-2.5">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-circle-info text-blue-600 text-base"></i> Active Scenario Profile &amp; Project Lifecycle Structure
+                    </h3>
+                    <span id="badge-scenario-name"
+                        class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+                        Scenario A (Standard / Optimal Retrofit)
+                    </span>
+                </div>
+
+                <p id="scenario-description"
+                    class="text-xs sm:text-sm text-slate-700 bg-slate-50 border border-slate-200 rounded-lg p-3.5 mb-3 leading-relaxed font-normal">
+                    Loading scenario overview...
+                </p>
+
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    This model evaluates capital facility upgrades (e.g., energy efficiency, electrification,
+                    decarbonization) by mapping thermodynamic states and reaction kinetics onto corporate financial
+                    decision-making across four continuous project phases: <strong>Pre-Implementation
+                        (Baseline)</strong>, <strong>Implementation</strong>, <strong>Commissioning</strong>, and
+                    <strong>Operation</strong>.
+                </p>
+            </div>
+
             <!-- Chart Display Card -->
             <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex flex-col relative">
                 <div class="flex flex-wrap justify-between items-center mb-4 gap-3">
@@ -757,64 +783,84 @@
                     </span>
                 </div>
 
-                <p id="scenario-description" class="text-xs sm:text-sm text-slate-600 bg-slate-50 border border-slate-200 rounded-lg p-3 mb-4 leading-relaxed font-normal">
-                    Loading scenario overview...
-                </p>
-
-                <p class="text-xs sm:text-sm text-slate-700 leading-relaxed mb-4">
-                    This model evaluates capital facility upgrades (e.g., energy efficiency, electrification, decarbonization) by mapping thermodynamic states and reaction kinetics onto corporate financial decision-making across four continuous project phases: <strong>Pre-Implementation (Baseline)</strong>, <strong>Implementation</strong>, <strong>Commissioning</strong>, and <strong>Operation</strong>.
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                    Comparative thermodynamic and cash-flow mechanics governing capital retrofit adoption under self-financed equity versus amortized third-party debt financing:
                 </p>
 
                 <!-- Two Regimes: Self-Financed vs Debt-Financed -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
                     <!-- Regime 1: Self-Financed -->
-                    <div id="regime-card-self" class="p-4 rounded-xl border-2 border-purple-400 bg-purple-50/40 shadow-sm transition-all flex flex-col justify-between">
+                    <div id="regime-card-self"
+                        class="p-4 rounded-xl border-2 border-purple-400 bg-purple-50/40 shadow-sm transition-all flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between mb-2">
                                 <h4 class="font-bold text-sm text-slate-800 flex items-center gap-2">
-                                    <i class="fa-solid fa-money-bill-wave text-amber-600"></i> 1. Self-Financed Regime (High Barrier)
+                                    <i class="fa-solid fa-money-bill-wave text-amber-600"></i> 1. Self-Financed Regime
+                                    (High Barrier)
                                 </h4>
-                                <span id="pill-self-status" class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 border border-purple-300">
+                                <span id="pill-self-status"
+                                    class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 border border-purple-300">
                                     Active: 100% Equity Hurdle (Ea)
                                 </span>
                             </div>
                             <p class="text-xs text-slate-600 mb-2 leading-relaxed">
-                                The asset owner pays 100% of net capital expenditures (Cap-Ex) from working capital or cash reserves across the implementation window:
+                                The asset owner pays 100% of net capital expenditures (Cap-Ex) from working capital or
+                                cash reserves across the implementation window:
                             </p>
                             <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
-                                <li><strong class="text-slate-800">The Kinetic Barrier (Ea):</strong> Creates a sharp, concentrated financial obstacle with monthly capital outflows spiking into negative territory.</li>
-                                <li><strong class="text-slate-800">The Adoption Bottleneck:</strong> Even when strongly NPV positive (ΔOp-Ex &lt; 0), projects stall if organizational liquidity or hurdle rate (analogous to thermal kinetic energy, kB·T) cannot clear the barrier peak.</li>
-                                <li><strong class="text-slate-800">Return Profile:</strong> Deep J-curve deficit during implementation, followed by gradual simple payback as 100% of operational savings are captured post-commissioning.</li>
+                                <li><strong class="text-slate-800">The Kinetic Barrier (Ea):</strong> Creates a sharp,
+                                    concentrated financial obstacle with monthly capital outflows spiking into negative
+                                    territory.</li>
+                                <li><strong class="text-slate-800">The Adoption Bottleneck:</strong> Even when strongly
+                                    NPV positive (ΔOp-Ex &lt; 0), projects stall if organizational liquidity or hurdle
+                                    rate (analogous to thermal kinetic energy, kB·T) cannot clear the barrier peak.</li>
+                                <li><strong class="text-slate-800">Return Profile:</strong> Deep J-curve deficit during
+                                    implementation, followed by gradual simple payback as 100% of operational savings
+                                    are captured post-commissioning.</li>
                             </ul>
                         </div>
                     </div>
 
                     <!-- Regime 2: Debt-Financed -->
-                    <div id="regime-card-debt" class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 opacity-80 transition-all flex flex-col justify-between">
+                    <div id="regime-card-debt"
+                        class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 opacity-80 transition-all flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between mb-2">
                                 <h4 class="font-bold text-sm text-slate-800 flex items-center gap-2">
-                                    <i class="fa-solid fa-hand-holding-dollar text-emerald-600"></i> 2. Debt-Financed Regime (Catalyzed Pathway)
+                                    <i class="fa-solid fa-hand-holding-dollar text-emerald-600"></i> 2. Debt-Financed
+                                    Regime (Catalyzed Pathway)
                                 </h4>
-                                <span id="pill-debt-status" class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-300">
+                                <span id="pill-debt-status"
+                                    class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-300">
                                     Amortized (Ea ≈ 0)
                                 </span>
                             </div>
                             <p class="text-xs text-slate-600 mb-2 leading-relaxed">
-                                Debt financing acts as a financial catalyst, amortizing upfront Cap-Ex into fixed monthly debt service (D) commencing at project kickoff (Month 0):
+                                Debt financing acts as a financial catalyst, amortizing upfront Cap-Ex into fixed
+                                monthly debt service (D) commencing at project kickoff (Month 0):
                             </p>
                             <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
-                                <li><strong class="text-slate-800">Barrier Mitigation (Ea → 0):</strong> Upfront equity drops to $0 (or down payment). The Cap-Ex spike is leveled into a predictable monthly debt service payment.</li>
-                                <li><strong class="text-slate-800">Self-Funding Dynamics &amp; DSCR:</strong> Feasibility is governed by the Debt Service Coverage Ratio (DSCR = |ΔOp-Ex| / 12 / D). When DSCR ≥ 1.0x, utility savings exceed debt payments, paying for itself from Day 1 out of operating savings.</li>
-                                <li><strong class="text-slate-800">Debt Retirement Milestone:</strong> Upon loan maturity, debt service drops to $0, unlocking full, unencumbered operating savings through the remaining operating horizon.</li>
+                                <li><strong class="text-slate-800">Barrier Mitigation (Ea → 0):</strong> Upfront equity
+                                    drops to $0 (or down payment). The Cap-Ex spike is leveled into a predictable
+                                    monthly debt service payment.</li>
+                                <li><strong class="text-slate-800">Self-Funding Dynamics &amp; DSCR:</strong>
+                                    Feasibility is governed by the Debt Service Coverage Ratio (DSCR = |ΔOp-Ex| / 12 /
+                                    D). When DSCR ≥ 1.0x, utility savings exceed debt payments, paying for itself from
+                                    Day 1 out of operating savings.</li>
+                                <li><strong class="text-slate-800">Debt Retirement Milestone:</strong> Upon loan
+                                    maturity, debt service drops to $0, unlocking full, unencumbered operating savings
+                                    through the remaining operating horizon.</li>
                             </ul>
                         </div>
-                        <div id="framework-debt-milestone" class="mt-3 pt-2.5 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs">
-                            <span id="framework-milestone-text" class="text-slate-600 flex items-center gap-1.5 font-medium">
+                        <div id="framework-debt-milestone"
+                            class="mt-3 pt-2.5 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs">
+                            <span id="framework-milestone-text"
+                                class="text-slate-600 flex items-center gap-1.5 font-medium">
                                 <i class="fa-solid fa-info-circle text-slate-400"></i>
                                 <span>Enable debt financing in the sidebar to simulate amortized cash flow.</span>
                             </span>
-                            <span id="framework-dscr-pill" class="font-mono font-bold px-2.5 py-0.5 rounded text-xs bg-slate-100 text-slate-600 border border-slate-200">
+                            <span id="framework-dscr-pill"
+                                class="font-mono font-bold px-2.5 py-0.5 rounded text-xs bg-slate-100 text-slate-600 border border-slate-200">
                                 Financing Inactive
                             </span>
                         </div>
@@ -1298,6 +1344,11 @@
                 if (badgeFinancingActive) badgeFinancingActive.classList.add('hidden');
 
                 customBadge.classList.add('hidden');
+                const badgeScenario = document.getElementById('badge-scenario-name');
+                if (badgeScenario) {
+                    badgeScenario.innerText = 'Scenario A (Standard / Optimal Retrofit)';
+                    badgeScenario.className = 'px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200';
+                }
                 stopAnimation();
                 state.ballProgress = 0.02;
                 state.ballVelocity = 0;
@@ -1333,6 +1384,11 @@
                         customBadge.classList.remove('hidden');
                         state.scenario = 'Custom';
                         scenarioDesc.innerHTML = `<strong>Custom Scenario:</strong> User-adjusted parameters (Total Cap-Ex: $${Math.round(state.totalCapex)}k, Implementation: ${state.installDuration} mos, Op-Ex Delta: ${state.opexDelta <= 0 ? '-' : '+'}$${Math.abs(state.opexDelta)}k/yr).`;
+                        const badgeScenario = document.getElementById('badge-scenario-name');
+                        if (badgeScenario) {
+                            badgeScenario.innerText = 'Custom Parameters';
+                            badgeScenario.className = 'px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200';
+                        }
                     }
 
                     if (!state.animating) {
@@ -1504,6 +1560,18 @@
 
             customBadge.classList.add('hidden');
             scenarioDesc.innerHTML = p.description;
+
+            const badgeScenario = document.getElementById('badge-scenario-name');
+            if (badgeScenario) {
+                const names = {
+                    A: 'Scenario A (Standard / Optimal Retrofit)',
+                    B: 'Scenario B (Excessive Cap-Ex)',
+                    C: 'Scenario C (Excessive Implementation Downtime)',
+                    D: 'Scenario D (Favorable Cap-Ex / Unfavorable Op-Ex)'
+                };
+                badgeScenario.innerText = names[key] || `Scenario ${key}`;
+                badgeScenario.className = 'px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200';
+            }
 
             // Update active preset styling
             document.querySelectorAll('.preset-btn').forEach(btn => {
@@ -2518,7 +2586,7 @@
             if (state.financingEnabled) {
                 if (debtInfo.equityDown === 0) {
                     actHeader = 'Activation Barrier';
-                    actLine1 = `Upfront Equity: $0k \n($${Math.round(debtInfo.debtPrincipal)}k Financed)`;
+                    actLine1 = `Upfront Equity: $0k ($${Math.round(debtInfo.debtPrincipal)}k Financed)`;
                     actLine2 = `Debt Service: $${debtInfo.monthlyPayment.toFixed(1)}k/mo (Starts Mo 0)`;
                 } else {
                     actHeader = `Debt (${state.financedPct}%):`;
