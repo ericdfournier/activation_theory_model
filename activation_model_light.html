@@ -1088,32 +1088,24 @@
         // Exact critical initial velocity (vc) required to reach the peak of the barrier (pPeak)
         // under the current physics landscape (potential energy slope + friction)
         function getCriticalVelocity() {
-            const debtInfo = calculateDebtService();
-            const effectiveCapEx = state.financingEnabled ? debtInfo.equityDown : (state.totalCapex * (1 - state.catalyst / 100));
-            if (effectiveCapEx <= 0) return 0.05; // No hurdle when 100% financed
+            const eps = 0.003;
+            const gEff = 0.00456;
+            const friction = 0.40;
+            const dt = 0.008;
 
             const effInstallMonths = getEffectiveInstallDuration();
             const installWidth = (effInstallMonths / 36) * 0.42;
             const pStart = 0.12;
             const pPeak = pStart + installWidth / 2;
-            const peakRateHeightMonthly = getPeakRateHeight(effectiveCapEx, effInstallMonths) / 12;
-            const halfW = installWidth / 2;
 
-            const gEff = 0.00456; // 0.00038 * 12 to maintain identical dynamics with monthly $/mo slopes
-            const friction = 0.40;
-            const dt = 0.008;
-
-            // Fast simulation to check if a test initial velocity reaches or exceeds pPeak
+            // Fast simulation using the actual landscape to find threshold velocity
             function clears(testV) {
                 let r = 0.02;
                 let v = testV;
-                for (let i = 0; i < 2500; i++) {
-                    let slope = 0.0;
-                    if (r >= pStart && r <= pStart + installWidth) {
-                        const u = ((r - pPeak) / halfW) * 2.1;
-                        const bump = Math.exp(-(u * u));
-                        slope = peakRateHeightMonthly * bump * (-2.0 * u * (2.1 / halfW));
-                    }
+                for (let i = 0; i < 2000; i++) {
+                    const y1 = getCostAtTime(Math.max(0, r - eps)).value;
+                    const y2 = getCostAtTime(Math.min(1, r + eps)).value;
+                    const slope = (y2 - y1) / (2 * eps);
                     v += (-gEff * slope - friction * v) * dt;
                     r += v * dt;
                     if (r >= pPeak) return true;
@@ -1123,7 +1115,7 @@
             }
 
             // Bisection search for precise threshold velocity
-            let low = 0.05;
+            let low = 0.02;
             let high = 2.5;
             for (let iter = 0; iter < 16; iter++) {
                 const mid = (low + high) / 2;
@@ -1137,20 +1129,34 @@
         }
 
         // Compute initial velocity of the reaction ball:
+        // - Self-Financed: Governed by Simple Payback (<5 yrs clears, >=5 yrs rolls back)
+        // - Debt-Financed: Governed by DSCR (>1.0x clears with speed scaling with DSCR; <1.0x rolls back)
         function computeInitialVelocity() {
             const annualSavings = -state.opexDelta; // $k/yr
             const vc = getCriticalVelocity();
 
             if (state.financingEnabled) {
                 const debtInfo = calculateDebtService();
-                if (annualSavings > 0 && debtInfo.dscr >= 1.0) {
-                    // Debt service is self-funding from day 1, zero/low cash barrier
-                    return Math.max(0.65, vc * 1.35);
-                } else if (annualSavings > 0 && debtInfo.dscr > 0.4) {
-                    return Math.max(0.35, vc * 0.90);
+                if (annualSavings <= 0 || debtInfo.dscr <= 0) {
+                    return Math.min(vc * 0.35, 0.08);
+                }
+
+                if (debtInfo.dscr >= 1.0) {
+                    // DSCR >= 1.0: Self-funding / cash-flow positive -> ball MUST make it over the hill!
+                    // Initial speed increases proportionately to the degree that DSCR > 1.0
+                    const dscrExcess = Math.min(3.0, debtInfo.dscr - 1.0);
+                    const speedMultiplier = 1.12 + 0.35 * dscrExcess;
+                    return vc * speedMultiplier;
+                } else {
+                    // DSCR < 1.0: Operating cash deficit -> ball MUST NOT make it over the hill!
+                    // Speed scales down with DSCR, strictly capped below vc so the ball rolls back
+                    const dscrFraction = Math.max(0.15, Math.min(0.95, debtInfo.dscr));
+                    const rollbackScale = 0.25 + 0.65 * dscrFraction;
+                    return Math.min(vc * 0.90, vc * rollbackScale);
                 }
             }
 
+            // Self-Financed Case: Payback Rule (<5 yrs clears, >=5 yrs rolls back)
             if (annualSavings <= 0) {
                 return Math.max(0.08, vc * 0.15);
             }
@@ -1189,21 +1195,28 @@
                         level: 'Very High',
                         colorClass: 'text-emerald-700 bg-emerald-50 border-emerald-200',
                         pillColor: 'text-emerald-600',
-                        desc: `Financed: Cash-Flow Positive (${debtInfo.dscr.toFixed(2)}x DSCR, $0 Upfront Hurdle)`
+                        desc: `Financed: Cash-Flow Positive (${debtInfo.dscr.toFixed(2)}x DSCR ≥ 1.25x)`
                     };
                 } else if (debtInfo.dscr >= 1.0) {
                     return {
                         level: 'High',
                         colorClass: 'text-teal-700 bg-teal-50 border-teal-200',
                         pillColor: 'text-teal-600',
-                        desc: `Financed: Self-Funding via Op-Ex (${debtInfo.dscr.toFixed(2)}x DSCR)`
+                        desc: `Financed: Self-Funding via Op-Ex (${debtInfo.dscr.toFixed(2)}x DSCR ≥ 1.0x)`
                     };
-                } else {
+                } else if (debtInfo.dscr >= 0.5) {
                     return {
                         level: 'Medium',
                         colorClass: 'text-amber-700 bg-amber-50 border-amber-200',
                         pillColor: 'text-amber-600',
-                        desc: `Financed: Deficit During Debt Term (${debtInfo.dscr.toFixed(2)}x DSCR)`
+                        desc: `Financed: Operating Deficit (${debtInfo.dscr.toFixed(2)}x DSCR < 1.0x)`
+                    };
+                } else {
+                    return {
+                        level: 'Low',
+                        colorClass: 'text-rose-700 bg-rose-50 border-rose-200',
+                        pillColor: 'text-rose-600',
+                        desc: `Financed: Heavy Operating Deficit (${debtInfo.dscr.toFixed(2)}x DSCR < 1.0x)`
                     };
                 }
             }
@@ -2972,14 +2985,16 @@
                         state.ballProgress = 0.02;
                         state.ballVelocity = 0;
                         state.physicsStatus = 'rollback';
+                        const debtInfo = calculateDebtService();
                         state.statusMessage = state.financingEnabled
-                            ? `${currentTier.level} Motivation: Insufficient Coverage / Cash Flow (Rolled Back)`
+                            ? `${currentTier.level} Motivation: Insufficient Coverage (${debtInfo.dscr.toFixed(2)}x DSCR < 1.0x) - Rolled Back`
                             : `${currentTier.level} Motivation: Payback ≥5 Yrs (Rolled Back)`;
                         stopAnimation();
                     }
                 } else if (state.ballProgress >= phase.pPeak && state.ballProgress < phase.pCommissionEnd) {
+                    const debtInfo = calculateDebtService();
                     state.statusMessage = state.financingEnabled
-                        ? `${currentTier.level} Motivation: Barrier Overcome via Financing! Accelerating into Savings`
+                        ? `${currentTier.level} Motivation: Barrier Overcome (${debtInfo.dscr.toFixed(2)}x DSCR ≥ 1.0x)! Accelerating into Savings`
                         : `${currentTier.level} Motivation: Barrier Overcome (<5 Yr Payback)! Accelerating into Savings`;
                 } else if (state.ballProgress >= phase.pCommissionEnd) {
                     state.statusMessage = state.financingEnabled
