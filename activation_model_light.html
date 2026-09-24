@@ -683,236 +683,256 @@
         </section>
 
         <!-- Right Display & Graph Area (8 Cols on lg, 9 Cols on xl/2xl) -->
-        <section class="lg:col-span-8 xl:col-span-9 2xl:col-span-9 space-y-6 flex flex-col">
+        <section class="lg:col-span-8 xl:col-span-9 2xl:col-span-9 space-y-4 flex flex-col">
 
+            <!-- Primary Navigation Tabs -->
+            <div class="border-b border-slate-200">
+                <nav class="flex space-x-2 -mb-px" aria-label="Dashboard Tabs">
+                    <button id="tab-btn-visualizer" type="button"
+                        class="tab-btn inline-flex items-center gap-2 px-4 py-2.5 text-sm font-bold border-b-2 border-blue-600 text-blue-600 transition">
+                        <i class="fa-solid fa-chart-line text-blue-600"></i>
+                        <span>Project Trajectory &amp; Results</span>
+                    </button>
+                    <button id="tab-btn-framework" type="button"
+                        class="tab-btn inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300 transition">
+                        <i class="fa-solid fa-atom text-purple-600"></i>
+                        <span>Conceptual Framework</span>
+                    </button>
+                </nav>
+            </div>
 
-            <!-- Chart Display Card -->
-            <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex flex-col relative">
-                <div class="flex flex-wrap justify-between items-center mb-4 gap-3">
-                    <div>
-                        <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
-                            <i class="fa-solid fa-chart-line text-emerald-600 text-lg"></i> Zero-Emissions Project
-                            Cost Trajectory
-                        </h2>
-                        <div class="flex flex-wrap items-center gap-2 mt-1">
-                            <p class="text-xs sm:text-sm text-slate-500">Y-Axis: Effective Cost Rate ($/mo) | X-Axis:
-                                Project Timeline</p>
-                            <span
-                                class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-900 border border-amber-200 shadow-2xs">
-                                <i class="fa-solid fa-arrows-left-right-to-line text-amber-600"></i>
-                                <span><strong>Non-Linear Scale:</strong> Zoomed Transition (Months) &bull; Compressed
-                                    Operation (<span id="scale-badge-horizon">20 Yrs</span>)</span>
-                            </span>
+            <!-- Tab 1: Project Trajectory & Results (Primary) -->
+            <div id="tab-pane-visualizer" class="space-y-4 flex flex-col">
+                <!-- Chart Display Card -->
+                <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex flex-col relative">
+                    <div class="flex flex-wrap justify-between items-center mb-4 gap-3">
+                        <div>
+                            <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                                <i class="fa-solid fa-chart-line text-emerald-600 text-lg"></i> Zero-Emissions Project
+                                Cost Trajectory
+                            </h2>
+                            <div class="flex flex-wrap items-center gap-2 mt-1">
+                                <p class="text-xs sm:text-sm text-slate-500">Y-Axis: Effective Cost Rate ($/mo) | X-Axis:
+                                    Project Timeline</p>
+                                <span
+                                    class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-900 border border-amber-200 shadow-2xs">
+                                    <i class="fa-solid fa-arrows-left-right-to-line text-amber-600"></i>
+                                    <span><strong>Non-Linear Scale:</strong> Zoomed Transition (Months) &bull; Compressed
+                                        Operation (<span id="scale-badge-horizon">20 Yrs</span>)</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Driving Force & Legend Controls -->
+                        <div class="flex flex-wrap items-center gap-3.5 text-xs">
+                            <div id="pill-driving-force"
+                                class="px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 font-mono text-slate-700 flex items-center gap-2 shadow-2xs">
+                                <span class="text-slate-500 font-sans">Cumulative Savings (PV):</span>
+                                <span id="val-cum-savings" class="text-emerald-600 font-bold text-sm">$688k</span>
+                                <span class="text-slate-300">|</span>
+                                <span class="text-slate-500 font-sans">Motivation:</span>
+                                <span id="pill-motivation-level" class="font-bold text-emerald-600 text-sm">High</span>
+                            </div>
+
+                            <div class="flex items-center gap-3.5 text-xs text-slate-600">
+                                <span class="flex items-center gap-1.5"><span
+                                        class="w-3 h-3 rounded-full bg-red-500 inline-block shadow-xs"></span> Cost
+                                    Increase</span>
+                                <span class="flex items-center gap-1.5"><span
+                                        class="w-3 h-3 rounded-full bg-emerald-500 inline-block shadow-xs"></span> Cost
+                                    Reduction</span>
+                                <span id="legend-debt-service" class="hidden flex items-center gap-1.5"><span
+                                        class="w-3 h-3 rounded-full bg-amber-400 inline-block shadow-xs"></span> Debt
+                                    Service</span>
+                                <span id="legend-ghost-barrier" class="hidden flex items-center gap-1.5"><span
+                                        class="w-3.5 h-0.5 border-b-2 border-dashed border-slate-400 inline-block"></span>
+                                    Unfinanced Barrier</span>
+                                <span class="flex items-center gap-1.5"><span
+                                        class="w-3.5 h-0.5 border-b-2 border-dashed border-slate-400 inline-block"></span>
+                                    Baseline Op-Ex</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Driving Force & Legend Controls -->
-                    <div class="flex flex-wrap items-center gap-3.5 text-xs">
-                        <div id="pill-driving-force"
-                            class="px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 font-mono text-slate-700 flex items-center gap-2 shadow-2xs">
-                            <span class="text-slate-500 font-sans">Cumulative Savings (PV):</span>
-                            <span id="val-cum-savings" class="text-emerald-600 font-bold text-sm">$688k</span>
-                            <span class="text-slate-300">|</span>
-                            <span class="text-slate-500 font-sans">Motivation:</span>
-                            <span id="pill-motivation-level" class="font-bold text-emerald-600 text-sm">High</span>
-                        </div>
-
-                        <div class="flex items-center gap-3.5 text-xs text-slate-600">
-                            <span class="flex items-center gap-1.5"><span
-                                    class="w-3 h-3 rounded-full bg-red-500 inline-block shadow-xs"></span> Cost
-                                Increase</span>
-                            <span class="flex items-center gap-1.5"><span
-                                    class="w-3 h-3 rounded-full bg-emerald-500 inline-block shadow-xs"></span> Cost
-                                Reduction</span>
-                            <span id="legend-debt-service" class="hidden flex items-center gap-1.5"><span
-                                    class="w-3 h-3 rounded-full bg-amber-400 inline-block shadow-xs"></span> Debt
-                                Service</span>
-                            <span id="legend-ghost-barrier" class="hidden flex items-center gap-1.5"><span
-                                    class="w-3.5 h-0.5 border-b-2 border-dashed border-slate-400 inline-block"></span>
-                                Unfinanced Barrier</span>
-                            <span class="flex items-center gap-1.5"><span
-                                    class="w-3.5 h-0.5 border-b-2 border-dashed border-slate-400 inline-block"></span>
-                                Baseline Op-Ex</span>
-                        </div>
+                    <!-- Canvas Container with Hover Tooltip Integration -->
+                    <div id="canvas-container"
+                        class="relative w-full h-[50vh] min-h-[420px] max-h-[640px] bg-white rounded-lg border border-slate-200 overflow-hidden cursor-crosshair shadow-inner">
+                        <canvas id="activationCanvas" class="absolute inset-0 w-full h-full"></canvas>
                     </div>
                 </div>
 
-                <!-- Canvas Container with Hover Tooltip Integration -->
-                <div id="canvas-container"
-                    class="relative w-full h-[50vh] min-h-[420px] max-h-[640px] bg-white rounded-lg border border-slate-200 overflow-hidden cursor-crosshair shadow-inner">
-                    <canvas id="activationCanvas" class="absolute inset-0 w-full h-full"></canvas>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- KPI 1: Net Present Value -->
+                    <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                        <div id="kpi-npv-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Net
+                            Present Value (NPV)
+                        </div>
+                        <div id="kpi-npv" class="text-2xl font-bold font-mono text-emerald-600 mt-1.5">$0</div>
+                        <div id="kpi-npv-sub" class="text-xs text-slate-400 mt-1">Lifetime net value</div>
+                    </div>
+
+                    <!-- KPI 2: Simple Payback -->
+                    <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                        <div id="kpi-payback-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                            Simple Payback</div>
+                        <div id="kpi-payback" class="text-2xl font-bold font-mono text-emerald-600 mt-1.5">0.0 yrs</div>
+                        <div id="kpi-payback-sub" class="text-xs text-slate-400 mt-1">Break-even (&lt;5 yrs rolls over)
+                        </div>
+                    </div>
+
+                    <!-- KPI 3: ROI -->
+                    <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                        <div id="kpi-roi-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                            Project ROI</div>
+                        <div id="kpi-roi" class="text-2xl font-bold font-mono text-emerald-600 mt-1.5">0%</div>
+                        <div id="kpi-roi-sub" class="text-xs text-slate-400 mt-1">Return on investment (NPV / Cap-Ex)</div>
+                    </div>
+
+                    <!-- KPI 4: Effective Cap-Ex -->
+                    <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                        <div id="kpi-net-capex-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                            Effective Cap-Ex Barrier
+                        </div>
+                        <div id="kpi-net-capex" class="text-2xl font-bold font-mono text-amber-600 mt-1.5">$0</div>
+                        <div id="kpi-net-capex-sub" class="text-xs text-slate-400 mt-1">After policy incentive offset</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <!-- KPI 1: Net Present Value -->
-                <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
-                    <div id="kpi-npv-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Net
-                        Present Value (NPV)
+            <!-- Tab 2: Conceptual Framework (Kinetics & Financing Narrative) -->
+            <div id="tab-pane-framework" class="hidden space-y-4 flex flex-col">
+                <div id="card-framework-kinetics" class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-2.5">
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-atom text-purple-600 text-base"></i> Conceptual Framework: Analogizing
+                            Zero-Emission Building Retrofit Dynamics to Chemical Reaction Kinetics
+                        </h3>
+                        <span id="framework-active-badge"
+                            class="px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-purple-100 text-purple-800 border border-purple-300">
+                            Active Regime: 100% Self-Financed (Cash Reserves)
+                        </span>
                     </div>
-                    <div id="kpi-npv" class="text-2xl font-bold font-mono text-emerald-600 mt-1.5">$0</div>
-                    <div id="kpi-npv-sub" class="text-xs text-slate-400 mt-1">Lifetime net value</div>
-                </div>
 
-                <!-- KPI 2: Simple Payback -->
-                <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
-                    <div id="kpi-payback-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                        Simple Payback</div>
-                    <div id="kpi-payback" class="text-2xl font-bold font-mono text-emerald-600 mt-1.5">0.0 yrs</div>
-                    <div id="kpi-payback-sub" class="text-xs text-slate-400 mt-1">Break-even (&lt;5 yrs rolls over)
-                    </div>
-                </div>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                        Comparative thermodynamic and cash-flow mechanics governing capital retrofit adoption under
+                        self-financing (cash reserves) versus amortized third-party debt financing:
+                    </p>
 
-                <!-- KPI 3: ROI -->
-                <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
-                    <div id="kpi-roi-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                        Project ROI</div>
-                    <div id="kpi-roi" class="text-2xl font-bold font-mono text-emerald-600 mt-1.5">0%</div>
-                    <div id="kpi-roi-sub" class="text-xs text-slate-400 mt-1">Return on investment (NPV / Cap-Ex)</div>
-                </div>
+                    <!-- Two Regimes: Self-Financed vs Debt-Financed -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+                        <!-- Regime 1: Self-Financed -->
+                        <div id="regime-card-self"
+                            class="p-4 rounded-xl border-2 border-purple-400 bg-purple-50/40 shadow-sm transition-all flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-bold text-sm text-slate-800 flex items-center gap-2">
+                                        <i class="fa-solid fa-money-bill-wave text-amber-600"></i> 1. Self-Financed Regime
+                                        (High Barrier)
+                                    </h4>
+                                    <span id="pill-self-status"
+                                        class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 border border-purple-300">
+                                        Active: 100% Cash Hurdle (Ea)
+                                    </span>
+                                </div>
+                                <p class="text-xs text-slate-600 mb-2 leading-relaxed">
+                                    The asset owner pays 100% of net capital expenditures (Cap-Ex) from working capital or
+                                    cash reserves across the implementation window:
+                                </p>
+                                <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
+                                    <li><strong class="text-slate-800">The Kinetic Barrier (Ea):</strong> Creates a sharp,
+                                        concentrated financial obstacle with monthly capital outflows spiking into negative
+                                        territory.</li>
+                                    <li><strong class="text-slate-800">The Adoption Bottleneck:</strong> Even when strongly
+                                        NPV positive (ΔOp-Ex &lt; 0), projects stall if organizational liquidity or hurdle
+                                        rate (analogous to thermal kinetic energy, kB·T) cannot clear the barrier peak.</li>
+                                    <li><strong class="text-slate-800">Return Profile:</strong> Deep J-curve deficit during
+                                        implementation, followed by gradual simple payback as 100% of operational savings
+                                        are captured post-commissioning.</li>
+                                </ul>
+                            </div>
+                        </div>
 
-                <!-- KPI 4: Effective Cap-Ex -->
-                <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
-                    <div id="kpi-net-capex-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                        Effective Cap-Ex Barrier
-                    </div>
-                    <div id="kpi-net-capex" class="text-2xl font-bold font-mono text-amber-600 mt-1.5">$0</div>
-                    <div id="kpi-net-capex-sub" class="text-xs text-slate-400 mt-1">After policy incentive offset</div>
-                </div>
-            </div>
-
-            <!-- Conceptual Framework: Unified Narrative (Self-Financed vs. Debt-Financed Dynamics) -->
-            <div id="card-framework-kinetics" class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
-                <div class="flex flex-wrap items-center justify-between gap-3 mb-2.5">
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
-                        <i class="fa-solid fa-atom text-purple-600 text-base"></i> Conceptual Framework: Analogizing
-                        Zero-Emission Building Retrofit Dynamics to Chemical Reaction Kinetics
-                    </h3>
-                    <span id="framework-active-badge"
-                        class="px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-purple-100 text-purple-800 border border-purple-300">
-                        Active Regime: 100% Self-Financed (Cash Reserves)
-                    </span>
-                </div>
-
-                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                    Comparative thermodynamic and cash-flow mechanics governing capital retrofit adoption under
-                    self-financing (cash reserves) versus amortized third-party debt financing:
-                </p>
-
-                <!-- Two Regimes: Self-Financed vs Debt-Financed -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
-                    <!-- Regime 1: Self-Financed -->
-                    <div id="regime-card-self"
-                        class="p-4 rounded-xl border-2 border-purple-400 bg-purple-50/40 shadow-sm transition-all flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center justify-between mb-2">
-                                <h4 class="font-bold text-sm text-slate-800 flex items-center gap-2">
-                                    <i class="fa-solid fa-money-bill-wave text-amber-600"></i> 1. Self-Financed Regime
-                                    (High Barrier)
-                                </h4>
-                                <span id="pill-self-status"
-                                    class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 border border-purple-300">
-                                    Active: 100% Cash Hurdle (Ea)
+                        <!-- Regime 2: Debt-Financed -->
+                        <div id="regime-card-debt"
+                            class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 opacity-80 transition-all flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-bold text-sm text-slate-800 flex items-center gap-2">
+                                        <i class="fa-solid fa-hand-holding-dollar text-emerald-600"></i> 2. Debt-Financed
+                                        Regime (Catalyzed Pathway)
+                                    </h4>
+                                    <span id="pill-debt-status"
+                                        class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-300">
+                                        Amortized (Ea ≈ 0)
+                                    </span>
+                                </div>
+                                <p class="text-xs text-slate-600 mb-2 leading-relaxed">
+                                    Debt financing acts as a financial catalyst, amortizing upfront Cap-Ex into fixed
+                                    monthly debt service (D) commencing at project kickoff (Month 0):
+                                </p>
+                                <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
+                                    <li><strong class="text-slate-800">Barrier Mitigation (Ea → 0):</strong> Upfront cash
+                                        outlay drops to $0 (or cash down payment). The Cap-Ex spike is leveled into a
+                                        predictable
+                                        monthly debt service payment.</li>
+                                    <li><strong class="text-slate-800">Self-Funding Dynamics &amp; DSCR:</strong>
+                                        Feasibility is governed by the Debt Service Coverage Ratio (DSCR = |ΔOp-Ex| / 12 /
+                                        D). When DSCR ≥ 1.0x, utility savings exceed debt payments, paying for itself from
+                                        Day 1 out of operating savings.</li>
+                                    <li><strong class="text-slate-800">Debt Retirement Milestone:</strong> Upon loan
+                                        maturity, debt service drops to $0, unlocking full, unencumbered operating savings
+                                        through the remaining operating horizon.</li>
+                                </ul>
+                            </div>
+                            <div id="framework-debt-milestone"
+                                class="mt-3 pt-2.5 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs">
+                                <span id="framework-milestone-text"
+                                    class="text-slate-600 flex items-center gap-1.5 font-medium">
+                                    <i class="fa-solid fa-info-circle text-slate-400"></i>
+                                    <span>Enable debt financing in the sidebar to simulate amortized cash flow.</span>
+                                </span>
+                                <span id="framework-dscr-pill"
+                                    class="font-mono font-bold px-2.5 py-0.5 rounded text-xs bg-slate-100 text-slate-600 border border-slate-200">
+                                    Financing Inactive
                                 </span>
                             </div>
-                            <p class="text-xs text-slate-600 mb-2 leading-relaxed">
-                                The asset owner pays 100% of net capital expenditures (Cap-Ex) from working capital or
-                                cash reserves across the implementation window:
-                            </p>
-                            <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
-                                <li><strong class="text-slate-800">The Kinetic Barrier (Ea):</strong> Creates a sharp,
-                                    concentrated financial obstacle with monthly capital outflows spiking into negative
-                                    territory.</li>
-                                <li><strong class="text-slate-800">The Adoption Bottleneck:</strong> Even when strongly
-                                    NPV positive (ΔOp-Ex &lt; 0), projects stall if organizational liquidity or hurdle
-                                    rate (analogous to thermal kinetic energy, kB·T) cannot clear the barrier peak.</li>
-                                <li><strong class="text-slate-800">Return Profile:</strong> Deep J-curve deficit during
-                                    implementation, followed by gradual simple payback as 100% of operational savings
-                                    are captured post-commissioning.</li>
-                            </ul>
                         </div>
                     </div>
 
-                    <!-- Regime 2: Debt-Financed -->
-                    <div id="regime-card-debt"
-                        class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 opacity-80 transition-all flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center justify-between mb-2">
-                                <h4 class="font-bold text-sm text-slate-800 flex items-center gap-2">
-                                    <i class="fa-solid fa-hand-holding-dollar text-emerald-600"></i> 2. Debt-Financed
-                                    Regime (Catalyzed Pathway)
-                                </h4>
-                                <span id="pill-debt-status"
-                                    class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-300">
-                                    Amortized (Ea ≈ 0)
-                                </span>
-                            </div>
-                            <p class="text-xs text-slate-600 mb-2 leading-relaxed">
-                                Debt financing acts as a financial catalyst, amortizing upfront Cap-Ex into fixed
-                                monthly debt service (D) commencing at project kickoff (Month 0):
-                            </p>
-                            <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
-                                <li><strong class="text-slate-800">Barrier Mitigation (Ea → 0):</strong> Upfront cash
-                                    outlay drops to $0 (or cash down payment). The Cap-Ex spike is leveled into a
-                                    predictable
-                                    monthly debt service payment.</li>
-                                <li><strong class="text-slate-800">Self-Funding Dynamics &amp; DSCR:</strong>
-                                    Feasibility is governed by the Debt Service Coverage Ratio (DSCR = |ΔOp-Ex| / 12 /
-                                    D). When DSCR ≥ 1.0x, utility savings exceed debt payments, paying for itself from
-                                    Day 1 out of operating savings.</li>
-                                <li><strong class="text-slate-800">Debt Retirement Milestone:</strong> Upon loan
-                                    maturity, debt service drops to $0, unlocking full, unencumbered operating savings
-                                    through the remaining operating horizon.</li>
-                            </ul>
-                        </div>
-                        <div id="framework-debt-milestone"
-                            class="mt-3 pt-2.5 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs">
-                            <span id="framework-milestone-text"
-                                class="text-slate-600 flex items-center gap-1.5 font-medium">
-                                <i class="fa-solid fa-info-circle text-slate-400"></i>
-                                <span>Enable debt financing in the sidebar to simulate amortized cash flow.</span>
-                            </span>
-                            <span id="framework-dscr-pill"
-                                class="font-mono font-bold px-2.5 py-0.5 rounded text-xs bg-slate-100 text-slate-600 border border-slate-200">
-                                Financing Inactive
-                            </span>
-                        </div>
+                    <!-- Comparative Synthesis Table -->
+                    <div class="overflow-x-auto rounded-lg border border-slate-200">
+                        <table class="w-full text-left text-xs text-slate-700">
+                            <thead class="bg-slate-100/80 text-slate-600 font-semibold border-b border-slate-200">
+                                <tr>
+                                    <th class="p-2.5">Dimension</th>
+                                    <th class="p-2.5">Self-Financed (100% Cash Reserves)</th>
+                                    <th class="p-2.5">Debt-Financed (Amortized Loan)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y border-slate-200">
+                                <tr class="hover:bg-slate-50/50">
+                                    <td class="p-2.5 font-bold text-slate-800">Initial Hurdle (Ea)</td>
+                                    <td class="p-2.5 text-slate-600">High upfront peak (+$ / mo cash outflow)</td>
+                                    <td class="p-2.5 text-slate-600">Flat or near-zero ($0 to cash down payment)</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/50">
+                                    <td class="p-2.5 font-bold text-slate-800">Cash-Flow Timing</td>
+                                    <td class="p-2.5 text-slate-600">Deep J-curve deficit followed by gradual payback</td>
+                                    <td class="p-2.5 text-slate-600">Immediate net-neutral or net-positive (ΔCFnet)</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/50">
+                                    <td class="p-2.5 font-bold text-slate-800">Primary Decision Metric</td>
+                                    <td class="p-2.5 text-slate-600">Simple Payback Period &amp; Balance Sheet Capital</td>
+                                    <td class="p-2.5 text-slate-600">Debt Service Coverage Ratio (DSCR)</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/50">
+                                    <td class="p-2.5 font-bold text-slate-800">Organizational Impact</td>
+                                    <td class="p-2.5 text-slate-600">Competes against limited capital budget reserves</td>
+                                    <td class="p-2.5 text-slate-600">Funded via ongoing operating budget savings</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-
-                <!-- Comparative Synthesis Table -->
-                <div class="overflow-x-auto rounded-lg border border-slate-200">
-                    <table class="w-full text-left text-xs text-slate-700">
-                        <thead class="bg-slate-100/80 text-slate-600 font-semibold border-b border-slate-200">
-                            <tr>
-                                <th class="p-2.5">Dimension</th>
-                                <th class="p-2.5">Self-Financed (100% Cash Reserves)</th>
-                                <th class="p-2.5">Debt-Financed (Amortized Loan)</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-200">
-                            <tr class="hover:bg-slate-50/50">
-                                <td class="p-2.5 font-bold text-slate-800">Initial Hurdle (Ea)</td>
-                                <td class="p-2.5 text-slate-600">High upfront peak (+$ / mo cash outflow)</td>
-                                <td class="p-2.5 text-slate-600">Flat or near-zero ($0 to cash down payment)</td>
-                            </tr>
-                            <tr class="hover:bg-slate-50/50">
-                                <td class="p-2.5 font-bold text-slate-800">Cash-Flow Timing</td>
-                                <td class="p-2.5 text-slate-600">Deep J-curve deficit followed by gradual payback</td>
-                                <td class="p-2.5 text-slate-600">Immediate net-neutral or net-positive (ΔCFnet)</td>
-                            </tr>
-                            <tr class="hover:bg-slate-50/50">
-                                <td class="p-2.5 font-bold text-slate-800">Primary Decision Metric</td>
-                                <td class="p-2.5 text-slate-600">Simple Payback Period &amp; Balance Sheet Capital</td>
-                                <td class="p-2.5 text-slate-600">Debt Service Coverage Ratio (DSCR)</td>
-                            </tr>
-                            <tr class="hover:bg-slate-50/50">
-                                <td class="p-2.5 font-bold text-slate-800">Organizational Impact</td>
-                                <td class="p-2.5 text-slate-600">Competes against limited capital budget reserves</td>
-                                <td class="p-2.5 text-slate-600">Funded via ongoing operating budget savings</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
 
@@ -1372,6 +1392,41 @@
 
             // Animation Play/Pause
             playBtn.addEventListener('click', toggleAnimation);
+
+            // Primary Dashboard Tab Switching (Trajectory/Results vs Conceptual Framework)
+            const tabBtnVisualizer = document.getElementById('tab-btn-visualizer');
+            const tabBtnFramework = document.getElementById('tab-btn-framework');
+            const tabPaneVisualizer = document.getElementById('tab-pane-visualizer');
+            const tabPaneFramework = document.getElementById('tab-pane-framework');
+
+            function switchMainTab(target) {
+                if (target === 'visualizer') {
+                    if (tabPaneVisualizer) tabPaneVisualizer.classList.remove('hidden');
+                    if (tabPaneFramework) tabPaneFramework.classList.add('hidden');
+                    if (tabBtnVisualizer) {
+                        tabBtnVisualizer.className = 'tab-btn inline-flex items-center gap-2 px-4 py-2.5 text-sm font-bold border-b-2 border-blue-600 text-blue-600 transition';
+                    }
+                    if (tabBtnFramework) {
+                        tabBtnFramework.className = 'tab-btn inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300 transition';
+                    }
+                    resizeCanvas();
+                    render();
+                } else {
+                    if (tabPaneVisualizer) tabPaneVisualizer.classList.add('hidden');
+                    if (tabPaneFramework) tabPaneFramework.classList.remove('hidden');
+                    if (tabBtnFramework) {
+                        tabBtnFramework.className = 'tab-btn inline-flex items-center gap-2 px-4 py-2.5 text-sm font-bold border-b-2 border-purple-600 text-purple-600 transition';
+                    }
+                    if (tabBtnVisualizer) {
+                        tabBtnVisualizer.className = 'tab-btn inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300 transition';
+                    }
+                }
+            }
+
+            if (tabBtnVisualizer && tabBtnFramework) {
+                tabBtnVisualizer.addEventListener('click', () => switchMainTab('visualizer'));
+                tabBtnFramework.addEventListener('click', () => switchMainTab('framework'));
+            }
 
             // Slider Listeners with Real-time Updates
             const sliderConfig = [
