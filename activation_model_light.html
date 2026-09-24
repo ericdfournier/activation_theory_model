@@ -1130,8 +1130,8 @@
                 commissionDuration: 6,
                 opexDelta: -60,
                 catalyst: 0,
-                yMin: -50,
-                yMax: 75,
+                yMin: -10,
+                yMax: 80,
                 description: "<strong>Scenario A (Standard / Optimal Retrofit):</strong> Rapid 4.2-year payback (<5 yrs) creates sufficient owner momentum to clear the Cap-Ex hurdle. Upfront integrated Cap-Ex is deployed over a 12-month implementation, followed by 6 months of commissioning and deep, perpetual operational cost reductions (green area)."
             },
             B: {
@@ -1141,8 +1141,8 @@
                 commissionDuration: 3,
                 opexDelta: -15,
                 catalyst: 0,
-                yMin: -250,
-                yMax: 250,
+                yMin: -70,
+                yMax: 260,
                 description: "<strong>Scenario B (Excessive Capital Expenditures):</strong> The integrated Cap-Ex barrier is exceptionally high ($550k, 36.7-year payback >> 5 yrs). The instantaneous expenditure rate spikes severely, creating an insurmountable economic hurdle where the ball runs out of momentum and rolls back."
             },
             C: {
@@ -1152,8 +1152,8 @@
                 commissionDuration: 6,
                 opexDelta: -50,
                 catalyst: 0,
-                yMin: -50,
-                yMax: 75,
+                yMin: -10,
+                yMax: 80,
                 description: "<strong>Scenario C (Excessive Implementation Downtime):</strong> The total integrated Cap-Ex is identical to Scenario A ($350k), but spread across an elongated 18-month implementation with a 7.0-year payback (>5 yrs). The prolonged disruption and delayed savings fail to provide the kinetic momentum required to surmount the barrier, resulting in rollback."
             },
             D: {
@@ -1163,7 +1163,7 @@
                 commissionDuration: 5,
                 opexDelta: 20,
                 catalyst: 0,
-                yMin: -25,
+                yMin: 0,
                 yMax: 50,
                 description: "<strong>Scenario D (Increased Operational Expenditures):</strong> An endothermic / unfavorable outcome with no economic payback. Ongoing operational expenditures exceed the pre-retrofit baseline (red area), producing near-zero driving motivation and immediate rollback."
             }
@@ -2256,15 +2256,17 @@
             const rawMax = Math.max(baselineMonthly, targetOpexMonthly, peakMonthly, financedDebtRateMonthly);
             const rawMin = Math.min(baselineMonthly, targetOpexMonthly, financedDebtRateMonthly);
 
-            // Center y-limits symmetrically around baselineMonthly with clean margin
-            const deltaAbove = rawMax - baselineMonthly;
-            const deltaBelow = baselineMonthly - rawMin;
-            const maxDelta = Math.max(deltaAbove, deltaBelow, 15);
+            // Scale y-limits so baselineMonthly appears at approximately the first quartile (~25% of y-span)
+            const spanAbove = rawMax - baselineMonthly;
+            const spanBelow = baselineMonthly - rawMin;
 
-            const margin = Math.max(10, Math.ceil((maxDelta * 0.15) / 5) * 5);
-            const halfSpan = Math.ceil((maxDelta + margin) / 5) * 5;
-            const minVal = Math.floor((baselineMonthly - halfSpan) / 5) * 5;
-            const maxVal = Math.ceil((baselineMonthly + halfSpan) / 5) * 5;
+            const rNeededAbove = (spanAbove + 5) / 0.75;
+            const rNeededBelow = (spanBelow + 2.5) / 0.25;
+            const r = Math.max(rNeededAbove, rNeededBelow, 40);
+            const rClean = Math.ceil(r / 10) * 10;
+
+            const minVal = Math.floor((baselineMonthly - 0.25 * rClean) / 5) * 5;
+            const maxVal = Math.ceil((baselineMonthly + 0.75 * rClean) / 5) * 5;
             return { minVal, maxVal };
         }
 
