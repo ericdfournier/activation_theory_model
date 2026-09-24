@@ -158,30 +158,22 @@
                             </button>
                         </div>
 
-                        <!-- Active Scenario Profile (Collapsible, closed by default) -->
-                        <div class="pt-3 border-t border-slate-100">
-                            <details class="group/profile rounded-lg border border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition p-2.5">
-                                <summary class="cursor-pointer list-none flex items-center justify-between gap-2 select-none">
-                                    <div class="flex items-center gap-1.5 min-w-0">
-                                        <i class="fa-solid fa-circle-info text-blue-600 text-xs flex-shrink-0"></i>
-                                        <span class="text-xs font-bold uppercase tracking-wider text-slate-700">Active Profile</span>
-                                    </div>
-                                    <div class="flex items-center gap-2 flex-shrink-0">
-                                        <span id="badge-scenario-name"
-                                            class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-700 border border-blue-200">
-                                            Scenario A (Standard / Optimal Retrofit)
-                                        </span>
-                                        <i class="fa-solid fa-chevron-down text-slate-400 group-open/profile:rotate-180 transition-transform text-xs"></i>
-                                    </div>
-                                </summary>
+                        <!-- Active Scenario Profile (Fixed Element) -->
+                        <div class="pt-3.5 border-t border-slate-100">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                <span class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-circle-info text-blue-600 text-xs"></i> Active Profile
+                                </span>
+                                <span id="badge-scenario-name"
+                                    class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+                                    Scenario A (Standard / Optimal Retrofit)
+                                </span>
+                            </div>
 
-                                <div class="pt-2.5 border-t border-slate-200/80 mt-2">
-                                    <p id="scenario-description"
-                                        class="text-xs text-slate-700 bg-white border border-slate-200 rounded-lg p-3 leading-relaxed font-normal shadow-2xs">
-                                        Loading scenario overview...
-                                    </p>
-                                </div>
-                            </details>
+                            <p id="scenario-description"
+                                class="text-xs text-slate-700 bg-slate-50 border border-slate-200 rounded-lg p-3 leading-relaxed font-normal">
+                                Loading scenario overview...
+                            </p>
                         </div>
                     </div>
                 </details>
