@@ -588,7 +588,7 @@
                                     </div>
                                     <input type="range" id="slider-financed-pct" min="10" max="100" step="5" value="100"
                                         class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                                    <p class="text-xs text-slate-500 mt-1">Remainder represents upfront equity down
+                                    <p class="text-xs text-slate-500 mt-1">Remainder represents upfront cash down
                                         payment.</p>
                                 </div>
 
@@ -653,7 +653,8 @@
             <div id="card-scenario-overview" class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
                 <div class="flex flex-wrap items-center justify-between gap-3 mb-2.5">
                     <h3 class="text-sm font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
-                        <i class="fa-solid fa-circle-info text-blue-600 text-base"></i> Active Scenario Profile &amp; Project Lifecycle Structure
+                        <i class="fa-solid fa-circle-info text-blue-600 text-base"></i> Active Scenario Profile &amp;
+                        Project Lifecycle Structure
                     </h3>
                     <span id="badge-scenario-name"
                         class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
@@ -779,12 +780,13 @@
                     </h3>
                     <span id="framework-active-badge"
                         class="px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-purple-100 text-purple-800 border border-purple-300">
-                        Active Regime: Self-Financed (100% Equity)
+                        Active Regime: 100% Self-Financed (Cash Reserves)
                     </span>
                 </div>
 
                 <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                    Comparative thermodynamic and cash-flow mechanics governing capital retrofit adoption under self-financed equity versus amortized third-party debt financing:
+                    Comparative thermodynamic and cash-flow mechanics governing capital retrofit adoption under
+                    self-financing (cash reserves) versus amortized third-party debt financing:
                 </p>
 
                 <!-- Two Regimes: Self-Financed vs Debt-Financed -->
@@ -800,7 +802,7 @@
                                 </h4>
                                 <span id="pill-self-status"
                                     class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 border border-purple-300">
-                                    Active: 100% Equity Hurdle (Ea)
+                                    Active: 100% Cash Hurdle (Ea)
                                 </span>
                             </div>
                             <p class="text-xs text-slate-600 mb-2 leading-relaxed">
@@ -840,8 +842,9 @@
                                 monthly debt service (D) commencing at project kickoff (Month 0):
                             </p>
                             <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
-                                <li><strong class="text-slate-800">Barrier Mitigation (Ea → 0):</strong> Upfront equity
-                                    drops to $0 (or down payment). The Cap-Ex spike is leveled into a predictable
+                                <li><strong class="text-slate-800">Barrier Mitigation (Ea → 0):</strong> Upfront cash
+                                    outlay drops to $0 (or cash down payment). The Cap-Ex spike is leveled into a
+                                    predictable
                                     monthly debt service payment.</li>
                                 <li><strong class="text-slate-800">Self-Funding Dynamics &amp; DSCR:</strong>
                                     Feasibility is governed by the Debt Service Coverage Ratio (DSCR = |ΔOp-Ex| / 12 /
@@ -873,7 +876,7 @@
                         <thead class="bg-slate-100/80 text-slate-600 font-semibold border-b border-slate-200">
                             <tr>
                                 <th class="p-2.5">Dimension</th>
-                                <th class="p-2.5">Self-Financed (100% Equity)</th>
+                                <th class="p-2.5">Self-Financed (100% Cash Reserves)</th>
                                 <th class="p-2.5">Debt-Financed (Amortized Loan)</th>
                             </tr>
                         </thead>
@@ -881,7 +884,7 @@
                             <tr class="hover:bg-slate-50/50">
                                 <td class="p-2.5 font-bold text-slate-800">Initial Hurdle (Ea)</td>
                                 <td class="p-2.5 text-slate-600">High upfront peak (+$ / mo cash outflow)</td>
-                                <td class="p-2.5 text-slate-600">Flat or near-zero ($0 to down-payment equity)</td>
+                                <td class="p-2.5 text-slate-600">Flat or near-zero ($0 to cash down payment)</td>
                             </tr>
                             <tr class="hover:bg-slate-50/50">
                                 <td class="p-2.5 font-bold text-slate-800">Cash-Flow Timing</td>
@@ -1075,7 +1078,7 @@
             const netCapex = state.totalCapex * (1 - state.catalyst / 100);
             const financedPct = state.financingEnabled ? (state.financedPct || 100) : 0;
             const debtPrincipal = state.financingEnabled ? netCapex * (financedPct / 100) : 0;
-            const equityDown = state.financingEnabled ? netCapex - debtPrincipal : netCapex;
+            const cashDown = state.financingEnabled ? netCapex - debtPrincipal : netCapex;
 
             const annualRate = (state.interestRate || 6.0) / 100;
             const r_m = annualRate / 12;
@@ -1097,7 +1100,7 @@
             return {
                 netCapex,
                 debtPrincipal,
-                equityDown,
+                cashDown,
                 monthlyPayment,
                 annualPayment: monthlyPayment * 12,
                 dscr,
@@ -1711,11 +1714,11 @@
 
             if (state.financingEnabled) {
                 // Project Financing Mode
-                const upfrontEquity = debtInfo.equityDown;
+                const upfrontCash = debtInfo.cashDown;
                 const annualDebt = debtInfo.annualPayment;
                 const loanTerm = state.loanTerm;
 
-                let financedNpv = -upfrontEquity;
+                let financedNpv = -upfrontCash;
                 for (let t = 1; t <= state.timeHorizon; t++) {
                     const cf = (t <= loanTerm) ? (annualSavings - annualDebt) : annualSavings;
                     financedNpv += cf / Math.pow(1 + r, t);
@@ -1751,11 +1754,11 @@
                 if (kpiLabels.roiSub) kpiLabels.roiSub.innerText = y1NetCashFlow >= 0 ? "Retained cash flow after debt payment" : "Operating cash deficit during loan";
                 kpis.roi.className = y1NetCashFlow >= 0 ? "text-2xl font-bold font-mono text-emerald-600 mt-1.5" : "text-2xl font-bold font-mono text-red-600 mt-1.5";
 
-                // KPI 4: Upfront Equity Required
-                if (kpiLabels.netCapex) kpiLabels.netCapex.innerText = "Upfront Equity Required";
-                kpis.netCapex.innerText = `$${Math.round(upfrontEquity)}k`;
-                if (kpiLabels.netCapexSub) kpiLabels.netCapexSub.innerText = state.financedPct === 100 ? "100% Financed (Zero upfront hurdle)" : `${100 - state.financedPct}% equity down payment`;
-                kpis.netCapex.className = upfrontEquity === 0 ? "text-2xl font-bold font-mono text-emerald-600 mt-1.5" : "text-2xl font-bold font-mono text-amber-600 mt-1.5";
+                // KPI 4: Upfront Cash Required
+                if (kpiLabels.netCapex) kpiLabels.netCapex.innerText = "Upfront Cash Required";
+                kpis.netCapex.innerText = `$${Math.round(upfrontCash)}k`;
+                if (kpiLabels.netCapexSub) kpiLabels.netCapexSub.innerText = state.financedPct === 100 ? "100% Financed (Zero upfront hurdle)" : `${100 - state.financedPct}% cash down payment`;
+                kpis.netCapex.className = upfrontCash === 0 ? "text-2xl font-bold font-mono text-emerald-600 mt-1.5" : "text-2xl font-bold font-mono text-amber-600 mt-1.5";
 
             } else {
                 // Standard Unfinanced Mode
@@ -1864,7 +1867,7 @@
                 }
             } else {
                 if (activeBadge) {
-                    activeBadge.innerText = "Active Regime: Self-Financed (100% Equity)";
+                    activeBadge.innerText = "Active Regime: 100% Self-Financed (Cash Reserves)";
                     activeBadge.className = "px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-purple-100 text-purple-800 border border-purple-300";
                 }
 
@@ -1874,7 +1877,7 @@
 
                 if (pillSelf) {
                     pillSelf.className = "text-[11px] font-bold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 border border-purple-300";
-                    pillSelf.innerText = "Active: 100% Equity Hurdle (Ea)";
+                    pillSelf.innerText = "Active: 100% Cash Hurdle (Ea)";
                 }
 
                 if (pillDebt) {
@@ -1913,7 +1916,7 @@
         function getCostAtTime(tRatio, forceUnfinanced = false) {
             const isFinanced = state.financingEnabled && !forceUnfinanced;
             const debtInfo = calculateDebtService();
-            const effectiveCapEx = isFinanced ? debtInfo.equityDown : (state.totalCapex * (1 - state.catalyst / 100));
+            const effectiveCapEx = isFinanced ? debtInfo.cashDown : (state.totalCapex * (1 - state.catalyst / 100));
             const effInstallMonths = getEffectiveInstallDuration();
             const commissionDuration = state.commissionDuration;
             const totTransMonths = effInstallMonths + commissionDuration;
@@ -1963,7 +1966,7 @@
                     baseRate = baselineMonthly + (targetOpexMonthly - baselineMonthly) * smoothProgress;
                 }
 
-                // Bell curve representing equity Cap-Ex deployment rate ($k/mo) (0 if 100% financed)
+                // Bell curve representing cash Cap-Ex deployment rate ($k/mo) (0 if 100% financed)
                 const normX = (tRatio - pPeak) / (installWidth / 2);
                 const bump = Math.exp(-Math.pow(normX * 2.1, 2));
 
@@ -2086,7 +2089,7 @@
             const graphH = height - paddingTop - paddingBottom;
 
             const debtInfo = calculateDebtService();
-            const effectiveCapEx = state.financingEnabled ? debtInfo.equityDown : (state.totalCapex * (1 - state.catalyst / 100));
+            const effectiveCapEx = state.financingEnabled ? debtInfo.cashDown : (state.totalCapex * (1 - state.catalyst / 100));
             const baselineMonthly = state.baselineOpex / 12;
             const { minVal, maxVal } = getAxisLimits();
 
@@ -2584,13 +2587,13 @@
             let actLine2 = `Avg Cap-Ex: $${avgMonthlyCapex.toFixed(1)}k/mo`;
 
             if (state.financingEnabled) {
-                if (debtInfo.equityDown === 0) {
+                if (debtInfo.cashDown === 0) {
                     actHeader = 'Activation Barrier';
-                    actLine1 = `Upfront Equity: $0k ($${Math.round(debtInfo.debtPrincipal)}k Financed)`;
+                    actLine1 = `Upfront Cash: $0k ($${Math.round(debtInfo.debtPrincipal)}k Financed)`;
                     actLine2 = `Debt Service: $${debtInfo.monthlyPayment.toFixed(1)}k/mo (Starts Mo 0)`;
                 } else {
                     actHeader = `Debt (${state.financedPct}%):`;
-                    actLine1 = `Upfront Equity: $${Math.round(debtInfo.equityDown)}k (${100 - state.financedPct}%)`;
+                    actLine1 = `Cash Down: $${Math.round(debtInfo.cashDown)}k (${100 - state.financedPct}%)`;
                     actLine2 = `Financed: $${Math.round(debtInfo.debtPrincipal)}k @ $${debtInfo.monthlyPayment.toFixed(1)}k/mo (Starts Mo 0)`;
                 }
             }
