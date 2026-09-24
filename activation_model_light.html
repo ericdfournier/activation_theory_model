@@ -1130,7 +1130,7 @@
                 commissionDuration: 6,
                 opexDelta: -60,
                 catalyst: 0,
-                yMin: 0,
+                yMin: -50,
                 yMax: 75,
                 description: "<strong>Scenario A (Standard / Optimal Retrofit):</strong> Rapid 4.2-year payback (<5 yrs) creates sufficient owner momentum to clear the Cap-Ex hurdle. Upfront integrated Cap-Ex is deployed over a 12-month implementation, followed by 6 months of commissioning and deep, perpetual operational cost reductions (green area)."
             },
@@ -1141,8 +1141,8 @@
                 commissionDuration: 3,
                 opexDelta: -15,
                 catalyst: 0,
-                yMin: 0,
-                yMax: 260,
+                yMin: -250,
+                yMax: 250,
                 description: "<strong>Scenario B (Excessive Capital Expenditures):</strong> The integrated Cap-Ex barrier is exceptionally high ($550k, 36.7-year payback >> 5 yrs). The instantaneous expenditure rate spikes severely, creating an insurmountable economic hurdle where the ball runs out of momentum and rolls back."
             },
             C: {
@@ -1152,7 +1152,7 @@
                 commissionDuration: 6,
                 opexDelta: -50,
                 catalyst: 0,
-                yMin: 0,
+                yMin: -50,
                 yMax: 75,
                 description: "<strong>Scenario C (Excessive Implementation Downtime):</strong> The total integrated Cap-Ex is identical to Scenario A ($350k), but spread across an elongated 18-month implementation with a 7.0-year payback (>5 yrs). The prolonged disruption and delayed savings fail to provide the kinetic momentum required to surmount the barrier, resulting in rollback."
             },
@@ -1163,8 +1163,8 @@
                 commissionDuration: 5,
                 opexDelta: 20,
                 catalyst: 0,
-                yMin: 10,
-                yMax: 45,
+                yMin: -25,
+                yMax: 50,
                 description: "<strong>Scenario D (Increased Operational Expenditures):</strong> An endothermic / unfavorable outcome with no economic payback. Ongoing operational expenditures exceed the pre-retrofit baseline (red area), producing near-zero driving motivation and immediate rollback."
             }
         };
@@ -2256,17 +2256,15 @@
             const rawMax = Math.max(baselineMonthly, targetOpexMonthly, peakMonthly, financedDebtRateMonthly);
             const rawMin = Math.min(baselineMonthly, targetOpexMonthly, financedDebtRateMonthly);
 
-            let minVal, maxVal;
-            if (state.opexDelta >= 0 || financedDebtRateMonthly > baselineMonthly) {
-                // Unfavorable / Endothermic: baseline is lowest or target is higher
-                minVal = Math.max(0, Math.floor(rawMin - 2.5));
-                maxVal = Math.ceil((rawMax + 2.5) / 5) * 5;
-                if (maxVal - minVal < 10) maxVal = minVal + 10;
-            } else {
-                // Favorable / Exothermic
-                minVal = 0;
-                maxVal = Math.max(30, Math.ceil((rawMax + 5) / 5) * 5);
-            }
+            // Center y-limits symmetrically around baselineMonthly with clean margin
+            const deltaAbove = rawMax - baselineMonthly;
+            const deltaBelow = baselineMonthly - rawMin;
+            const maxDelta = Math.max(deltaAbove, deltaBelow, 15);
+
+            const margin = Math.max(10, Math.ceil((maxDelta * 0.15) / 5) * 5);
+            const halfSpan = Math.ceil((maxDelta + margin) / 5) * 5;
+            const minVal = Math.floor((baselineMonthly - halfSpan) / 5) * 5;
+            const maxVal = Math.ceil((baselineMonthly + halfSpan) / 5) * 5;
             return { minVal, maxVal };
         }
 
@@ -2417,7 +2415,15 @@
                 ctx.lineTo(width - paddingRight, y);
                 ctx.stroke();
 
-                const labelText = (Math.abs(v - Math.round(v)) > 0.01) ? `$${v.toFixed(1)}k` : `$${Math.round(v)}k`;
+                let labelText;
+                if (Math.abs(v) < 0.001) {
+                    labelText = '$0k';
+                } else if (v < 0) {
+                    const absV = Math.abs(v);
+                    labelText = (Math.abs(absV - Math.round(absV)) > 0.01) ? `-$${absV.toFixed(1)}k` : `-$${Math.round(absV)}k`;
+                } else {
+                    labelText = (Math.abs(v - Math.round(v)) > 0.01) ? `$${v.toFixed(1)}k` : `$${Math.round(v)}k`;
+                }
                 ctx.fillText(labelText, paddingLeft - 10, y + 4);
             }
 
@@ -2624,11 +2630,6 @@
             ctx.font = 'bold 13px Inter';
             ctx.textAlign = 'left';
             ctx.fillText('Costs ($/mo rate)', paddingLeft, paddingTop - 22);
-
-            ctx.textAlign = 'right';
-            ctx.font = 'bold 12px Inter';
-            ctx.fillStyle = '#1e293b';
-            ctx.fillText('Time: Project Timeline (Months & 5-Yr Intervals) →', width - paddingRight, xAxisY - 9);
 
             // Top Timeline Scale Interval Indicators (Visualizing Piecewise Non-Linear Resolution)
             const topBarY = paddingTop - 22;
