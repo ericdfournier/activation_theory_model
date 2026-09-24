@@ -114,66 +114,77 @@
         <!-- Left Controls Panel (4 Cols on lg, 3 Cols on xl/2xl) -->
         <section class="lg:col-span-4 xl:col-span-3 2xl:col-span-3 space-y-6">
 
-            <!-- Preset Selection Card -->
+            <!-- Card 0: Introduction (Non-collapsible) -->
             <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
-                <!-- Introduction Section -->
-                <div class="mb-4">
-                    <h2 class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2 mb-2">
-                        <i class="fa-solid fa-book-open text-blue-600"></i> Introduction
-                    </h2>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        This model evaluates capital facility upgrades (e.g., energy efficiency, electrification, decarbonization) by mapping thermodynamic states and reaction kinetics onto corporate financial decision-making across four continuous project phases: <strong>Pre-Implementation (Baseline)</strong>, <strong>Implementation</strong>, <strong>Commissioning</strong>, and <strong>Operation</strong>.
-                    </p>
-                </div>
+                <h2 class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-book-open text-blue-600"></i> Introduction
+                </h2>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    This model evaluates capital facility upgrades (e.g., energy efficiency, electrification, decarbonization) by mapping thermodynamic states and reaction kinetics onto corporate financial decision-making across four continuous project phases: <strong>Pre-Implementation (Baseline)</strong>, <strong>Implementation</strong>, <strong>Commissioning</strong>, and <strong>Operation</strong>.
+                </p>
+            </div>
 
-                <!-- Model Scenario Presets Section -->
-                <div class="pt-3.5 border-t border-slate-100">
-                    <div class="flex items-center justify-between gap-2 mb-3">
+            <!-- Model Scenario Presets Card (Collapsible) -->
+            <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+                <details class="group" open>
+                    <summary class="cursor-pointer list-none flex items-center justify-between select-none">
                         <h2 class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
                             <i class="fa-solid fa-sliders text-blue-600"></i> Model Scenario Presets
                         </h2>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2.5 mb-4">
-                        <button data-preset="A"
-                            class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-200 hover:border-emerald-400 bg-slate-50 hover:bg-emerald-50/60 transition group shadow-xs">
-                            <div class="text-sm font-bold text-slate-800 group-hover:text-emerald-700">Scenario A</div>
-                            <div class="text-xs text-slate-500">Standard / Optimal</div>
-                        </button>
-                        <button data-preset="B"
-                            class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-200 hover:border-red-400 bg-slate-50 hover:bg-red-50/60 transition group shadow-xs">
-                            <div class="text-sm font-bold text-slate-800 group-hover:text-red-700">Scenario B</div>
-                            <div class="text-xs text-slate-500">Excessive Cap-Ex</div>
-                        </button>
-                        <button data-preset="C"
-                            class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-200 hover:border-amber-400 bg-slate-50 hover:bg-amber-50/60 transition group shadow-xs">
-                            <div class="text-sm font-bold text-slate-800 group-hover:text-amber-700">Scenario C</div>
-                            <div class="text-xs text-slate-500">Long Downtime</div>
-                        </button>
-                        <button data-preset="D"
-                            class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-200 hover:border-rose-400 bg-slate-50 hover:bg-rose-50/60 transition group shadow-xs">
-                            <div class="text-sm font-bold text-slate-800 group-hover:text-rose-700">Scenario D</div>
-                            <div class="text-xs text-slate-500">Increased Op-Ex</div>
-                        </button>
-                    </div>
+                        <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform text-sm"></i>
+                    </summary>
 
-                    <!-- Active Scenario Profile -->
-                    <div class="pt-3 border-t border-slate-100">
-                        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-                            <span class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
-                                <i class="fa-solid fa-circle-info text-blue-600"></i> Active Scenario Profile
-                            </span>
-                            <span id="badge-scenario-name"
-                                class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-700 border border-blue-200">
-                                Scenario A (Standard / Optimal Retrofit)
-                            </span>
+                    <div class="pt-4">
+                        <div class="grid grid-cols-2 gap-2.5 mb-3.5">
+                            <button data-preset="A"
+                                class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-200 hover:border-emerald-400 bg-slate-50 hover:bg-emerald-50/60 transition group shadow-xs">
+                                <div class="text-sm font-bold text-slate-800 group-hover:text-emerald-700">Scenario A</div>
+                                <div class="text-xs text-slate-500">Standard / Optimal</div>
+                            </button>
+                            <button data-preset="B"
+                                class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-200 hover:border-red-400 bg-slate-50 hover:bg-red-50/60 transition group shadow-xs">
+                                <div class="text-sm font-bold text-slate-800 group-hover:text-red-700">Scenario B</div>
+                                <div class="text-xs text-slate-500">Excessive Cap-Ex</div>
+                            </button>
+                            <button data-preset="C"
+                                class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-200 hover:border-amber-400 bg-slate-50 hover:bg-amber-50/60 transition group shadow-xs">
+                                <div class="text-sm font-bold text-slate-800 group-hover:text-amber-700">Scenario C</div>
+                                <div class="text-xs text-slate-500">Long Downtime</div>
+                            </button>
+                            <button data-preset="D"
+                                class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-200 hover:border-rose-400 bg-slate-50 hover:bg-rose-50/60 transition group shadow-xs">
+                                <div class="text-sm font-bold text-slate-800 group-hover:text-rose-700">Scenario D</div>
+                                <div class="text-xs text-slate-500">Increased Op-Ex</div>
+                            </button>
                         </div>
 
-                        <p id="scenario-description"
-                            class="text-xs text-slate-700 bg-slate-50 border border-slate-200 rounded-lg p-3 leading-relaxed font-normal">
-                            Loading scenario overview...
-                        </p>
+                        <!-- Active Scenario Profile (Collapsible, closed by default) -->
+                        <div class="pt-3 border-t border-slate-100">
+                            <details class="group/profile rounded-lg border border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition p-2.5">
+                                <summary class="cursor-pointer list-none flex items-center justify-between gap-2 select-none">
+                                    <div class="flex items-center gap-1.5 min-w-0">
+                                        <i class="fa-solid fa-circle-info text-blue-600 text-xs flex-shrink-0"></i>
+                                        <span class="text-xs font-bold uppercase tracking-wider text-slate-700">Active Profile</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 flex-shrink-0">
+                                        <span id="badge-scenario-name"
+                                            class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+                                            Scenario A (Standard / Optimal Retrofit)
+                                        </span>
+                                        <i class="fa-solid fa-chevron-down text-slate-400 group-open/profile:rotate-180 transition-transform text-xs"></i>
+                                    </div>
+                                </summary>
+
+                                <div class="pt-2.5 border-t border-slate-200/80 mt-2">
+                                    <p id="scenario-description"
+                                        class="text-xs text-slate-700 bg-white border border-slate-200 rounded-lg p-3 leading-relaxed font-normal shadow-2xs">
+                                        Loading scenario overview...
+                                    </p>
+                                </div>
+                            </details>
+                        </div>
                     </div>
-                </div>
+                </details>
             </div>
 
             <!-- Parameter Controls Container -->
