@@ -2837,10 +2837,11 @@
 
             // Vertical Activation Barrier Dimension Line at Peak
             const peakX = ratioToX(phaseInfo.pPeak);
-            const peakRateHeight = phaseInfo.peakRateHeight;
-            const peakY = valToY(baselineMonthly + peakRateHeight);
+            const peakCostRes = getCostAtTime(phaseInfo.pPeak);
+            const peakDelta = peakCostRes.value - baselineMonthly;
+            const peakY = valToY(peakCostRes.value);
 
-            if (peakRateHeight > 0.5) {
+            if (peakDelta > 0.5) {
                 ctx.strokeStyle = '#d97706';
                 ctx.lineWidth = 1.5;
                 ctx.beginPath();
@@ -2861,7 +2862,7 @@
                     ctx.fillStyle = '#b45309';
                     ctx.font = 'bold 9.5px Inter';
                     ctx.textAlign = 'center';
-                    const peakTag = `+~$${peakRateHeight >= 10 ? Math.round(peakRateHeight) : peakRateHeight.toFixed(1)}k/mo`;
+                    const peakTag = `+~$${peakDelta >= 10 ? Math.round(peakDelta) : peakDelta.toFixed(1)}k/mo`;
                     ctx.fillText(peakTag, peakX, Math.max(paddingTop + 12, peakY - 6));
                 }
             }
@@ -2899,31 +2900,33 @@
                 ctx.fillText(actLine2, actCardX + 9, actCardY + 40);
             }
 
-            // Op-Ex Delta Indicator in Operation Phase (Initial undiscounted monthly rate marker)
-            const opexMarkerX = xCommissionEnd + (xEnd - xCommissionEnd) * 0.16;
-            const opexDeltaMonthly = state.opexDelta / 12;
-            const opexInitialY = valToY(baselineMonthly + opexDeltaMonthly);
-            const opexColor = state.opexDelta <= 0 ? '#059669' : '#dc2626';
-            const opexBorder = state.opexDelta <= 0 ? '#a7f3d0' : '#fecaca';
+            // Op-Ex Delta Indicator in Operation Phase (Plotted to full curve height)
+            const rOpexMarker = phaseInfo.pCommissionEnd + (1.0 - phaseInfo.pCommissionEnd) * 0.16;
+            const opexMarkerX = ratioToX(rOpexMarker);
+            const opexCostRes = getCostAtTime(rOpexMarker);
+            const opexCurveY = valToY(opexCostRes.value);
+            const opexDeltaCurrent = opexCostRes.value - baselineMonthly;
+            const opexColor = opexDeltaCurrent <= 0 ? '#059669' : '#dc2626';
+            const opexBorder = opexDeltaCurrent <= 0 ? '#a7f3d0' : '#fecaca';
 
-            ctx.strokeStyle = opexColor;
-            ctx.lineWidth = 1.5;
-            ctx.beginPath();
-            ctx.moveTo(opexMarkerX, baselineY);
-            ctx.lineTo(opexMarkerX, opexInitialY);
-            ctx.moveTo(opexMarkerX - 4, baselineY);
-            ctx.lineTo(opexMarkerX + 4, baselineY);
-            ctx.moveTo(opexMarkerX - 4, opexInitialY);
-            ctx.lineTo(opexMarkerX + 4, opexInitialY);
-            ctx.stroke();
+            if (Math.abs(opexDeltaCurrent) > 0.2) {
+                ctx.strokeStyle = opexColor;
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(opexMarkerX, baselineY);
+                ctx.lineTo(opexMarkerX, opexCurveY);
+                ctx.moveTo(opexMarkerX - 4, baselineY);
+                ctx.lineTo(opexMarkerX + 4, baselineY);
+                ctx.moveTo(opexMarkerX - 4, opexCurveY);
+                ctx.lineTo(opexMarkerX + 4, opexCurveY);
+                ctx.stroke();
 
-            // Compact Op-Ex delta label directly at indicator cap
-            if (Math.abs(opexDeltaMonthly) > 0.5) {
+                // Compact Op-Ex delta label directly at indicator cap
                 ctx.fillStyle = opexColor;
                 ctx.font = 'bold 9.5px Inter';
                 ctx.textAlign = 'center';
-                const tagStr = opexDeltaMonthly < 0 ? `-$${Math.abs(opexDeltaMonthly).toFixed(1)}k/mo` : `+$${opexDeltaMonthly.toFixed(1)}k/mo`;
-                const tagY = opexInitialY > baselineY ? opexInitialY + 12 : opexInitialY - 6;
+                const tagStr = opexDeltaCurrent < 0 ? `-$${Math.abs(opexDeltaCurrent).toFixed(1)}k/mo` : `+$${opexDeltaCurrent.toFixed(1)}k/mo`;
+                const tagY = opexCurveY > baselineY ? opexCurveY + 12 : opexCurveY - 6;
                 ctx.fillText(tagStr, opexMarkerX, tagY);
             }
 
