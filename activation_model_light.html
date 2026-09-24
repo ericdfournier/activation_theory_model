@@ -1131,7 +1131,7 @@
                 opexDelta: -60,
                 catalyst: 0,
                 yMin: 0,
-                yMax: 40,
+                yMax: 75,
                 description: "<strong>Scenario A (Standard / Optimal Retrofit):</strong> Rapid 4.2-year payback (<5 yrs) creates sufficient owner momentum to clear the Cap-Ex hurdle. Upfront integrated Cap-Ex is deployed over a 12-month implementation, followed by 6 months of commissioning and deep, perpetual operational cost reductions (green area)."
             },
             B: {
@@ -1142,7 +1142,7 @@
                 opexDelta: -15,
                 catalyst: 0,
                 yMin: 0,
-                yMax: 70,
+                yMax: 260,
                 description: "<strong>Scenario B (Excessive Capital Expenditures):</strong> The integrated Cap-Ex barrier is exceptionally high ($550k, 36.7-year payback >> 5 yrs). The instantaneous expenditure rate spikes severely, creating an insurmountable economic hurdle where the ball runs out of momentum and rolls back."
             },
             C: {
@@ -1153,7 +1153,7 @@
                 opexDelta: -50,
                 catalyst: 0,
                 yMin: 0,
-                yMax: 40,
+                yMax: 75,
                 description: "<strong>Scenario C (Excessive Implementation Downtime):</strong> The total integrated Cap-Ex is identical to Scenario A ($350k), but spread across an elongated 18-month implementation with a 7.0-year payback (>5 yrs). The prolonged disruption and delayed savings fail to provide the kinetic momentum required to surmount the barrier, resulting in rollback."
             },
             D: {
@@ -1164,7 +1164,7 @@
                 opexDelta: 20,
                 catalyst: 0,
                 yMin: 10,
-                yMax: 20,
+                yMax: 45,
                 description: "<strong>Scenario D (Increased Operational Expenditures):</strong> An endothermic / unfavorable outcome with no economic payback. Ongoing operational expenditures exceed the pre-retrofit baseline (red area), producing near-zero driving motivation and immediate rollback."
             }
         };
@@ -1300,19 +1300,23 @@
             return Math.sqrt(9 / (effInstallMonths + 3));
         }
 
-        // Peak Rate Height (Activation Barrier Height) above baseline
+        // Peak Monthly Cap-Ex Deployment Rate ($k/mo) above baseline
+        // Calculated such that the integral under the bell curve over effInstallMonths exactly equals effectiveCapEx.
+        // bump(u) = exp(-(normX * 2.1)^2) where normX = (u - 0.5) / 0.5.
+        // Integral of bump(u) du from 0 to 1 is ~0.420755.
+        // Therefore: peakRateHeightMonthly = (effectiveCapEx / effInstallMonths) / 0.420755
         function getPeakRateHeight(effectiveCapEx, effInstallMonths) {
-            const baseWidth = (6 / 36) * 0.42;
-            const installWidth = (effInstallMonths / 36) * 0.42;
-            const widthFactor = installWidth / baseWidth;
-            return (effectiveCapEx * 1.1) / Math.pow(widthFactor, 0.75);
+            if (!effInstallMonths || effInstallMonths <= 0) return 0;
+            const integralBump = 0.420755;
+            const avgMonthlyCapex = effectiveCapEx / effInstallMonths;
+            return avgMonthlyCapex / integralBump;
         }
 
         // Exact critical initial velocity (vc) required to reach the peak of the barrier (pPeak)
         // under the current physics landscape (potential energy slope + friction)
         function getCriticalVelocity() {
             const eps = 0.003;
-            const gEff = 0.00456;
+            const gEff = 0.001918;
             const friction = 0.40;
             const dt = 0.008;
 
@@ -1847,8 +1851,7 @@
         function updateLabels() {
             const effInstallMonths = getEffectiveInstallDuration();
             const netTotalCapex = state.totalCapex * (1 - state.catalyst / 100);
-            const peakRateHeightAnnual = getPeakRateHeight(netTotalCapex, effInstallMonths);
-            const peakRateHeightMonthly = peakRateHeightAnnual / 12;
+            const peakRateHeightMonthly = getPeakRateHeight(netTotalCapex, effInstallMonths);
             const totalPeakRateMonthly = (state.baselineOpex / 12) + peakRateHeightMonthly;
 
             labels.capex.innerText = `$${Math.round(state.totalCapex)}k`;
@@ -2142,8 +2145,7 @@
             // Monthly rates ($k/mo)
             const baselineMonthly = state.baselineOpex / 12;
             const targetOpexMonthly = (state.baselineOpex + state.opexDelta) / 12;
-            const peakRateHeightAnnual = getPeakRateHeight(effectiveCapEx, effInstallMonths);
-            const peakRateHeightMonthly = peakRateHeightAnnual / 12;
+            const peakRateHeightMonthly = getPeakRateHeight(effectiveCapEx, effInstallMonths);
             const rDisc = state.discountRate / 100;
 
             let value = baselineMonthly;
@@ -3246,7 +3248,7 @@
                 const y2 = getCostAtTime(Math.min(1, r + eps)).value;
                 const slope = (y2 - y1) / (2 * eps); // $/mo rate slope
 
-                const gEff = 0.00456; // scaled for monthly $/mo rate slope
+                const gEff = 0.001918; // scaled for monthly $/mo rate slope
                 const friction = 0.40;
 
                 const aSlope = -gEff * slope;
