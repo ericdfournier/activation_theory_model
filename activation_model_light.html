@@ -144,8 +144,8 @@
                         <i class="fa-solid fa-book-open text-blue-600"></i> Introduction
                     </h2>
                     <p class="text-xs text-slate-600 leading-relaxed">
-                        This model analogizing non-residential facility capital upgrade project decision making processes to
-                        chemical reaction kinetics by evaluating four distinct project phases: <strong>Pre-Retorfit
+                        This model represents non-residential facility capital upgrade projects using an analog to
+                        chemical reaction kinetics by evaluating costs over four distinct phases: <strong>Pre-Retorfit
                             (Baseline)</strong>, <strong>Implementation</strong>, <strong>Commissioning</strong>, and
                         <strong>Operation</strong>.
                     </p>
@@ -155,7 +155,8 @@
                 <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
                     <details class="group" open>
                         <summary class="cursor-pointer list-none flex items-center justify-between select-none">
-                            <h2 class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+                            <h2
+                                class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
                                 <i class="fa-solid fa-sliders text-blue-600"></i> Model Scenario Presets
                             </h2>
                             <i
@@ -166,13 +167,15 @@
                             <div class="grid grid-cols-2 gap-2.5 mb-3.5">
                                 <button data-preset="A"
                                     class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-200 hover:border-emerald-400 bg-slate-50 hover:bg-emerald-50/60 transition group shadow-xs">
-                                    <div class="text-sm font-bold text-slate-800 group-hover:text-emerald-700">Scenario A
+                                    <div class="text-sm font-bold text-slate-800 group-hover:text-emerald-700">Scenario
+                                        A
                                     </div>
                                     <div class="text-xs text-slate-500">Standard / Optimal</div>
                                 </button>
                                 <button data-preset="B"
                                     class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-200 hover:border-red-400 bg-slate-50 hover:bg-red-50/60 transition group shadow-xs">
-                                    <div class="text-sm font-bold text-slate-800 group-hover:text-red-700">Scenario B</div>
+                                    <div class="text-sm font-bold text-slate-800 group-hover:text-red-700">Scenario B
+                                    </div>
                                     <div class="text-xs text-slate-500">Excessive Cap-Ex</div>
                                 </button>
                                 <button data-preset="C"
@@ -183,7 +186,8 @@
                                 </button>
                                 <button data-preset="D"
                                     class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-200 hover:border-rose-400 bg-slate-50 hover:bg-rose-50/60 transition group shadow-xs">
-                                    <div class="text-sm font-bold text-slate-800 group-hover:text-rose-700">Scenario D</div>
+                                    <div class="text-sm font-bold text-slate-800 group-hover:text-rose-700">Scenario D
+                                    </div>
                                     <div class="text-xs text-slate-500">Increased Op-Ex</div>
                                 </button>
                             </div>
@@ -628,7 +632,8 @@
                                 <div>
                                     <div class="flex items-center gap-1.5">
                                         <label for="toggle-financing"
-                                            class="font-semibold text-slate-800 text-sm block cursor-pointer">Enable Debt
+                                            class="font-semibold text-slate-800 text-sm block cursor-pointer">Enable
+                                            Debt
                                             Financing</label>
                                         <button type="button" class="param-tooltip-btn"
                                             data-tooltip-id="tip-toggle-financing"
@@ -643,9 +648,11 @@
                                     class="param-popover hidden absolute z-30 left-0 right-0 top-14 p-3 rounded-lg bg-white border border-slate-300 shadow-xl text-xs text-slate-700">
                                     <div class="flex justify-between items-start gap-2 mb-1">
                                         <span class="font-bold text-slate-900 flex items-center gap-1.5">
-                                            <i class="fa-solid fa-circle-info text-emerald-600"></i> Debt Financing Model
+                                            <i class="fa-solid fa-circle-info text-emerald-600"></i> Debt Financing
+                                            Model
                                         </span>
-                                        <button type="button" class="close-tip text-slate-400 hover:text-slate-700 p-0.5"
+                                        <button type="button"
+                                            class="close-tip text-slate-400 hover:text-slate-700 p-0.5"
                                             aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
                                     </div>
                                     <p class="text-slate-600 leading-relaxed">Switches the project from balance-sheet
@@ -685,7 +692,8 @@
                                         class="param-popover hidden absolute z-30 left-0 right-0 top-7 p-3 rounded-lg bg-white border border-slate-300 shadow-xl text-xs text-slate-700">
                                         <div class="flex justify-between items-start gap-2 mb-1">
                                             <span class="font-bold text-slate-900 flex items-center gap-1.5">
-                                                <i class="fa-solid fa-circle-info text-emerald-600"></i> Financed Debt Share
+                                                <i class="fa-solid fa-circle-info text-emerald-600"></i> Financed Debt
+                                                Share
                                             </span>
                                             <button type="button"
                                                 class="close-tip text-slate-400 hover:text-slate-700 p-0.5"
@@ -693,7 +701,8 @@
                                         </div>
                                         <p class="text-slate-600 leading-relaxed">The portion of net capital expenditure
                                             financed through borrowed capital. At 100%, the upfront capital hurdle is
-                                            completely leveled ($E_a \approx 0$). Values below 100% require an upfront cash
+                                            completely leveled ($E_a \approx 0$). Values below 100% require an upfront
+                                            cash
                                             down payment funded from owner reserves.</p>
                                     </div>
                                     <input type="range" id="slider-financed-pct" min="10" max="100" step="5" value="100"
@@ -708,8 +717,7 @@
                                         <div class="flex items-center gap-1.5">
                                             <label class="font-medium text-slate-700">Loan Term (Years)</label>
                                             <button type="button" class="param-tooltip-btn"
-                                                data-tooltip-id="tip-loan-term"
-                                                title="Click for parameter description"
+                                                data-tooltip-id="tip-loan-term" title="Click for parameter description"
                                                 aria-label="Info on Loan Term">
                                                 <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
                                             </button>
@@ -728,10 +736,14 @@
                                                 class="close-tip text-slate-400 hover:text-slate-700 p-0.5"
                                                 aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
                                         </div>
-                                        <p class="text-slate-600 leading-relaxed">The duration over which borrowed principal
-                                            is amortized. Loan repayments commence at Month 0 (Kickoff). Longer terms reduce
-                                            monthly debt service ($D$) to strengthen the debt service coverage ratio ($\text{DSCR}$),
-                                            while shorter terms retire debt earlier to unlock full unencumbered savings sooner.</p>
+                                        <p class="text-slate-600 leading-relaxed">The duration over which borrowed
+                                            principal
+                                            is amortized. Loan repayments commence at Month 0 (Kickoff). Longer terms
+                                            reduce
+                                            monthly debt service ($D$) to strengthen the debt service coverage ratio
+                                            ($\text{DSCR}$),
+                                            while shorter terms retire debt earlier to unlock full unencumbered savings
+                                            sooner.</p>
                                     </div>
                                     <input type="range" id="slider-loan-term" min="3" max="30" step="1" value="10"
                                         class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
@@ -758,15 +770,18 @@
                                         class="param-popover hidden absolute z-30 left-0 right-0 top-7 p-3 rounded-lg bg-white border border-slate-300 shadow-xl text-xs text-slate-700">
                                         <div class="flex justify-between items-start gap-2 mb-1">
                                             <span class="font-bold text-slate-900 flex items-center gap-1.5">
-                                                <i class="fa-solid fa-circle-info text-purple-600"></i> Interest Rate (APR)
+                                                <i class="fa-solid fa-circle-info text-purple-600"></i> Interest Rate
+                                                (APR)
                                             </span>
                                             <button type="button"
                                                 class="close-tip text-slate-400 hover:text-slate-700 p-0.5"
                                                 aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
                                         </div>
-                                        <p class="text-slate-600 leading-relaxed">The annual percentage rate (APR) for the
+                                        <p class="text-slate-600 leading-relaxed">The annual percentage rate (APR) for
+                                            the
                                             financing facility. Lower interest rates reduce monthly carrying costs ($D$)
-                                            and interest expense, expanding net retained operating cash flow and boosting
+                                            and interest expense, expanding net retained operating cash flow and
+                                            boosting
                                             project $\text{DSCR}$.</p>
                                     </div>
                                     <input type="range" id="slider-interest-rate" min="2.0" max="12.0" step="0.25"
