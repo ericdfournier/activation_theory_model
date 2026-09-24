@@ -120,7 +120,10 @@
                     <i class="fa-solid fa-book-open text-blue-600"></i> Introduction
                 </h2>
                 <p class="text-xs text-slate-600 leading-relaxed">
-                    This model evaluates capital facility upgrades (e.g., energy efficiency, electrification, decarbonization) by mapping thermodynamic states and reaction kinetics onto corporate financial decision-making across four continuous project phases: <strong>Pre-Implementation (Baseline)</strong>, <strong>Implementation</strong>, <strong>Commissioning</strong>, and <strong>Operation</strong>.
+                    This model analogizing non-residential facility capital upgrade project decision making processes to
+                    chemical reaction kinetics by evaluating four distinct project phases: <strong>Pre-Retorfit
+                        (Baseline)</strong>, <strong>Implementation</strong>, <strong>Commissioning</strong>, and
+                    <strong>Operation</strong>.
                 </p>
             </div>
 
@@ -131,14 +134,16 @@
                         <h2 class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
                             <i class="fa-solid fa-sliders text-blue-600"></i> Model Scenario Presets
                         </h2>
-                        <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform text-sm"></i>
+                        <i
+                            class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform text-sm"></i>
                     </summary>
 
                     <div class="pt-4">
                         <div class="grid grid-cols-2 gap-2.5 mb-3.5">
                             <button data-preset="A"
                                 class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-200 hover:border-emerald-400 bg-slate-50 hover:bg-emerald-50/60 transition group shadow-xs">
-                                <div class="text-sm font-bold text-slate-800 group-hover:text-emerald-700">Scenario A</div>
+                                <div class="text-sm font-bold text-slate-800 group-hover:text-emerald-700">Scenario A
+                                </div>
                                 <div class="text-xs text-slate-500">Standard / Optimal</div>
                             </button>
                             <button data-preset="B"
@@ -148,7 +153,8 @@
                             </button>
                             <button data-preset="C"
                                 class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-200 hover:border-amber-400 bg-slate-50 hover:bg-amber-50/60 transition group shadow-xs">
-                                <div class="text-sm font-bold text-slate-800 group-hover:text-amber-700">Scenario C</div>
+                                <div class="text-sm font-bold text-slate-800 group-hover:text-amber-700">Scenario C
+                                </div>
                                 <div class="text-xs text-slate-500">Long Downtime</div>
                             </button>
                             <button data-preset="D"
@@ -161,7 +167,8 @@
                         <!-- Active Scenario Profile (Fixed Element) -->
                         <div class="pt-3.5 border-t border-slate-100">
                             <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-                                <span class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                                <span
+                                    class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
                                     <i class="fa-solid fa-circle-info text-blue-600 text-xs"></i> Active Profile
                                 </span>
                                 <span id="badge-scenario-name"
@@ -712,12 +719,14 @@
                                 Cost Trajectory
                             </h2>
                             <div class="flex flex-wrap items-center gap-2 mt-1">
-                                <p class="text-xs sm:text-sm text-slate-500">Y-Axis: Effective Cost Rate ($/mo) | X-Axis:
+                                <p class="text-xs sm:text-sm text-slate-500">Y-Axis: Effective Cost Rate ($/mo) |
+                                    X-Axis:
                                     Project Timeline</p>
                                 <span
                                     class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-900 border border-amber-200 shadow-2xs">
                                     <i class="fa-solid fa-arrows-left-right-to-line text-amber-600"></i>
-                                    <span><strong>Non-Linear Scale:</strong> Zoomed Transition (Months) &bull; Compressed
+                                    <span><strong>Non-Linear Scale:</strong> Zoomed Transition (Months) &bull;
+                                        Compressed
                                         Operation (<span id="scale-badge-horizon">20 Yrs</span>)</span>
                                 </span>
                             </div>
@@ -756,7 +765,7 @@
 
                     <!-- Canvas Container with Hover Tooltip Integration -->
                     <div id="canvas-container"
-                        class="relative w-full h-[50vh] min-h-[420px] max-h-[640px] bg-white rounded-lg border border-slate-200 overflow-hidden cursor-crosshair shadow-inner">
+                        class="relative w-full h-[47.5vh] min-h-[399px] max-h-[608px] bg-white rounded-lg border border-slate-200 overflow-hidden cursor-crosshair shadow-inner">
                         <canvas id="activationCanvas" class="absolute inset-0 w-full h-full"></canvas>
                     </div>
                 </div>
@@ -764,7 +773,8 @@
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <!-- KPI 1: Net Present Value -->
                     <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
-                        <div id="kpi-npv-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Net
+                        <div id="kpi-npv-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                            Net
                             Present Value (NPV)
                         </div>
                         <div id="kpi-npv" class="text-2xl font-bold font-mono text-emerald-600 mt-1.5">$0</div>
@@ -773,7 +783,8 @@
 
                     <!-- KPI 2: Simple Payback -->
                     <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
-                        <div id="kpi-payback-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                        <div id="kpi-payback-label"
+                            class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                             Simple Payback</div>
                         <div id="kpi-payback" class="text-2xl font-bold font-mono text-emerald-600 mt-1.5">0.0 yrs</div>
                         <div id="kpi-payback-sub" class="text-xs text-slate-400 mt-1">Break-even (&lt;5 yrs rolls over)
@@ -785,16 +796,19 @@
                         <div id="kpi-roi-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                             Project ROI</div>
                         <div id="kpi-roi" class="text-2xl font-bold font-mono text-emerald-600 mt-1.5">0%</div>
-                        <div id="kpi-roi-sub" class="text-xs text-slate-400 mt-1">Return on investment (NPV / Cap-Ex)</div>
+                        <div id="kpi-roi-sub" class="text-xs text-slate-400 mt-1">Return on investment (NPV / Cap-Ex)
+                        </div>
                     </div>
 
                     <!-- KPI 4: Effective Cap-Ex -->
                     <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
-                        <div id="kpi-net-capex-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                        <div id="kpi-net-capex-label"
+                            class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                             Effective Cap-Ex Barrier
                         </div>
                         <div id="kpi-net-capex" class="text-2xl font-bold font-mono text-amber-600 mt-1.5">$0</div>
-                        <div id="kpi-net-capex-sub" class="text-xs text-slate-400 mt-1">After policy incentive offset</div>
+                        <div id="kpi-net-capex-sub" class="text-xs text-slate-400 mt-1">After policy incentive offset
+                        </div>
                     </div>
                 </div>
             </div>
@@ -826,7 +840,8 @@
                             <div>
                                 <div class="flex items-center justify-between mb-2">
                                     <h4 class="font-bold text-sm text-slate-800 flex items-center gap-2">
-                                        <i class="fa-solid fa-money-bill-wave text-amber-600"></i> 1. Self-Financed Regime
+                                        <i class="fa-solid fa-money-bill-wave text-amber-600"></i> 1. Self-Financed
+                                        Regime
                                         (High Barrier)
                                     </h4>
                                     <span id="pill-self-status"
@@ -835,18 +850,26 @@
                                     </span>
                                 </div>
                                 <p class="text-xs text-slate-600 mb-2 leading-relaxed">
-                                    The asset owner pays 100% of net capital expenditures (Cap-Ex) from working capital or
+                                    The asset owner pays 100% of net capital expenditures (Cap-Ex) from working capital
+                                    or
                                     cash reserves across the implementation window:
                                 </p>
                                 <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
-                                    <li><strong class="text-slate-800">The Kinetic Barrier (Ea):</strong> Creates a sharp,
-                                        concentrated financial obstacle with monthly capital outflows spiking into negative
+                                    <li><strong class="text-slate-800">The Kinetic Barrier (Ea):</strong> Creates a
+                                        sharp,
+                                        concentrated financial obstacle with monthly capital outflows spiking into
+                                        negative
                                         territory.</li>
-                                    <li><strong class="text-slate-800">The Adoption Bottleneck:</strong> Even when strongly
-                                        NPV positive (ΔOp-Ex &lt; 0), projects stall if organizational liquidity or hurdle
-                                        rate (analogous to thermal kinetic energy, kB·T) cannot clear the barrier peak.</li>
-                                    <li><strong class="text-slate-800">Return Profile:</strong> Deep J-curve deficit during
-                                        implementation, followed by gradual simple payback as 100% of operational savings
+                                    <li><strong class="text-slate-800">The Adoption Bottleneck:</strong> Even when
+                                        strongly
+                                        NPV positive (ΔOp-Ex &lt; 0), projects stall if organizational liquidity or
+                                        hurdle
+                                        rate (analogous to thermal kinetic energy, kB·T) cannot clear the barrier peak.
+                                    </li>
+                                    <li><strong class="text-slate-800">Return Profile:</strong> Deep J-curve deficit
+                                        during
+                                        implementation, followed by gradual simple payback as 100% of operational
+                                        savings
                                         are captured post-commissioning.</li>
                                 </ul>
                             </div>
@@ -858,7 +881,8 @@
                             <div>
                                 <div class="flex items-center justify-between mb-2">
                                     <h4 class="font-bold text-sm text-slate-800 flex items-center gap-2">
-                                        <i class="fa-solid fa-hand-holding-dollar text-emerald-600"></i> 2. Debt-Financed
+                                        <i class="fa-solid fa-hand-holding-dollar text-emerald-600"></i> 2.
+                                        Debt-Financed
                                         Regime (Catalyzed Pathway)
                                     </h4>
                                     <span id="pill-debt-status"
@@ -871,16 +895,20 @@
                                     monthly debt service (D) commencing at project kickoff (Month 0):
                                 </p>
                                 <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
-                                    <li><strong class="text-slate-800">Barrier Mitigation (Ea → 0):</strong> Upfront cash
+                                    <li><strong class="text-slate-800">Barrier Mitigation (Ea → 0):</strong> Upfront
+                                        cash
                                         outlay drops to $0 (or cash down payment). The Cap-Ex spike is leveled into a
                                         predictable
                                         monthly debt service payment.</li>
                                     <li><strong class="text-slate-800">Self-Funding Dynamics &amp; DSCR:</strong>
-                                        Feasibility is governed by the Debt Service Coverage Ratio (DSCR = |ΔOp-Ex| / 12 /
-                                        D). When DSCR ≥ 1.0x, utility savings exceed debt payments, paying for itself from
+                                        Feasibility is governed by the Debt Service Coverage Ratio (DSCR = |ΔOp-Ex| / 12
+                                        /
+                                        D). When DSCR ≥ 1.0x, utility savings exceed debt payments, paying for itself
+                                        from
                                         Day 1 out of operating savings.</li>
                                     <li><strong class="text-slate-800">Debt Retirement Milestone:</strong> Upon loan
-                                        maturity, debt service drops to $0, unlocking full, unencumbered operating savings
+                                        maturity, debt service drops to $0, unlocking full, unencumbered operating
+                                        savings
                                         through the remaining operating horizon.</li>
                                 </ul>
                             </div>
@@ -917,17 +945,20 @@
                                 </tr>
                                 <tr class="hover:bg-slate-50/50">
                                     <td class="p-2.5 font-bold text-slate-800">Cash-Flow Timing</td>
-                                    <td class="p-2.5 text-slate-600">Deep J-curve deficit followed by gradual payback</td>
+                                    <td class="p-2.5 text-slate-600">Deep J-curve deficit followed by gradual payback
+                                    </td>
                                     <td class="p-2.5 text-slate-600">Immediate net-neutral or net-positive (ΔCFnet)</td>
                                 </tr>
                                 <tr class="hover:bg-slate-50/50">
                                     <td class="p-2.5 font-bold text-slate-800">Primary Decision Metric</td>
-                                    <td class="p-2.5 text-slate-600">Simple Payback Period &amp; Balance Sheet Capital</td>
+                                    <td class="p-2.5 text-slate-600">Simple Payback Period &amp; Balance Sheet Capital
+                                    </td>
                                     <td class="p-2.5 text-slate-600">Debt Service Coverage Ratio (DSCR)</td>
                                 </tr>
                                 <tr class="hover:bg-slate-50/50">
                                     <td class="p-2.5 font-bold text-slate-800">Organizational Impact</td>
-                                    <td class="p-2.5 text-slate-600">Competes against limited capital budget reserves</td>
+                                    <td class="p-2.5 text-slate-600">Competes against limited capital budget reserves
+                                    </td>
                                     <td class="p-2.5 text-slate-600">Funded via ongoing operating budget savings</td>
                                 </tr>
                             </tbody>
