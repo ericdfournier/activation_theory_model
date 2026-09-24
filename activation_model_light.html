@@ -116,10 +116,12 @@
 
             <!-- Preset Selection Card -->
             <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
-                <h2 class="text-sm font-bold uppercase tracking-wider text-slate-600 mb-3 flex items-center gap-2">
-                    <i class="fa-solid fa-sliders text-blue-600"></i> Model Scenario Presets
-                </h2>
-                <div class="grid grid-cols-2 gap-2.5">
+                <div class="flex items-center justify-between gap-2 mb-3">
+                    <h2 class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+                        <i class="fa-solid fa-sliders text-blue-600"></i> Model Scenario Presets
+                    </h2>
+                </div>
+                <div class="grid grid-cols-2 gap-2.5 mb-4">
                     <button data-preset="A"
                         class="preset-btn px-3.5 py-2.5 text-left rounded-lg border border-slate-200 hover:border-emerald-400 bg-slate-50 hover:bg-emerald-50/60 transition group shadow-xs">
                         <div class="text-sm font-bold text-slate-800 group-hover:text-emerald-700">Scenario A</div>
@@ -140,6 +142,28 @@
                         <div class="text-sm font-bold text-slate-800 group-hover:text-rose-700">Scenario D</div>
                         <div class="text-xs text-slate-500">Increased Op-Ex</div>
                     </button>
+                </div>
+
+                <!-- Active Scenario Profile & Project Lifecycle Structure -->
+                <div class="pt-3.5 border-t border-slate-100">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-info text-blue-600"></i> Active Scenario Profile
+                        </span>
+                        <span id="badge-scenario-name"
+                            class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+                            Scenario A (Standard / Optimal Retrofit)
+                        </span>
+                    </div>
+
+                    <p id="scenario-description"
+                        class="text-xs text-slate-700 bg-slate-50 border border-slate-200 rounded-lg p-3 mb-2.5 leading-relaxed font-normal">
+                        Loading scenario overview...
+                    </p>
+
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        <strong class="text-slate-700">Project Lifecycle Structure:</strong> This model evaluates capital facility upgrades (e.g., energy efficiency, electrification, decarbonization) by mapping thermodynamic states and reaction kinetics onto corporate financial decision-making across four continuous project phases: <strong>Pre-Implementation (Baseline)</strong>, <strong>Implementation</strong>, <strong>Commissioning</strong>, and <strong>Operation</strong>.
+                    </p>
                 </div>
             </div>
 
@@ -649,32 +673,6 @@
         <!-- Right Display & Graph Area (8 Cols on lg, 9 Cols on xl/2xl) -->
         <section class="lg:col-span-8 xl:col-span-9 2xl:col-span-9 space-y-6 flex flex-col">
 
-            <!-- Card 0: Active Scenario Profile & Project Lifecycle Structure -->
-            <div id="card-scenario-overview" class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
-                <div class="flex flex-wrap items-center justify-between gap-3 mb-2.5">
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
-                        <i class="fa-solid fa-circle-info text-blue-600 text-base"></i> Active Scenario Profile &amp;
-                        Project Lifecycle Structure
-                    </h3>
-                    <span id="badge-scenario-name"
-                        class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
-                        Scenario A (Standard / Optimal Retrofit)
-                    </span>
-                </div>
-
-                <p id="scenario-description"
-                    class="text-xs sm:text-sm text-slate-700 bg-slate-50 border border-slate-200 rounded-lg p-3.5 mb-3 leading-relaxed font-normal">
-                    Loading scenario overview...
-                </p>
-
-                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                    This model evaluates capital facility upgrades (e.g., energy efficiency, electrification,
-                    decarbonization) by mapping thermodynamic states and reaction kinetics onto corporate financial
-                    decision-making across four continuous project phases: <strong>Pre-Implementation
-                        (Baseline)</strong>, <strong>Implementation</strong>, <strong>Commissioning</strong>, and
-                    <strong>Operation</strong>.
-                </p>
-            </div>
 
             <!-- Chart Display Card -->
             <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex flex-col relative">
