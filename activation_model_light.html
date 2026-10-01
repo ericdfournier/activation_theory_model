@@ -612,14 +612,13 @@
                     </details>
                 </div>
 
-                <!-- Card 4: Project Financing & Debt Service (Collapsible) -->
+                <!-- Card 4: Financing & Debt (Collapsible) -->
                 <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
                     <details class="group" id="details-financing">
                         <summary class="cursor-pointer list-none flex items-center justify-between select-none">
                             <h2
                                 class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
-                                <i class="fa-solid fa-hand-holding-dollar text-emerald-600"></i> Project Financing &amp;
-                                Debt
+                                <i class="fa-solid fa-hand-holding-dollar text-emerald-600"></i> Financing &amp; Debt
                                 <span id="badge-financing-active"
                                     class="hidden text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full border border-emerald-300 font-bold">Active</span>
                             </h2>
@@ -816,6 +815,90 @@
                         </div>
                     </details>
                 </div>
+
+                <!-- Card 5: Operational Uncertainty & Risk Sensitivity (Collapsible) -->
+                <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+                    <details class="group" id="details-uncertainty">
+                        <summary class="cursor-pointer list-none flex items-center justify-between select-none">
+                            <h2
+                                class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+                                <i class="fa-solid fa-chart-area text-indigo-600"></i> Uncertainty &amp; Risk
+                                <span id="badge-uncertainty-active"
+                                    class="hidden text-xs bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-full border border-indigo-300 font-bold">Active</span>
+                            </h2>
+                            <i
+                                class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform text-sm"></i>
+                        </summary>
+
+                        <div class="space-y-5 pt-4">
+                            <!-- Upfront Cap-Ex Uncertainty Slider -->
+                            <div class="relative">
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
+                                    <div class="flex items-center gap-1.5">
+                                        <label class="font-medium text-slate-700 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-layer-group text-amber-600"></i> Upfront Cap-Ex Uncertainty (±%)
+                                        </label>
+                                        <button type="button" class="param-tooltip-btn" data-tooltip-id="tip-uncertainty-capex"
+                                            title="Click for parameter description"
+                                            aria-label="Info on Upfront Cap-Ex Uncertainty">
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
+                                        </button>
+                                    </div>
+                                    <span id="val-uncertainty-capex"
+                                        class="text-amber-600 font-mono font-bold text-base">0% (Deterministic)</span>
+                                </div>
+                                <div id="tip-uncertainty-capex"
+                                    class="param-popover hidden absolute z-30 left-0 right-0 top-7 p-3 rounded-lg bg-white border border-slate-300 shadow-xl text-xs text-slate-700">
+                                    <div class="flex justify-between items-start gap-2 mb-1">
+                                        <span class="font-bold text-slate-900 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-circle-info text-amber-600"></i> Upfront Cap-Ex Uncertainty
+                                        </span>
+                                        <button type="button"
+                                            class="close-tip text-slate-400 hover:text-slate-700 p-0.5"
+                                            aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
+                                    </div>
+                                    <p class="text-slate-600 leading-relaxed">Accounts for unforeseen installation contingencies, supply chain price volatility, structural retrofitting surprises, and contractor change orders. Expands the height of the activation barrier and evaluates risk exposure on simple payback and capital requirements.</p>
+                                </div>
+                                <input type="range" id="slider-uncertainty-capex" min="0" max="50" step="5" value="0"
+                                    class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Projects capital cost variance across the implementation barrier.</p>
+                            </div>
+
+                            <!-- Long-Term Op-Ex Uncertainty Slider -->
+                            <div class="pt-3 border-t border-slate-200 relative">
+                                <div class="flex justify-between items-baseline text-sm mb-1.5">
+                                    <div class="flex items-center gap-1.5">
+                                        <label class="font-medium text-slate-700 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-arrows-split-up-and-left text-indigo-600"></i> Long-Term Op-Ex Uncertainty (±%)
+                                        </label>
+                                        <button type="button" class="param-tooltip-btn" data-tooltip-id="tip-uncertainty-opex"
+                                            title="Click for parameter description"
+                                            aria-label="Info on Long-Term Op-Ex Uncertainty">
+                                            <i class="fa-solid fa-circle-info text-xs pointer-events-none"></i>
+                                        </button>
+                                    </div>
+                                    <span id="val-uncertainty-opex"
+                                        class="text-indigo-600 font-mono font-bold text-base">0% (Deterministic)</span>
+                                </div>
+                                <div id="tip-uncertainty-opex"
+                                    class="param-popover hidden absolute z-30 left-0 right-0 top-10 p-3 rounded-lg bg-white border border-slate-300 shadow-xl text-xs text-slate-700">
+                                    <div class="flex justify-between items-start gap-2 mb-1">
+                                        <span class="font-bold text-slate-900 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-circle-info text-indigo-600"></i> Commissioning &amp; Op-Ex Uncertainty
+                                        </span>
+                                        <button type="button"
+                                            class="close-tip text-slate-400 hover:text-slate-700 p-0.5"
+                                            aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
+                                    </div>
+                                    <p class="text-slate-600 leading-relaxed">Mimics real-world variance during both commissioning tuning and ongoing operations caused by fluctuating utility tariffs, weather extremes, equipment degradation, and occupancy changes. Projects a fanning confidence corridor across commissioning and the operational horizon.</p>
+                                </div>
+                                <input type="range" id="slider-uncertainty-opex" min="0" max="50" step="5" value="0"
+                                    class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Projects confidence bounds across both commissioning and operations.</p>
+                            </div>
+                        </div>
+                    </details>
+                </div>
             </div> <!-- End #controls-scroll-container -->
         </section>
 
@@ -880,6 +963,9 @@
                                 <span class="flex items-center gap-1.5"><span
                                         class="w-3 h-3 rounded-full bg-emerald-500 inline-block shadow-xs"></span> Cost
                                     Reduction</span>
+                                <span id="legend-uncertainty" class="hidden flex items-center gap-1.5"><span
+                                        class="w-3.5 h-2 rounded bg-indigo-100 border border-indigo-400 inline-block shadow-xs"></span>
+                                    Projected Cost Range</span>
                                 <span id="legend-debt-service" class="hidden flex items-center gap-1.5"><span
                                         class="w-3 h-3 rounded-full bg-amber-400 inline-block shadow-xs"></span> Debt
                                     Service</span>
@@ -1264,6 +1350,10 @@
             loanTerm: 10,            // loan term in years (3 to 30)
             interestRate: 6.0,       // annual interest rate % (2.0% to 12.0%)
 
+            // Uncertainty & Risk State
+            capexUncertaintyPct: 0,  // ± % Upfront Cap-Ex uncertainty (0% to 50%)
+            opexUncertaintyPct: 0,   // ± % Long-Term Op-Ex uncertainty (0% to 50%)
+
             // Physics Animation State
             animating: false,
             ballProgress: 0,         // normalized progress r: 0 to 1
@@ -1346,7 +1436,9 @@
             horizon: document.getElementById('slider-horizon'),
             financedPct: document.getElementById('slider-financed-pct'),
             loanTerm: document.getElementById('slider-loan-term'),
-            interestRate: document.getElementById('slider-interest-rate')
+            interestRate: document.getElementById('slider-interest-rate'),
+            capexUncertainty: document.getElementById('slider-uncertainty-capex'),
+            opexUncertainty: document.getElementById('slider-uncertainty-opex')
         };
 
         const labels = {
@@ -1365,7 +1457,9 @@
             interestRate: document.getElementById('val-interest-rate'),
             monthlyDebt: document.getElementById('val-monthly-debt'),
             dscr: document.getElementById('val-dscr'),
-            retainedFlow: document.getElementById('val-retained-flow')
+            retainedFlow: document.getElementById('val-retained-flow'),
+            capexUncertainty: document.getElementById('val-uncertainty-capex'),
+            opexUncertainty: document.getElementById('val-uncertainty-opex')
         };
 
         const kpis = {
@@ -1389,8 +1483,10 @@
         const toggleFinancing = document.getElementById('toggle-financing');
         const financingControlsGroup = document.getElementById('financing-controls-group');
         const badgeFinancingActive = document.getElementById('badge-financing-active');
+        const badgeUncertaintyActive = document.getElementById('badge-uncertainty-active');
         const legendDebtService = document.getElementById('legend-debt-service');
         const legendGhostBarrier = document.getElementById('legend-ghost-barrier');
+        const legendUncertainty = document.getElementById('legend-uncertainty');
 
         const playBtn = document.getElementById('btn-play-animation');
         const playIcon = document.getElementById('play-icon');
@@ -1516,11 +1612,14 @@
         }
 
         // Compute initial velocity of the reaction ball:
-        // - Self-Financed: Governed by Simple Payback (<5 yrs clears, >=5 yrs rolls back)
-        // - Debt-Financed: Governed by DSCR (>1.0x clears with speed scaling with DSCR; <1.0x rolls back)
+        // - Self-Financed: Governed by Simple Payback (<5 yrs clears, >=5 yrs rolls back).
+        //   When Cap-Ex uncertainty is active, determined by the worst-case Cap-Ex scenario.
+        // - Debt-Financed: Governed by DSCR (>1.0x clears; <1.0x rolls back).
+        //   When Cap-Ex uncertainty is active, determined by the worst-case debt service / DSCR scenario.
         function computeInitialVelocity() {
             const annualSavings = -state.opexDelta; // $k/yr
             const vc = getCriticalVelocity();
+            const uCap = (state.capexUncertaintyPct || 0) / 100;
 
             if (state.financingEnabled) {
                 const debtInfo = calculateDebtService();
@@ -1528,16 +1627,19 @@
                     return Math.min(vc * 0.35, 0.08);
                 }
 
-                if (debtInfo.dscr >= 1.0) {
-                    // DSCR >= 1.0: Self-funding / cash-flow positive -> ball MUST make it over the hill!
+                // In worst-case Cap-Ex scenario, debt service increases by (1 + uCap), reducing DSCR
+                const effectiveDscr = uCap > 0 ? (debtInfo.dscr / (1 + uCap)) : debtInfo.dscr;
+
+                if (effectiveDscr >= 1.0) {
+                    // DSCR >= 1.0 under worst-case Cap-Ex: Self-funding -> ball MUST make it over the hill!
                     // Initial speed increases proportionately to the degree that DSCR > 1.0
-                    const dscrExcess = Math.min(3.0, debtInfo.dscr - 1.0);
+                    const dscrExcess = Math.min(3.0, effectiveDscr - 1.0);
                     const speedMultiplier = 1.12 + 0.35 * dscrExcess;
                     return vc * speedMultiplier;
                 } else {
-                    // DSCR < 1.0: Operating cash deficit -> ball MUST NOT make it over the hill!
+                    // DSCR < 1.0 under worst-case Cap-Ex: Operating cash deficit -> ball MUST NOT make it over the hill!
                     // Speed scales down with DSCR, strictly capped below vc so the ball rolls back
-                    const dscrFraction = Math.max(0.15, Math.min(0.95, debtInfo.dscr));
+                    const dscrFraction = Math.max(0.15, Math.min(0.95, effectiveDscr));
                     const rollbackScale = 0.25 + 0.65 * dscrFraction;
                     return Math.min(vc * 0.90, vc * rollbackScale);
                 }
@@ -1548,8 +1650,9 @@
                 return Math.max(0.08, vc * 0.15);
             }
 
-            const effectiveCapEx = state.totalCapex * (1 - state.catalyst / 100);
-            const payback = effectiveCapEx / annualSavings; // simple payback in years
+            const baseCapex = state.totalCapex * (1 - state.catalyst / 100);
+            const effectiveCapEx = uCap > 0 ? baseCapex * (1 + uCap) : baseCapex;
+            const payback = effectiveCapEx / annualSavings; // simple payback in years under worst-case Cap-Ex
             const durMultiplier = getDurationMotivationMultiplier();
 
             if (payback < 5.0) {
@@ -1566,6 +1669,8 @@
 
         // Qualitative Property Owner Motivation Metric [Low, Medium, High, Very High]
         function getMotivationTier(v0) {
+            const uCap = (state.capexUncertaintyPct || 0) / 100;
+
             if (state.financingEnabled) {
                 const debtInfo = calculateDebtService();
                 const annualSavings = -state.opexDelta;
@@ -1577,38 +1682,42 @@
                         desc: 'Financed: Unfavorable Economics (No Op-Ex Savings)'
                     };
                 }
-                if (debtInfo.dscr >= 1.25) {
+                const effectiveDscr = uCap > 0 ? (debtInfo.dscr / (1 + uCap)) : debtInfo.dscr;
+                const riskSuffix = uCap > 0 ? ` (+${state.capexUncertaintyPct}% Cap-Ex Risk)` : '';
+
+                if (effectiveDscr >= 1.25) {
                     return {
                         level: 'Very High',
                         colorClass: 'text-emerald-700 bg-emerald-50 border-emerald-200',
                         pillColor: 'text-emerald-600',
-                        desc: `Financed: Cash-Flow Positive (${debtInfo.dscr.toFixed(2)}x DSCR ≥ 1.25x)`
+                        desc: `Financed: Cash-Flow Positive (${effectiveDscr.toFixed(2)}x DSCR ≥ 1.25x${riskSuffix})`
                     };
-                } else if (debtInfo.dscr >= 1.0) {
+                } else if (effectiveDscr >= 1.0) {
                     return {
                         level: 'High',
                         colorClass: 'text-teal-700 bg-teal-50 border-teal-200',
                         pillColor: 'text-teal-600',
-                        desc: `Financed: Self-Funding via Op-Ex (${debtInfo.dscr.toFixed(2)}x DSCR ≥ 1.0x)`
+                        desc: `Financed: Self-Funding via Op-Ex (${effectiveDscr.toFixed(2)}x DSCR ≥ 1.0x${riskSuffix})`
                     };
-                } else if (debtInfo.dscr >= 0.5) {
+                } else if (effectiveDscr >= 0.5) {
                     return {
                         level: 'Medium',
                         colorClass: 'text-amber-700 bg-amber-50 border-amber-200',
                         pillColor: 'text-amber-600',
-                        desc: `Financed: Operating Deficit (${debtInfo.dscr.toFixed(2)}x DSCR < 1.0x)`
+                        desc: `Financed: Operating Deficit (${effectiveDscr.toFixed(2)}x DSCR < 1.0x${riskSuffix})`
                     };
                 } else {
                     return {
                         level: 'Low',
                         colorClass: 'text-rose-700 bg-rose-50 border-rose-200',
                         pillColor: 'text-rose-600',
-                        desc: `Financed: Heavy Operating Deficit (${debtInfo.dscr.toFixed(2)}x DSCR < 1.0x)`
+                        desc: `Financed: Heavy Operating Deficit (${effectiveDscr.toFixed(2)}x DSCR < 1.0x${riskSuffix})`
                     };
                 }
             }
 
-            const effectiveCapEx = state.totalCapex * (1 - state.catalyst / 100);
+            const baseCapex = state.totalCapex * (1 - state.catalyst / 100);
+            const effectiveCapEx = uCap > 0 ? baseCapex * (1 + uCap) : baseCapex;
             const annualSavings = -state.opexDelta;
 
             if (annualSavings <= 0) {
@@ -1621,34 +1730,35 @@
             }
 
             const payback = effectiveCapEx / annualSavings;
+            const riskSuffix = uCap > 0 ? ` (+${state.capexUncertaintyPct}% Cap-Ex Risk)` : '';
 
             if (payback >= 10.0) {
                 return {
                     level: 'Low',
                     colorClass: 'text-red-700 bg-red-50 border-red-200',
                     pillColor: 'text-red-600',
-                    desc: 'Low Motivation (Long payback ≥10 yrs, unfeasible barrier)'
+                    desc: `Low Motivation (Long payback ${payback.toFixed(1)} yrs ≥10 yrs${riskSuffix}, unfeasible barrier)`
                 };
             } else if (payback >= 5.0) {
                 return {
                     level: 'Medium',
                     colorClass: 'text-amber-700 bg-amber-50 border-amber-200',
                     pillColor: 'text-amber-600',
-                    desc: 'Medium Motivation (Marginal payback ≥5 yrs, insufficient momentum)'
+                    desc: `Medium Motivation (Downside payback ${payback.toFixed(1)} yrs ≥5 yrs${riskSuffix}, insufficient momentum)`
                 };
             } else if (payback >= 3.5) {
                 return {
                     level: 'High',
                     colorClass: 'text-emerald-700 bg-emerald-50 border-emerald-200',
                     pillColor: 'text-emerald-600',
-                    desc: 'High Motivation (Rapid payback <5 yrs, surmounts barrier)'
+                    desc: `High Motivation (Rapid payback ${payback.toFixed(1)} yrs <5 yrs${riskSuffix}, surmounts barrier)`
                 };
             } else {
                 return {
                     level: 'Very High',
                     colorClass: 'text-teal-700 bg-teal-50 border-teal-200',
                     pillColor: 'text-teal-600',
-                    desc: 'Very High Motivation (Exceptional payback <3.5 yrs & rapid adoption)'
+                    desc: `Very High Motivation (Exceptional payback ${payback.toFixed(1)} yrs <3.5 yrs${riskSuffix} & rapid adoption)`
                 };
             }
         }
@@ -1671,6 +1781,12 @@
                 sliders.baselineOpex.value = 150;
                 state.timeHorizon = 20;
                 sliders.horizon.value = 20;
+
+                // Reset uncertainty
+                state.capexUncertaintyPct = 0;
+                state.opexUncertaintyPct = 0;
+                if (sliders.capexUncertainty) sliders.capexUncertainty.value = 0;
+                if (sliders.opexUncertainty) sliders.opexUncertainty.value = 0;
 
                 // Reset financing
                 state.financingEnabled = false;
@@ -1750,21 +1866,25 @@
                 { slider: sliders.horizon, key: 'timeHorizon', float: false },
                 { slider: sliders.financedPct, key: 'financedPct', float: false },
                 { slider: sliders.loanTerm, key: 'loanTerm', float: false },
-                { slider: sliders.interestRate, key: 'interestRate', float: true }
+                { slider: sliders.interestRate, key: 'interestRate', float: true },
+                { slider: sliders.capexUncertainty, key: 'capexUncertaintyPct', float: false },
+                { slider: sliders.opexUncertainty, key: 'opexUncertaintyPct', float: false }
             ];
 
             sliderConfig.forEach(({ slider, key, float }) => {
                 if (!slider) return;
                 slider.addEventListener('input', (e) => {
                     state[key] = float ? parseFloat(e.target.value) : parseInt(e.target.value, 10);
-                    clearPresetHighlights();
-                    customBadge.classList.remove('hidden');
-                    state.scenario = 'Custom';
-                    scenarioDesc.innerHTML = `<strong>Custom Scenario:</strong> User-adjusted parameters (Total Cap-Ex: $${Math.round(state.totalCapex)}k, Implementation: ${state.installDuration} mos, Op-Ex Delta: ${state.opexDelta <= 0 ? '-' : '+'}$${Math.abs(state.opexDelta)}k/yr).`;
-                    const badgeScenario = document.getElementById('badge-scenario-name');
-                    if (badgeScenario) {
-                        badgeScenario.innerText = 'Custom Parameters';
-                        badgeScenario.className = 'px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200';
+                    if (key !== 'capexUncertaintyPct' && key !== 'opexUncertaintyPct') {
+                        clearPresetHighlights();
+                        customBadge.classList.remove('hidden');
+                        state.scenario = 'Custom';
+                        scenarioDesc.innerHTML = `<strong>Custom Scenario:</strong> User-adjusted parameters (Total Cap-Ex: $${Math.round(state.totalCapex)}k, Implementation: ${state.installDuration} mos, Op-Ex Delta: ${state.opexDelta <= 0 ? '-' : '+'}$${Math.abs(state.opexDelta)}k/yr).`;
+                        const badgeScenario = document.getElementById('badge-scenario-name');
+                        if (badgeScenario) {
+                            badgeScenario.innerText = 'Custom Parameters';
+                            badgeScenario.className = 'px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200';
+                        }
                     }
 
                     if (!state.animating) {
@@ -2079,6 +2199,33 @@
                 }
             }
 
+            if (labels.capexUncertainty) {
+                if (state.capexUncertaintyPct === 0) {
+                    labels.capexUncertainty.innerText = "0% (Deterministic)";
+                    labels.capexUncertainty.className = "text-slate-600 font-mono font-bold text-base";
+                } else {
+                    labels.capexUncertainty.innerText = `±${state.capexUncertaintyPct}%`;
+                    labels.capexUncertainty.className = "text-amber-600 font-mono font-bold text-base";
+                }
+            }
+            if (labels.opexUncertainty) {
+                if (state.opexUncertaintyPct === 0) {
+                    labels.opexUncertainty.innerText = "0% (Deterministic)";
+                    labels.opexUncertainty.className = "text-slate-600 font-mono font-bold text-base";
+                } else {
+                    labels.opexUncertainty.innerText = `±${state.opexUncertaintyPct}%`;
+                    labels.opexUncertainty.className = "text-indigo-600 font-mono font-bold text-base";
+                }
+            }
+            if (badgeUncertaintyActive) {
+                if (state.capexUncertaintyPct > 0 || state.opexUncertaintyPct > 0) {
+                    badgeUncertaintyActive.classList.remove('hidden');
+                    badgeUncertaintyActive.innerText = "Active";
+                } else {
+                    badgeUncertaintyActive.classList.add('hidden');
+                }
+            }
+
             updateFrameworkCard();
             updateTelemetryUI();
         }
@@ -2183,6 +2330,89 @@
 
                 kpis.roi.innerText = roi;
                 kpis.roi.className = roiVal >= 0 ? "text-2xl font-bold font-mono text-emerald-600 mt-1.5" : "text-2xl font-bold font-mono text-red-600 mt-1.5";
+            }
+
+            // Uncertainty Sensitivity Overlay on KPIs
+            const uCap = (state.capexUncertaintyPct || 0) / 100;
+            const uOp = (state.opexUncertaintyPct || 0) / 100;
+
+            if ((uCap > 0 || uOp > 0) && annualSavings > 0) {
+                const sPess = annualSavings * (1 - uOp);
+                const sOpt = annualSavings * (1 + uOp);
+
+                if (state.financingEnabled) {
+                    const upfrontCash = debtInfo.cashDown;
+                    const annualDebt = debtInfo.annualPayment;
+                    const loanTerm = state.loanTerm;
+
+                    const cashPess = upfrontCash * (1 + uCap);
+                    const cashOpt = upfrontCash * (1 - uCap);
+
+                    let npvPess = -cashPess;
+                    let npvOpt = -cashOpt;
+                    for (let t = 1; t <= state.timeHorizon; t++) {
+                        const cfPess = (t <= loanTerm) ? (sPess - annualDebt) : sPess;
+                        const cfOpt = (t <= loanTerm) ? (sOpt - annualDebt) : sOpt;
+                        npvPess += cfPess / Math.pow(1 + r, t);
+                        npvOpt += cfOpt / Math.pow(1 + r, t);
+                    }
+
+                    const dscrPess = annualDebt > 0 ? (sPess / annualDebt) : 0;
+                    const dscrOpt = annualDebt > 0 ? (sOpt / annualDebt) : 0;
+                    const y1Pess = sPess - annualDebt;
+                    const y1Opt = sOpt - annualDebt;
+
+                    if (kpiLabels.netCapexSub && uCap > 0 && upfrontCash > 0) {
+                        const baseCashTxt = state.financedPct === 100 ? "100% Financed (Zero upfront hurdle)" : `${100 - state.financedPct}% cash down payment`;
+                        kpiLabels.netCapexSub.innerHTML = `${baseCashTxt} <span class="block mt-0.5 text-amber-700 font-semibold text-[11px]">Range: $${Math.round(cashOpt)}k to $${Math.round(cashPess)}k</span>`;
+                    }
+                    if (kpiLabels.npvSub) {
+                        kpiLabels.npvSub.innerHTML = `Financed net value <span class="block mt-0.5 text-indigo-700 font-semibold text-[11px]">Range: $${Math.round(npvPess)}k to $${Math.round(npvOpt)}k</span>`;
+                    }
+                    if (kpiLabels.paybackSub) {
+                        const dscrDeficit = dscrPess < 1.0 && debtInfo.dscr >= 1.0;
+                        const alert = dscrDeficit ? ` <span class="text-amber-600 font-semibold block mt-0.5">⚠️ Downside deficit</span>` : '';
+                        kpiLabels.paybackSub.innerHTML = `Debt coverage <span class="block mt-0.5 text-indigo-700 font-semibold text-[11px]">Range: ${dscrPess.toFixed(2)}x – ${dscrOpt.toFixed(2)}x</span>${alert}`;
+                    }
+                    if (kpiLabels.roiSub) {
+                        const sP = y1Pess >= 0 ? "+$" : "-$";
+                        const sO = y1Opt >= 0 ? "+$" : "-$";
+                        kpiLabels.roiSub.innerHTML = `Yr 1 Cash Flow <span class="block mt-0.5 text-indigo-700 font-semibold text-[11px]">Range: ${sP}${Math.abs(Math.round(y1Pess))}k to ${sO}${Math.abs(Math.round(y1Opt))}k</span>`;
+                    }
+                } else {
+                    const effectiveCapEx = netCapex;
+                    const capexPess = effectiveCapEx * (1 + uCap);
+                    const capexOpt = effectiveCapEx * (1 - uCap);
+
+                    let npvPess = -capexPess;
+                    let npvOpt = -capexOpt;
+                    for (let t = 1; t <= state.timeHorizon; t++) {
+                        npvPess += sPess / Math.pow(1 + r, t);
+                        npvOpt += sOpt / Math.pow(1 + r, t);
+                    }
+
+                    const pbBest = sOpt > 0 ? (capexOpt / sOpt) : null;
+                    const pbWorst = sPess > 0 ? (capexPess / sPess) : null;
+                    const roiPess = capexPess > 0 ? (npvPess / capexPess) * 100 : 0;
+                    const roiOpt = capexOpt > 0 ? (npvOpt / capexOpt) * 100 : 0;
+                    const paybackYears = annualSavings > 0 ? (effectiveCapEx / annualSavings) : null;
+
+                    if (kpiLabels.netCapexSub && uCap > 0) {
+                        kpiLabels.netCapexSub.innerHTML = `After policy incentive offset <span class="block mt-0.5 text-amber-700 font-semibold text-[11px]">Range: $${Math.round(capexOpt)}k to $${Math.round(capexPess)}k</span>`;
+                    }
+                    if (kpiLabels.npvSub) {
+                        kpiLabels.npvSub.innerHTML = `Lifetime net value <span class="block mt-0.5 text-indigo-700 font-semibold text-[11px]">Range: $${Math.round(npvPess)}k to $${Math.round(npvOpt)}k</span>`;
+                    }
+                    if (kpiLabels.paybackSub) {
+                        const pbStr = (pbBest && pbWorst) ? `${pbBest.toFixed(1)} – ${pbWorst.toFixed(1)} yrs` : 'N/A';
+                        const crossesHurdle = pbWorst !== null && pbWorst >= 5.0 && paybackYears < 5.0;
+                        const hurdleAlert = crossesHurdle ? ` <span class="text-amber-600 font-semibold block mt-0.5">⚠️ Downside risk > 5 yrs</span>` : '';
+                        kpiLabels.paybackSub.innerHTML = `Break-even <span class="block mt-0.5 text-indigo-700 font-semibold text-[11px]">Range: [${pbStr}]</span>${hurdleAlert}`;
+                    }
+                    if (kpiLabels.roiSub) {
+                        kpiLabels.roiSub.innerHTML = `Return on Cap-Ex <span class="block mt-0.5 text-indigo-700 font-semibold text-[11px]">Range: ${roiPess.toFixed(0)}% to ${roiOpt.toFixed(0)}%</span>`;
+                    }
+                }
             }
 
             updateFrameworkCard();
@@ -2492,6 +2722,8 @@
             const rDisc = state.discountRate / 100;
 
             let value = baselineMonthly;
+            let valueMin = baselineMonthly;
+            let valueMax = baselineMonthly;
             let baseCostWithoutDebt = baselineMonthly;
             let isUnderDebtTerm = false;
             let activeDebtMonthly = 0;
@@ -2501,6 +2733,8 @@
 
             if (tRatio < pStart) {
                 value = baselineMonthly;
+                valueMin = baselineMonthly;
+                valueMax = baselineMonthly;
                 baseCostWithoutDebt = baselineMonthly;
             } else if (tRatio >= pStart && tRatio < pInstallEnd) {
                 // Implementation Phase: Loan repayment begins at pStart (Month 0)
@@ -2526,6 +2760,16 @@
 
                 baseCostWithoutDebt = baseRate + peakRateHeightMonthly * bump;
                 value = baseCostWithoutDebt + discountedDebt;
+
+                const uCap = (state.capexUncertaintyPct || 0) / 100;
+                if (uCap > 0) {
+                    const bumpSpread = (peakRateHeightMonthly * bump) * uCap;
+                    valueMax = value + bumpSpread;
+                    valueMin = value - bumpSpread;
+                } else {
+                    valueMin = value;
+                    valueMax = value;
+                }
             } else if (tRatio >= pInstallEnd && tRatio < pCommissionEnd) {
                 // Commissioning Phase: Loan repayment continues
                 const u = (tRatio - pInstallEnd) / commissionWidth;
@@ -2544,6 +2788,17 @@
                 const smoothFactor = 3 * Math.pow(u, 2) - 2 * Math.pow(u, 3);
                 baseCostWithoutDebt = startCost + (targetOpexMonthly - startCost) * smoothFactor;
                 value = baseCostWithoutDebt + discountedDebt;
+
+                const uOp = (state.opexUncertaintyPct || 0) / 100;
+                if (uOp > 0) {
+                    const fanComm = uOp * (0.25 + 0.15 * smoothFactor);
+                    const spread = (Math.abs(state.opexDelta) / 12 * fanComm) / Math.pow(1 + rDisc, tProjYears);
+                    valueMax = value + spread;
+                    valueMin = value - spread;
+                } else {
+                    valueMin = value;
+                    valueMax = value;
+                }
             } else {
                 // Operation Phase:
                 const tau = Math.min(Math.max((tRatio - pCommissionEnd) / (1.0 - pCommissionEnd), 0), 1);
@@ -2559,10 +2814,43 @@
                 const nominalDelta = (state.opexDelta / 12) + activeDebtMonthly;
                 const discountedDelta = nominalDelta / Math.pow(1 + rDisc, tOpYears);
                 value = baselineMonthly + discountedDelta;
+
+                // Future Cost Uncertainty Corridor
+                const uOp = (state.opexUncertaintyPct || 0) / 100;
+                if (uOp > 0) {
+                    // Expanding fan corridor: smoothly continues from commissioning (0.40 * uOp) up to 1.0 * uOp at horizon end
+                    const fan = uOp * (0.40 + 0.60 * Math.sqrt(tau));
+                    if (state.opexDelta < 0) {
+                        const nomSavings = -state.opexDelta / 12;
+                        const nomSavingsPess = nomSavings * (1 - fan);
+                        const nomSavingsOpt = nomSavings * (1 + fan);
+
+                        const deltaPess = -nomSavingsPess + activeDebtMonthly;
+                        const deltaOpt = -nomSavingsOpt + activeDebtMonthly;
+
+                        valueMax = baselineMonthly + deltaPess / Math.pow(1 + rDisc, tOpYears);
+                        valueMin = baselineMonthly + deltaOpt / Math.pow(1 + rDisc, tOpYears);
+                    } else {
+                        const nomCost = state.opexDelta / 12;
+                        const nomCostPess = nomCost * (1 + fan);
+                        const nomCostOpt = nomCost * (1 - fan);
+
+                        const deltaPess = nomCostPess + activeDebtMonthly;
+                        const deltaOpt = nomCostOpt + activeDebtMonthly;
+
+                        valueMax = baselineMonthly + deltaPess / Math.pow(1 + rDisc, tOpYears);
+                        valueMin = baselineMonthly + deltaOpt / Math.pow(1 + rDisc, tOpYears);
+                    }
+                } else {
+                    valueMin = value;
+                    valueMax = value;
+                }
             }
 
             return {
                 value, // in $k/mo
+                valueMin,
+                valueMax,
                 baseCostWithoutDebt,
                 pStart,
                 pPeak,
@@ -2581,7 +2869,7 @@
 
         // Dynamic Y-Axis Limits based on active scenario or custom parameter ranges
         function getAxisLimits() {
-            if (state.scenario && presets[state.scenario] && presets[state.scenario].yMin !== undefined && presets[state.scenario].yMax !== undefined && !state.financingEnabled) {
+            if (state.scenario && presets[state.scenario] && presets[state.scenario].yMin !== undefined && presets[state.scenario].yMax !== undefined && !state.financingEnabled && state.capexUncertaintyPct === 0 && state.opexUncertaintyPct === 0) {
                 return {
                     minVal: presets[state.scenario].yMin,
                     maxVal: presets[state.scenario].yMax
@@ -2596,8 +2884,20 @@
             const debtInfo = calculateDebtService();
             const financedDebtRateMonthly = state.financingEnabled ? (targetOpexMonthly + debtInfo.monthlyPayment) : targetOpexMonthly;
 
-            const rawMax = Math.max(baselineMonthly, targetOpexMonthly, peakMonthly, financedDebtRateMonthly);
-            const rawMin = Math.min(baselineMonthly, targetOpexMonthly, financedDebtRateMonthly);
+            let rawMax = Math.max(baselineMonthly, targetOpexMonthly, peakMonthly, financedDebtRateMonthly);
+            let rawMin = Math.min(baselineMonthly, targetOpexMonthly, financedDebtRateMonthly);
+
+            const uCap = (state.capexUncertaintyPct || 0) / 100;
+            const uOp = (state.opexUncertaintyPct || 0) / 100;
+
+            if (uCap > 0) {
+                rawMax = Math.max(rawMax, baselineMonthly + dummyUnfinInfo.peakRateHeight * (1 + uCap));
+            }
+            if (uOp > 0) {
+                const savingsRate = Math.abs(state.opexDelta) / 12;
+                rawMin = Math.min(rawMin, baselineMonthly - (savingsRate * (1 + uOp)));
+                rawMax = Math.max(rawMax, baselineMonthly + (savingsRate * uOp) + (state.financingEnabled ? debtInfo.monthlyPayment : 0));
+            }
 
             // Scale y-limits so baselineMonthly appears at approximately the first quartile (~25% of y-span)
             const spanAbove = rawMax - baselineMonthly;
@@ -2618,13 +2918,17 @@
             updateLabels();
             calculateFinancials();
 
-            // Toggle visibility of debt-related legends
+            // Toggle visibility of debt-related and uncertainty legends
             if (state.financingEnabled) {
                 if (legendDebtService) legendDebtService.classList.remove('hidden');
                 if (legendGhostBarrier) legendGhostBarrier.classList.remove('hidden');
             } else {
                 if (legendDebtService) legendDebtService.classList.add('hidden');
                 if (legendGhostBarrier) legendGhostBarrier.classList.add('hidden');
+            }
+            if (legendUncertainty) {
+                if (state.capexUncertaintyPct > 0 || state.opexUncertaintyPct > 0) legendUncertainty.classList.remove('hidden');
+                else legendUncertainty.classList.add('hidden');
             }
 
             const rect = container.getBoundingClientRect();
@@ -2880,6 +3184,129 @@
                 const netCapGross = state.totalCapex * (1 - state.catalyst / 100);
                 ctx.fillText(`Original Unfinanced Barrier ($${Math.round(netCapGross)}k)`, gPeakX, Math.max(paddingTop + 14, gPeakY - 8));
                 ctx.restore();
+            }
+
+            // Upfront Cap-Ex Uncertainty Ribbon (Implementation Barrier)
+            if (state.capexUncertaintyPct > 0) {
+                const capPoints = points.filter(p => p.r >= phaseInfo.pStart && p.r <= phaseInfo.pInstallEnd);
+                if (capPoints.length > 1) {
+                    ctx.save();
+
+                    // Shaded corridor ribbon
+                    ctx.beginPath();
+                    for (let i = 0; i < capPoints.length; i++) {
+                        const p = capPoints[i];
+                        const yTop = valToY(p.res.valueMax);
+                        if (i === 0) ctx.moveTo(p.x, yTop);
+                        else ctx.lineTo(p.x, yTop);
+                    }
+                    for (let i = capPoints.length - 1; i >= 0; i--) {
+                        const p = capPoints[i];
+                        const yBottom = valToY(p.res.valueMin);
+                        ctx.lineTo(p.x, yBottom);
+                    }
+                    ctx.closePath();
+                    ctx.fillStyle = 'rgba(245, 158, 11, 0.16)'; // Soft translucent amber
+                    ctx.fill();
+
+                    // Top Boundary (Pessimistic / Higher Cap-Ex)
+                    ctx.beginPath();
+                    ctx.setLineDash([4, 4]);
+                    ctx.strokeStyle = '#d97706';
+                    ctx.lineWidth = 1.75;
+                    for (let i = 0; i < capPoints.length; i++) {
+                        const p = capPoints[i];
+                        const yTop = valToY(p.res.valueMax);
+                        if (i === 0) ctx.moveTo(p.x, yTop);
+                        else ctx.lineTo(p.x, yTop);
+                    }
+                    ctx.stroke();
+
+                    // Bottom Boundary (Optimistic / Lower Cap-Ex)
+                    ctx.beginPath();
+                    for (let i = 0; i < capPoints.length; i++) {
+                        const p = capPoints[i];
+                        const yBottom = valToY(p.res.valueMin);
+                        if (i === 0) ctx.moveTo(p.x, yBottom);
+                        else ctx.lineTo(p.x, yBottom);
+                    }
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+
+                    ctx.restore();
+                }
+            }
+
+            // Long-Term Op-Ex Uncertainty Ribbon (Commissioning & Operations)
+            if (state.opexUncertaintyPct > 0) {
+                const opPoints = points.filter(p => p.r >= phaseInfo.pInstallEnd);
+                if (opPoints.length > 1) {
+                    ctx.save();
+
+                    // Shaded corridor ribbon
+                    ctx.beginPath();
+                    for (let i = 0; i < opPoints.length; i++) {
+                        const p = opPoints[i];
+                        const yTop = valToY(p.res.valueMax);
+                        if (i === 0) ctx.moveTo(p.x, yTop);
+                        else ctx.lineTo(p.x, yTop);
+                    }
+                    for (let i = opPoints.length - 1; i >= 0; i--) {
+                        const p = opPoints[i];
+                        const yBottom = valToY(p.res.valueMin);
+                        ctx.lineTo(p.x, yBottom);
+                    }
+                    ctx.closePath();
+                    ctx.fillStyle = 'rgba(99, 102, 241, 0.15)'; // Soft translucent indigo
+                    ctx.fill();
+
+                    // Top Boundary (Pessimistic / Downside Risk)
+                    ctx.beginPath();
+                    ctx.setLineDash([4, 4]);
+                    ctx.strokeStyle = '#818cf8';
+                    ctx.lineWidth = 1.75;
+                    for (let i = 0; i < opPoints.length; i++) {
+                        const p = opPoints[i];
+                        const yTop = valToY(p.res.valueMax);
+                        if (i === 0) ctx.moveTo(p.x, yTop);
+                        else ctx.lineTo(p.x, yTop);
+                    }
+                    ctx.stroke();
+
+                    // Bottom Boundary (Optimistic / Upside Potential)
+                    ctx.beginPath();
+                    for (let i = 0; i < opPoints.length; i++) {
+                        const p = opPoints[i];
+                        const yBottom = valToY(p.res.valueMin);
+                        if (i === 0) ctx.moveTo(p.x, yBottom);
+                        else ctx.lineTo(p.x, yBottom);
+                    }
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+
+                    // End Corridor Labels at right edge
+                    const lastP = opPoints[opPoints.length - 1];
+                    if (lastP) {
+                        const yTop = valToY(lastP.res.valueMax);
+                        const yBottom = valToY(lastP.res.valueMin);
+                        const deltaPx = Math.abs(yBottom - yTop);
+
+                        if (deltaPx > 18) {
+                            ctx.font = 'bold 9.5px Inter';
+                            ctx.textAlign = 'right';
+
+                            // Upper bound label (Pessimistic)
+                            ctx.fillStyle = '#4f46e5';
+                            ctx.fillText(`+${state.opexUncertaintyPct}% Pessimistic ($${lastP.res.valueMax.toFixed(1)}k/mo)`, lastP.x - 6, yTop - 4);
+
+                            // Lower bound label (Optimistic)
+                            ctx.fillStyle = '#059669';
+                            ctx.fillText(`-${state.opexUncertaintyPct}% Optimistic ($${lastP.res.valueMin.toFixed(1)}k/mo)`, lastP.x - 6, yBottom + 12);
+                        }
+                    }
+
+                    ctx.restore();
+                }
             }
 
             // Main Energy Curve Line (Vibrant Blue on White)
@@ -3143,16 +3570,32 @@
             let actLine1 = `Total Cap-Ex: $${Math.round(effectiveCapEx)}k`;
             let actLine2 = `Avg Cap-Ex: $${avgMonthlyCapex.toFixed(1)}k/mo`;
 
+            const peakCostRes = getCostAtTime(phaseInfo.pPeak);
+
             if (state.financingEnabled) {
                 if (debtInfo.cashDown === 0) {
                     actHeader = 'Activation Barrier';
                     actLine1 = `Upfront Cash: $0k ($${Math.round(debtInfo.debtPrincipal)}k Financed)`;
                     actLine2 = `Debt Service: $${debtInfo.monthlyPayment.toFixed(1)}k/mo (Starts Mo 0)`;
+                } else if (state.capexUncertaintyPct > 0) {
+                    const u = state.capexUncertaintyPct / 100;
+                    const cdMin = Math.round(debtInfo.cashDown * (1 - u));
+                    const cdMax = Math.round(debtInfo.cashDown * (1 + u));
+                    actHeader = `Debt (${state.financedPct}%) • ±${state.capexUncertaintyPct}% Risk:`;
+                    actLine1 = `Cash Down Range: $${cdMin}k – $${cdMax}k`;
+                    actLine2 = `Peak Range: $${peakCostRes.valueMin.toFixed(1)} – $${peakCostRes.valueMax.toFixed(1)}k/mo`;
                 } else {
                     actHeader = `Debt (${state.financedPct}%):`;
                     actLine1 = `Cash Down: $${Math.round(debtInfo.cashDown)}k (${100 - state.financedPct}%)`;
                     actLine2 = `Financed: $${Math.round(debtInfo.debtPrincipal)}k @ $${debtInfo.monthlyPayment.toFixed(1)}k/mo (Starts Mo 0)`;
                 }
+            } else if (state.capexUncertaintyPct > 0) {
+                const u = state.capexUncertaintyPct / 100;
+                const cMin = Math.round(effectiveCapEx * (1 - u));
+                const cMax = Math.round(effectiveCapEx * (1 + u));
+                actHeader = `Activation Barrier (±${state.capexUncertaintyPct}% Uncertainty):`;
+                actLine1 = `Cap-Ex Range: $${cMin}k – $${cMax}k`;
+                actLine2 = `Peak Range: $${peakCostRes.valueMin.toFixed(1)} – $${peakCostRes.valueMax.toFixed(1)}k/mo`;
             }
 
             ctx.font = 'bold 11px Inter';
@@ -3185,33 +3628,69 @@
 
             // Vertical Activation Barrier Dimension Line at Peak
             const peakX = ratioToX(phaseInfo.pPeak);
-            const peakCostRes = getCostAtTime(phaseInfo.pPeak);
             const peakDelta = peakCostRes.value - baselineMonthly;
             const peakY = valToY(peakCostRes.value);
 
-            if (peakDelta > 0.5) {
-                ctx.strokeStyle = '#d97706';
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.moveTo(peakX, baselineY);
-                ctx.lineTo(peakX, peakY);
-                ctx.stroke();
+            if (state.capexUncertaintyPct === 0) {
+                // Deterministic Condition: Vertical bar from baseline to peak
+                if (peakDelta > 0.5) {
+                    ctx.strokeStyle = '#d97706';
+                    ctx.lineWidth = 1.5;
+                    ctx.beginPath();
+                    ctx.moveTo(peakX, baselineY);
+                    ctx.lineTo(peakX, peakY);
+                    ctx.stroke();
 
-                // End tick caps
-                ctx.beginPath();
-                ctx.moveTo(peakX - 4, peakY);
-                ctx.lineTo(peakX + 4, peakY);
-                ctx.moveTo(peakX - 4, baselineY);
-                ctx.lineTo(peakX + 4, baselineY);
-                ctx.stroke();
+                    // End tick caps
+                    ctx.beginPath();
+                    ctx.moveTo(peakX - 4, peakY);
+                    ctx.lineTo(peakX + 4, peakY);
+                    ctx.moveTo(peakX - 4, baselineY);
+                    ctx.lineTo(peakX + 4, baselineY);
+                    ctx.stroke();
 
-                // Compact peak rate label directly above peak cap (only if clear of upper-left card)
-                if (peakX > actCardX + actCardW + 8 || peakY > actCardY + actCardH + 12) {
-                    ctx.fillStyle = '#b45309';
-                    ctx.font = 'bold 9.5px Inter';
-                    ctx.textAlign = 'center';
-                    const peakTag = `+~$${peakDelta >= 10 ? Math.round(peakDelta) : peakDelta.toFixed(1)}k/mo`;
-                    ctx.fillText(peakTag, peakX, Math.max(paddingTop + 12, peakY - 6));
+                    // Compact peak rate label directly above peak cap (only if clear of upper-left card)
+                    if (peakX > actCardX + actCardW + 8 || peakY > actCardY + actCardH + 12) {
+                        ctx.fillStyle = '#b45309';
+                        ctx.font = 'bold 9.5px Inter';
+                        ctx.textAlign = 'center';
+                        const peakTag = `+~$${peakDelta >= 10 ? Math.round(peakDelta) : peakDelta.toFixed(1)}k/mo`;
+                        ctx.fillText(peakTag, peakX, Math.max(paddingTop + 12, peakY - 6));
+                    }
+                }
+            } else {
+                // Cap-Ex Uncertainty Activated:
+                // Show ONLY the min-max range bracket based upon the uncertainty value (no deterministic vertical bar from baseline)
+                const yPeakMax = valToY(peakCostRes.valueMax);
+                const yPeakMin = valToY(peakCostRes.valueMin);
+                const rangeDeltaPx = Math.abs(yPeakMin - yPeakMax);
+
+                if (rangeDeltaPx > 4) {
+                    ctx.strokeStyle = '#b45309';
+                    ctx.lineWidth = 1.75;
+
+                    // Vertical dimension bracket spanning strictly between valueMin and valueMax bounds
+                    ctx.beginPath();
+                    ctx.moveTo(peakX, yPeakMin);
+                    ctx.lineTo(peakX, yPeakMax);
+                    ctx.stroke();
+
+                    // End tick caps at min and max bounds
+                    ctx.beginPath();
+                    ctx.moveTo(peakX - 5, yPeakMax);
+                    ctx.lineTo(peakX + 5, yPeakMax);
+                    ctx.moveTo(peakX - 5, yPeakMin);
+                    ctx.lineTo(peakX + 5, yPeakMin);
+                    ctx.stroke();
+
+                    // Cap-Ex Min-Max Range Label directly above the upper bracket cap
+                    if (peakX > actCardX + actCardW + 8 || yPeakMax > actCardY + actCardH + 12) {
+                        ctx.fillStyle = '#92400e';
+                        ctx.font = 'bold 9.5px Inter';
+                        ctx.textAlign = 'center';
+                        const rangeTag = `Range: $${peakCostRes.valueMin.toFixed(1)} – $${peakCostRes.valueMax.toFixed(1)}k/mo`;
+                        ctx.fillText(rangeTag, peakX, Math.max(paddingTop + 12, yPeakMax - 6));
+                    }
                 }
             }
 
@@ -3257,25 +3736,76 @@
             const opexColor = opexDeltaCurrent <= 0 ? '#059669' : '#dc2626';
             const opexBorder = opexDeltaCurrent <= 0 ? '#a7f3d0' : '#fecaca';
 
-            if (Math.abs(opexDeltaCurrent) > 0.2) {
-                ctx.strokeStyle = opexColor;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.moveTo(opexMarkerX, baselineY);
-                ctx.lineTo(opexMarkerX, opexCurveY);
-                ctx.moveTo(opexMarkerX - 4, baselineY);
-                ctx.lineTo(opexMarkerX + 4, baselineY);
-                ctx.moveTo(opexMarkerX - 4, opexCurveY);
-                ctx.lineTo(opexMarkerX + 4, opexCurveY);
-                ctx.stroke();
+            if (state.opexUncertaintyPct === 0) {
+                // Deterministic Condition: Vertical bar from baseline to curve
+                if (Math.abs(opexDeltaCurrent) > 0.2) {
+                    ctx.strokeStyle = opexColor;
+                    ctx.lineWidth = 1.5;
+                    ctx.beginPath();
+                    ctx.moveTo(opexMarkerX, baselineY);
+                    ctx.lineTo(opexMarkerX, opexCurveY);
+                    ctx.moveTo(opexMarkerX - 4, baselineY);
+                    ctx.lineTo(opexMarkerX + 4, baselineY);
+                    ctx.moveTo(opexMarkerX - 4, opexCurveY);
+                    ctx.lineTo(opexMarkerX + 4, opexCurveY);
+                    ctx.stroke();
 
-                // Compact Op-Ex delta label directly at indicator cap
-                ctx.fillStyle = opexColor;
-                ctx.font = 'bold 9.5px Inter';
-                ctx.textAlign = 'center';
-                const tagStr = opexDeltaCurrent < 0 ? `-$${Math.abs(opexDeltaCurrent).toFixed(1)}k/mo` : `+$${opexDeltaCurrent.toFixed(1)}k/mo`;
-                const tagY = opexCurveY > baselineY ? opexCurveY + 12 : opexCurveY - 6;
-                ctx.fillText(tagStr, opexMarkerX, tagY);
+                    // Compact Op-Ex delta label directly at indicator cap
+                    ctx.fillStyle = opexColor;
+                    ctx.font = 'bold 9.5px Inter';
+                    ctx.textAlign = 'center';
+                    const tagStr = opexDeltaCurrent < 0 ? `-$${Math.abs(opexDeltaCurrent).toFixed(1)}k/mo` : `+$${opexDeltaCurrent.toFixed(1)}k/mo`;
+                    const tagY = opexCurveY > baselineY ? opexCurveY + 12 : opexCurveY - 6;
+                    ctx.fillText(tagStr, opexMarkerX, tagY);
+                }
+            } else {
+                // Op-Ex Uncertainty Activated:
+                // Show ONLY the min-max range bracket based upon the uncertainty value (no deterministic vertical bar from baseline)
+                const yOpTop = valToY(opexCostRes.valueMax);    // upper cost bound (less savings / higher cost)
+                const yOpBottom = valToY(opexCostRes.valueMin); // lower cost bound (more savings / lower cost)
+                const rangeDeltaPx = Math.abs(yOpBottom - yOpTop);
+
+                if (rangeDeltaPx > 4) {
+                    ctx.strokeStyle = '#4f46e5';
+                    ctx.lineWidth = 1.75;
+
+                    // Vertical dimension bracket spanning strictly between valueMin and valueMax bounds
+                    ctx.beginPath();
+                    ctx.moveTo(opexMarkerX, yOpBottom);
+                    ctx.lineTo(opexMarkerX, yOpTop);
+                    ctx.stroke();
+
+                    // End tick caps at min and max bounds
+                    ctx.beginPath();
+                    ctx.moveTo(opexMarkerX - 5, yOpTop);
+                    ctx.lineTo(opexMarkerX + 5, yOpTop);
+                    ctx.moveTo(opexMarkerX - 5, yOpBottom);
+                    ctx.lineTo(opexMarkerX + 5, yOpBottom);
+                    ctx.stroke();
+
+                    // Op-Ex Min-Max Range Label directly outside the bracket
+                    ctx.fillStyle = '#4338ca';
+                    ctx.font = 'bold 9.5px Inter';
+                    ctx.textAlign = 'center';
+
+                    let rangeTag;
+                    if (opexCostRes.valueMax <= baselineMonthly) {
+                        const sMax = Math.abs(opexCostRes.valueMin - baselineMonthly);
+                        const sMin = Math.abs(opexCostRes.valueMax - baselineMonthly);
+                        rangeTag = `Range: -$${sMax.toFixed(1)} to -$${sMin.toFixed(1)}k/mo`;
+                    } else if (opexCostRes.valueMin >= baselineMonthly) {
+                        const cMin = opexCostRes.valueMin - baselineMonthly;
+                        const cMax = opexCostRes.valueMax - baselineMonthly;
+                        rangeTag = `Range: +$${cMin.toFixed(1)} to +$${cMax.toFixed(1)}k/mo`;
+                    } else {
+                        const sMax = Math.abs(opexCostRes.valueMin - baselineMonthly);
+                        const cMax = opexCostRes.valueMax - baselineMonthly;
+                        rangeTag = `Range: -$${sMax.toFixed(1)} to +$${cMax.toFixed(1)}k/mo`;
+                    }
+
+                    const tagY = opexCurveY > baselineY ? yOpBottom + 13 : yOpTop - 6;
+                    ctx.fillText(rangeTag, opexMarkerX, tagY);
+                }
             }
 
             // Project Outcomes Callout Badge (Anchored cleanly to the upper right-hand corner of the graph)
@@ -3285,12 +3815,26 @@
             let opexLine1, opexLine2;
 
             if (state.financingEnabled) {
+                const uOp = (state.opexUncertaintyPct || 0) / 100;
                 const dscrDesc = debtInfo.dscr >= 1.0 ? `${debtInfo.dscr.toFixed(2)}x (Self-Funding)` : `${debtInfo.dscr.toFixed(2)}x (Deficit)`;
-                opexHeader = `Financed Operations (${state.loanTerm}-Yr Loan):`;
+                opexHeader = uOp > 0 ? `Financed Operations (±${state.opexUncertaintyPct}% Op-Ex Risk):` : `Financed Operations (${state.loanTerm}-Yr Loan):`;
                 opexLine1 = `Debt Service: $${debtInfo.monthlyPayment.toFixed(1)}k/mo (DSCR: ${dscrDesc})`;
                 opexLine2 = debtInfo.netMonthlySavings >= 0
                     ? `Net Retained: +$${debtInfo.netMonthlySavings.toFixed(1)}k/mo (Yr ${state.loanTerm}+: +$${(-state.opexDelta / 12).toFixed(1)}k/mo)`
                     : `Operating Cash Deficit: -$${Math.abs(debtInfo.netMonthlySavings).toFixed(1)}k/mo (Yr ${state.loanTerm}+: +$${(-state.opexDelta / 12).toFixed(1)}k/mo)`;
+            } else if (state.opexUncertaintyPct > 0) {
+                const uOp = state.opexUncertaintyPct / 100;
+                const pvPess = pvSavings * (1 - uOp);
+                const pvOpt = pvSavings * (1 + uOp);
+                opexHeader = `Project Outcomes (±${state.opexUncertaintyPct}% Op-Ex Risk):`;
+                opexLine1 = isSavings
+                    ? `Total Savings (PV): $${Math.round(pvPess)}k – $${Math.round(pvOpt)}k`
+                    : `Total Penalty (PV): $${Math.round(Math.abs(pvPess))}k – $${Math.round(Math.abs(pvOpt))}k`;
+                const sRatePess = Math.abs(state.opexDelta / 12) * (1 - uOp);
+                const sRateOpt = Math.abs(state.opexDelta / 12) * (1 + uOp);
+                opexLine2 = isSavings
+                    ? `Delta Range: -$${sRateOpt.toFixed(1)} to -$${sRatePess.toFixed(1)}k/mo`
+                    : `Delta Range: +$${sRatePess.toFixed(1)} to +$${sRateOpt.toFixed(1)}k/mo`;
             } else if (state.discountRate > 0) {
                 const avgMonthlyPV = Math.abs(pvSavings) / (state.timeHorizon * 12);
                 opexLine1 = isSavings
@@ -3435,8 +3979,12 @@
                 }
 
                 const isFinancedActive = state.financingEnabled && (hr >= phaseInfo.pStart);
-                const tooltipW = isFinancedActive ? 260 : 230;
-                const tooltipH = isFinancedActive ? 96 : 78;
+                const showUncertaintyInTip = Boolean(hRes && Math.abs(hRes.valueMax - hRes.valueMin) > 0.05);
+                const tooltipW = isFinancedActive ? (showUncertaintyInTip ? 275 : 260) : (showUncertaintyInTip ? 260 : 230);
+                let tooltipH = 78;
+                if (isFinancedActive) tooltipH += 18;
+                if (showUncertaintyInTip) tooltipH += 18;
+
                 let tipX = hX + 14;
                 if (tipX + tooltipW > width - paddingRight) tipX = hX - tooltipW - 14;
                 let tipY = Math.max(hY - tooltipH / 2, paddingTop);
@@ -3459,25 +4007,35 @@
                 ctx.fillStyle = '#64748b';
                 ctx.fillText(subTime, tipX + 10, tipY + 31);
 
+                let curTipY = tipY + 49;
                 ctx.font = 'bold 12px Inter';
                 ctx.fillStyle = '#0f172a';
-                ctx.fillText(`Discounted Cost Rate: $${hRes.value.toFixed(2)}k/mo`, tipX + 10, tipY + 49);
+                ctx.fillText(`Discounted Cost Rate: $${hRes.value.toFixed(2)}k/mo`, tipX + 10, curTipY);
 
+                if (showUncertaintyInTip) {
+                    curTipY += 16;
+                    ctx.font = '600 10.5px Inter';
+                    ctx.fillStyle = (hr < phaseInfo.pInstallEnd) ? '#b45309' : '#4f46e5';
+                    ctx.fillText(`Projected Range: [$${hRes.valueMin.toFixed(2)}k – $${hRes.valueMax.toFixed(2)}k/mo]`, tipX + 10, curTipY);
+                }
+
+                curTipY += 17;
                 ctx.font = 'bold 11.5px Inter';
                 ctx.fillStyle = deltaColor;
-                ctx.fillText(`Cost Delta: ${deltaStr}`, tipX + 10, tipY + 66);
+                ctx.fillText(`Cost Delta: ${deltaStr}`, tipX + 10, curTipY);
 
                 if (isFinancedActive) {
+                    curTipY += 18;
                     ctx.font = '600 10.5px Inter';
                     if (hr < phaseInfo.pCommissionEnd) {
                         ctx.fillStyle = '#b45309';
-                        ctx.fillText(`Debt Service Active: $${debtInfo.monthlyPayment.toFixed(2)}k/mo`, tipX + 10, tipY + 84);
+                        ctx.fillText(`Debt Service Active: $${debtInfo.monthlyPayment.toFixed(2)}k/mo`, tipX + 10, curTipY);
                     } else if (hRes.isUnderDebtTerm) {
                         ctx.fillStyle = debtInfo.netMonthlySavings >= 0 ? '#047857' : '#b45309';
-                        ctx.fillText(`Net Retained Cash Flow: ${debtInfo.netMonthlySavings >= 0 ? '+' : ''}$${debtInfo.netMonthlySavings.toFixed(2)}k/mo`, tipX + 10, tipY + 84);
+                        ctx.fillText(`Net Retained Cash Flow: ${debtInfo.netMonthlySavings >= 0 ? '+' : ''}$${debtInfo.netMonthlySavings.toFixed(2)}k/mo`, tipX + 10, curTipY);
                     } else {
                         ctx.fillStyle = '#047857';
-                        ctx.fillText(`Unencumbered Savings: +$${(-state.opexDelta / 12).toFixed(2)}k/mo`, tipX + 10, tipY + 84);
+                        ctx.fillText(`Unencumbered Savings: +$${(-state.opexDelta / 12).toFixed(2)}k/mo`, tipX + 10, curTipY);
                     }
                 }
             }
@@ -3577,7 +4135,10 @@
             }
 
             state.physicsStatus = 'running';
-            state.statusMessage = `${tier.level} Motivation: Ascending Barrier...`;
+            const uCap = (state.capexUncertaintyPct || 0) / 100;
+            state.statusMessage = uCap > 0
+                ? `${tier.level} Motivation (+${state.capexUncertaintyPct}% Cap-Ex Risk): Ascending Barrier...`
+                : `${tier.level} Motivation: Ascending Barrier...`;
             updateTelemetryUI();
 
             let lastTime = performance.now();
@@ -3617,16 +4178,44 @@
                         state.ballVelocity = 0;
                         state.physicsStatus = 'rollback';
                         const debtInfo = calculateDebtService();
-                        state.statusMessage = state.financingEnabled
-                            ? `${currentTier.level} Motivation: Insufficient Coverage (${debtInfo.dscr.toFixed(2)}x DSCR < 1.0x) - Rolled Back`
-                            : `${currentTier.level} Motivation: Payback ≥5 Yrs (Rolled Back)`;
+                        const uCap = (state.capexUncertaintyPct || 0) / 100;
+                        const annualSavings = -state.opexDelta;
+
+                        if (state.financingEnabled) {
+                            const effDscr = uCap > 0 ? (debtInfo.dscr / (1 + uCap)) : debtInfo.dscr;
+                            state.statusMessage = uCap > 0
+                                ? `${currentTier.level} Motivation: Downside Coverage Deficit (${effDscr.toFixed(2)}x DSCR at +${state.capexUncertaintyPct}% Cap-Ex Risk) - Rolled Back`
+                                : `${currentTier.level} Motivation: Insufficient Coverage (${debtInfo.dscr.toFixed(2)}x DSCR < 1.0x) - Rolled Back`;
+                        } else {
+                            const baseCapex = state.totalCapex * (1 - state.catalyst / 100);
+                            const effCap = uCap > 0 ? baseCapex * (1 + uCap) : baseCapex;
+                            const pb = annualSavings > 0 ? effCap / annualSavings : null;
+                            const pbStr = pb !== null ? `${pb.toFixed(1)} Yrs` : 'No Payback';
+                            state.statusMessage = uCap > 0
+                                ? `${currentTier.level} Motivation: Downside Payback ≥5 Yrs (${pbStr} at +${state.capexUncertaintyPct}% Cap-Ex Risk) - Rolled Back`
+                                : `${currentTier.level} Motivation: Payback ≥5 Yrs (${pbStr}) - Rolled Back`;
+                        }
                         stopAnimation();
                     }
                 } else if (state.ballProgress >= phase.pPeak && state.ballProgress < phase.pCommissionEnd) {
                     const debtInfo = calculateDebtService();
-                    state.statusMessage = state.financingEnabled
-                        ? `${currentTier.level} Motivation: Barrier Overcome (${debtInfo.dscr.toFixed(2)}x DSCR ≥ 1.0x)! Accelerating into Savings`
-                        : `${currentTier.level} Motivation: Barrier Overcome (<5 Yr Payback)! Accelerating into Savings`;
+                    const uCap = (state.capexUncertaintyPct || 0) / 100;
+                    const annualSavings = -state.opexDelta;
+
+                    if (state.financingEnabled) {
+                        const effDscr = uCap > 0 ? (debtInfo.dscr / (1 + uCap)) : debtInfo.dscr;
+                        state.statusMessage = uCap > 0
+                            ? `${currentTier.level} Motivation: Barrier Overcome even with +${state.capexUncertaintyPct}% Cap-Ex Risk (${effDscr.toFixed(2)}x DSCR)! Accelerating into Savings`
+                            : `${currentTier.level} Motivation: Barrier Overcome (${debtInfo.dscr.toFixed(2)}x DSCR ≥ 1.0x)! Accelerating into Savings`;
+                    } else {
+                        const baseCapex = state.totalCapex * (1 - state.catalyst / 100);
+                        const effCap = uCap > 0 ? baseCapex * (1 + uCap) : baseCapex;
+                        const pb = annualSavings > 0 ? effCap / annualSavings : null;
+                        const pbStr = pb !== null ? `${pb.toFixed(1)} Yr Payback` : 'No Payback';
+                        state.statusMessage = uCap > 0
+                            ? `${currentTier.level} Motivation: Barrier Overcome even with +${state.capexUncertaintyPct}% Cap-Ex Risk (${pbStr})! Accelerating into Savings`
+                            : `${currentTier.level} Motivation: Barrier Overcome (<5 Yr Payback)! Accelerating into Savings`;
+                    }
                 } else if (state.ballProgress >= phase.pCommissionEnd) {
                     state.statusMessage = state.financingEnabled
                         ? (phase.isUnderDebtTerm ? 'Zero-Emission Operation: Debt Serviced by Op-Ex' : 'Zero-Emission Operation: Debt Fully Retired')

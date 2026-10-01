@@ -41,8 +41,12 @@ Traditional building retrofit analyses focus strictly on static payback periods 
   - Effective Cap-Ex Barrier (after incentives)
   - Cumulative Present Value Savings
   - Property Owner Motivation Telemetry (`Low`, `Medium`, `High`, `Very High`)
+- **Uncertainty & Risk Sensitivity Controls:**
+  - **Upfront Cap-Ex Uncertainty Slider:** ($\pm 0\%$ to $\pm 50\%$) projecting capital deployment variance and contingency bands across the implementation barrier. Suppresses deterministic peak markers in favor of bounded min–max dimension brackets and dynamically governs the reaction ball's initial velocity and hill-clearing momentum based on the worst-case Cap-Ex payback/DSCR.
+  - **Long-Term Op-Ex Uncertainty Slider:** ($\pm 0\%$ to $\pm 50\%$) projecting a continuous confidence corridor across both the commissioning and operations phases to model tariff, weather, and operational variances, switching deterministic delta bars into bounded min–max operational range brackets.
+  - Full KPI integration displaying sensitivity ranges for Cap-Ex requirements, NPV, Payback, ROI, and debt coverage with downside threshold alerts (>5-year payback risk).
 - **Interactive Controls & Presets:**
-  - Sliders for Cap-Ex, implementation duration, commissioning window, Op-Ex delta, discount rates, pre-retrofit baseline, and evaluation horizons.
+  - Sliders for Cap-Ex, implementation duration, commissioning window, Op-Ex delta, discount rates, pre-retrofit baseline, Cap-Ex and Op-Ex uncertainty, and evaluation horizons.
   - Policy interventions: speedup/barrier reduction (%) and catalytic incentives (%).
   - Pre-configured case studies: Scenarios A, B, C, and D.
 
