@@ -983,23 +983,23 @@
                     <div id="chart-summary-strip" class="grid grid-cols-1 md:grid-cols-2 gap-2.5 mb-2.5">
                         <!-- Activation Barrier Card -->
                         <div id="callout-card-act"
-                            class="flex flex-col justify-center px-3.5 py-1.5 sm:py-2 rounded-lg bg-amber-50/80 border border-amber-200/90 shadow-2xs">
+                            class="flex flex-col justify-center px-3.5 py-1.5 sm:py-2 rounded-lg bg-emerald-50/80 border border-emerald-200/90 shadow-2xs transition-colors duration-200">
                             <div class="flex items-center justify-between gap-2">
                                 <span id="callout-act-header"
-                                    class="text-xs font-bold uppercase tracking-wider text-amber-900 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-bolt text-amber-600 text-[11px]"></i> Activation Barrier:
+                                    class="text-xs font-bold uppercase tracking-wider text-emerald-900 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-bolt text-emerald-600 text-[11px]"></i> Activation Barrier:
                                 </span>
                             </div>
                             <div class="flex flex-wrap items-baseline gap-x-3 gap-y-0.5 mt-0.5 text-xs">
-                                <span id="callout-act-line1" class="font-bold text-amber-950 font-mono">Total Cap-Ex: $350k</span>
-                                <span class="text-amber-300 hidden sm:inline">&bull;</span>
-                                <span id="callout-act-line2" class="font-semibold text-amber-800 font-mono">Avg Cap-Ex: $29.2k/mo</span>
+                                <span id="callout-act-line1" class="font-bold text-emerald-950 font-mono">Total Cap-Ex: $350k</span>
+                                <span id="callout-act-bullet" class="text-emerald-300 hidden sm:inline">&bull;</span>
+                                <span id="callout-act-line2" class="font-semibold text-emerald-800 font-mono">Avg Cap-Ex: $29.2k/mo</span>
                             </div>
                         </div>
 
                         <!-- Project Outcomes Card -->
                         <div id="callout-card-opex"
-                            class="flex flex-col justify-center px-3.5 py-1.5 sm:py-2 rounded-lg bg-emerald-50/80 border border-emerald-200/90 shadow-2xs transition-colors">
+                            class="flex flex-col justify-center px-3.5 py-1.5 sm:py-2 rounded-lg bg-emerald-50/80 border border-emerald-200/90 shadow-2xs transition-colors duration-200">
                             <div class="flex items-center justify-between gap-2">
                                 <span id="callout-opex-header"
                                     class="text-xs font-bold uppercase tracking-wider text-emerald-900 flex items-center gap-1.5">
@@ -1008,7 +1008,7 @@
                             </div>
                             <div class="flex flex-wrap items-baseline gap-x-3 gap-y-0.5 mt-0.5 text-xs">
                                 <span id="callout-opex-line1" class="font-bold text-emerald-950 font-mono">Total Op-Ex Savings (PV): +$688k</span>
-                                <span class="text-emerald-300 hidden sm:inline">&bull;</span>
+                                <span id="callout-opex-bullet" class="text-emerald-300 hidden sm:inline">&bull;</span>
                                 <span id="callout-opex-line2" class="font-semibold text-emerald-800 font-mono">Avg Op-Ex Savings (PV): +$5.0k/mo</span>
                             </div>
                         </div>
@@ -1711,8 +1711,9 @@
                 if (annualSavings <= 0) {
                     return {
                         level: 'Low',
-                        colorClass: 'text-red-700 bg-red-50 border-red-200',
-                        pillColor: 'text-red-600',
+                        color: 'rose',
+                        colorClass: 'text-rose-700 bg-rose-50 border-rose-200',
+                        pillColor: 'text-rose-600',
                         desc: 'Financed: Unfavorable Economics (No Op-Ex Savings)'
                     };
                 }
@@ -1722,6 +1723,7 @@
                 if (effectiveDscr >= 1.25) {
                     return {
                         level: 'Very High',
+                        color: 'emerald',
                         colorClass: 'text-emerald-700 bg-emerald-50 border-emerald-200',
                         pillColor: 'text-emerald-600',
                         desc: `Financed: Cash-Flow Positive (${effectiveDscr.toFixed(2)}x DSCR ≥ 1.25x${riskSuffix})`
@@ -1729,6 +1731,7 @@
                 } else if (effectiveDscr >= 1.0) {
                     return {
                         level: 'High',
+                        color: 'teal',
                         colorClass: 'text-teal-700 bg-teal-50 border-teal-200',
                         pillColor: 'text-teal-600',
                         desc: `Financed: Self-Funding via Op-Ex (${effectiveDscr.toFixed(2)}x DSCR ≥ 1.0x${riskSuffix})`
@@ -1736,6 +1739,7 @@
                 } else if (effectiveDscr >= 0.5) {
                     return {
                         level: 'Medium',
+                        color: 'amber',
                         colorClass: 'text-amber-700 bg-amber-50 border-amber-200',
                         pillColor: 'text-amber-600',
                         desc: `Financed: Operating Deficit (${effectiveDscr.toFixed(2)}x DSCR < 1.0x${riskSuffix})`
@@ -1743,6 +1747,7 @@
                 } else {
                     return {
                         level: 'Low',
+                        color: 'rose',
                         colorClass: 'text-rose-700 bg-rose-50 border-rose-200',
                         pillColor: 'text-rose-600',
                         desc: `Financed: Heavy Operating Deficit (${effectiveDscr.toFixed(2)}x DSCR < 1.0x${riskSuffix})`
@@ -1757,8 +1762,9 @@
             if (annualSavings <= 0) {
                 return {
                     level: 'Low',
-                    colorClass: 'text-red-700 bg-red-50 border-red-200',
-                    pillColor: 'text-red-600',
+                    color: 'rose',
+                    colorClass: 'text-rose-700 bg-rose-50 border-rose-200',
+                    pillColor: 'text-rose-600',
                     desc: 'Low Motivation (Unfavorable economics / no payback)'
                 };
             }
@@ -1769,13 +1775,15 @@
             if (payback >= 10.0) {
                 return {
                     level: 'Low',
-                    colorClass: 'text-red-700 bg-red-50 border-red-200',
-                    pillColor: 'text-red-600',
+                    color: 'rose',
+                    colorClass: 'text-rose-700 bg-rose-50 border-rose-200',
+                    pillColor: 'text-rose-600',
                     desc: `Low Motivation (Long payback ${payback.toFixed(1)} yrs ≥10 yrs${riskSuffix}, unfeasible barrier)`
                 };
             } else if (payback >= 5.0) {
                 return {
                     level: 'Medium',
+                    color: 'amber',
                     colorClass: 'text-amber-700 bg-amber-50 border-amber-200',
                     pillColor: 'text-amber-600',
                     desc: `Medium Motivation (Downside payback ${payback.toFixed(1)} yrs ≥5 yrs${riskSuffix}, insufficient momentum)`
@@ -1783,15 +1791,17 @@
             } else if (payback >= 3.5) {
                 return {
                     level: 'High',
-                    colorClass: 'text-emerald-700 bg-emerald-50 border-emerald-200',
-                    pillColor: 'text-emerald-600',
+                    color: 'teal',
+                    colorClass: 'text-teal-700 bg-teal-50 border-teal-200',
+                    pillColor: 'text-teal-600',
                     desc: `High Motivation (Rapid payback ${payback.toFixed(1)} yrs <5 yrs${riskSuffix}, surmounts barrier)`
                 };
             } else {
                 return {
                     level: 'Very High',
-                    colorClass: 'text-teal-700 bg-teal-50 border-teal-200',
-                    pillColor: 'text-teal-600',
+                    color: 'emerald',
+                    colorClass: 'text-emerald-700 bg-emerald-50 border-emerald-200',
+                    pillColor: 'text-emerald-600',
                     desc: `Very High Motivation (Exceptional payback ${payback.toFixed(1)} yrs <3.5 yrs${riskSuffix} & rapid adoption)`
                 };
             }
@@ -2948,15 +2958,76 @@
         }
 
         function updateCalloutBadges(effectiveCapEx, effInstallMonths, debtInfo, peakCostRes, pvSavings, isSavings) {
+            const elActCard = document.getElementById('callout-card-act');
             const elActHeader = document.getElementById('callout-act-header');
             const elActLine1 = document.getElementById('callout-act-line1');
             const elActLine2 = document.getElementById('callout-act-line2');
+            const elActBullet = document.getElementById('callout-act-bullet');
+
             const elOpexCard = document.getElementById('callout-card-opex');
             const elOpexHeader = document.getElementById('callout-opex-header');
             const elOpexLine1 = document.getElementById('callout-opex-line1');
             const elOpexLine2 = document.getElementById('callout-opex-line2');
+            const elOpexBullet = document.getElementById('callout-opex-bullet');
 
             if (!elActHeader || !elOpexHeader) return;
+
+            // Synchronize card colors with the active Owner Motivation ranking tier
+            const v0 = computeInitialVelocity();
+            const tier = getMotivationTier(v0);
+            const theme = tier.color || 'emerald';
+
+            const themeStyles = {
+                emerald: {
+                    card: "flex flex-col justify-center px-3.5 py-1.5 sm:py-2 rounded-lg bg-emerald-50/80 border border-emerald-200/90 shadow-2xs transition-colors duration-200",
+                    header: "text-xs font-bold uppercase tracking-wider text-emerald-900 flex items-center gap-1.5",
+                    iconColor: "text-emerald-600 text-[11px]",
+                    line1: "font-bold text-emerald-950 font-mono",
+                    line2: "font-semibold text-emerald-800 font-mono",
+                    bullet: "text-emerald-300 hidden sm:inline"
+                },
+                teal: {
+                    card: "flex flex-col justify-center px-3.5 py-1.5 sm:py-2 rounded-lg bg-teal-50/80 border border-teal-200/90 shadow-2xs transition-colors duration-200",
+                    header: "text-xs font-bold uppercase tracking-wider text-teal-900 flex items-center gap-1.5",
+                    iconColor: "text-teal-600 text-[11px]",
+                    line1: "font-bold text-teal-950 font-mono",
+                    line2: "font-semibold text-teal-800 font-mono",
+                    bullet: "text-teal-300 hidden sm:inline"
+                },
+                amber: {
+                    card: "flex flex-col justify-center px-3.5 py-1.5 sm:py-2 rounded-lg bg-amber-50/80 border border-amber-200/90 shadow-2xs transition-colors duration-200",
+                    header: "text-xs font-bold uppercase tracking-wider text-amber-900 flex items-center gap-1.5",
+                    iconColor: "text-amber-600 text-[11px]",
+                    line1: "font-bold text-amber-950 font-mono",
+                    line2: "font-semibold text-amber-800 font-mono",
+                    bullet: "text-amber-300 hidden sm:inline"
+                },
+                rose: {
+                    card: "flex flex-col justify-center px-3.5 py-1.5 sm:py-2 rounded-lg bg-rose-50/80 border border-rose-200/90 shadow-2xs transition-colors duration-200",
+                    header: "text-xs font-bold uppercase tracking-wider text-rose-900 flex items-center gap-1.5",
+                    iconColor: "text-rose-600 text-[11px]",
+                    line1: "font-bold text-rose-950 font-mono",
+                    line2: "font-semibold text-rose-800 font-mono",
+                    bullet: "text-rose-300 hidden sm:inline"
+                }
+            };
+
+            const s = themeStyles[theme] || themeStyles.emerald;
+
+            // Apply synchronized theme to Activation Barrier card
+            if (elActCard) elActCard.className = s.card;
+            if (elActHeader) elActHeader.className = s.header;
+            if (elActLine1) elActLine1.className = s.line1;
+            if (elActLine2) elActLine2.className = s.line2;
+            if (elActBullet) elActBullet.className = s.bullet;
+
+            // Apply synchronized theme to Project Outcomes card (if not savings, force rose alert)
+            const opexStyle = isSavings ? s : themeStyles.rose;
+            if (elOpexCard) elOpexCard.className = opexStyle.card;
+            if (elOpexHeader) elOpexHeader.className = opexStyle.header;
+            if (elOpexLine1) elOpexLine1.className = opexStyle.line1;
+            if (elOpexLine2) elOpexLine2.className = opexStyle.line2;
+            if (elOpexBullet) elOpexBullet.className = opexStyle.bullet;
 
             // Activation Barrier Callout Info
             const avgMonthlyCapex = effectiveCapEx / effInstallMonths;
@@ -2990,7 +3061,7 @@
                 actLine2 = `Peak Range: $${peakCostRes.valueMin.toFixed(1)} – $${peakCostRes.valueMax.toFixed(1)}k/mo`;
             }
 
-            elActHeader.innerHTML = `<i class="fa-solid fa-bolt text-amber-600 text-[11px]"></i> ${actHeader}`;
+            elActHeader.innerHTML = `<i class="fa-solid fa-bolt ${s.iconColor}"></i> ${actHeader}`;
             elActLine1.textContent = actLine1.replace('\n', ' ');
             elActLine2.textContent = actLine2;
 
@@ -3038,20 +3109,8 @@
                     : `Avg Op-Ex Penalty: -$${avgMonthlyNominal.toFixed(1)}k/mo`;
             }
 
-            if (isSavings) {
-                elOpexCard.className = "flex flex-col justify-center px-3.5 py-1.5 sm:py-2 rounded-lg bg-emerald-50/80 border border-emerald-200/90 shadow-2xs transition-colors";
-                elOpexHeader.className = "text-xs font-bold uppercase tracking-wider text-emerald-900 flex items-center gap-1.5";
-                elOpexHeader.innerHTML = `<i class="fa-solid fa-bullseye text-emerald-600 text-[11px]"></i> ${opexHeader}`;
-                elOpexLine1.className = "font-bold text-emerald-950 font-mono";
-                elOpexLine2.className = "font-semibold text-emerald-800 font-mono";
-            } else {
-                elOpexCard.className = "flex flex-col justify-center px-3.5 py-1.5 sm:py-2 rounded-lg bg-rose-50/80 border border-rose-200/90 shadow-2xs transition-colors";
-                elOpexHeader.className = "text-xs font-bold uppercase tracking-wider text-rose-900 flex items-center gap-1.5";
-                elOpexHeader.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-rose-600 text-[11px]"></i> ${opexHeader}`;
-                elOpexLine1.className = "font-bold text-rose-950 font-mono";
-                elOpexLine2.className = "font-semibold text-rose-800 font-mono";
-            }
-
+            const opexIcon = isSavings ? 'fa-bullseye' : 'fa-triangle-exclamation';
+            elOpexHeader.innerHTML = `<i class="fa-solid ${opexIcon} ${opexStyle.iconColor}"></i> ${opexHeader}`;
             elOpexLine1.textContent = opexLine1;
             elOpexLine2.textContent = opexLine2;
         }
