@@ -738,13 +738,9 @@
                                                 aria-label="Close tooltip"><i class="fa-solid fa-xmark"></i></button>
                                         </div>
                                         <p class="text-slate-600 leading-relaxed">The duration over which borrowed
-                                            principal
-                                            is amortized. Loan repayments commence at Month 0 (Kickoff). Longer terms
-                                            reduce
-                                            monthly debt service ($D$) to strengthen the debt service coverage ratio
-                                            ($\text{DSCR}$),
-                                            while shorter terms retire debt earlier to unlock full unencumbered savings
-                                            sooner.</p>
+                                            principal is amortized. Loan repayments commence at Month 0 (Kickoff). Longer terms
+                                            reduce monthly carrying costs ($D$) to strengthen the debt service coverage ratio
+                                            ($\text{DSCR}$). In project finance, standard default terms scale with capital expenditure volume and Weighted Average Useful Life (WAUL): 5 yrs (&lt;$150k), 10 yrs ($150k–$300k), 15 yrs ($300k–$400k), and 20 yrs (≥$400k C-PACE).</p>
                                     </div>
                                     <input type="range" id="slider-loan-term" min="3" max="30" step="1" value="10"
                                         class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
@@ -1234,6 +1230,46 @@
                                     </div>
                                 </div>
 
+                                <!-- Underwriting Standards & Term Scaling Documentation -->
+                                <div class="mb-3.5 bg-slate-50/90 rounded-lg p-2.5 sm:p-3 border border-slate-200/90 text-xs text-slate-700 space-y-2">
+                                    <div class="flex items-center justify-between">
+                                        <span class="font-bold text-slate-800 text-[11px] uppercase tracking-wider flex items-center gap-1.5">
+                                            <i class="fa-solid fa-scale-balanced text-indigo-600"></i> Underwriting Standards &amp; Term Scaling
+                                        </span>
+                                        <span class="text-[10px] font-semibold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-full border border-indigo-200">
+                                            WAUL Principle
+                                        </span>
+                                    </div>
+                                    <p class="text-[11px] text-slate-600 leading-relaxed">
+                                        In energy project finance, debt amortization periods scale with borrowing volume according to the <strong>Weighted Average Useful Life (WAUL)</strong> of installed mechanical assets. Matching term lengths to equipment durability flattens monthly debt service ($D$) below utility savings ($\Delta\text{Op-Ex}$), preserving cash flow and securing $\text{DSCR} \ge 1.0\text{x}$:
+                                    </p>
+                                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 pt-0.5 text-[11px]">
+                                        <div class="bg-white p-2 rounded border border-slate-200 flex flex-col justify-between shadow-2xs">
+                                            <span class="font-bold text-slate-800">&lt; $150k</span>
+                                            <span class="text-indigo-600 font-mono font-bold text-xs mt-0.5">5-Yr Term</span>
+                                            <span class="text-[10px] text-slate-500">Lighting &amp; Controls</span>
+                                        </div>
+                                        <div class="bg-white p-2 rounded border border-slate-200 flex flex-col justify-between shadow-2xs">
+                                            <span class="font-bold text-slate-800">$150k–$300k</span>
+                                            <span class="text-indigo-600 font-mono font-bold text-xs mt-0.5">10-Yr Term</span>
+                                            <span class="text-[10px] text-slate-500">Unitary HVAC</span>
+                                        </div>
+                                        <div class="bg-white p-2 rounded border border-slate-200 flex flex-col justify-between shadow-2xs">
+                                            <span class="font-bold text-slate-800">$300k–$400k</span>
+                                            <span class="text-indigo-600 font-mono font-bold text-xs mt-0.5">15-Yr Term</span>
+                                            <span class="text-[10px] text-slate-500">Hydronics &amp; Pumps</span>
+                                        </div>
+                                        <div class="bg-white p-2 rounded border border-slate-200 flex flex-col justify-between shadow-2xs">
+                                            <span class="font-bold text-slate-800">≥ $400k</span>
+                                            <span class="text-indigo-600 font-mono font-bold text-xs mt-0.5">20-Yr Term</span>
+                                            <span class="text-[10px] text-slate-500">C-PACE / Central Plants</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-[10.5px] text-slate-500 italic pt-0.5">
+                                        Note: Default loan periods automatically scale to these tiers when adjusting Cap-Ex, and can be manually fine-tuned via the sidebar slider.
+                                    </p>
+                                </div>
+
                                 <!-- Live Decision Criteria Values -->
                                 <div class="bg-white/90 rounded-lg p-2.5 border border-slate-200 text-xs space-y-2">
                                     <div
@@ -1384,6 +1420,7 @@
             financingEnabled: false, // toggled via checkbox
             financedPct: 100,        // % debt share (10% to 100%)
             loanTerm: 10,            // loan term in years (3 to 30)
+            loanTermUserOverridden: false, // tracks manual slider override vs auto-scale
             interestRate: 6.0,       // annual interest rate % (2.0% to 12.0%)
 
             // Uncertainty & Risk State
@@ -1538,6 +1575,14 @@
         function getEffectiveInstallDuration() {
             const rawDuration = state.installDuration * (1 - state.barrierReduction / 100);
             return Math.max(rawDuration, 0.5); // Minimum 0.5 months
+        }
+
+        // Industry-standard loan term scaling based on Weighted Average Useful Life (WAUL) and Cap-Ex size
+        function getRecommendedLoanTerm(capex) {
+            if (capex < 150) return 5;
+            if (capex < 300) return 10;
+            if (capex < 400) return 15;
+            return 20;
         }
 
         // Project Financing & Debt Service Calculations
@@ -1837,6 +1882,7 @@
 
                 // Reset financing
                 state.financingEnabled = false;
+                state.loanTermUserOverridden = false;
                 if (toggleFinancing) toggleFinancing.checked = false;
                 state.financedPct = 100;
                 if (sliders.financedPct) sliders.financedPct.value = 100;
@@ -1922,6 +1968,14 @@
                 if (!slider) return;
                 slider.addEventListener('input', (e) => {
                     state[key] = float ? parseFloat(e.target.value) : parseInt(e.target.value, 10);
+                    if (key === 'loanTerm') {
+                        state.loanTermUserOverridden = true;
+                    }
+                    if (key === 'totalCapex' && !state.loanTermUserOverridden) {
+                        const recTerm = getRecommendedLoanTerm(state.totalCapex);
+                        state.loanTerm = recTerm;
+                        if (sliders.loanTerm) sliders.loanTerm.value = recTerm;
+                    }
                     if (key !== 'capexUncertaintyPct' && key !== 'opexUncertaintyPct') {
                         clearPresetHighlights();
                         customBadge.classList.remove('hidden');
@@ -2100,16 +2154,12 @@
             state.opexDelta = p.opexDelta;
             state.catalyst = p.catalyst;
 
-            // Update loan term according to preset or restore default 10 years
-            if (p.loanTerm !== undefined) {
-                state.loanTerm = p.loanTerm;
-                if (sliders.loanTerm) sliders.loanTerm.value = p.loanTerm;
-                if (labels.loanTerm) labels.loanTerm.innerText = `${p.loanTerm} Yrs (${p.loanTerm * 12} Mos)`;
-            } else {
-                state.loanTerm = 10;
-                if (sliders.loanTerm) sliders.loanTerm.value = 10;
-                if (labels.loanTerm) labels.loanTerm.innerText = '10 Yrs (120 Mos)';
-            }
+            // Update loan term according to preset or auto-scale by Cap-Ex bracket
+            state.loanTermUserOverridden = false;
+            const targetLoanTerm = p.loanTerm !== undefined ? p.loanTerm : getRecommendedLoanTerm(p.totalCapex);
+            state.loanTerm = targetLoanTerm;
+            if (sliders.loanTerm) sliders.loanTerm.value = targetLoanTerm;
+            if (labels.loanTerm) labels.loanTerm.innerText = `${targetLoanTerm} Yrs (${targetLoanTerm * 12} Mos)`;
 
             // Update Slider Elements
             sliders.capex.value = state.totalCapex;
