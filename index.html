@@ -1421,15 +1421,16 @@
                 description: "<strong>Scenario A (Standard / Optimal Retrofit):</strong> Rapid 4.2-year payback (<5 yrs) creates sufficient owner momentum to clear the Cap-Ex hurdle. Upfront integrated Cap-Ex is deployed over a 12-month implementation, followed by 6 months of commissioning and deep, perpetual operational cost reductions (green area)."
             },
             B: {
-                totalCapex: 550,
+                totalCapex: 420,
                 installDuration: 6,
                 barrierReduction: 0,
                 commissionDuration: 3,
-                opexDelta: -15,
+                opexDelta: -40,
                 catalyst: 0,
-                yMin: -70,
-                yMax: 260,
-                description: "<strong>Scenario B (Excessive Capital Expenditures):</strong> The integrated Cap-Ex barrier is exceptionally high ($550k, 36.7-year payback >> 5 yrs). The instantaneous expenditure rate spikes severely, creating an insurmountable economic hurdle where the ball runs out of momentum and rolls back."
+                loanTerm: 20,
+                yMin: -30,
+                yMax: 180,
+                description: "<strong>Scenario B (Excessive Capital Expenditures):</strong> The integrated Cap-Ex barrier is steep ($420k, 10.5-year payback > 5 yrs), resulting in Low owner motivation and project rollback when self-financed. However, enabling long-term debt financing (20-yr @ 6%) spreads carrying costs ($3.0k/mo) below annual operational savings ($3.3k/mo), unlocking a bankable 1.11x DSCR and elevating owner motivation to High."
             },
             C: {
                 totalCapex: 350,
@@ -2098,6 +2099,17 @@
             state.commissionDuration = p.commissionDuration;
             state.opexDelta = p.opexDelta;
             state.catalyst = p.catalyst;
+
+            // Update loan term according to preset or restore default 10 years
+            if (p.loanTerm !== undefined) {
+                state.loanTerm = p.loanTerm;
+                if (sliders.loanTerm) sliders.loanTerm.value = p.loanTerm;
+                if (labels.loanTerm) labels.loanTerm.innerText = `${p.loanTerm} Yrs (${p.loanTerm * 12} Mos)`;
+            } else {
+                state.loanTerm = 10;
+                if (sliders.loanTerm) sliders.loanTerm.value = 10;
+                if (labels.loanTerm) labels.loanTerm.innerText = '10 Yrs (120 Mos)';
+            }
 
             // Update Slider Elements
             sliders.capex.value = state.totalCapex;
