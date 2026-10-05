@@ -3190,7 +3190,7 @@
                 xTicks.push({
                     x: xPeak,
                     label: `Mo ${(phaseInfo.effInstallMonths / 2).toFixed(0)}`,
-                    color: '#d97706',
+                    color: '#64748b',
                     grid: false
                 });
             }
@@ -3200,7 +3200,7 @@
                 xTicks.push({
                     x: xInstallEnd,
                     label: `Mo ${phaseInfo.effInstallMonths.toFixed(0)}`,
-                    color: '#d97706',
+                    color: '#64748b',
                     grid: false
                 });
             }
@@ -3211,14 +3211,14 @@
                 xTicks.push({
                     x: xCommissionEnd,
                     label: `Mo ${totMonths.toFixed(0)}`,
-                    color: '#0284c7',
+                    color: '#64748b',
                     grid: false
                 });
             } else if ((xCommissionEnd - xStart) >= 54) {
                 xTicks.push({
                     x: xCommissionEnd,
                     label: `Mo ${totMonths.toFixed(0)}`,
-                    color: '#0284c7',
+                    color: '#64748b',
                     grid: false
                 });
             }
@@ -3614,7 +3614,7 @@
 
             // 1. Zoomed Transition Phase Bracket (Months)
             if ((xCommissionEnd - xStart) >= 50) {
-                ctx.strokeStyle = '#f59e0b';
+                ctx.strokeStyle = '#94a3b8';
                 ctx.lineWidth = 1.25;
                 ctx.beginPath();
                 ctx.moveTo(xStart, topBarY);
@@ -3627,7 +3627,7 @@
                 ctx.stroke();
 
                 const transMidX = (xStart + xCommissionEnd) / 2;
-                ctx.fillStyle = '#b45309';
+                ctx.fillStyle = '#475569';
                 ctx.font = 'bold 10px Inter';
                 ctx.textAlign = 'center';
                 const transText = (xCommissionEnd - xStart >= 120) ? '🔍 Zoomed Transition (Months)' : '🔍 Transition (Mo)';
@@ -3638,7 +3638,7 @@
 
             // 2. Operational Lifecycle Horizon Bracket (Years)
             if ((xEnd - xCommissionEnd) >= 70) {
-                ctx.strokeStyle = '#10b981';
+                ctx.strokeStyle = '#94a3b8';
                 ctx.lineWidth = 1.25;
                 ctx.beginPath();
                 ctx.moveTo(xCommissionEnd, topBarY);
@@ -3651,7 +3651,7 @@
                 ctx.stroke();
 
                 const opMidX = (xCommissionEnd + xEnd) / 2;
-                ctx.fillStyle = '#047857';
+                ctx.fillStyle = '#475569';
                 ctx.font = 'bold 10px Inter';
                 ctx.textAlign = 'center';
                 const opText = (xEnd - xCommissionEnd >= 140) ? `⏳ Operational Horizon (${state.timeHorizon} Yrs)` : `⏳ ${state.timeHorizon} Yrs`;
@@ -3763,11 +3763,11 @@
                 }
             }
 
-            // Draw 4 distinct phase tracks below X-axis (Light Theme Tailored Colors)
+            // Draw 4 distinct phase tracks below X-axis (Harmonized Neutral Gray Palette)
             drawPhaseBadge(paddingLeft, xStart, 'rgba(241, 245, 249, 0.95)', '#cbd5e1', '#475569', 'Pre-Retrofit', `$${(state.baselineOpex / 12).toFixed(1)}k/mo`, 'Baseline', `$${(state.baselineOpex / 12).toFixed(1)}k/mo`);
-            drawPhaseBadge(xStart, xInstallEnd, 'rgba(254, 243, 199, 0.7)', '#f59e0b', '#b45309', 'Implementation', `${phaseInfo.effInstallMonths.toFixed(1)} mos`);
-            drawPhaseBadge(xInstallEnd, xCommissionEnd, 'rgba(224, 242, 254, 0.7)', '#38bdf8', '#0369a1', 'Commissioning', `${state.commissionDuration} mos`, 'Comm.', `${state.commissionDuration}m`);
-            drawPhaseBadge(xCommissionEnd, xEnd, 'rgba(209, 250, 229, 0.7)', '#10b981', '#047857', 'Operation (Zero-Emission)', `${Math.round(state.timeHorizon * 12)} mos (${state.timeHorizon} yr Horizon)`, 'Operation', `${Math.round(state.timeHorizon * 12)} mos`);
+            drawPhaseBadge(xStart, xInstallEnd, 'rgba(241, 245, 249, 0.95)', '#cbd5e1', '#475569', 'Implementation', `${phaseInfo.effInstallMonths.toFixed(1)} mos`);
+            drawPhaseBadge(xInstallEnd, xCommissionEnd, 'rgba(241, 245, 249, 0.95)', '#cbd5e1', '#475569', 'Commissioning', `${state.commissionDuration} mos`, 'Comm.', `${state.commissionDuration}m`);
+            drawPhaseBadge(xCommissionEnd, xEnd, 'rgba(241, 245, 249, 0.95)', '#cbd5e1', '#475569', 'Operation (Zero-Emission)', `${Math.round(state.timeHorizon * 12)} mos (${state.timeHorizon} yr Horizon)`, 'Operation', `${Math.round(state.timeHorizon * 12)} mos`);
 
             // Activation Barrier Callout Badge (Anchored cleanly to the upper left-hand corner of the graph)
             const peakCostRes = getCostAtTime(phaseInfo.pPeak);
