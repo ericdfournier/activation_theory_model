@@ -89,26 +89,26 @@
 <body class="min-h-screen flex flex-col overflow-x-hidden bg-slate-50 text-slate-800">
 
     <header class="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-50 shadow-sm">
-        <div class="w-full px-4 py-3 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 flex flex-col gap-2.5">
+        <div class="w-full px-4 py-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 flex flex-col gap-2">
             <div class="flex items-center space-x-3">
-                <div class="p-2.5 bg-emerald-50 rounded-xl border border-emerald-200 text-emerald-600 flex-shrink-0">
-                    <i class="fa-solid fa-bolt-lightning text-2xl"></i>
+                <div class="p-2 bg-emerald-50 rounded-xl border border-emerald-200 text-emerald-600 flex-shrink-0">
+                    <i class="fa-solid fa-bolt-lightning text-xl"></i>
                 </div>
                 <div>
-                    <h1 class="text-xl font-bold text-slate-900 tracking-tight">Zero-Emission Retrofit Dynamics</h1>
-                    <p class="text-sm text-slate-500">An Activation Energy Based Conceptual Model for the Implementation
+                    <h1 class="text-lg sm:text-xl font-bold text-slate-900 tracking-tight leading-snug">Zero-Emission Retrofit Dynamics</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 line-clamp-1">An Activation Energy Based Conceptual Model for the Implementation
                         of Zero-Emissions Decarbonization Retrofits in Non-Residential Buildings</p>
                 </div>
             </div>
-            <div class="pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
-                <div class="flex items-center gap-2.5">
+            <div class="pt-1.5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2.5">
+                <div class="flex items-center gap-2">
                     <button id="btn-play-animation"
-                        class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold flex items-center gap-2 transition shadow-md shadow-blue-600/20">
+                        class="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs sm:text-sm font-semibold flex items-center gap-2 transition shadow-md shadow-blue-600/20">
                         <i class="fa-solid fa-play" id="play-icon"></i>
                         <span id="play-text">Evaluate Project</span>
                     </button>
                     <button id="btn-reset"
-                        class="px-3.5 py-2 bg-white hover:bg-slate-100 text-slate-700 rounded-lg text-sm font-medium border border-slate-300 transition flex items-center gap-1.5 shadow-sm">
+                        class="px-3 py-1.5 bg-white hover:bg-slate-100 text-slate-700 rounded-lg text-xs sm:text-sm font-medium border border-slate-300 transition flex items-center gap-1.5 shadow-sm">
                         <i class="fa-solid fa-rotate-right text-slate-500"></i>
                         <span>Reset</span>
                     </button>
@@ -116,13 +116,13 @@
 
                 <!-- Property Owner Motivation Telemetry Badge -->
                 <div id="physics-telemetry"
-                    class="flex items-center gap-2.5 px-3.5 py-2 rounded-lg bg-slate-100 border border-slate-200 text-sm">
+                    class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-xs sm:text-sm">
                     <span class="flex items-center gap-1.5 text-slate-700 font-medium flex-shrink-0">
-                        <i class="fa-solid fa-user-tie text-blue-600 text-base"></i>
+                        <i class="fa-solid fa-user-tie text-blue-600 text-sm"></i>
                         <span>Owner Motivation:</span>
                     </span>
                     <span id="telemetry-motivation"
-                        class="px-2.5 py-0.5 rounded font-bold uppercase tracking-wider text-xs bg-emerald-100 text-emerald-800 border border-emerald-300 flex-shrink-0">High</span>
+                        class="px-2 py-0.5 rounded font-bold uppercase tracking-wider text-[11px] bg-emerald-100 text-emerald-800 border border-emerald-300 flex-shrink-0">High</span>
                     <span class="text-slate-300 flex-shrink-0">|</span>
                     <span id="telemetry-status" class="text-slate-800 font-medium">Ready</span>
                 </div>
@@ -131,12 +131,12 @@
     </header>
 
     <main
-        class="flex-1 w-full px-4 py-6 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        class="flex-1 w-full px-4 py-3 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-5 items-start">
 
         <!-- Left Controls Panel (4 Cols on lg, 3 Cols on xl/2xl) -->
         <section class="lg:col-span-4 xl:col-span-3 2xl:col-span-3">
             <div id="controls-scroll-container"
-                class="lg:sticky lg:top-[7.5rem] lg:max-h-[calc(100vh-8.5rem)] lg:overflow-y-auto space-y-4 pr-1.5 custom-scrollbar pb-6">
+                class="lg:sticky lg:top-[5.5rem] lg:max-h-[calc(100vh-6.5rem)] lg:overflow-y-auto space-y-3.5 pr-1.5 custom-scrollbar pb-6">
 
                 <!-- Card 0: Introduction (Non-collapsible) -->
                 <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
@@ -903,18 +903,18 @@
         </section>
 
         <!-- Right Display & Graph Area (8 Cols on lg, 9 Cols on xl/2xl) -->
-        <section class="lg:col-span-8 xl:col-span-9 2xl:col-span-9 space-y-4 flex flex-col">
+        <section class="lg:col-span-8 xl:col-span-9 2xl:col-span-9 space-y-3.5 flex flex-col">
 
             <!-- Primary Navigation Tabs -->
             <div class="border-b border-slate-200">
                 <nav class="flex space-x-2 -mb-px" aria-label="Dashboard Tabs">
                     <button id="tab-btn-visualizer" type="button"
-                        class="tab-btn inline-flex items-center gap-2 px-4 py-2.5 text-sm font-bold border-b-2 border-blue-600 text-blue-600 transition">
+                        class="tab-btn inline-flex items-center gap-2 px-4 py-2 text-sm font-bold border-b-2 border-blue-600 text-blue-600 transition">
                         <i class="fa-solid fa-chart-line text-blue-600"></i>
                         <span>Project Trajectory &amp; Results</span>
                     </button>
                     <button id="tab-btn-framework" type="button"
-                        class="tab-btn inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300 transition">
+                        class="tab-btn inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300 transition">
                         <i class="fa-solid fa-scale-balanced text-purple-600"></i>
                         <span>Decision Factors & Dynamics</span>
                     </button>
@@ -922,21 +922,21 @@
             </div>
 
             <!-- Tab 1: Project Trajectory & Results (Primary) -->
-            <div id="tab-pane-visualizer" class="space-y-4 flex flex-col">
+            <div id="tab-pane-visualizer" class="space-y-3 flex flex-col">
                 <!-- Chart Display Card -->
-                <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex flex-col relative">
-                    <div class="flex flex-wrap justify-between items-center mb-4 gap-3">
+                <div class="bg-white border border-slate-200 rounded-xl p-3.5 sm:p-4 shadow-sm flex flex-col relative">
+                    <div class="flex flex-wrap justify-between items-center mb-2.5 gap-2.5">
                         <div>
                             <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
                                 <i class="fa-solid fa-chart-line text-emerald-600 text-lg"></i> Zero-Emissions Project
                                 Cost Trajectory
                             </h2>
-                            <div class="flex flex-wrap items-center gap-2 mt-1">
+                            <div class="flex flex-wrap items-center gap-2 mt-0.5">
                                 <p class="text-xs sm:text-sm text-slate-500">Y-Axis: Effective Cost Rate ($/mo) |
                                     X-Axis:
                                     Project Timeline</p>
                                 <span
-                                    class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-900 border border-amber-200 shadow-2xs">
+                                    class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-900 border border-amber-200 shadow-2xs">
                                     <i class="fa-solid fa-arrows-left-right-to-line text-amber-600"></i>
                                     <span><strong>Non-Linear Scale:</strong> Zoomed Transition (Months) &bull;
                                         Compressed
@@ -946,9 +946,9 @@
                         </div>
 
                         <!-- Driving Force & Legend Controls -->
-                        <div class="flex flex-wrap items-center gap-3.5 text-xs">
+                        <div class="flex flex-wrap items-center gap-3 text-xs">
                             <div id="pill-driving-force"
-                                class="px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 font-mono text-slate-700 flex items-center gap-2 shadow-2xs">
+                                class="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200 font-mono text-slate-700 flex items-center gap-2 shadow-2xs">
                                 <span class="text-slate-500 font-sans">Cumulative Savings (PV):</span>
                                 <span id="val-cum-savings" class="text-emerald-600 font-bold text-sm">$688k</span>
                                 <span class="text-slate-300">|</span>
@@ -956,7 +956,7 @@
                                 <span id="pill-motivation-level" class="font-bold text-emerald-600 text-sm">High</span>
                             </div>
 
-                            <div class="flex items-center gap-3.5 text-xs text-slate-600">
+                            <div class="flex items-center gap-3 text-xs text-slate-600">
                                 <span class="flex items-center gap-1.5"><span
                                         class="w-3 h-3 rounded-full bg-red-500 inline-block shadow-xs"></span> Cost
                                     Increase</span>
@@ -979,51 +979,85 @@
                         </div>
                     </div>
 
+                    <!-- Dynamic Summary Strip: Activation Barrier & Project Outcomes (Relocated from Canvas to Prevent Occlusion) -->
+                    <div id="chart-summary-strip" class="grid grid-cols-1 md:grid-cols-2 gap-2.5 mb-2.5">
+                        <!-- Activation Barrier Card -->
+                        <div id="callout-card-act"
+                            class="flex flex-col justify-center px-3.5 py-1.5 sm:py-2 rounded-lg bg-amber-50/80 border border-amber-200/90 shadow-2xs">
+                            <div class="flex items-center justify-between gap-2">
+                                <span id="callout-act-header"
+                                    class="text-xs font-bold uppercase tracking-wider text-amber-900 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-bolt text-amber-600 text-[11px]"></i> Activation Barrier:
+                                </span>
+                            </div>
+                            <div class="flex flex-wrap items-baseline gap-x-3 gap-y-0.5 mt-0.5 text-xs">
+                                <span id="callout-act-line1" class="font-bold text-amber-950 font-mono">Total Cap-Ex: $350k</span>
+                                <span class="text-amber-300 hidden sm:inline">&bull;</span>
+                                <span id="callout-act-line2" class="font-semibold text-amber-800 font-mono">Avg Cap-Ex: $29.2k/mo</span>
+                            </div>
+                        </div>
+
+                        <!-- Project Outcomes Card -->
+                        <div id="callout-card-opex"
+                            class="flex flex-col justify-center px-3.5 py-1.5 sm:py-2 rounded-lg bg-emerald-50/80 border border-emerald-200/90 shadow-2xs transition-colors">
+                            <div class="flex items-center justify-between gap-2">
+                                <span id="callout-opex-header"
+                                    class="text-xs font-bold uppercase tracking-wider text-emerald-900 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-bullseye text-emerald-600 text-[11px]"></i> Project Outcomes:
+                                </span>
+                            </div>
+                            <div class="flex flex-wrap items-baseline gap-x-3 gap-y-0.5 mt-0.5 text-xs">
+                                <span id="callout-opex-line1" class="font-bold text-emerald-950 font-mono">Total Op-Ex Savings (PV): +$688k</span>
+                                <span class="text-emerald-300 hidden sm:inline">&bull;</span>
+                                <span id="callout-opex-line2" class="font-semibold text-emerald-800 font-mono">Avg Op-Ex Savings (PV): +$5.0k/mo</span>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Canvas Container with Hover Tooltip Integration -->
                     <div id="canvas-container"
-                        class="relative w-full h-[47.5vh] min-h-[399px] max-h-[608px] bg-white rounded-lg border border-slate-200 overflow-hidden cursor-crosshair shadow-inner">
+                        class="relative w-full h-[37vh] min-h-[250px] max-h-[480px] xl:h-[40vh] 2xl:h-[44vh] bg-white rounded-lg border border-slate-200 overflow-hidden cursor-crosshair shadow-inner">
                         <canvas id="activationCanvas" class="absolute inset-0 w-full h-full"></canvas>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                     <!-- KPI 1: Net Present Value -->
-                    <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                    <div class="bg-white border border-slate-200 rounded-xl p-3 sm:p-3.5 shadow-sm">
                         <div id="kpi-npv-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                            Net
-                            Present Value (NPV)
+                            Net Present Value (NPV)
                         </div>
-                        <div id="kpi-npv" class="text-2xl font-bold font-mono text-emerald-600 mt-1.5">$0</div>
-                        <div id="kpi-npv-sub" class="text-xs text-slate-400 mt-1">Lifetime net value</div>
+                        <div id="kpi-npv" class="text-xl sm:text-2xl font-bold font-mono text-emerald-600 mt-1">$0</div>
+                        <div id="kpi-npv-sub" class="text-[11px] text-slate-400 mt-0.5">Lifetime net value</div>
                     </div>
 
                     <!-- KPI 2: Simple Payback -->
-                    <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                    <div class="bg-white border border-slate-200 rounded-xl p-3 sm:p-3.5 shadow-sm">
                         <div id="kpi-payback-label"
                             class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                             Simple Payback</div>
-                        <div id="kpi-payback" class="text-2xl font-bold font-mono text-emerald-600 mt-1.5">0.0 yrs</div>
-                        <div id="kpi-payback-sub" class="text-xs text-slate-400 mt-1">Break-even (&lt;5 yrs rolls over)
+                        <div id="kpi-payback" class="text-xl sm:text-2xl font-bold font-mono text-emerald-600 mt-1">0.0 yrs</div>
+                        <div id="kpi-payback-sub" class="text-[11px] text-slate-400 mt-0.5">Break-even (&lt;5 yrs rolls over)
                         </div>
                     </div>
 
                     <!-- KPI 3: ROI -->
-                    <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                    <div class="bg-white border border-slate-200 rounded-xl p-3 sm:p-3.5 shadow-sm">
                         <div id="kpi-roi-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                             Project ROI</div>
-                        <div id="kpi-roi" class="text-2xl font-bold font-mono text-emerald-600 mt-1.5">0%</div>
-                        <div id="kpi-roi-sub" class="text-xs text-slate-400 mt-1">Return on investment (NPV / Cap-Ex)
+                        <div id="kpi-roi" class="text-xl sm:text-2xl font-bold font-mono text-emerald-600 mt-1">0%</div>
+                        <div id="kpi-roi-sub" class="text-[11px] text-slate-400 mt-0.5">Return on investment (NPV / Cap-Ex)
                         </div>
                     </div>
 
                     <!-- KPI 4: Effective Cap-Ex -->
-                    <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                    <div class="bg-white border border-slate-200 rounded-xl p-3 sm:p-3.5 shadow-sm">
                         <div id="kpi-net-capex-label"
                             class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                             Effective Cap-Ex Barrier
                         </div>
-                        <div id="kpi-net-capex" class="text-2xl font-bold font-mono text-amber-600 mt-1.5">$0</div>
-                        <div id="kpi-net-capex-sub" class="text-xs text-slate-400 mt-1">After policy incentive offset
+                        <div id="kpi-net-capex" class="text-xl sm:text-2xl font-bold font-mono text-amber-600 mt-1">$0</div>
+                        <div id="kpi-net-capex-sub" class="text-[11px] text-slate-400 mt-0.5">After policy incentive offset
                         </div>
                     </div>
                 </div>
@@ -2913,6 +2947,115 @@
             return { minVal, maxVal };
         }
 
+        function updateCalloutBadges(effectiveCapEx, effInstallMonths, debtInfo, peakCostRes, pvSavings, isSavings) {
+            const elActHeader = document.getElementById('callout-act-header');
+            const elActLine1 = document.getElementById('callout-act-line1');
+            const elActLine2 = document.getElementById('callout-act-line2');
+            const elOpexCard = document.getElementById('callout-card-opex');
+            const elOpexHeader = document.getElementById('callout-opex-header');
+            const elOpexLine1 = document.getElementById('callout-opex-line1');
+            const elOpexLine2 = document.getElementById('callout-opex-line2');
+
+            if (!elActHeader || !elOpexHeader) return;
+
+            // Activation Barrier Callout Info
+            const avgMonthlyCapex = effectiveCapEx / effInstallMonths;
+            let actHeader = 'Activation Barrier:';
+            let actLine1 = `Total Cap-Ex: $${Math.round(effectiveCapEx)}k`;
+            let actLine2 = `Avg Cap-Ex: $${avgMonthlyCapex.toFixed(1)}k/mo`;
+
+            if (state.financingEnabled) {
+                if (debtInfo.cashDown === 0) {
+                    actHeader = 'Activation Barrier (100% Financed):';
+                    actLine1 = `Upfront Cash: $0k ($${Math.round(debtInfo.debtPrincipal)}k Financed)`;
+                    actLine2 = `Debt Service: $${debtInfo.monthlyPayment.toFixed(1)}k/mo (Starts Mo 0)`;
+                } else if (state.capexUncertaintyPct > 0) {
+                    const u = state.capexUncertaintyPct / 100;
+                    const cdMin = Math.round(debtInfo.cashDown * (1 - u));
+                    const cdMax = Math.round(debtInfo.cashDown * (1 + u));
+                    actHeader = `Debt (${state.financedPct}%) • ±${state.capexUncertaintyPct}% Risk:`;
+                    actLine1 = `Cash Down Range: $${cdMin}k – $${cdMax}k`;
+                    actLine2 = `Peak Range: $${peakCostRes.valueMin.toFixed(1)} – $${peakCostRes.valueMax.toFixed(1)}k/mo`;
+                } else {
+                    actHeader = `Debt (${state.financedPct}% Financed):`;
+                    actLine1 = `Cash Down: $${Math.round(debtInfo.cashDown)}k (${100 - state.financedPct}%)`;
+                    actLine2 = `Financed: $${Math.round(debtInfo.debtPrincipal)}k @ $${debtInfo.monthlyPayment.toFixed(1)}k/mo`;
+                }
+            } else if (state.capexUncertaintyPct > 0) {
+                const u = state.capexUncertaintyPct / 100;
+                const cMin = Math.round(effectiveCapEx * (1 - u));
+                const cMax = Math.round(effectiveCapEx * (1 + u));
+                actHeader = `Activation Barrier (±${state.capexUncertaintyPct}% Uncertainty):`;
+                actLine1 = `Cap-Ex Range: $${cMin}k – $${cMax}k`;
+                actLine2 = `Peak Range: $${peakCostRes.valueMin.toFixed(1)} – $${peakCostRes.valueMax.toFixed(1)}k/mo`;
+            }
+
+            elActHeader.innerHTML = `<i class="fa-solid fa-bolt text-amber-600 text-[11px]"></i> ${actHeader}`;
+            elActLine1.textContent = actLine1.replace('\n', ' ');
+            elActLine2.textContent = actLine2;
+
+            // Project Outcomes Callout Info
+            let opexHeader = 'Project Outcomes:';
+            let opexLine1, opexLine2;
+
+            if (state.financingEnabled) {
+                const uOp = (state.opexUncertaintyPct || 0) / 100;
+                const dscrDesc = debtInfo.dscr >= 1.0 ? `${debtInfo.dscr.toFixed(2)}x (Self-Funding)` : `${debtInfo.dscr.toFixed(2)}x (Deficit)`;
+                opexHeader = uOp > 0 ? `Financed Operations (±${state.opexUncertaintyPct}% Op-Ex Risk):` : `Financed Operations (${state.loanTerm}-Yr Loan):`;
+                opexLine1 = `Debt Service: $${debtInfo.monthlyPayment.toFixed(1)}k/mo (DSCR: ${dscrDesc})`;
+                opexLine2 = debtInfo.netMonthlySavings >= 0
+                    ? `Net Retained: +$${debtInfo.netMonthlySavings.toFixed(1)}k/mo (Yr ${state.loanTerm}+: +$${(-state.opexDelta / 12).toFixed(1)}k/mo)`
+                    : `Operating Cash Deficit: -$${Math.abs(debtInfo.netMonthlySavings).toFixed(1)}k/mo (Yr ${state.loanTerm}+: +$${(-state.opexDelta / 12).toFixed(1)}k/mo)`;
+            } else if (state.opexUncertaintyPct > 0) {
+                const uOp = state.opexUncertaintyPct / 100;
+                const pvPess = pvSavings * (1 - uOp);
+                const pvOpt = pvSavings * (1 + uOp);
+                opexHeader = `Project Outcomes (±${state.opexUncertaintyPct}% Op-Ex Risk):`;
+                opexLine1 = isSavings
+                    ? `Total Savings (PV): $${Math.round(pvPess)}k – $${Math.round(pvOpt)}k`
+                    : `Total Penalty (PV): $${Math.round(Math.abs(pvPess))}k – $${Math.round(Math.abs(pvOpt))}k`;
+                const sRatePess = Math.abs(state.opexDelta / 12) * (1 - uOp);
+                const sRateOpt = Math.abs(state.opexDelta / 12) * (1 + uOp);
+                opexLine2 = isSavings
+                    ? `Delta Range: -$${sRateOpt.toFixed(1)} to -$${sRatePess.toFixed(1)}k/mo`
+                    : `Delta Range: +$${sRatePess.toFixed(1)} to +$${sRateOpt.toFixed(1)}k/mo`;
+            } else if (state.discountRate > 0) {
+                const avgMonthlyPV = Math.abs(pvSavings) / (state.timeHorizon * 12);
+                opexLine1 = isSavings
+                    ? `Total Op-Ex Savings (PV): +$${Math.round(pvSavings)}k`
+                    : `Total Op-Ex Penalty (PV): -$${Math.abs(Math.round(pvSavings))}k`;
+                opexLine2 = isSavings
+                    ? `Avg Op-Ex Savings (PV): +$${avgMonthlyPV.toFixed(1)}k/mo`
+                    : `Avg Op-Ex Penalty (PV): -$${avgMonthlyPV.toFixed(1)}k/mo`;
+            } else {
+                const totalNominal = Math.round(-state.opexDelta * state.timeHorizon);
+                const avgMonthlyNominal = Math.abs(state.opexDelta) / 12;
+                opexLine1 = isSavings
+                    ? `Total Op-Ex Savings: +$${totalNominal}k`
+                    : `Total Op-Ex Penalty: -$${Math.abs(totalNominal)}k`;
+                opexLine2 = isSavings
+                    ? `Avg Op-Ex Savings: +$${avgMonthlyNominal.toFixed(1)}k/mo`
+                    : `Avg Op-Ex Penalty: -$${avgMonthlyNominal.toFixed(1)}k/mo`;
+            }
+
+            if (isSavings) {
+                elOpexCard.className = "flex flex-col justify-center px-3.5 py-1.5 sm:py-2 rounded-lg bg-emerald-50/80 border border-emerald-200/90 shadow-2xs transition-colors";
+                elOpexHeader.className = "text-xs font-bold uppercase tracking-wider text-emerald-900 flex items-center gap-1.5";
+                elOpexHeader.innerHTML = `<i class="fa-solid fa-bullseye text-emerald-600 text-[11px]"></i> ${opexHeader}`;
+                elOpexLine1.className = "font-bold text-emerald-950 font-mono";
+                elOpexLine2.className = "font-semibold text-emerald-800 font-mono";
+            } else {
+                elOpexCard.className = "flex flex-col justify-center px-3.5 py-1.5 sm:py-2 rounded-lg bg-rose-50/80 border border-rose-200/90 shadow-2xs transition-colors";
+                elOpexHeader.className = "text-xs font-bold uppercase tracking-wider text-rose-900 flex items-center gap-1.5";
+                elOpexHeader.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-rose-600 text-[11px]"></i> ${opexHeader}`;
+                elOpexLine1.className = "font-bold text-rose-950 font-mono";
+                elOpexLine2.className = "font-semibold text-rose-800 font-mono";
+            }
+
+            elOpexLine1.textContent = opexLine1;
+            elOpexLine2.textContent = opexLine2;
+        }
+
         function render() {
             resizeCanvas();
             updateLabels();
@@ -3564,67 +3707,10 @@
             drawPhaseBadge(xCommissionEnd, xEnd, 'rgba(209, 250, 229, 0.7)', '#10b981', '#047857', 'Operation (Zero-Emission)', `${Math.round(state.timeHorizon * 12)} mos (${state.timeHorizon} yr Horizon)`, 'Operation', `${Math.round(state.timeHorizon * 12)} mos`);
 
             // Activation Barrier Callout Badge (Anchored cleanly to the upper left-hand corner of the graph)
-            const effInstallMonths = phaseInfo.effInstallMonths;
-            const avgMonthlyCapex = effectiveCapEx / effInstallMonths;
-            let actHeader = 'Activation Barrier:';
-            let actLine1 = `Total Cap-Ex: $${Math.round(effectiveCapEx)}k`;
-            let actLine2 = `Avg Cap-Ex: $${avgMonthlyCapex.toFixed(1)}k/mo`;
-
             const peakCostRes = getCostAtTime(phaseInfo.pPeak);
-
-            if (state.financingEnabled) {
-                if (debtInfo.cashDown === 0) {
-                    actHeader = 'Activation Barrier';
-                    actLine1 = `Upfront Cash: $0k ($${Math.round(debtInfo.debtPrincipal)}k Financed)`;
-                    actLine2 = `Debt Service: $${debtInfo.monthlyPayment.toFixed(1)}k/mo (Starts Mo 0)`;
-                } else if (state.capexUncertaintyPct > 0) {
-                    const u = state.capexUncertaintyPct / 100;
-                    const cdMin = Math.round(debtInfo.cashDown * (1 - u));
-                    const cdMax = Math.round(debtInfo.cashDown * (1 + u));
-                    actHeader = `Debt (${state.financedPct}%) • ±${state.capexUncertaintyPct}% Risk:`;
-                    actLine1 = `Cash Down Range: $${cdMin}k – $${cdMax}k`;
-                    actLine2 = `Peak Range: $${peakCostRes.valueMin.toFixed(1)} – $${peakCostRes.valueMax.toFixed(1)}k/mo`;
-                } else {
-                    actHeader = `Debt (${state.financedPct}%):`;
-                    actLine1 = `Cash Down: $${Math.round(debtInfo.cashDown)}k (${100 - state.financedPct}%)`;
-                    actLine2 = `Financed: $${Math.round(debtInfo.debtPrincipal)}k @ $${debtInfo.monthlyPayment.toFixed(1)}k/mo (Starts Mo 0)`;
-                }
-            } else if (state.capexUncertaintyPct > 0) {
-                const u = state.capexUncertaintyPct / 100;
-                const cMin = Math.round(effectiveCapEx * (1 - u));
-                const cMax = Math.round(effectiveCapEx * (1 + u));
-                actHeader = `Activation Barrier (±${state.capexUncertaintyPct}% Uncertainty):`;
-                actLine1 = `Cap-Ex Range: $${cMin}k – $${cMax}k`;
-                actLine2 = `Peak Range: $${peakCostRes.valueMin.toFixed(1)} – $${peakCostRes.valueMax.toFixed(1)}k/mo`;
-            }
-
-            ctx.font = 'bold 11px Inter';
-            const wHeader = ctx.measureText(actHeader).width;
-            ctx.font = '600 10.5px Inter';
-            const line1Parts = actLine1.split('\n');
-            const wLine1 = Math.max(...line1Parts.map(p => ctx.measureText(p).width));
-            const wLine2 = ctx.measureText(actLine2).width;
-            const actCardW = Math.max(wHeader, wLine1, wLine2) + 20;
-            const hasMultiline = line1Parts.length > 1;
-            const actCardH = hasMultiline ? 58 : 48;
-
-            // Anchor cleanly to the upper left-hand corner within graph margins
-            let actCardX = paddingLeft + 12;
-            let actCardY = paddingTop + 10;
-
-            // If debt retirement milestone marker is positioned at top-left, drop below it
-            if (state.financingEnabled && rLoanEnd !== null) {
-                const xLoanEnd = ratioToX(rLoanEnd);
-                if (xLoanEnd >= actCardX - 10 && xLoanEnd <= actCardX + actCardW + 10) {
-                    actCardY = paddingTop + 34;
-                }
-            }
-
-            // If baseline line is near the top and conflicts with actCard, place actCard cleanly below baseline
-            if (baselineY - paddingTop < 80) {
-                actCardY = Math.max(actCardY, baselineY + 12);
-            }
-            actCardY = Math.min(actCardY, height - paddingBottom - actCardH - 10);
+            const pvSavings = getDiscountedCumulativeSavings();
+            const isSavings = state.opexDelta <= 0;
+            updateCalloutBadges(effectiveCapEx, phaseInfo.effInstallMonths, debtInfo, peakCostRes, pvSavings, isSavings);
 
             // Vertical Activation Barrier Dimension Line at Peak
             const peakX = ratioToX(phaseInfo.pPeak);
@@ -3649,14 +3735,12 @@
                     ctx.lineTo(peakX + 4, baselineY);
                     ctx.stroke();
 
-                    // Compact peak rate label directly above peak cap (only if clear of upper-left card)
-                    if (peakX > actCardX + actCardW + 8 || peakY > actCardY + actCardH + 12) {
-                        ctx.fillStyle = '#b45309';
-                        ctx.font = 'bold 9.5px Inter';
-                        ctx.textAlign = 'center';
-                        const peakTag = `+~$${peakDelta >= 10 ? Math.round(peakDelta) : peakDelta.toFixed(1)}k/mo`;
-                        ctx.fillText(peakTag, peakX, Math.max(paddingTop + 12, peakY - 6));
-                    }
+                    // Compact peak rate label directly above peak cap (always cleanly visible without canvas badge occlusion)
+                    ctx.fillStyle = '#b45309';
+                    ctx.font = 'bold 9.5px Inter';
+                    ctx.textAlign = 'center';
+                    const peakTag = `+~$${peakDelta >= 10 ? Math.round(peakDelta) : peakDelta.toFixed(1)}k/mo`;
+                    ctx.fillText(peakTag, peakX, Math.max(paddingTop + 12, peakY - 6));
                 }
             } else {
                 // Cap-Ex Uncertainty Activated:
@@ -3684,47 +3768,12 @@
                     ctx.stroke();
 
                     // Cap-Ex Min-Max Range Label directly above the upper bracket cap
-                    if (peakX > actCardX + actCardW + 8 || yPeakMax > actCardY + actCardH + 12) {
-                        ctx.fillStyle = '#92400e';
-                        ctx.font = 'bold 9.5px Inter';
-                        ctx.textAlign = 'center';
-                        const rangeTag = `Range: $${peakCostRes.valueMin.toFixed(1)} – $${peakCostRes.valueMax.toFixed(1)}k/mo`;
-                        ctx.fillText(rangeTag, peakX, Math.max(paddingTop + 12, yPeakMax - 6));
-                    }
+                    ctx.fillStyle = '#92400e';
+                    ctx.font = 'bold 9.5px Inter';
+                    ctx.textAlign = 'center';
+                    const rangeTag = `Range: $${peakCostRes.valueMin.toFixed(1)} – $${peakCostRes.valueMax.toFixed(1)}k/mo`;
+                    ctx.fillText(rangeTag, peakX, Math.max(paddingTop + 12, yPeakMax - 6));
                 }
-            }
-
-            // Draw Activation Badge Card (Crisp floating light theme card anchored in upper-left)
-            ctx.save();
-            ctx.shadowColor = 'rgba(0, 0, 0, 0.04)';
-            ctx.shadowBlur = 6;
-            ctx.shadowOffsetY = 2;
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.96)';
-            ctx.strokeStyle = '#fde68a';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.roundRect(actCardX, actCardY, actCardW, actCardH, 6);
-            ctx.fill();
-            ctx.stroke();
-            ctx.restore();
-
-            // Draw Badge Text
-            ctx.textAlign = 'left';
-            ctx.fillStyle = '#b45309';
-            ctx.font = 'bold 11px Inter';
-            ctx.fillText(actHeader, actCardX + 9, actCardY + 13);
-
-            ctx.fillStyle = '#78350f';
-            ctx.font = '600 10.5px Inter';
-            if (hasMultiline) {
-                ctx.fillText(line1Parts[0], actCardX + 9, actCardY + 25);
-                ctx.fillText(line1Parts[1], actCardX + 9, actCardY + 37);
-                ctx.fillStyle = '#92400e';
-                ctx.fillText(actLine2, actCardX + 9, actCardY + 50);
-            } else {
-                ctx.fillText(actLine1, actCardX + 9, actCardY + 27);
-                ctx.fillStyle = '#92400e';
-                ctx.fillText(actLine2, actCardX + 9, actCardY + 40);
             }
 
             // Op-Ex Delta Indicator in Operation Phase (Plotted to full curve height)
@@ -3808,111 +3857,6 @@
                 }
             }
 
-            // Project Outcomes Callout Badge (Anchored cleanly to the upper right-hand corner of the graph)
-            const pvSavings = getDiscountedCumulativeSavings();
-            const isSavings = state.opexDelta <= 0;
-            let opexHeader = 'Project Outcomes:';
-            let opexLine1, opexLine2;
-
-            if (state.financingEnabled) {
-                const uOp = (state.opexUncertaintyPct || 0) / 100;
-                const dscrDesc = debtInfo.dscr >= 1.0 ? `${debtInfo.dscr.toFixed(2)}x (Self-Funding)` : `${debtInfo.dscr.toFixed(2)}x (Deficit)`;
-                opexHeader = uOp > 0 ? `Financed Operations (±${state.opexUncertaintyPct}% Op-Ex Risk):` : `Financed Operations (${state.loanTerm}-Yr Loan):`;
-                opexLine1 = `Debt Service: $${debtInfo.monthlyPayment.toFixed(1)}k/mo (DSCR: ${dscrDesc})`;
-                opexLine2 = debtInfo.netMonthlySavings >= 0
-                    ? `Net Retained: +$${debtInfo.netMonthlySavings.toFixed(1)}k/mo (Yr ${state.loanTerm}+: +$${(-state.opexDelta / 12).toFixed(1)}k/mo)`
-                    : `Operating Cash Deficit: -$${Math.abs(debtInfo.netMonthlySavings).toFixed(1)}k/mo (Yr ${state.loanTerm}+: +$${(-state.opexDelta / 12).toFixed(1)}k/mo)`;
-            } else if (state.opexUncertaintyPct > 0) {
-                const uOp = state.opexUncertaintyPct / 100;
-                const pvPess = pvSavings * (1 - uOp);
-                const pvOpt = pvSavings * (1 + uOp);
-                opexHeader = `Project Outcomes (±${state.opexUncertaintyPct}% Op-Ex Risk):`;
-                opexLine1 = isSavings
-                    ? `Total Savings (PV): $${Math.round(pvPess)}k – $${Math.round(pvOpt)}k`
-                    : `Total Penalty (PV): $${Math.round(Math.abs(pvPess))}k – $${Math.round(Math.abs(pvOpt))}k`;
-                const sRatePess = Math.abs(state.opexDelta / 12) * (1 - uOp);
-                const sRateOpt = Math.abs(state.opexDelta / 12) * (1 + uOp);
-                opexLine2 = isSavings
-                    ? `Delta Range: -$${sRateOpt.toFixed(1)} to -$${sRatePess.toFixed(1)}k/mo`
-                    : `Delta Range: +$${sRatePess.toFixed(1)} to +$${sRateOpt.toFixed(1)}k/mo`;
-            } else if (state.discountRate > 0) {
-                const avgMonthlyPV = Math.abs(pvSavings) / (state.timeHorizon * 12);
-                opexLine1 = isSavings
-                    ? `Total Op-Ex Savings (PV): +$${Math.round(pvSavings)}k`
-                    : `Total Op-Ex Penalty (PV): -$${Math.abs(Math.round(pvSavings))}k`;
-                opexLine2 = isSavings
-                    ? `Avg Op-Ex Savings (PV): +$${avgMonthlyPV.toFixed(1)}k/mo`
-                    : `Avg Op-Ex Penalty (PV): -$${avgMonthlyPV.toFixed(1)}k/mo`;
-            } else {
-                const totalNominal = Math.round(-state.opexDelta * state.timeHorizon);
-                const avgMonthlyNominal = Math.abs(state.opexDelta) / 12;
-                opexLine1 = isSavings
-                    ? `Total Op-Ex Savings: +$${totalNominal}k`
-                    : `Total Op-Ex Penalty: -$${Math.abs(totalNominal)}k`;
-                opexLine2 = isSavings
-                    ? `Avg Op-Ex Savings: +$${avgMonthlyNominal.toFixed(1)}k/mo`
-                    : `Avg Op-Ex Penalty: -$${avgMonthlyNominal.toFixed(1)}k/mo`;
-            }
-
-            ctx.font = 'bold 11px Inter';
-            const wOpHeader = ctx.measureText(opexHeader).width;
-            ctx.font = '600 10.5px Inter';
-            const wOpLine1 = ctx.measureText(opexLine1).width;
-            const wOpLine2 = ctx.measureText(opexLine2).width;
-            const opexCardW = Math.max(wOpHeader, wOpLine1, wOpLine2) + 20;
-            const opexCardH = 48;
-
-            // Anchor cleanly to the upper right-hand corner within graph margins
-            let opexCardX = width - paddingRight - opexCardW - 14;
-            let opexCardY = paddingTop + 10;
-
-            // If debt retirement milestone marker is positioned at top-right, drop below it
-            if (state.financingEnabled && rLoanEnd !== null) {
-                const xLoanEnd = ratioToX(rLoanEnd);
-                if (xLoanEnd >= opexCardX - 25 && xLoanEnd <= opexCardX + opexCardW + 25) {
-                    opexCardY = paddingTop + 34;
-                }
-            }
-
-            // If baseline line is near the top and conflicts with opexCard, place opexCard cleanly below baseline
-            if (baselineY - paddingTop < 80) {
-                opexCardY = Math.max(opexCardY, baselineY + 12);
-            }
-
-            // If container is narrow, stack opexCard below actCard to avoid collision
-            if (opexCardX < actCardX + actCardW + 10) {
-                opexCardY = Math.max(opexCardY, actCardY + actCardH + 8);
-            }
-
-            opexCardY = Math.min(opexCardY, height - paddingBottom - opexCardH - 10);
-
-            // Draw Op-Ex Badge Card
-            ctx.save();
-            ctx.shadowColor = 'rgba(0, 0, 0, 0.04)';
-            ctx.shadowBlur = 6;
-            ctx.shadowOffsetY = 2;
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.96)';
-            ctx.strokeStyle = opexBorder;
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.roundRect(opexCardX, opexCardY, opexCardW, opexCardH, 6);
-            ctx.fill();
-            ctx.stroke();
-            ctx.restore();
-
-            // Draw Op-Ex Badge Text
-            ctx.textAlign = 'left';
-            ctx.fillStyle = opexColor;
-            ctx.font = 'bold 11px Inter';
-            ctx.fillText(opexHeader, opexCardX + 9, opexCardY + 13);
-
-            ctx.fillStyle = isSavings ? '#065f46' : '#991b1b';
-            ctx.font = '600 10.5px Inter';
-            ctx.fillText(opexLine1, opexCardX + 9, opexCardY + 27);
-
-            ctx.fillStyle = isSavings ? '#047857' : '#b91c1c';
-            ctx.font = '600 10.5px Inter';
-            ctx.fillText(opexLine2, opexCardX + 9, opexCardY + 40);
 
             // Interactive Mouse Hover Crosshair & Tooltip
             if (state.isHovering && state.hoverRatio !== null) {

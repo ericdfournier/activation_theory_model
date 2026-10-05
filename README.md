@@ -75,7 +75,7 @@ git clone https://github.com/ericdfournier/activation_theory_model.git
 cd activation_theory_model
 
 # Open in your preferred browser
-open activation_model_light.html
+open index.html
 ```
 
 Or serve locally with any static web server:
@@ -88,7 +88,7 @@ python3 -m http.server 8000
 npx serve .
 ```
 
-Then visit `http://localhost:8000/activation_model_light.html`.
+Then visit `http://localhost:8000`.
 
 ---
 
