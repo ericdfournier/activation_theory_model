@@ -83,12 +83,19 @@
             scrollbar-width: thin;
             scrollbar-color: #cbd5e1 transparent;
         }
+
+        @media (min-width: 1024px) and (min-height: 600px) {
+            .app-viewport-fit {
+                height: 100vh;
+                overflow: hidden;
+            }
+        }
     </style>
 </head>
 
-<body class="min-h-screen flex flex-col overflow-x-hidden bg-slate-50 text-slate-800">
+<body class="min-h-screen app-viewport-fit flex flex-col overflow-x-hidden bg-slate-50 text-slate-800">
 
-    <header class="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-50 shadow-sm">
+    <header class="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-50 shadow-sm flex-shrink-0">
         <div class="w-full px-4 py-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 flex flex-col gap-2">
             <div class="flex items-center space-x-3">
                 <div class="p-2 bg-emerald-50 rounded-xl border border-emerald-200 text-emerald-600 flex-shrink-0">
@@ -131,12 +138,12 @@
     </header>
 
     <main
-        class="flex-1 w-full px-4 py-3 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-5 items-start">
+        class="flex-1 min-h-0 w-full px-4 py-2 sm:px-6 sm:py-2.5 lg:px-8 xl:px-10 2xl:px-12 grid grid-cols-1 lg:grid-cols-12 gap-3.5 lg:gap-4 lg:items-stretch lg:overflow-hidden">
 
         <!-- Left Controls Panel (4 Cols on lg, 3 Cols on xl/2xl) -->
-        <section class="lg:col-span-4 xl:col-span-3 2xl:col-span-3">
+        <section class="lg:col-span-4 xl:col-span-3 2xl:col-span-3 lg:h-full lg:min-h-0 flex flex-col">
             <div id="controls-scroll-container"
-                class="lg:sticky lg:top-[5.5rem] lg:max-h-[calc(100vh-6.5rem)] lg:overflow-y-auto space-y-3.5 pr-1.5 custom-scrollbar pb-6">
+                class="lg:h-full lg:overflow-y-auto space-y-3 pr-1.5 custom-scrollbar pb-4">
 
                 <!-- Card 0: Introduction (Non-collapsible) -->
                 <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
@@ -899,10 +906,10 @@
         </section>
 
         <!-- Right Display & Graph Area (8 Cols on lg, 9 Cols on xl/2xl) -->
-        <section class="lg:col-span-8 xl:col-span-9 2xl:col-span-9 space-y-3.5 flex flex-col">
+        <section class="lg:col-span-8 xl:col-span-9 2xl:col-span-9 flex flex-col lg:h-full lg:min-h-0 gap-2 sm:gap-2.5">
 
             <!-- Primary Navigation Tabs -->
-            <div class="border-b border-slate-200">
+            <div class="border-b border-slate-200 flex-shrink-0">
                 <nav class="flex space-x-2 -mb-px" aria-label="Dashboard Tabs">
                     <button id="tab-btn-visualizer" type="button"
                         class="tab-btn inline-flex items-center gap-2 px-4 py-2 text-sm font-bold border-b-2 border-blue-600 text-blue-600 transition">
@@ -918,10 +925,10 @@
             </div>
 
             <!-- Tab 1: Project Trajectory & Results (Primary) -->
-            <div id="tab-pane-visualizer" class="space-y-3 flex flex-col">
+            <div id="tab-pane-visualizer" class="flex-1 min-h-0 flex flex-col gap-2 sm:gap-2.5">
                 <!-- Chart Display Card -->
-                <div class="bg-white border border-slate-200 rounded-xl p-3.5 sm:p-4 shadow-sm flex flex-col relative">
-                    <div class="flex flex-wrap justify-between items-center mb-2.5 gap-2.5">
+                <div class="bg-white border border-slate-200 rounded-xl p-3 sm:p-3.5 shadow-sm flex flex-col flex-1 min-h-0 relative">
+                    <div class="flex flex-wrap justify-between items-center mb-1.5 gap-2 flex-shrink-0">
                         <div>
                             <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
                                 <i class="fa-solid fa-chart-line text-emerald-600 text-lg"></i> Zero-Emissions Project
@@ -966,14 +973,14 @@
 
                     <!-- Canvas Container with Hover Tooltip Integration -->
                     <div id="canvas-container"
-                        class="relative w-full h-[37vh] min-h-[250px] max-h-[480px] xl:h-[40vh] 2xl:h-[44vh] bg-white rounded-lg border border-slate-200 overflow-hidden cursor-crosshair shadow-inner">
+                        class="relative w-full h-[280px] lg:h-auto lg:flex-1 min-h-[160px] bg-white rounded-lg border border-slate-200 overflow-hidden cursor-crosshair shadow-inner">
                         <canvas id="activationCanvas" class="absolute inset-0 w-full h-full"></canvas>
                     </div>
                 </div>
 
                 <!-- Fused Project Feasibility & Adoption Summary Card (Activation Barrier & Project Outcomes) -->
                 <div id="fused-summary-card"
-                    class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 px-4 py-2 sm:py-2.5 rounded-xl bg-emerald-50/80 border border-emerald-200/90 shadow-2xs transition-colors duration-200">
+                    class="flex-shrink-0 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 px-4 py-2 sm:py-2.5 rounded-xl bg-emerald-50/80 border border-emerald-200/90 shadow-2xs transition-colors duration-200">
                     <!-- Left Section: Activation Barrier -->
                     <div class="flex-1 flex flex-col justify-center min-w-0">
                         <div class="flex items-center gap-1.5">
@@ -1008,7 +1015,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div class="flex-shrink-0 grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3">
                     <!-- KPI 1: Net Present Value -->
                     <div class="bg-white border border-slate-200 rounded-xl p-3 sm:p-3.5 shadow-sm">
                         <div id="kpi-npv-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
@@ -1051,7 +1058,7 @@
             </div>
 
             <!-- Tab 2: Decision Factors (Operative Dynamics & Financing Criteria) -->
-            <div id="tab-pane-framework" class="hidden space-y-4 flex flex-col">
+            <div id="tab-pane-framework" class="hidden flex-1 min-h-0 lg:overflow-y-auto custom-scrollbar space-y-4 pr-1 pb-4">
                 <div id="card-framework-kinetics" class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
                     <div class="flex flex-wrap items-center justify-between gap-3 mb-2.5">
                         <h3 class="text-sm font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
